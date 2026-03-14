@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rena Rados Friseure in Muenchen — Ihr Premium-Salon mit KI-Beratung, Online-Terminbuchung und Wunschfrisur-Service. Powered by Casa 2035.">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Rena Rados Friseure | Muenchen — Premium Haarstyling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================================
+       Rena Rados Friseure — Salon Website
+       Powered by Casa 2035 | KI-First Innovation
+       Stand: 14.03.2026
+       ============================================================= */
+
+    :root {
+      --black: #1a1a1a;
+      --black-light: #2a2a2a;
+      --black-soft: #3a3a3a;
+      --white: #ffffff;
+      --cream: #faf8f6;
+      --warm: #f5f2ef;
+      --gold: #b8962e;
+      --gold-light: #c9a93d;
+      --gold-dim: rgba(184,150,46,0.15);
+      --gold-glow: rgba(184,150,46,0.08);
+      --text: #1a1a1a;
+      --text-light: #5a5550;
+      --text-muted: #8a8580;
+      --border: rgba(0,0,0,0.08);
+      --border-gold: rgba(184,150,46,0.2);
+      --success: #2d8a4e;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-full: 9999px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      color: var(--text); background: var(--cream);
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes breathe { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes goldPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(184,150,46,0.3); } 50% { box-shadow: 0 0 0 12px rgba(184,150,46,0); } }
+    @keyframes particleFloat {
+      0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+      10% { opacity: 0.6; } 90% { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-10vh) rotate(720deg); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Navigation */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 32px; background: rgba(26,26,26,0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: padding 300ms, background 300ms;
+    }
+    .nav.scrolled { padding: 10px 32px; background: rgba(26,26,26,0.98); }
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
+      color: var(--white); text-decoration: none; letter-spacing: -0.3px;
+    }
+    .nav-logo em { font-style: italic; color: var(--gold-light); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: color 200ms;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta {
+      padding: 10px 24px; background: linear-gradient(135deg, #b8962e, #c9a93d);
+      color: #fff !important; border-radius: var(--radius-full);
+      font-weight: 600 !important; transition: transform 200ms, box-shadow 200ms;
+    }
+    .nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(184,150,46,0.4); }
+    .nav-mobile { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-mobile svg { width: 24px; height: 24px; color: var(--white); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(26,26,26,0.98); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    }
+    .mobile-menu.open { display: flex; animation: fadeIn 300ms; }
+    .mobile-menu a { color: var(--white); text-decoration: none; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; transition: color 200ms; }
+    .mobile-menu a:hover { color: var(--gold-light); }
+    .mobile-close { position: absolute; top: 20px; right: 32px; background: none; border: none; cursor: pointer; }
+    .mobile-close svg { width: 28px; height: 28px; color: var(--white); }
+
+    /* Hero */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--black); overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%); opacity: 0.95;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(184,150,46,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(184,150,46,0.05) 0%, transparent 50%);
+    }
+    .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .hero-particle {
+      position: absolute; width: 2px; height: 2px; background: var(--gold);
+      border-radius: 50%; opacity: 0; animation: particleFloat linear infinite;
+    }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 20px; border-radius: var(--radius-full);
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      font-size: 11px; font-weight: 600; color: var(--gold-light);
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 28px;
+      animation: fadeUp 0.8s var(--ease) both;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: breathe 2s infinite; }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(42px, 7vw, 80px); font-weight: 500;
+      color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
+      animation: fadeUp 0.8s var(--ease) 0.2s both;
+    }
+    .hero h1 em { color: var(--gold-light); font-style: italic; }
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7;
+      max-width: 540px; margin: 0 auto 36px; font-weight: 300;
+      animation: fadeUp 0.8s var(--ease) 0.4s both;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.8s var(--ease) 0.6s both; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 32px; border-radius: var(--radius-full);
+      font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif;
+      text-decoration: none; border: none; cursor: pointer; transition: all 200ms var(--ease);
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn-gold { background: linear-gradient(135deg, #b8962e, #c9a93d); color: #fff; box-shadow: 0 4px 20px rgba(184,150,46,0.3); }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(184,150,46,0.4); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.2); }
+    .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .btn-dark { background: var(--black); color: var(--white); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-dark:hover { background: var(--black-light); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.3); font-size: 11px; text-transform: uppercase;
+      letter-spacing: 2px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero-scroll svg { width: 20px; height: 20px; }
+
+    /* Sections */
+    section { padding: 100px 24px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; color: var(--gold);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 52px);
+      font-weight: 500; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 18px;
+    }
+    .section-title em { color: var(--gold); font-style: italic; }
+    .section-desc { font-size: 16px; color: var(--text-light); line-height: 1.8; max-width: 560px; }
+
+    /* About */
+    .about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-visual {
+      position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--black) 0%, var(--black-light) 100%);
+    }
+    .about-visual-inner {
+      position: absolute; inset: 16px; border-radius: var(--radius-sm);
+      border: 1px solid rgba(184,150,46,0.15);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; text-align: center; padding: 32px;
+    }
+    .about-visual-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-visual-icon svg { width: 28px; height: 28px; color: var(--gold-light); }
+    .about-visual-text { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--white); font-weight: 500; }
+    .about-visual-sub { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+    .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .about-stat { text-align: center; padding: 24px 12px; background: var(--cream); border-radius: var(--radius); border: 1px solid var(--border); }
+    .about-stat-val { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--gold); }
+    .about-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+    /* Services */
+    .services { background: var(--cream); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .service-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 24px;
+      transition: all 300ms var(--ease); cursor: default; position: relative; overflow: hidden;
+    }
+    .service-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow); transform: translateY(-4px); }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light)); opacity: 0; transition: opacity 300ms;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--gold-glow); border: 1px solid var(--gold-dim);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    }
+    .service-icon svg { width: 22px; height: 22px; color: var(--gold); }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .service-card p { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+    .service-price { margin-top: 16px; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--gold); }
+
+    /* KI Wunschfrisur */
+    .ki-section { background: var(--black); color: var(--white); position: relative; overflow: hidden; }
+    .ki-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(184,150,46,0.06) 0%, transparent 60%); }
+    .ki-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+    .ki-content .section-desc { color: rgba(255,255,255,0.6); }
+    .ki-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+    .ki-feature {
+      display: flex; align-items: flex-start; gap: 14px; padding: 16px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm); transition: border-color 200ms;
+    }
+    .ki-feature:hover { border-color: var(--border-gold); }
+    .ki-feature-icon {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: var(--gold-dim); display: flex; align-items: center; justify-content: center;
+    }
+    .ki-feature-icon svg { width: 16px; height: 16px; color: var(--gold-light); }
+    .ki-feature h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .ki-feature p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .ki-form-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius); padding: 32px; position: relative; overflow: hidden;
+    }
+    .ki-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--success)); }
+    .ki-form-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px; color: var(--white); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm);
+      color: var(--white); font-size: 14px; font-family: 'Inter', sans-serif; transition: border-color 200ms;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,150,46,0.15); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group select { -webkit-appearance: none; appearance: none; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .upload-zone {
+      border: 2px dashed rgba(184,150,46,0.25); border-radius: var(--radius-sm);
+      padding: 24px; text-align: center; cursor: pointer; transition: border-color 200ms, background 200ms;
+      position: relative; overflow: hidden;
+    }
+    .upload-zone:hover { border-color: var(--gold); background: rgba(184,150,46,0.04); }
+    .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-zone svg { width: 28px; height: 28px; color: var(--gold); margin-bottom: 8px; }
+    .upload-zone p { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .upload-zone span { color: var(--gold-light); font-weight: 600; }
+    .upload-preview { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .upload-thumb { width: 60px; height: 60px; border-radius: 8px; background: rgba(255,255,255,0.1); object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
+
+    /* Booking */
+    .booking { background: var(--white); }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
+    .booking-form { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
+    .booking-form h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px; }
+    .booking .form-group input, .booking .form-group select, .booking .form-group textarea { background: var(--white); border-color: var(--border); color: var(--text); }
+    .booking .form-group input:focus, .booking .form-group select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); }
+    .booking .form-group input::placeholder { color: var(--text-muted); }
+    .booking .form-group label { color: var(--text-muted); }
+    .booking-info { display: flex; flex-direction: column; gap: 24px; }
+    .booking-info-card { display: flex; gap: 16px; padding: 20px; background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); }
+    .booking-info-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .booking-info-icon.gold { background: var(--gold-glow); color: var(--gold); }
+    .booking-info-icon.dark { background: rgba(26,26,26,0.06); color: var(--black); }
+    .booking-info-icon svg { width: 20px; height: 20px; }
+    .booking-info-text h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .booking-info-text p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+    .booking-info-text a { color: var(--gold); text-decoration: none; font-weight: 600; }
+
+    /* Contact */
+    .contact { background: var(--cream); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
+    .contact-map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); min-height: 400px; background: var(--warm); display: flex; align-items: center; justify-content: center; }
+    .contact-map-placeholder { text-align: center; color: var(--text-muted); font-size: 13px; }
+    .contact-map-placeholder svg { width: 48px; height: 48px; color: var(--gold); margin-bottom: 12px; display: block; margin: 0 auto 12px; }
+    .contact-details { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
+    .contact-item-icon { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0; background: var(--gold-glow); color: var(--gold); display: flex; align-items: center; justify-content: center; }
+    .contact-item-icon svg { width: 18px; height: 18px; }
+    .contact-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .contact-item p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+    .contact-item a { color: var(--gold); text-decoration: none; }
+    .hours-grid { margin-top: 24px; }
+    .hours-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { font-weight: 500; }
+    .hours-time { color: var(--text-light); }
+    .hours-closed { color: var(--text-muted); font-style: italic; }
+
+    /* Footer */
+    .footer { background: var(--black); color: var(--white); padding: 60px 24px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; margin-bottom: 12px; }
+    .footer-brand em { color: var(--gold-light); font-style: italic; }
+    .footer-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; }
+    .footer h4 { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; transition: color 200ms; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-social { display: flex; gap: 12px; margin-top: 16px; }
+    .footer-social a {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5); text-decoration: none; transition: all 200ms;
+    }
+    .footer-social a:hover { background: var(--gold-dim); border-color: var(--border-gold); color: var(--gold-light); }
+    .footer-social svg { width: 18px; height: 18px; }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 40px auto 0; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.3);
+    }
+    .footer-casa {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: var(--radius-full);
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      font-size: 10px; font-weight: 600; color: var(--gold-light);
+      letter-spacing: 0.5px; text-decoration: none; transition: all 200ms;
+    }
+    .footer-casa:hover { background: rgba(184,150,46,0.2); }
+    .footer-casa svg { width: 12px; height: 12px; }
+
+    /* Casa Badge */
+    .casa-badge {
+      position: fixed; bottom: 20px; left: 20px; z-index: 90;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--radius-full);
+      background: rgba(26,26,26,0.9); backdrop-filter: blur(12px);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.5px; text-decoration: none; transition: all 200ms;
+      cursor: pointer; animation: goldPulse 3s infinite;
+    }
+    .casa-badge:hover { background: rgba(26,26,26,0.95); transform: scale(1.05); }
+    .casa-badge svg { width: 14px; height: 14px; }
+
+    /* Toast */
+    .toast-container { position: fixed; top: 100px; right: 20px; z-index: 200; display: flex; flex-direction: column; gap: 8px; }
+    .toast {
+      padding: 14px 20px; border-radius: var(--radius-sm);
+      background: var(--black); color: var(--white);
+      font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 10px;
+      box-shadow: var(--shadow-lg); animation: fadeUp 300ms var(--ease); max-width: 360px;
+    }
+    .toast-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .toast.success .toast-icon { color: var(--success); }
+    .toast.info .toast-icon { color: var(--gold); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-mobile { display: block; }
+      .about-grid, .ki-grid, .booking-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 60px 20px; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="mainNav">
+    <a href="#" class="nav-logo"><em>Rena Rados</em> Friseure</a>
+    <div class="nav-links">
+      <a href="#about">Salon</a>
+      <a href="#services">Leistungen</a>
+      <a href="#wunschfrisur">Wunschfrisur</a>
+      <a href="#booking">Termin</a>
+      <a href="#contact">Kontakt</a>
+      <a href="#booking" class="nav-cta">Termin buchen</a>
+    </div>
+    <button class="nav-mobile" onclick="toggleMobile()" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="toggleMobile()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="#about" onclick="toggleMobile()">Salon</a>
+    <a href="#services" onclick="toggleMobile()">Leistungen</a>
+    <a href="#wunschfrisur" onclick="toggleMobile()">Wunschfrisur</a>
+    <a href="#booking" onclick="toggleMobile()">Termin buchen</a>
+    <a href="#contact" onclick="toggleMobile()">Kontakt</a>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>KI-Beratung verfuegbar</div>
+      <h1>Ihr Haar.<br>Unsere <em>Leidenschaft.</em></h1>
+      <p class="hero-sub">Premium Haarstyling in Muenchen mit individueller KI-Beratung, Online-Terminbuchung und exklusivem Wunschfrisur-Service.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-gold">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Termin buchen
+        </a>
+        <a href="#wunschfrisur" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
+          Wunschfrisur senden
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Entdecken</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="section-label">Unser Salon</div>
+          <h2 class="section-title">Ein Platz zum<br><em>Wohlfuehlen</em></h2>
+          <p class="section-desc">Bei Rena Rados Friseure erwartet Sie ungeteilte Aufmerksamkeit und individuelle Beratung. Unser Team bildet sich permanent weiter, um Ihnen die neuesten Trends und Techniken bieten zu koennen.</p>
+          <p class="section-desc" style="margin-top:12px">Wir arbeiten ausschliesslich mit hochwertigen Produkten von La Biosthetique und setzen auf nachhaltige, schonende Behandlungen.</p>
+          <div class="about-stats">
+            <div class="about-stat reveal reveal-delay-1"><div class="about-stat-val">15+</div><div class="about-stat-label">Jahre Erfahrung</div></div>
+            <div class="about-stat reveal reveal-delay-2"><div class="about-stat-val">5.000+</div><div class="about-stat-label">Zufriedene Kunden</div></div>
+            <div class="about-stat reveal reveal-delay-3"><div class="about-stat-val">4.9</div><div class="about-stat-label">Google Bewertung</div></div>
+          </div>
+        </div>
+        <div class="about-visual reveal reveal-delay-2">
+          <div class="about-visual-inner">
+            <div class="about-visual-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div class="about-visual-text">Leidenschaft<br>&amp; Hingabe</div>
+            <div class="about-visual-sub">Seit 2009 in Muenchen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Unsere Leistungen</div>
+        <h2 class="section-title">Premium <em>Services</em></h2>
+        <p class="section-desc">Von klassischen Schnitten bis zu aufwendigen Farbbehandlungen — wir bieten das volle Programm.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
+          <h3>Haarschnitte</h3>
+          <p>Individuelle Schnitte fuer Damen und Herren — von klassisch bis modern, perfekt auf Ihre Gesichtsform abgestimmt.</p>
+          <div class="service-price">ab 35 &euro;</div>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
+          <h3>Farbbehandlung</h3>
+          <p>Balayage, Highlights, Komplett-Coloration — mit Premium-Produkten von La Biosthetique fuer langanhaltende Farbergebnisse.</p>
+          <div class="service-price">ab 65 &euro;</div>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/><path d="M9 6.5C7.33 7.83 5 10.6 5 14c0 3 2.5 6 7 8"/><path d="M15 6.5c1.67 1.33 4 4.1 4 7.5 0 3-2.5 6-7 8"/></svg></div>
+          <h3>KI-Wunschfrisur</h3>
+          <p>Schicken Sie uns ein Foto Ihrer Wunschfrisur — unsere KI analysiert Ihren Haartyp und gibt eine professionelle Empfehlung.</p>
+          <div class="service-price">Kostenlos</div>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Haarpflege</h3>
+          <p>Intensive Treatments, Olaplex-Behandlungen und individuelle Pflegekonzepte fuer gesundes, glaenzendes Haar.</p>
+          <div class="service-price">ab 25 &euro;</div>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <h3>Styling</h3>
+          <p>Brautstyling, Event-Styling und besondere Anlaesse — wir machen Sie zum Star des Abends.</p>
+          <div class="service-price">ab 45 &euro;</div>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+          <h3>Shop</h3>
+          <p>Hochwertige Haarpflege-Produkte von La Biosthetique — professionelle Qualitaet fuer zu Hause.</p>
+          <div class="service-price">Im Salon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KI Wunschfrisur -->
+  <section class="ki-section" id="wunschfrisur">
+    <div class="container">
+      <div class="ki-grid">
+        <div class="ki-content reveal">
+          <div class="section-label">KI-Innovation</div>
+          <h2 class="section-title" style="color:#fff">Ihre <em>Wunschfrisur</em><br>wird analysiert</h2>
+          <p class="section-desc">Laden Sie ein Foto Ihrer Traumfrisur hoch und unsere KI analysiert sofort, ob der Style zu Ihrem Haartyp passt. Sie erhalten eine professionelle Empfehlung und passende Produktvorschlaege.</p>
+          <div class="ki-features">
+            <div class="ki-feature">
+              <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div><h4>Foto hochladen</h4><p>Schicken Sie ein Bild Ihrer Wunschfrisur oder Ihres aktuellen Looks</p></div>
+            </div>
+            <div class="ki-feature">
+              <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg></div>
+              <div><h4>KI-Analyse</h4><p>Unsere KI erkennt Haartyp, Farbe und Style und gibt eine Machbarkeits-Einschaetzung</p></div>
+            </div>
+            <div class="ki-feature">
+              <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+              <div><h4>Persoenliche Empfehlung</h4><p>Innerhalb weniger Minuten erhalten Sie eine Antwort mit Produkt- und Terminvorschlag</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="ki-form-card">
+            <h3>Wunschfrisur anfragen</h3>
+            <form id="wunschfrisurForm" onsubmit="submitWunschfrisur(event)">
+              <div class="form-row">
+                <div class="form-group"><label>Vorname</label><input type="text" id="wfVorname" placeholder="Anna" required></div>
+                <div class="form-group"><label>Nachname</label><input type="text" id="wfNachname" placeholder="Schmidt" required></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>E-Mail</label><input type="email" id="wfEmail" placeholder="anna@beispiel.de" required></div>
+                <div class="form-group"><label>Telefon</label><input type="tel" id="wfTelefon" placeholder="0171 1234567"></div>
+              </div>
+              <div class="form-group"><label>Was wuenschen Sie sich?</label><textarea id="wfNachricht" placeholder="Beschreiben Sie Ihre Wunschfrisur oder stellen Sie eine Frage..." rows="3" required></textarea></div>
+              <div class="form-group">
+                <label>Fotos hochladen (optional)</label>
+                <div class="upload-zone" id="uploadZone">
+                  <input type="file" id="wfFiles" accept="image/*" multiple onchange="handleFiles(this.files)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <p><span>Klicken</span> oder Bilder hierher ziehen</p>
+                </div>
+                <div class="upload-preview" id="uploadPreview"></div>
+              </div>
+              <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
+                Wunschfrisur absenden
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Termin-Buchung -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Online-Terminbuchung</div>
+        <h2 class="section-title">Ihren <em>Termin</em> buchen</h2>
+        <p class="section-desc">Buchen Sie bequem online — wir bestaetigen innerhalb weniger Minuten.</p>
+      </div>
+      <div class="booking-grid">
+        <div class="booking-form reveal">
+          <h3>Termin anfragen</h3>
+          <form id="bookingForm" onsubmit="submitBooking(event)">
+            <div class="form-row">
+              <div class="form-group"><label>Vorname</label><input type="text" id="bkVorname" placeholder="Ihr Vorname" required></div>
+              <div class="form-group"><label>Nachname</label><input type="text" id="bkNachname" placeholder="Ihr Nachname" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>E-Mail</label><input type="email" id="bkEmail" placeholder="ihre@email.de" required></div>
+              <div class="form-group"><label>Telefon</label><input type="tel" id="bkTelefon" placeholder="0171 1234567" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Wunschtermin</label><input type="date" id="bkDatum" required></div>
+              <div class="form-group"><label>Uhrzeit</label>
+                <select id="bkUhrzeit" required>
+                  <option value="">Bitte waehlen</option>
+                  <option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option>
+                  <option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option>
+                  <option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option>
+                  <option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option>
+                  <option>17:00</option><option>17:30</option><option>18:00</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group"><label>Gewuenschte Leistung</label>
+              <select id="bkLeistung" required>
+                <option value="">Bitte waehlen</option>
+                <option>Damenhaarschnitt</option><option>Herrenschnitt</option><option>Kinderhaarschnitt</option>
+                <option>Farbbehandlung</option><option>Balayage / Highlights</option><option>Haarpflege / Treatment</option>
+                <option>Brautstyling</option><option>Beratung</option><option>Sonstiges</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Anmerkungen (optional)</label><textarea id="bkNotiz" placeholder="Besondere Wuensche oder Hinweise..." rows="2"></textarea></div>
+            <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Termin anfragen
+            </button>
+          </form>
+        </div>
+        <div class="booking-info reveal reveal-delay-2">
+          <div class="booking-info-card">
+            <div class="booking-info-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.09 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 11.3a16 16 0 0 0 6.61 6.61l2.13-2.13a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="booking-info-text"><h4>Telefonisch buchen</h4><p><a href="tel:08912962940">089 - 1296294</a><br>Wir sind waehrend der Oeffnungszeiten erreichbar.</p></div>
+          </div>
+          <div class="booking-info-card">
+            <div class="booking-info-icon dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="booking-info-text"><h4>Per WhatsApp</h4><p>Schreiben Sie uns auf WhatsApp — auch Fotos und Wunschfrisur-Anfragen moeglich.</p></div>
+          </div>
+          <div class="booking-info-card">
+            <div class="booking-info-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="booking-info-text"><h4>Per E-Mail</h4><p><a href="mailto:renarados.friseure@hotmail.com">renarados.friseure@hotmail.com</a></p></div>
+          </div>
+          <div class="booking-info-card">
+            <div class="booking-info-icon dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="booking-info-text"><h4>Schnelle Bestaetigung</h4><p>Online-Anfragen werden automatisch bearbeitet. Sie erhalten innerhalb weniger Minuten eine Bestaetigung per E-Mail.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Kontakt</div>
+        <h2 class="section-title">Besuchen Sie <em>uns</em></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-map reveal">
+          <div class="contact-map-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <p>Erzgiessereistr. 51<br>Eingang Dachauer Str. 143<br>80335 Muenchen</p>
+            <a href="https://maps.google.com/?q=Erzgie%C3%9Fereistr.+51,+80335+M%C3%BCnchen" target="_blank" rel="noopener" class="btn btn-dark" style="margin-top:16px;font-size:12px;padding:10px 20px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              In Google Maps oeffnen
+            </a>
+          </div>
+        </div>
+        <div class="contact-details reveal reveal-delay-2">
+          <div class="contact-item">
+            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><h4>Adresse</h4><p>Erzgiessereistr. 51<br>Eingang Dachauer Str. 143<br>80335 Muenchen</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.09 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 11.3a16 16 0 0 0 6.61 6.61l2.13-2.13a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><h4>Telefon</h4><p><a href="tel:08912962940">089 - 1296294</a></p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><h4>E-Mail</h4><p><a href="mailto:renarados.friseure@hotmail.com">renarados.friseure@hotmail.com</a></p></div>
+          </div>
+          <div>
+            <h4 style="font-size:13px;font-weight:600;margin-bottom:12px">Oeffnungszeiten</h4>
+            <div class="hours-grid">
+              <div class="hours-row"><span class="hours-day">Montag</span><span class="hours-closed">Geschlossen</span></div>
+              <div class="hours-row"><span class="hours-day">Dienstag</span><span class="hours-time">09:00 — 18:00</span></div>
+              <div class="hours-row"><span class="hours-day">Mittwoch</span><span class="hours-time">09:00 — 18:00</span></div>
+              <div class="hours-row"><span class="hours-day">Donnerstag</span><span class="hours-time">09:00 — 20:00</span></div>
+              <div class="hours-row"><span class="hours-day">Freitag</span><span class="hours-time">09:00 — 18:00</span></div>
+              <div class="hours-row"><span class="hours-day">Samstag</span><span class="hours-time">09:00 — 15:00</span></div>
+              <div class="hours-row"><span class="hours-day">Sonntag</span><span class="hours-closed">Geschlossen</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><em>Rena Rados</em> Friseure</div>
+        <p class="footer-desc">Premium Haarstyling in Muenchen. Individuelle Beratung, hochwertige Produkte und KI-gestuetzte Innovation fuer Ihr perfektes Haarstyling.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/rena_rados_friseure/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/Rena.Rados" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <div class="footer-links"><a href="#about">Salon</a><a href="#services">Leistungen</a><a href="#wunschfrisur">Wunschfrisur</a><a href="#booking">Termin buchen</a><a href="#contact">Kontakt</a></div>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <div class="footer-links"><a href="#services">Haarschnitte</a><a href="#services">Farbbehandlung</a><a href="#services">Haarpflege</a><a href="#services">Styling</a><a href="#wunschfrisur">KI-Beratung</a></div>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Rena Rados Friseure. Alle Rechte vorbehalten.</span>
+      <a href="#" class="footer-casa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
+        Powered by Casa 2035
+      </a>
+    </div>
+  </footer>
+
+  <!-- Casa 2035 Badge -->
+  <a class="casa-badge" id="casaBadge" title="KI-Innovation von Casa 2035">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
+    Casa 2035
+  </a>
+
+  <script>
+    var webhookBase = '';
+
+    // Nav scroll
+    window.addEventListener('scroll', function() {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    function toggleMobile() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // Scroll reveal
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // Particles
+    (function() {
+      var c = document.getElementById('heroParticles');
+      for (var i = 0; i < 30; i++) {
+        var p = document.createElement('div');
+        p.className = 'hero-particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.width = (1 + Math.random() * 2) + 'px';
+        p.style.height = p.style.width;
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
+        c.appendChild(p);
+      }
+    })();
+
+    // File upload preview
+    function handleFiles(files) {
+      var preview = document.getElementById('uploadPreview');
+      preview.textContent = '';
+      Array.from(files).forEach(function(file) {
+        if (!file.type.startsWith('image/')) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'upload-thumb';
+          img.alt = file.name;
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Toast (safe DOM methods)
+    function showToast(message, type) {
+      var container = document.getElementById('toastContainer');
+      var toast = document.createElement('div');
+      toast.className = 'toast ' + (type || 'info');
+      var iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      iconSvg.setAttribute('viewBox', '0 0 24 24');
+      iconSvg.setAttribute('fill', 'none');
+      iconSvg.setAttribute('stroke', 'currentColor');
+      iconSvg.setAttribute('stroke-width', '2');
+      iconSvg.classList.add('toast-icon');
+      if (type === 'success') {
+        var path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path1.setAttribute('d', 'M22 11.08V12a10 10 0 1 1-5.93-9.14');
+        var poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        poly.setAttribute('points', '22 4 12 14.01 9 11.01');
+        iconSvg.appendChild(path1);
+        iconSvg.appendChild(poly);
+      } else {
+        var c1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c1.setAttribute('cx', '12'); c1.setAttribute('cy', '12'); c1.setAttribute('r', '10');
+        var l1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l1.setAttribute('x1', '12'); l1.setAttribute('y1', '8'); l1.setAttribute('x2', '12'); l1.setAttribute('y2', '12');
+        var l2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l2.setAttribute('x1', '12'); l2.setAttribute('y1', '16'); l2.setAttribute('x2', '12.01'); l2.setAttribute('y2', '16');
+        iconSvg.appendChild(c1); iconSvg.appendChild(l1); iconSvg.appendChild(l2);
+      }
+      toast.appendChild(iconSvg);
+      var span = document.createElement('span');
+      span.textContent = message;
+      toast.appendChild(span);
+      container.appendChild(toast);
+      setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(20px)';
+        toast.style.transition = 'all 300ms ease';
+        setTimeout(function() { toast.remove(); }, 300);
+      }, 4000);
+    }
+
+    // Submit Wunschfrisur
+    function submitWunschfrisur(e) {
+      e.preventDefault();
+      var payload = {
+        kanal: 'homepage', typ: 'wunschfrisur',
+        vorname: document.getElementById('wfVorname').value.trim(),
+        nachname: document.getElementById('wfNachname').value.trim(),
+        email: document.getElementById('wfEmail').value.trim(),
+        telefon: document.getElementById('wfTelefon').value.trim(),
+        nachricht: document.getElementById('wfNachricht').value.trim(),
+        timestamp: new Date().toISOString()
+      };
+      if (webhookBase) {
+        fetch(webhookBase + '/pwa-events', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function() {
+          showToast('Ihre Wunschfrisur-Anfrage wurde gesendet! Wir melden uns in Kuerze.', 'success');
+          e.target.reset(); document.getElementById('uploadPreview').textContent = '';
+        }).catch(function() { showToast('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error'); });
+      } else {
+        showToast('Wunschfrisur-Anfrage gesendet! (Demo-Modus)', 'success');
+        e.target.reset(); document.getElementById('uploadPreview').textContent = '';
+      }
+    }
+
+    // Submit Booking
+    function submitBooking(e) {
+      e.preventDefault();
+      var payload = {
+        kanal: 'homepage', typ: 'terminanfrage',
+        vorname: document.getElementById('bkVorname').value.trim(),
+        nachname: document.getElementById('bkNachname').value.trim(),
+        email: document.getElementById('bkEmail').value.trim(),
+        telefon: document.getElementById('bkTelefon').value.trim(),
+        datum: document.getElementById('bkDatum').value,
+        uhrzeit: document.getElementById('bkUhrzeit').value,
+        leistung: document.getElementById('bkLeistung').value,
+        notiz: (document.getElementById('bkNotiz').value || '').trim(),
+        timestamp: new Date().toISOString()
+      };
+      if (webhookBase) {
+        fetch(webhookBase + '/pwa-termine', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function() {
+          showToast('Terminanfrage gesendet! Sie erhalten in Kuerze eine Bestaetigung.', 'success');
+          e.target.reset();
+        }).catch(function() { showToast('Fehler beim Senden. Bitte rufen Sie uns an.', 'error'); });
+      } else {
+        showToast('Terminanfrage gesendet! (Demo-Modus)', 'success');
+        e.target.reset();
+      }
+    }
+
+    // Min date = today
+    var dateInput = document.getElementById('bkDatum');
+    if (dateInput) dateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+  </script>
+</body>
+</html>
