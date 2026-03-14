@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Rena Rados Friseure in Muenchen — Ihr Premium-Salon mit KI-Beratung, Online-Terminbuchung und Wunschfrisur-Service. Powered by Casa 2035.">
-  <meta name="theme-color" content="#1a1a1a">
+  <meta name="theme-color" content="#faf8f6">
   <title>Rena Rados Friseure | Muenchen — Premium Haarstyling</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,24 +71,25 @@
     /* Navigation */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 16px 32px; background: rgba(26,26,26,0.95);
+      padding: 16px 32px; background: rgba(250,248,246,0.85);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       display: flex; align-items: center; justify-content: space-between;
-      transition: padding 300ms, background 300ms;
+      transition: padding 300ms, background 300ms, box-shadow 300ms;
+      border-bottom: 1px solid transparent;
     }
-    .nav.scrolled { padding: 10px 32px; background: rgba(26,26,26,0.98); }
+    .nav.scrolled { padding: 10px 32px; background: rgba(250,248,246,0.95); border-bottom-color: var(--border); box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
     .nav-logo {
       font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
-      color: var(--white); text-decoration: none; letter-spacing: -0.3px;
+      color: var(--black); text-decoration: none; letter-spacing: -0.3px;
     }
-    .nav-logo em { font-style: italic; color: var(--gold-light); }
+    .nav-logo em { font-style: italic; color: var(--gold); }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
-      color: rgba(255,255,255,0.7); text-decoration: none;
+      color: var(--text-light); text-decoration: none;
       font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
       text-transform: uppercase; transition: color 200ms;
     }
-    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover { color: var(--gold); }
     .nav-cta {
       padding: 10px 24px; background: linear-gradient(135deg, #b8962e, #c9a93d);
       color: #fff !important; border-radius: var(--radius-full);
@@ -96,32 +97,33 @@
     }
     .nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(184,150,46,0.4); }
     .nav-mobile { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-    .nav-mobile svg { width: 24px; height: 24px; color: var(--white); }
+    .nav-mobile svg { width: 24px; height: 24px; color: var(--black); }
     .mobile-menu {
       display: none; position: fixed; inset: 0; z-index: 99;
-      background: rgba(26,26,26,0.98); backdrop-filter: blur(20px);
+      background: rgba(250,248,246,0.98); backdrop-filter: blur(20px);
       flex-direction: column; align-items: center; justify-content: center; gap: 28px;
     }
     .mobile-menu.open { display: flex; animation: fadeIn 300ms; }
-    .mobile-menu a { color: var(--white); text-decoration: none; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; transition: color 200ms; }
-    .mobile-menu a:hover { color: var(--gold-light); }
+    .mobile-menu a { color: var(--text); text-decoration: none; font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; transition: color 200ms; }
+    .mobile-menu a:hover { color: var(--gold); }
     .mobile-close { position: absolute; top: 20px; right: 32px; background: none; border: none; cursor: pointer; }
-    .mobile-close svg { width: 28px; height: 28px; color: var(--white); }
+    .mobile-close svg { width: 28px; height: 28px; color: var(--text); }
 
-    /* Hero */
+    /* Hero — Spa Atmosphere */
     .hero {
       position: relative; min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
-      background: var(--black); overflow: hidden;
+      background: var(--cream); overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%); opacity: 0.95;
+      background: linear-gradient(160deg, #faf8f6 0%, #f0ebe4 30%, #e8dfd4 60%, #f5f0ea 100%); opacity: 1;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(184,150,46,0.08) 0%, transparent 60%),
-                  radial-gradient(ellipse at 70% 30%, rgba(184,150,46,0.05) 0%, transparent 50%);
+      background: radial-gradient(ellipse at 30% 40%, rgba(184,150,46,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 70%, rgba(200,180,140,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 50% 100%, rgba(184,150,46,0.04) 0%, transparent 40%);
     }
     .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-particle {
@@ -132,20 +134,20 @@
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 8px 20px; border-radius: var(--radius-full);
-      background: var(--gold-dim); border: 1px solid var(--border-gold);
-      font-size: 11px; font-weight: 600; color: var(--gold-light);
+      background: rgba(184,150,46,0.08); border: 1px solid rgba(184,150,46,0.15);
+      font-size: 11px; font-weight: 600; color: var(--gold);
       letter-spacing: 1px; text-transform: uppercase; margin-bottom: 28px;
       animation: fadeUp 0.8s var(--ease) both;
     }
     .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: breathe 2s infinite; }
     .hero h1 {
       font-family: 'Playfair Display', serif; font-size: clamp(42px, 7vw, 80px); font-weight: 500;
-      color: var(--white); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
+      color: var(--black); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
       animation: fadeUp 0.8s var(--ease) 0.2s both;
     }
-    .hero h1 em { color: var(--gold-light); font-style: italic; }
+    .hero h1 em { color: var(--gold); font-style: italic; }
     .hero-sub {
-      font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7;
+      font-size: 18px; color: var(--text-light); line-height: 1.7;
       max-width: 540px; margin: 0 auto 36px; font-weight: 300;
       animation: fadeUp 0.8s var(--ease) 0.4s both;
     }
@@ -159,13 +161,13 @@
     .btn svg { width: 18px; height: 18px; }
     .btn-gold { background: linear-gradient(135deg, #b8962e, #c9a93d); color: #fff; box-shadow: 0 4px 20px rgba(184,150,46,0.3); }
     .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(184,150,46,0.4); }
-    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.2); }
-    .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
-    .btn-dark { background: var(--black); color: var(--white); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-outline { background: transparent; color: var(--text); border: 1.5px solid rgba(0,0,0,0.15); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-dark { background: var(--black); color: var(--white); border: 1px solid rgba(0,0,0,0.1); }
     .btn-dark:hover { background: var(--black-light); }
     .hero-scroll {
       position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-      color: rgba(255,255,255,0.3); font-size: 11px; text-transform: uppercase;
+      color: var(--text-muted); font-size: 11px; text-transform: uppercase;
       letter-spacing: 2px; display: flex; flex-direction: column; align-items: center; gap: 8px;
       animation: float 3s ease-in-out infinite;
     }
@@ -237,55 +239,56 @@
     .service-card p { font-size: 13px; color: var(--text-light); line-height: 1.7; }
     .service-price { margin-top: 16px; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--gold); }
 
-    /* KI Wunschfrisur */
-    .ki-section { background: var(--black); color: var(--white); position: relative; overflow: hidden; }
-    .ki-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(184,150,46,0.06) 0%, transparent 60%); }
+    /* KI Wunschfrisur — Spa Light */
+    .ki-section { background: var(--warm); color: var(--text); position: relative; overflow: hidden; }
+    .ki-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(184,150,46,0.05) 0%, transparent 60%); }
     .ki-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
-    .ki-content .section-desc { color: rgba(255,255,255,0.6); }
+    .ki-content .section-desc { color: var(--text-light); }
     .ki-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
     .ki-feature {
       display: flex; align-items: flex-start; gap: 14px; padding: 16px;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--radius-sm); transition: border-color 200ms;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); transition: border-color 200ms, box-shadow 200ms;
     }
-    .ki-feature:hover { border-color: var(--border-gold); }
+    .ki-feature:hover { border-color: var(--border-gold); box-shadow: var(--shadow); }
     .ki-feature-icon {
       width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
       background: var(--gold-dim); display: flex; align-items: center; justify-content: center;
     }
-    .ki-feature-icon svg { width: 16px; height: 16px; color: var(--gold-light); }
-    .ki-feature h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
-    .ki-feature p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .ki-feature-icon svg { width: 16px; height: 16px; color: var(--gold); }
+    .ki-feature h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+    .ki-feature p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
     .ki-form-card {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      background: var(--white); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 32px; position: relative; overflow: hidden;
+      box-shadow: var(--shadow);
     }
-    .ki-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--success)); }
-    .ki-form-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px; color: var(--white); }
+    .ki-form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .ki-form-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px; color: var(--text); }
     .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .form-group label { display: block; font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
     .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm);
-      color: var(--white); font-size: 14px; font-family: 'Inter', sans-serif; transition: border-color 200ms;
+      width: 100%; padding: 13px 16px; background: var(--cream);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; transition: border-color 200ms;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,150,46,0.15); }
-    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,150,46,0.1); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
     .form-group select { -webkit-appearance: none; appearance: none; }
     .form-group textarea { resize: vertical; min-height: 80px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .upload-zone {
-      border: 2px dashed rgba(184,150,46,0.25); border-radius: var(--radius-sm);
+      border: 2px dashed rgba(184,150,46,0.3); border-radius: var(--radius-sm);
       padding: 24px; text-align: center; cursor: pointer; transition: border-color 200ms, background 200ms;
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; background: var(--cream);
     }
     .upload-zone:hover { border-color: var(--gold); background: rgba(184,150,46,0.04); }
     .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
     .upload-zone svg { width: 28px; height: 28px; color: var(--gold); margin-bottom: 8px; }
-    .upload-zone p { font-size: 12px; color: rgba(255,255,255,0.5); }
-    .upload-zone span { color: var(--gold-light); font-weight: 600; }
+    .upload-zone p { font-size: 12px; color: var(--text-muted); }
+    .upload-zone span { color: var(--gold); font-weight: 600; }
     .upload-preview { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-    .upload-thumb { width: 60px; height: 60px; border-radius: 8px; background: rgba(255,255,255,0.1); object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
+    .upload-thumb { width: 60px; height: 60px; border-radius: 8px; background: var(--warm); object-fit: cover; border: 1px solid var(--border); }
 
     /* Booking */
     .booking { background: var(--white); }
@@ -365,13 +368,13 @@
       position: fixed; bottom: 20px; left: 20px; z-index: 90;
       display: flex; align-items: center; gap: 8px;
       padding: 10px 18px; border-radius: var(--radius-full);
-      background: rgba(26,26,26,0.9); backdrop-filter: blur(12px);
-      border: 1px solid var(--border-gold);
-      color: var(--gold-light); font-size: 11px; font-weight: 600;
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(12px);
+      border: 1px solid var(--border-gold); box-shadow: var(--shadow);
+      color: var(--gold); font-size: 11px; font-weight: 600;
       letter-spacing: 0.5px; text-decoration: none; transition: all 200ms;
       cursor: pointer; animation: goldPulse 3s infinite;
     }
-    .casa-badge:hover { background: rgba(26,26,26,0.95); transform: scale(1.05); }
+    .casa-badge:hover { background: rgba(255,255,255,0.95); transform: scale(1.05); }
     .casa-badge svg { width: 14px; height: 14px; }
 
     /* Toast */
@@ -542,7 +545,7 @@
       <div class="ki-grid">
         <div class="ki-content reveal">
           <div class="section-label">KI-Innovation</div>
-          <h2 class="section-title" style="color:#fff">Ihre <em>Wunschfrisur</em><br>wird analysiert</h2>
+          <h2 class="section-title">Ihre <em>Wunschfrisur</em><br>wird analysiert</h2>
           <p class="section-desc">Laden Sie ein Foto Ihrer Traumfrisur hoch und unsere KI analysiert sofort, ob der Style zu Ihrem Haartyp passt. Sie erhalten eine professionelle Empfehlung und passende Produktvorschlaege.</p>
           <div class="ki-features">
             <div class="ki-feature">
