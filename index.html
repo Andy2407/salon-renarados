@@ -21,24 +21,24 @@
       --black-light: #2a2a2a;
       --black-soft: #3a3a3a;
       --white: #ffffff;
-      --cream: #faf8f6;
-      --warm: #f5f2ef;
+      --cream: #faf6f2;
+      --warm: #f3ede7;
       --gold: #b8962e;
       --gold-light: #c9a93d;
-      --gold-dim: rgba(184,150,46,0.15);
-      --gold-glow: rgba(184,150,46,0.08);
-      --text: #1a1a1a;
-      --text-light: #5a5550;
-      --text-muted: #8a8580;
-      --border: rgba(0,0,0,0.08);
+      --gold-dim: rgba(184,150,46,0.12);
+      --gold-glow: rgba(184,150,46,0.06);
+      --text: #2c2420;
+      --text-light: #6a5e55;
+      --text-muted: #9a918a;
+      --border: rgba(0,0,0,0.07);
       --border-gold: rgba(184,150,46,0.2);
       --success: #2d8a4e;
       --radius: 16px;
       --radius-sm: 10px;
       --radius-full: 9999px;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
-      --shadow: 0 4px 24px rgba(0,0,0,0.08);
-      --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+      --shadow: 0 4px 24px rgba(120,100,70,0.08);
+      --shadow-lg: 0 12px 48px rgba(120,100,70,0.12);
     }
 
     /* === Maenner-Style (Dark Mode) === */
@@ -89,13 +89,13 @@
     /* Navigation */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 16px 32px; background: rgba(250,248,246,0.85);
+      padding: 16px 32px; background: rgba(250,244,238,0.88);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       display: flex; align-items: center; justify-content: space-between;
       transition: padding 300ms, background 300ms, box-shadow 300ms;
       border-bottom: 1px solid transparent;
     }
-    .nav.scrolled { padding: 10px 32px; background: rgba(250,248,246,0.95); border-bottom-color: var(--border); box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
+    .nav.scrolled { padding: 10px 32px; background: rgba(250,244,238,0.96); border-bottom-color: var(--border); box-shadow: 0 2px 20px rgba(120,100,70,0.06); }
     .nav-logo {
       font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
       color: var(--black); text-decoration: none; letter-spacing: -0.3px;
@@ -123,7 +123,7 @@
     .nav-mobile svg { width: 24px; height: 24px; color: var(--black); }
     .mobile-menu {
       display: none; position: fixed; inset: 0; z-index: 99;
-      background: rgba(250,248,246,0.98); backdrop-filter: blur(20px);
+      background: rgba(250,244,238,0.98); backdrop-filter: blur(20px);
       flex-direction: column; align-items: center; justify-content: center; gap: 28px;
     }
     .mobile-menu.open { display: flex; animation: fadeIn 300ms; }
@@ -140,11 +140,11 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1920&q=80') center/cover no-repeat;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(250,248,246,0.55) 0%, rgba(240,235,228,0.62) 30%, rgba(245,242,238,0.68) 55%, rgba(248,245,240,0.58) 80%, rgba(250,248,246,0.50) 100%);
+      background: linear-gradient(160deg, rgba(250,244,238,0.65) 0%, rgba(245,238,228,0.58) 30%, rgba(248,242,234,0.62) 55%, rgba(250,244,238,0.55) 80%, rgba(248,240,232,0.50) 100%);
     }
     .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-particle {
@@ -249,7 +249,7 @@
     .service-card {
       background: var(--white); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 32px 24px;
-      transition: all 300ms var(--ease); cursor: default; position: relative; overflow: hidden;
+      transition: all 300ms var(--ease); cursor: pointer; position: relative; overflow: hidden;
     }
     .service-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow); transform: translateY(-4px); }
     .service-card::before {
@@ -266,6 +266,97 @@
     .service-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
     .service-card p { font-size: 13px; color: var(--text-light); line-height: 1.7; }
     .service-price { margin-top: 16px; font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--gold); }
+    .service-card .service-cta {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+      font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: 0.3px;
+      opacity: 0; transform: translateY(4px); transition: all 300ms var(--ease);
+    }
+    .service-card:hover .service-cta { opacity: 1; transform: translateY(0); }
+    .service-cta svg { width: 14px; height: 14px; }
+
+    /* Service Detail Sheet */
+    .svc-sheet-overlay {
+      display: none; position: fixed; inset: 0; z-index: 250;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(8px);
+      align-items: flex-end; justify-content: center;
+    }
+    .svc-sheet-overlay.open { display: flex; animation: fadeIn 200ms; }
+    .svc-sheet {
+      background: var(--white); border-radius: 20px 20px 0 0; padding: 32px 28px 40px;
+      width: 100%; max-width: 560px; max-height: 85vh; overflow-y: auto;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.15); position: relative;
+      animation: slideUp 350ms var(--ease);
+    }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .svc-sheet-handle {
+      width: 40px; height: 4px; border-radius: 2px; background: var(--border);
+      margin: 0 auto 20px;
+    }
+    .svc-sheet-close {
+      position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+      border-radius: 50%; border: 1px solid var(--border); background: var(--cream);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .svc-sheet-close svg { width: 14px; height: 14px; color: var(--text); }
+    .svc-sheet-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .svc-sheet-icon {
+      width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .svc-sheet-icon svg { width: 24px; height: 24px; color: var(--gold); }
+    .svc-sheet-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 600; }
+    .svc-sheet-meta { display: flex; gap: 16px; margin-top: 4px; }
+    .svc-sheet-meta span {
+      font-size: 13px; color: var(--text-light); display: flex; align-items: center; gap: 4px;
+    }
+    .svc-sheet-meta svg { width: 14px; height: 14px; color: var(--gold); }
+    .svc-sheet-desc { font-size: 14px; color: var(--text-light); line-height: 1.8; margin-bottom: 24px; }
+    .svc-sheet-section { margin-bottom: 20px; }
+    .svc-sheet-section h4 {
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .svc-addon {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; background: var(--cream); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); margin-bottom: 8px; cursor: pointer;
+      transition: border-color 200ms;
+    }
+    .svc-addon:hover { border-color: var(--border-gold); }
+    .svc-addon-left { display: flex; align-items: center; gap: 10px; }
+    .svc-addon-check {
+      width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center; transition: all 200ms; flex-shrink: 0;
+    }
+    .svc-addon.selected .svc-addon-check {
+      background: var(--gold); border-color: var(--gold);
+    }
+    .svc-addon-check svg { width: 12px; height: 12px; color: #fff; opacity: 0; }
+    .svc-addon.selected .svc-addon-check svg { opacity: 1; }
+    .svc-addon-name { font-size: 13px; font-weight: 500; }
+    .svc-addon-price { font-size: 13px; font-weight: 600; color: var(--gold); }
+    .svc-product {
+      display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); margin-bottom: 8px;
+    }
+    .svc-product-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .svc-product-name { font-size: 13px; color: var(--text); }
+    .svc-product-info { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+    .svc-sheet-total {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0; border-top: 1px solid var(--border); margin-top: 8px;
+    }
+    .svc-sheet-total-label { font-size: 14px; color: var(--text-light); }
+    .svc-sheet-total-val { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--gold); }
+    .svc-sheet-actions { display: flex; gap: 10px; margin-top: 16px; }
+    .svc-sheet-actions .btn { flex: 1; justify-content: center; }
+
+    body.herren-style .svc-sheet { background: var(--white); }
+    body.herren-style .svc-sheet-close { background: var(--cream); border-color: var(--border); }
+    body.herren-style .svc-addon { background: var(--cream); border-color: var(--border); }
+    body.herren-style .svc-product { background: var(--cream); border-color: var(--border); }
 
     /* KI Wunschfrisur — Spa Light */
     .ki-section { background: var(--warm); color: var(--text); position: relative; overflow: hidden; }
@@ -392,6 +483,7 @@
       border-radius: var(--radius); padding: 28px 24px;
       transition: all 300ms var(--ease); position: relative; overflow: hidden;
     }
+    .karriere-card { cursor: pointer; }
     .karriere-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow); transform: translateY(-4px); }
     .karriere-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -789,41 +881,47 @@
         <p class="section-desc">Von klassischen Schnitten bis zu aufwendigen Farbbehandlungen — wir bieten das volle Programm.</p>
       </div>
       <div class="services-grid">
-        <div class="service-card reveal reveal-delay-1">
+        <div class="service-card reveal reveal-delay-1" onclick="openService(0)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
           <h3>Haarschnitte</h3>
           <p>Individuelle Schnitte fuer Damen und Herren — von klassisch bis modern, perfekt auf Ihre Gesichtsform abgestimmt.</p>
           <div class="service-price">ab 35 &euro;</div>
+          <div class="service-cta">Details &amp; buchen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="service-card reveal reveal-delay-2">
+        <div class="service-card reveal reveal-delay-2" onclick="openService(1)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></div>
           <h3>Farbbehandlung</h3>
           <p>Balayage, Highlights, Komplett-Coloration — mit Premium-Produkten von La Biosthetique fuer langanhaltende Farbergebnisse.</p>
           <div class="service-price">ab 65 &euro;</div>
+          <div class="service-cta">Details &amp; buchen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="service-card reveal reveal-delay-3">
+        <div class="service-card reveal reveal-delay-3" onclick="openService(2)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/><path d="M9 6.5C7.33 7.83 5 10.6 5 14c0 3 2.5 6 7 8"/><path d="M15 6.5c1.67 1.33 4 4.1 4 7.5 0 3-2.5 6-7 8"/></svg></div>
           <h3>Wunschfrisur-Service</h3>
           <p>Schicken Sie uns ein Foto Ihrer Wunschfrisur — wir analysieren Ihren Haartyp und geben eine persoenliche Empfehlung.</p>
           <div class="service-price">Kostenlos</div>
+          <div class="service-cta">Jetzt anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="service-card reveal">
+        <div class="service-card reveal" onclick="openService(3)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <h3>Haarpflege</h3>
           <p>Intensive Treatments, Olaplex-Behandlungen und individuelle Pflegekonzepte fuer gesundes, glaenzendes Haar.</p>
           <div class="service-price">ab 25 &euro;</div>
+          <div class="service-cta">Details &amp; buchen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="service-card reveal reveal-delay-1">
+        <div class="service-card reveal reveal-delay-1" onclick="openService(4)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
           <h3>Styling</h3>
           <p>Brautstyling, Event-Styling und besondere Anlaesse — wir machen Sie zum Star des Abends.</p>
           <div class="service-price">ab 45 &euro;</div>
+          <div class="service-cta">Details &amp; buchen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
-        <div class="service-card reveal reveal-delay-2">
+        <div class="service-card reveal reveal-delay-2" onclick="openService(5)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
           <h3>Shop</h3>
           <p>Hochwertige Haarpflege-Produkte von La Biosthetique — professionelle Qualitaet fuer zu Hause.</p>
           <div class="service-price">Im Salon</div>
+          <div class="service-cta">Produkte entdecken <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
       </div>
     </div>
@@ -1013,25 +1111,25 @@
       </div>
 
       <div class="karriere-grid">
-        <div class="karriere-card reveal">
+        <div class="karriere-card reveal" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Friseur%20/%20Stylist'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
           <h3>Friseur / Stylist (m/w/d)</h3>
           <p>Du bist leidenschaftlicher Friseur mit Erfahrung in Schnitt und Farbe? Du liebst es, Kunden gluecklich zu machen und ihnen ein Laecheln ins Gesicht zu zaubern? Dann bist du bei uns richtig.</p>
           <span class="karriere-tag">Voll- oder Teilzeit</span>
         </div>
-        <div class="karriere-card reveal reveal-delay-1">
+        <div class="karriere-card reveal reveal-delay-1" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Herrenfriseur%20/%20Barber'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <h3>Herrenfriseur / Barber (m/w/d)</h3>
           <p>Klassischer Herrenschnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auch Maenner auf hoechstem Niveau bedient.</p>
           <span class="karriere-tag">Voll- oder Teilzeit</span>
         </div>
-        <div class="karriere-card reveal reveal-delay-2">
+        <div class="karriere-card reveal reveal-delay-2" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Auszubildende/r'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
           <h3>Auszubildende/r (m/w/d)</h3>
           <p>Du willst Friseur werden und von den Besten lernen? Bei uns bekommst du eine erstklassige Ausbildung mit echtem Praxisbezug — ab Tag eins mittendrin statt nur dabei.</p>
           <span class="karriere-tag">Ausbildung 2025/2026</span>
         </div>
-        <div class="karriere-card reveal reveal-delay-3">
+        <div class="karriere-card reveal reveal-delay-3" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Colorist%20/%20Farb-Spezialist'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <h3>Colorist / Farb-Spezialist (m/w/d)</h3>
           <p>Balayage, Highlights, Komplett-Coloration — du bist der Farb-Profi und willst mit Premium-Produkten von La Biosthetique arbeiten? Perfekt, wir brauchen genau dich.</p>
@@ -1125,6 +1223,15 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
     Casa 2035
   </a>
+
+  <!-- Service Detail Sheet -->
+  <div class="svc-sheet-overlay" id="svcSheetOverlay" onclick="if(event.target===this)closeSvcSheet()">
+    <div class="svc-sheet" id="svcSheet">
+      <div class="svc-sheet-handle"></div>
+      <button class="svc-sheet-close" onclick="closeSvcSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div id="svcSheetContent"></div>
+    </div>
+  </div>
 
   <!-- Legal Modals -->
   <div class="legal-overlay" id="impressumOverlay" onclick="if(event.target===this)closeLegal('impressum')">
@@ -1364,6 +1471,207 @@
         showToast('Terminanfrage gesendet! (Demo-Modus)', 'success');
         e.target.reset();
       }
+    }
+
+    // Service data + detail sheets
+    var serviceData = [
+      { name: 'Damenhaarschnitt', leistung: 'Damenhaarschnitt', price: 35, dur: '45-60 Min',
+        desc: 'Beratung, Waschen mit Kopfmassage, Schnitt und Styling. Wir nehmen uns Zeit fuer Sie — kein Zeitdruck, nur volle Aufmerksamkeit.',
+        addons: [{n:'Ansatzfarbe',p:30},{n:'Intensivpflege Olaplex',p:20},{n:'Augenbrauen zupfen',p:8},{n:'Kopfmassage Extra (10 Min)',p:12}],
+        products: [{n:'La Biosthetique Shampoo',i:'Passend zu Ihrem Haartyp'},{n:'Styling Mousse',i:'Fuer Volumen & Halt'}]
+      },
+      { name: 'Farbbehandlung', leistung: 'Farbbehandlung', price: 65, dur: '90-150 Min',
+        desc: 'Von zartem Balayage bis hin zur kompletten Verwandlung. Wir verwenden ausschliesslich Premium-Produkte von La Biosthetique fuer strahlende, langanhaltende Farben.',
+        addons: [{n:'Balayage / Highlights',p:40},{n:'Olaplex Schutzbehandlung',p:25},{n:'Glossing / Toenung',p:20},{n:'Haarschnitt dazu',p:25}],
+        products: [{n:'Color Care Shampoo',i:'Farbschutz & Glanz'},{n:'Color Protect Maske',i:'Intensive Farbpflege'}]
+      },
+      { name: 'Wunschfrisur-Service', leistung: 'Beratung', price: 0, dur: 'Kostenlos',
+        desc: 'Schicken Sie ein Foto Ihrer Traumfrisur — wir analysieren Haartyp, Gesichtsform und Machbarkeit. Sie erhalten eine persoenliche Einschaetzung mit Produktvorschlaegen.',
+        addons: [], products: [], isWunsch: true
+      },
+      { name: 'Haarpflege-Treatment', leistung: 'Haarpflege / Treatment', price: 25, dur: '30-45 Min',
+        desc: 'Intensive Pflege fuer strapaziertes Haar. Olaplex, Keratin oder individuelle Kuren — wir finden die perfekte Behandlung fuer Ihr Haar.',
+        addons: [{n:'Olaplex Stand-Alone',p:35},{n:'Keratin-Glaettung',p:80},{n:'Kopfhaut-Peeling',p:15},{n:'Haarbad mit aetherischen Oelen',p:18}],
+        products: [{n:'Olaplex No. 3',i:'Reparatur fuer zu Hause'},{n:'Repair Maske',i:'Tiefenpflege'}]
+      },
+      { name: 'Styling', leistung: 'Brautstyling', price: 45, dur: '60-90 Min',
+        desc: 'Hochsteckfrisuren, Brautstyling, Event-Looks — wir zaubern Ihnen den perfekten Style fuer Ihren besonderen Anlass. Inklusive Probestyling auf Wunsch.',
+        addons: [{n:'Make-up dazu',p:40},{n:'Probestyling (separater Termin)',p:35},{n:'Haarschmuck / Accessoires',p:15},{n:'Glaetteisen-Finish',p:10}],
+        products: [{n:'Haarspray Strong Hold',i:'Den ganzen Tag perfekt'},{n:'Glanz-Serum',i:'Seidig & strahlend'}]
+      },
+      { name: 'Shop — Produkte', leistung: 'Beratung', price: 0, dur: 'Im Salon',
+        desc: 'Professionelle Haarpflege fuer zu Hause. Unsere Stylisten beraten Sie persoenlich, welche Produkte zu Ihrem Haartyp passen. La Biosthetique, Olaplex und mehr.',
+        addons: [], products: [{n:'La Biosthetique Shampoos',i:'ab 18 EUR'},{n:'Olaplex Serie',i:'ab 26 EUR'},{n:'Styling-Produkte',i:'ab 14 EUR'},{n:'Haarkuren & Masken',i:'ab 22 EUR'}], isShop: true
+      }
+    ];
+    var selectedAddons = [];
+
+    function openService(idx) {
+      var s = serviceData[idx];
+      selectedAddons = [];
+      var c = document.getElementById('svcSheetContent');
+      c.textContent = '';
+
+      // Header
+      var header = document.createElement('div');
+      header.className = 'svc-sheet-header';
+      var iconDiv = document.createElement('div');
+      iconDiv.className = 'svc-sheet-icon';
+      var cards = document.querySelectorAll('.service-card');
+      var svgEl = cards[idx].querySelector('.service-icon svg').cloneNode(true);
+      iconDiv.appendChild(svgEl);
+      header.appendChild(iconDiv);
+      var info = document.createElement('div');
+      var title = document.createElement('div');
+      title.className = 'svc-sheet-title';
+      title.textContent = s.name;
+      info.appendChild(title);
+      var meta = document.createElement('div');
+      meta.className = 'svc-sheet-meta';
+      var durSpan = document.createElement('span');
+      var clockSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      clockSvg.setAttribute('viewBox','0 0 24 24');clockSvg.setAttribute('fill','none');
+      clockSvg.setAttribute('stroke','currentColor');clockSvg.setAttribute('stroke-width','2');
+      var c1=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c1.setAttribute('cx','12');c1.setAttribute('cy','12');c1.setAttribute('r','10');
+      var pl=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+      pl.setAttribute('points','12 6 12 12 16 14');
+      clockSvg.appendChild(c1);clockSvg.appendChild(pl);
+      durSpan.appendChild(clockSvg);
+      durSpan.appendChild(document.createTextNode(s.dur));
+      meta.appendChild(durSpan);
+      if(s.price>0){
+        var priceSpan=document.createElement('span');
+        priceSpan.textContent='ab '+s.price+' \u20AC';
+        priceSpan.style.fontWeight='600';priceSpan.style.color='var(--gold)';
+        meta.appendChild(priceSpan);
+      }
+      info.appendChild(meta);
+      header.appendChild(info);
+      c.appendChild(header);
+
+      // Description
+      var desc=document.createElement('p');desc.className='svc-sheet-desc';desc.textContent=s.desc;
+      c.appendChild(desc);
+
+      // Wunschfrisur special
+      if(s.isWunsch){
+        var btn=document.createElement('a');btn.href='#wunschfrisur';btn.className='btn btn-gold';
+        btn.style.cssText='width:100%;justify-content:center';
+        btn.textContent='Wunschfrisur jetzt senden';
+        btn.addEventListener('click',function(){closeSvcSheet()});
+        c.appendChild(btn);
+        document.getElementById('svcSheetOverlay').classList.add('open');
+        document.body.style.overflow='hidden';
+        return;
+      }
+
+      // Shop special
+      if(s.isShop){
+        var sec=document.createElement('div');sec.className='svc-sheet-section';
+        var h4=document.createElement('h4');h4.textContent='Unser Sortiment';sec.appendChild(h4);
+        s.products.forEach(function(p){
+          var row=document.createElement('div');row.className='svc-product';
+          var dot=document.createElement('div');dot.className='svc-product-dot';
+          var nm=document.createElement('div');nm.className='svc-product-name';nm.textContent=p.n;
+          var inf=document.createElement('div');inf.className='svc-product-info';inf.textContent=p.i;
+          row.appendChild(dot);row.appendChild(nm);row.appendChild(inf);
+          sec.appendChild(row);
+        });
+        c.appendChild(sec);
+        var btn2=document.createElement('a');btn2.href='#booking';btn2.className='btn btn-gold';
+        btn2.style.cssText='width:100%;justify-content:center;margin-top:16px';
+        btn2.textContent='Beratungstermin buchen';
+        btn2.addEventListener('click',function(){closeSvcSheet();
+          document.getElementById('bkLeistung').value='Beratung';
+        });
+        c.appendChild(btn2);
+        document.getElementById('svcSheetOverlay').classList.add('open');
+        document.body.style.overflow='hidden';
+        return;
+      }
+
+      // Addons
+      if(s.addons.length){
+        var addonSec=document.createElement('div');addonSec.className='svc-sheet-section';
+        var h4a=document.createElement('h4');h4a.textContent='Dazu buchbar';addonSec.appendChild(h4a);
+        s.addons.forEach(function(a,ai){
+          var row=document.createElement('div');row.className='svc-addon';
+          row.setAttribute('data-idx',ai);row.setAttribute('data-price',a.p);
+          var left=document.createElement('div');left.className='svc-addon-left';
+          var chk=document.createElement('div');chk.className='svc-addon-check';
+          var chkSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+          chkSvg.setAttribute('viewBox','0 0 24 24');chkSvg.setAttribute('fill','none');
+          chkSvg.setAttribute('stroke','currentColor');chkSvg.setAttribute('stroke-width','3');
+          var chkPl=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+          chkPl.setAttribute('points','20 6 9 17 4 12');chkSvg.appendChild(chkPl);
+          chk.appendChild(chkSvg);left.appendChild(chk);
+          var nm=document.createElement('span');nm.className='svc-addon-name';nm.textContent=a.n;
+          left.appendChild(nm);row.appendChild(left);
+          var pr=document.createElement('span');pr.className='svc-addon-price';pr.textContent='+'+a.p+' \u20AC';
+          row.appendChild(pr);
+          row.addEventListener('click',function(){
+            this.classList.toggle('selected');
+            updateSvcTotal(idx);
+          });
+          addonSec.appendChild(row);
+        });
+        c.appendChild(addonSec);
+      }
+
+      // Products
+      if(s.products.length){
+        var prodSec=document.createElement('div');prodSec.className='svc-sheet-section';
+        var h4p=document.createElement('h4');h4p.textContent='Empfohlene Produkte';prodSec.appendChild(h4p);
+        s.products.forEach(function(p){
+          var row=document.createElement('div');row.className='svc-product';
+          var dot=document.createElement('div');dot.className='svc-product-dot';
+          var nm=document.createElement('div');nm.className='svc-product-name';nm.textContent=p.n;
+          var inf=document.createElement('div');inf.className='svc-product-info';inf.textContent=p.i;
+          row.appendChild(dot);row.appendChild(nm);row.appendChild(inf);
+          prodSec.appendChild(row);
+        });
+        c.appendChild(prodSec);
+      }
+
+      // Total
+      var total=document.createElement('div');total.className='svc-sheet-total';
+      var tl=document.createElement('div');tl.className='svc-sheet-total-label';tl.textContent='Geschaetzter Preis';
+      var tv=document.createElement('div');tv.className='svc-sheet-total-val';tv.id='svcTotalVal';
+      tv.textContent='ab '+s.price+' \u20AC';
+      total.appendChild(tl);total.appendChild(tv);c.appendChild(total);
+
+      // Actions
+      var actions=document.createElement('div');actions.className='svc-sheet-actions';
+      var bookBtn=document.createElement('a');bookBtn.href='#booking';bookBtn.className='btn btn-gold';
+      bookBtn.textContent='Jetzt Termin buchen';
+      bookBtn.addEventListener('click',function(){
+        closeSvcSheet();
+        var sel=document.getElementById('bkLeistung');
+        for(var i=0;i<sel.options.length;i++){
+          if(sel.options[i].text===s.leistung){sel.selectedIndex=i;break;}
+        }
+      });
+      var callBtn=document.createElement('a');callBtn.href='tel:08912962940';callBtn.className='btn btn-outline';
+      callBtn.textContent='Anrufen';
+      actions.appendChild(bookBtn);actions.appendChild(callBtn);c.appendChild(actions);
+
+      document.getElementById('svcSheetOverlay').classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+
+    function updateSvcTotal(idx){
+      var base=serviceData[idx].price;
+      var extra=0;
+      document.querySelectorAll('.svc-addon.selected').forEach(function(el){
+        extra+=parseInt(el.getAttribute('data-price'));
+      });
+      document.getElementById('svcTotalVal').textContent='ab '+(base+extra)+' \u20AC';
+    }
+
+    function closeSvcSheet(){
+      document.getElementById('svcSheetOverlay').classList.remove('open');
+      document.body.style.overflow='';
     }
 
     // Legal modals
