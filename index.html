@@ -377,6 +377,71 @@
     .hours-time { color: var(--text-light); }
     .hours-closed { color: var(--text-muted); font-style: italic; }
 
+    /* Karriere */
+    .karriere { background: var(--white); position: relative; overflow: hidden; }
+    .karriere::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.05;
+    }
+    .karriere .container { position: relative; z-index: 1; }
+    .karriere-intro { max-width: 640px; margin-bottom: 48px; }
+    .karriere-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 48px; }
+    .karriere-card {
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 24px;
+      transition: all 300ms var(--ease); position: relative; overflow: hidden;
+    }
+    .karriere-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow); transform: translateY(-4px); }
+    .karriere-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light)); opacity: 0; transition: opacity 300ms;
+    }
+    .karriere-card:hover::before { opacity: 1; }
+    .karriere-card-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--gold-glow); border: 1px solid var(--gold-dim);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .karriere-card-icon svg { width: 22px; height: 22px; color: var(--gold); }
+    .karriere-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .karriere-card p { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+    .karriere-card .karriere-tag {
+      display: inline-block; margin-top: 14px; padding: 5px 14px;
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      border-radius: var(--radius-full); font-size: 11px; font-weight: 600;
+      color: var(--gold); letter-spacing: 0.3px;
+    }
+    .karriere-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+    .karriere-benefit {
+      display: flex; align-items: flex-start; gap: 12px; padding: 20px;
+      background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    }
+    .karriere-benefit-icon {
+      width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+      background: var(--gold-dim); display: flex; align-items: center; justify-content: center;
+    }
+    .karriere-benefit-icon svg { width: 16px; height: 16px; color: var(--gold); }
+    .karriere-benefit h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .karriere-benefit p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .karriere-cta {
+      text-align: center; padding: 40px; background: var(--cream);
+      border: 1px solid var(--border-gold); border-radius: var(--radius);
+    }
+    .karriere-cta h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; margin-bottom: 12px; }
+    .karriere-cta p { font-size: 14px; color: var(--text-light); margin-bottom: 24px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    .karriere-cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    body.herren-style .karriere { background: var(--white); }
+    body.herren-style .karriere-card { background: var(--cream); border-color: var(--border); }
+    body.herren-style .karriere-card:hover { border-color: var(--border-gold); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+    body.herren-style .karriere-benefit { background: var(--cream); border-color: var(--border); }
+    body.herren-style .karriere-cta { background: var(--cream); border-color: var(--border-gold); }
+    body.herren-style .karriere::before {
+      background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.08;
+    }
+
     /* Footer */
     .footer { background: var(--black); color: var(--white); padding: 60px 24px 24px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1200px; margin: 0 auto; }
@@ -577,7 +642,8 @@
       .nav-mobile { display: block; }
       #styleToggleMobile { display: flex; }
       .about-grid, .ki-grid, .booking-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid, .karriere-grid { grid-template-columns: 1fr; }
+      .karriere-benefits { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
       .form-row { grid-template-columns: 1fr; }
       section { padding: 60px 20px; }
@@ -599,6 +665,7 @@
       <a href="#wunschfrisur">Wunschfrisur</a>
       <a href="#booking">Termin</a>
       <a href="#contact">Kontakt</a>
+      <a href="#karriere">Karriere</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
       <div class="style-toggle" id="styleToggle">
         <button class="style-toggle-btn active" data-style="damen" onclick="setStyle('damen')">Damen</button>
@@ -626,6 +693,7 @@
     <a href="#wunschfrisur" onclick="toggleMobile()">Wunschfrisur</a>
     <a href="#booking" onclick="toggleMobile()">Termin buchen</a>
     <a href="#contact" onclick="toggleMobile()">Kontakt</a>
+    <a href="#karriere" onclick="toggleMobile()">Karriere</a>
   </div>
 
   <div class="toast-container" id="toastContainer"></div>
@@ -906,6 +974,86 @@
     </div>
   </section>
 
+  <!-- Karriere -->
+  <section class="karriere" id="karriere">
+    <div class="container">
+      <div class="karriere-intro reveal">
+        <div class="section-label">Werde Teil unseres Teams</div>
+        <h2 class="section-title">Deine <em>Karriere</em><br>bei Rena Rados</h2>
+        <p class="section-desc">Wir suchen Menschen, die fuer ihren Beruf brennen. Ob erfahrener Stylist, Barber oder Azubi am Anfang — bei uns zaehlt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.</p>
+      </div>
+
+      <div class="karriere-grid">
+        <div class="karriere-card reveal">
+          <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
+          <h3>Friseur / Stylist (m/w/d)</h3>
+          <p>Du bist leidenschaftlicher Friseur mit Erfahrung in Schnitt und Farbe? Du liebst es, Kunden gluecklich zu machen und ihnen ein Laecheln ins Gesicht zu zaubern? Dann bist du bei uns richtig.</p>
+          <span class="karriere-tag">Voll- oder Teilzeit</span>
+        </div>
+        <div class="karriere-card reveal reveal-delay-1">
+          <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Herrenfriseur / Barber (m/w/d)</h3>
+          <p>Klassischer Herrenschnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auch Maenner auf hoechstem Niveau bedient.</p>
+          <span class="karriere-tag">Voll- oder Teilzeit</span>
+        </div>
+        <div class="karriere-card reveal reveal-delay-2">
+          <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
+          <h3>Auszubildende/r (m/w/d)</h3>
+          <p>Du willst Friseur werden und von den Besten lernen? Bei uns bekommst du eine erstklassige Ausbildung mit echtem Praxisbezug — ab Tag eins mittendrin statt nur dabei.</p>
+          <span class="karriere-tag">Ausbildung 2025/2026</span>
+        </div>
+        <div class="karriere-card reveal reveal-delay-3">
+          <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Colorist / Farb-Spezialist (m/w/d)</h3>
+          <p>Balayage, Highlights, Komplett-Coloration — du bist der Farb-Profi und willst mit Premium-Produkten von La Biosthetique arbeiten? Perfekt, wir brauchen genau dich.</p>
+          <span class="karriere-tag">Voll- oder Teilzeit</span>
+        </div>
+      </div>
+
+      <div class="karriere-benefits">
+        <div class="karriere-benefit reveal">
+          <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div><h4>Familienaeres Team</h4><p>Kein Stress, kein Druck — bei uns arbeitet man miteinander, nicht gegeneinander</p></div>
+        </div>
+        <div class="karriere-benefit reveal reveal-delay-1">
+          <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg></div>
+          <div><h4>Modernste Technik</h4><p>Innovative Tools und Premium-Produkte von La Biosthetique</p></div>
+        </div>
+        <div class="karriere-benefit reveal reveal-delay-2">
+          <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
+          <div><h4>Weiterbildung</h4><p>Regelmaessige Schulungen und Seminare auf Salonkosten</p></div>
+        </div>
+        <div class="karriere-benefit reveal">
+          <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><h4>Flexible Arbeitszeiten</h4><p>Voll- oder Teilzeit — wir finden gemeinsam das passende Modell</p></div>
+        </div>
+        <div class="karriere-benefit reveal reveal-delay-1">
+          <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Top-Lage Muenchen</h4><p>Zentral gelegen, gut erreichbar mit OePNV</p></div>
+        </div>
+        <div class="karriere-benefit reveal reveal-delay-2">
+          <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4"/></svg></div>
+          <div><h4>Faire Bezahlung</h4><p>Ueberdurchschnittliches Gehalt plus leistungsabhaengiger Bonus</p></div>
+        </div>
+      </div>
+
+      <div class="karriere-cta reveal">
+        <h3>Bereit fuer den naechsten Schritt?</h3>
+        <p>Schick uns einfach eine kurze Nachricht oder ruf an — kein kompliziertes Bewerbungsverfahren. Wir wollen dich kennenlernen, nicht deinen Lebenslauf auswendig lernen.</p>
+        <div class="karriere-cta-buttons">
+          <a href="mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20bei%20Rena%20Rados" class="btn btn-gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            E-Mail schreiben
+          </a>
+          <a href="tel:08912962940" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.09 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 11.3a16 16 0 0 0 6.61 6.61l2.13-2.13a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-grid">
@@ -923,7 +1071,7 @@
       </div>
       <div>
         <h4>Navigation</h4>
-        <div class="footer-links"><a href="#about">Salon</a><a href="#services">Leistungen</a><a href="#wunschfrisur">Wunschfrisur</a><a href="#booking">Termin buchen</a><a href="#contact">Kontakt</a></div>
+        <div class="footer-links"><a href="#about">Salon</a><a href="#services">Leistungen</a><a href="#wunschfrisur">Wunschfrisur</a><a href="#booking">Termin buchen</a><a href="#contact">Kontakt</a><a href="#karriere">Karriere</a></div>
       </div>
       <div>
         <h4>Leistungen</h4>
@@ -974,7 +1122,7 @@
     })();
 
     // Nav scroll + active section highlight
-    var navSections = ['about', 'services', 'wunschfrisur', 'booking', 'contact'];
+    var navSections = ['about', 'services', 'wunschfrisur', 'booking', 'contact', 'karriere'];
     window.addEventListener('scroll', function() {
       document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
       // Highlight active section in nav
