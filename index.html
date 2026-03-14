@@ -140,11 +140,11 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1633681122967-a8c72a27013e?w=1920&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(250,248,246,0.88) 0%, rgba(240,235,228,0.82) 40%, rgba(232,223,212,0.85) 70%, rgba(245,240,234,0.9) 100%);
+      background: linear-gradient(160deg, rgba(250,248,246,0.78) 0%, rgba(240,235,228,0.72) 40%, rgba(232,223,212,0.75) 70%, rgba(245,240,234,0.82) 100%);
     }
     .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-particle {
@@ -238,7 +238,13 @@
     .about-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
     /* Services */
-    .services { background: var(--cream); }
+    .services { background: var(--cream); position: relative; overflow: hidden; }
+    .services::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.04;
+    }
+    .services .container { position: relative; z-index: 1; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
     .service-card {
       background: var(--white); border: 1px solid var(--border);
@@ -266,7 +272,7 @@
     .ki-section::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.06;
+      opacity: 0.12;
     }
     .ki-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
     .ki-content .section-desc { color: var(--text-light); }
@@ -321,7 +327,7 @@
     .booking::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.04;
+      opacity: 0.08;
     }
     .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
     .booking-form { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
@@ -341,7 +347,13 @@
     .booking-info-text a { color: var(--gold); text-decoration: none; font-weight: 600; }
 
     /* Contact */
-    .contact { background: var(--cream); }
+    .contact { background: var(--cream); position: relative; overflow: hidden; }
+    .contact::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.04;
+    }
+    .contact .container { position: relative; z-index: 1; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
     .contact-map {
       border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); min-height: 400px;
@@ -465,10 +477,37 @@
     body.herren-style .mobile-menu a { color: var(--text); }
     body.herren-style .mobile-close svg { color: var(--text); }
 
+    /* Herren-Style: Eigene Barbershop-Bilder */
+    body.herren-style .hero-bg {
+      background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920&q=80') center/cover no-repeat;
+    }
     body.herren-style .hero-bg::after {
-      background: linear-gradient(160deg, rgba(14,14,14,0.92) 0%, rgba(20,20,20,0.88) 40%, rgba(16,16,16,0.9) 70%, rgba(14,14,14,0.94) 100%);
+      background: linear-gradient(160deg, rgba(14,14,14,0.82) 0%, rgba(20,20,20,0.78) 40%, rgba(16,16,16,0.8) 70%, rgba(14,14,14,0.85) 100%);
     }
     body.herren-style .hero-particle { background: var(--gold); }
+
+    body.herren-style .about-visual {
+      background: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800&q=80') center/cover no-repeat;
+    }
+
+    body.herren-style .ki-section::before {
+      background: url('https://images.unsplash.com/photo-1585747860019-8e8705a7fa68?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.15;
+    }
+
+    body.herren-style .booking::before {
+      background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.1;
+    }
+
+    body.herren-style .contact-map {
+      background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800&q=80') center/cover no-repeat;
+    }
+
+    body.herren-style .services::before {
+      background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.08;
+    }
 
     body.herren-style .about-visual-inner {
       background: rgba(14,14,14,0.7);
@@ -596,9 +635,9 @@
     <div class="hero-bg"></div>
     <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-content">
-      <div class="hero-badge"><span class="hero-badge-dot"></span>Ihre Wellness-Oase</div>
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Willkommen im Jahr 2035</div>
       <h1>Entspannen.<br>Geniessen. <em>Strahlen.</em></h1>
-      <p class="hero-sub">Ankommen, Kaffee geniessen, eine wohltuende Kopfmassage erleben — und mit Ihrer Traumfrisur den Salon verlassen. Bei uns haben Sie unsere volle Aufmerksamkeit.</p>
+      <p class="hero-sub">Hier stehen Sie im Mittelpunkt. Ankommen, durchatmen, bei einem Kaffee ankommen. Eine wohltuende Kopfmassage geniessen — und mit Ihrem Wunschlook den Salon verlassen. Bei uns dreht sich alles um Sie.</p>
       <div class="hero-actions">
         <a href="#booking" class="btn btn-gold">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -621,10 +660,10 @@
     <div class="container">
       <div class="about-grid">
         <div class="reveal">
-          <div class="section-label">Ihre Wellness-Oase</div>
+          <div class="section-label">Die Zukunft erleben</div>
           <h2 class="section-title">Mehr als nur ein<br><em>Friseurbesuch</em></h2>
-          <p class="section-desc">Treten Sie ein und lassen Sie den Alltag hinter sich. Bei uns beginnt Ihr Besuch mit einer Tasse Kaffee, einem persoenlichen Gespraech und einer entspannenden Kopfmassage — bevor die eigentliche Verwandlung beginnt.</p>
-          <p class="section-desc" style="margin-top:12px">Wir nehmen uns Zeit. Keine Hektik, kein Zeitdruck. Nur Sie, Ihr Wunsch und unser ganzes Koennen mit hochwertigen Produkten von La Biosthetique.</p>
+          <p class="section-desc">Wir hoeren Ihnen zu. Was bewegt Sie? Was wuenschen Sie sich? Bei uns beginnt alles mit einem persoenlichen Gespraech bei einer Tasse Kaffee — bevor die erste Schere angesetzt wird.</p>
+          <p class="section-desc" style="margin-top:12px">Entspannende Kopfmassage, individuelle Beratung, null Zeitdruck. Bei uns sind Sie keine Nummer — Sie sind der Mittelpunkt. Mit hochwertigen Produkten von La Biosthetique und modernster Technik.</p>
           <div class="about-stats">
             <div class="about-stat reveal reveal-delay-1"><div class="about-stat-val">15+</div><div class="about-stat-label">Jahre Erfahrung</div></div>
             <div class="about-stat reveal reveal-delay-2"><div class="about-stat-val">100%</div><div class="about-stat-label">Zeit fuer Sie</div></div>
@@ -636,8 +675,8 @@
             <div class="about-visual-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </div>
-            <div class="about-visual-text">Ihre Zeit.<br>Ihr Moment.</div>
-            <div class="about-visual-sub">Wellness &amp; Styling seit 2009</div>
+            <div class="about-visual-text">Zukunft trifft<br>Handwerk</div>
+            <div class="about-visual-sub">Casa 2035 &mdash; Ihr Salon der Zukunft</div>
           </div>
         </div>
       </div>
@@ -700,7 +739,7 @@
         <div class="ki-content reveal">
           <div class="section-label">Ihr Wunsch</div>
           <h2 class="section-title">Ihre <em>Wunschfrisur</em><br>wird Realitaet</h2>
-          <p class="section-desc">Schicken Sie uns ein Foto Ihrer Traumfrisur — wir analysieren sofort, ob der Style zu Ihrem Haartyp passt. Sie erhalten eine persoenliche Empfehlung und passende Produktvorschlaege.</p>
+          <p class="section-desc">Zeigen Sie uns, wovon Sie traeumen. Ein Foto, eine Idee, ein Wunsch — wir hoeren zu und sagen Ihnen ehrlich, was moeglich ist. Persoenlich, schnell und ganz auf Sie zugeschnitten.</p>
           <div class="ki-features">
             <div class="ki-feature">
               <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
@@ -755,7 +794,7 @@
       <div class="reveal">
         <div class="section-label">Online-Terminbuchung</div>
         <h2 class="section-title">Ihren <em>Termin</em> buchen</h2>
-        <p class="section-desc">Buchen Sie bequem online — wir bestaetigen innerhalb weniger Minuten.</p>
+        <p class="section-desc">Waehlen Sie Ihren Wunschtermin — wir nehmen uns Zeit fuer Sie und bestaetigen persoenlich.</p>
       </div>
       <div class="booking-grid">
         <div class="booking-form reveal">
@@ -872,7 +911,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><em>Rena Rados</em> Friseure</div>
-        <p class="footer-desc">Premium Haarstyling in Muenchen. 100% Zeit fuer Sie — persoenliche Beratung, hochwertige Produkte und volle Aufmerksamkeit fuer Ihr perfektes Haar.</p>
+        <p class="footer-desc">Sie stehen im Mittelpunkt. Premium Haarstyling in Muenchen — mit Kaffee, Kopfmassage, persoenlicher Beratung und voller Aufmerksamkeit. Willkommen im Jahr 2035.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/rena_rados_friseure/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
