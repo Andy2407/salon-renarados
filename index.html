@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Rena Rados Friseure in Muenchen — Ihr Premium-Salon mit KI-Beratung, Online-Terminbuchung und Wunschfrisur-Service. Powered by Casa 2035.">
+  <meta name="description" content="Rena Rados Friseure in Muenchen — Ihr Premium-Salon mit persoenlicher Beratung, Online-Terminbuchung und Wunschfrisur-Service.">
   <meta name="theme-color" content="#faf8f6">
   <title>Rena Rados Friseure | Muenchen — Premium Haarstyling</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,7 +109,7 @@
     .mobile-close { position: absolute; top: 20px; right: 32px; background: none; border: none; cursor: pointer; }
     .mobile-close svg { width: 28px; height: 28px; color: var(--text); }
 
-    /* Hero — Spa Atmosphere */
+    /* Hero — Spa Atmosphere with Background Image */
     .hero {
       position: relative; min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
@@ -117,13 +117,11 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: linear-gradient(160deg, #faf8f6 0%, #f0ebe4 30%, #e8dfd4 60%, #f5f0ea 100%); opacity: 1;
+      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 30% 40%, rgba(184,150,46,0.06) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 70%, rgba(200,180,140,0.08) 0%, transparent 50%),
-                  radial-gradient(ellipse at 50% 100%, rgba(184,150,46,0.04) 0%, transparent 40%);
+      background: linear-gradient(160deg, rgba(250,248,246,0.88) 0%, rgba(240,235,228,0.82) 40%, rgba(232,223,212,0.85) 70%, rgba(245,240,234,0.9) 100%);
     }
     .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-particle {
@@ -194,11 +192,12 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .about-visual {
       position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/5;
-      background: linear-gradient(135deg, var(--black) 0%, var(--black-light) 100%);
+      background: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80') center/cover no-repeat;
     }
     .about-visual-inner {
       position: absolute; inset: 16px; border-radius: var(--radius-sm);
-      border: 1px solid rgba(184,150,46,0.15);
+      border: 1px solid rgba(184,150,46,0.25);
+      background: rgba(26,26,26,0.45); backdrop-filter: blur(4px);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 16px; text-align: center; padding: 32px;
     }
@@ -241,7 +240,11 @@
 
     /* KI Wunschfrisur — Spa Light */
     .ki-section { background: var(--warm); color: var(--text); position: relative; overflow: hidden; }
-    .ki-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(184,150,46,0.05) 0%, transparent 60%); }
+    .ki-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.06;
+    }
     .ki-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
     .ki-content .section-desc { color: var(--text-light); }
     .ki-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
@@ -291,7 +294,12 @@
     .upload-thumb { width: 60px; height: 60px; border-radius: 8px; background: var(--warm); object-fit: cover; border: 1px solid var(--border); }
 
     /* Booking */
-    .booking { background: var(--white); }
+    .booking { background: var(--white); position: relative; overflow: hidden; }
+    .booking::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=1920&q=80') center/cover no-repeat;
+      opacity: 0.04;
+    }
     .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
     .booking-form { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
     .booking-form h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin-bottom: 24px; }
@@ -312,8 +320,13 @@
     /* Contact */
     .contact { background: var(--cream); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
-    .contact-map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); min-height: 400px; background: var(--warm); display: flex; align-items: center; justify-content: center; }
-    .contact-map-placeholder { text-align: center; color: var(--text-muted); font-size: 13px; }
+    .contact-map {
+      border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); min-height: 400px;
+      background: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .contact-map::before { content: ''; position: absolute; inset: 0; background: rgba(245,240,234,0.85); }
+    .contact-map-placeholder { text-align: center; color: var(--text-muted); font-size: 13px; position: relative; z-index: 1; }
     .contact-map-placeholder svg { width: 48px; height: 48px; color: var(--gold); margin-bottom: 12px; display: block; margin: 0 auto 12px; }
     .contact-details { display: flex; flex-direction: column; gap: 20px; }
     .contact-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
@@ -442,9 +455,9 @@
     <div class="hero-bg"></div>
     <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-content">
-      <div class="hero-badge"><span class="hero-badge-dot"></span>KI-Beratung verfuegbar</div>
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Persoenliche Beratung</div>
       <h1>Ihr Haar.<br>Unsere <em>Leidenschaft.</em></h1>
-      <p class="hero-sub">Premium Haarstyling in Muenchen mit individueller KI-Beratung, Online-Terminbuchung und exklusivem Wunschfrisur-Service.</p>
+      <p class="hero-sub">Premium Haarstyling in Muenchen — mit ungeteilter Aufmerksamkeit, persoenlicher Beratung und voller Zeit nur fuer Sie.</p>
       <div class="hero-actions">
         <a href="#booking" class="btn btn-gold">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -513,8 +526,8 @@
         </div>
         <div class="service-card reveal reveal-delay-3">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/><path d="M9 6.5C7.33 7.83 5 10.6 5 14c0 3 2.5 6 7 8"/><path d="M15 6.5c1.67 1.33 4 4.1 4 7.5 0 3-2.5 6-7 8"/></svg></div>
-          <h3>KI-Wunschfrisur</h3>
-          <p>Schicken Sie uns ein Foto Ihrer Wunschfrisur — unsere KI analysiert Ihren Haartyp und gibt eine professionelle Empfehlung.</p>
+          <h3>Wunschfrisur-Service</h3>
+          <p>Schicken Sie uns ein Foto Ihrer Wunschfrisur — wir analysieren Ihren Haartyp und geben eine persoenliche Empfehlung.</p>
           <div class="service-price">Kostenlos</div>
         </div>
         <div class="service-card reveal">
@@ -544,9 +557,9 @@
     <div class="container">
       <div class="ki-grid">
         <div class="ki-content reveal">
-          <div class="section-label">KI-Innovation</div>
-          <h2 class="section-title">Ihre <em>Wunschfrisur</em><br>wird analysiert</h2>
-          <p class="section-desc">Laden Sie ein Foto Ihrer Traumfrisur hoch und unsere KI analysiert sofort, ob der Style zu Ihrem Haartyp passt. Sie erhalten eine professionelle Empfehlung und passende Produktvorschlaege.</p>
+          <div class="section-label">Ihr Wunsch</div>
+          <h2 class="section-title">Ihre <em>Wunschfrisur</em><br>wird Realitaet</h2>
+          <p class="section-desc">Schicken Sie uns ein Foto Ihrer Traumfrisur — wir analysieren sofort, ob der Style zu Ihrem Haartyp passt. Sie erhalten eine persoenliche Empfehlung und passende Produktvorschlaege.</p>
           <div class="ki-features">
             <div class="ki-feature">
               <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
@@ -554,11 +567,11 @@
             </div>
             <div class="ki-feature">
               <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg></div>
-              <div><h4>KI-Analyse</h4><p>Unsere KI erkennt Haartyp, Farbe und Style und gibt eine Machbarkeits-Einschaetzung</p></div>
+              <div><h4>Professionelle Analyse</h4><p>Wir pruefen Haartyp, Farbe und Style und geben eine ehrliche Machbarkeits-Einschaetzung</p></div>
             </div>
             <div class="ki-feature">
               <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-              <div><h4>Persoenliche Empfehlung</h4><p>Innerhalb weniger Minuten erhalten Sie eine Antwort mit Produkt- und Terminvorschlag</p></div>
+              <div><h4>Ihre persoenliche Antwort</h4><p>Innerhalb weniger Minuten erhalten Sie eine Antwort mit Produkt- und Terminvorschlag</p></div>
             </div>
           </div>
         </div>
@@ -718,7 +731,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><em>Rena Rados</em> Friseure</div>
-        <p class="footer-desc">Premium Haarstyling in Muenchen. Individuelle Beratung, hochwertige Produkte und KI-gestuetzte Innovation fuer Ihr perfektes Haarstyling.</p>
+        <p class="footer-desc">Premium Haarstyling in Muenchen. 100% Zeit fuer Sie — persoenliche Beratung, hochwertige Produkte und volle Aufmerksamkeit fuer Ihr perfektes Haar.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/rena_rados_friseure/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -734,7 +747,7 @@
       </div>
       <div>
         <h4>Leistungen</h4>
-        <div class="footer-links"><a href="#services">Haarschnitte</a><a href="#services">Farbbehandlung</a><a href="#services">Haarpflege</a><a href="#services">Styling</a><a href="#wunschfrisur">KI-Beratung</a></div>
+        <div class="footer-links"><a href="#services">Haarschnitte</a><a href="#services">Farbbehandlung</a><a href="#services">Haarpflege</a><a href="#services">Styling</a><a href="#wunschfrisur">Wunschfrisur</a></div>
       </div>
       <div>
         <h4>Rechtliches</h4>
