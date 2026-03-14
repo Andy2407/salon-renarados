@@ -41,12 +41,30 @@
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
     }
 
+    /* === Maenner-Style (Dark Mode) === */
+    body.herren-style {
+      --cream: #0e0e0e;
+      --warm: #161616;
+      --white: #1a1a1a;
+      --black: #f0ece8;
+      --black-light: #e0dbd5;
+      --black-soft: #c0b8ae;
+      --text: #f0ece8;
+      --text-light: #b0a89e;
+      --text-muted: #7a7570;
+      --border: rgba(255,255,255,0.08);
+      --border-gold: rgba(184,150,46,0.25);
+      --shadow: 0 4px 24px rgba(0,0,0,0.3);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.5);
+    }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
       font-family: 'Inter', -apple-system, system-ui, sans-serif;
       color: var(--text); background: var(--cream);
       -webkit-font-smoothing: antialiased; overflow-x: hidden;
+      transition: background 500ms ease, color 500ms ease;
     }
     .serif { font-family: 'Playfair Display', Georgia, serif; }
 
@@ -90,6 +108,11 @@
       text-transform: uppercase; transition: color 200ms;
     }
     .nav-links a:hover { color: var(--gold); }
+    .nav-links a.active { color: var(--gold); position: relative; }
+    .nav-links a.active::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: var(--gold); border-radius: 1px;
+    }
     .nav-cta {
       padding: 10px 24px; background: linear-gradient(135deg, #b8962e, #c9a93d);
       color: #fff !important; border-radius: var(--radius-full);
@@ -117,7 +140,7 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1633681122967-a8c72a27013e?w=1920&q=80') center/cover no-repeat;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
@@ -402,10 +425,118 @@
     .toast.success .toast-icon { color: var(--success); }
     .toast.info .toast-icon { color: var(--gold); }
 
+    /* === Style Toggle (Maenner/Damen) === */
+    .style-toggle {
+      display: flex; gap: 2px;
+      background: rgba(0,0,0,0.06); border-radius: var(--radius-full);
+      padding: 3px; margin-left: 16px;
+    }
+    .style-toggle-btn {
+      padding: 7px 14px; border: none; border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 600; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all 250ms ease;
+      letter-spacing: 0.3px; background: transparent; color: var(--text-light);
+    }
+    .style-toggle-btn.active {
+      background: var(--gold); color: #fff;
+      box-shadow: 0 2px 8px rgba(184,150,46,0.3);
+    }
+    .style-toggle-btn:not(.active):hover { color: var(--gold); }
+
+    /* === Herren-Style Dark Overrides === */
+    body.herren-style .nav {
+      background: rgba(14,14,14,0.9);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    body.herren-style .nav.scrolled {
+      background: rgba(14,14,14,0.95);
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+    body.herren-style .nav-logo { color: var(--text); }
+    body.herren-style .nav-links a { color: var(--text-light); }
+    body.herren-style .nav-mobile svg { color: var(--text); }
+    body.herren-style .style-toggle { background: rgba(255,255,255,0.08); }
+    body.herren-style .style-toggle-btn { color: var(--text-light); }
+    body.herren-style .style-toggle-btn.active { background: var(--gold); color: #fff; }
+
+    body.herren-style .mobile-menu {
+      background: rgba(14,14,14,0.98);
+    }
+    body.herren-style .mobile-menu a { color: var(--text); }
+    body.herren-style .mobile-close svg { color: var(--text); }
+
+    body.herren-style .hero-bg::after {
+      background: linear-gradient(160deg, rgba(14,14,14,0.92) 0%, rgba(20,20,20,0.88) 40%, rgba(16,16,16,0.9) 70%, rgba(14,14,14,0.94) 100%);
+    }
+    body.herren-style .hero-particle { background: var(--gold); }
+
+    body.herren-style .about-visual-inner {
+      background: rgba(14,14,14,0.7);
+    }
+
+    body.herren-style .service-card {
+      background: var(--white); border-color: var(--border);
+    }
+    body.herren-style .service-card:hover {
+      border-color: var(--border-gold);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    body.herren-style .ki-section { background: var(--warm); }
+    body.herren-style .ki-feature {
+      background: var(--white); border-color: var(--border);
+    }
+    body.herren-style .ki-form-card {
+      background: var(--white); border-color: var(--border);
+    }
+    body.herren-style .form-group input,
+    body.herren-style .form-group select,
+    body.herren-style .form-group textarea {
+      background: var(--cream); border-color: var(--border);
+      color: var(--text);
+    }
+    body.herren-style .form-group input::placeholder,
+    body.herren-style .form-group textarea::placeholder { color: var(--text-muted); }
+
+    body.herren-style .booking { background: var(--white); }
+    body.herren-style .booking-form { background: var(--cream); border-color: var(--border); }
+    body.herren-style .booking .form-group input,
+    body.herren-style .booking .form-group select,
+    body.herren-style .booking .form-group textarea {
+      background: var(--warm); border-color: var(--border); color: var(--text);
+    }
+    body.herren-style .booking-info-card { background: var(--cream); border-color: var(--border); }
+
+    body.herren-style .contact-map::before { background: rgba(14,14,14,0.85); }
+    body.herren-style .contact-item { background: var(--white); border-color: var(--border); }
+    body.herren-style .about-stat { background: var(--cream); border-color: var(--border); }
+    body.herren-style .upload-zone { background: var(--cream); border-color: rgba(184,150,46,0.2); }
+
+    body.herren-style .footer { background: #060606; }
+
+    body.herren-style .casa-badge {
+      background: rgba(26,26,26,0.9); border-color: var(--border-gold);
+      color: var(--gold);
+    }
+    body.herren-style .toast { background: #222; color: #f0ece8; }
+
+    body.herren-style .hero h1 { color: var(--text); }
+    body.herren-style .hero-sub { color: var(--text-light); }
+    body.herren-style .btn-outline {
+      color: var(--text); border-color: rgba(255,255,255,0.2);
+    }
+    body.herren-style .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    body.herren-style .hero-scroll { color: var(--text-muted); }
+    body.herren-style .section-title { color: var(--text); }
+    body.herren-style .booking-form h3 { color: var(--text); }
+    body.herren-style .ki-form-card h3 { color: var(--text); }
+
     /* Responsive */
+    #styleToggleMobile { display: none; }
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .nav-mobile { display: block; }
+      #styleToggleMobile { display: flex; }
       .about-grid, .ki-grid, .booking-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .services-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -430,10 +561,20 @@
       <a href="#booking">Termin</a>
       <a href="#contact">Kontakt</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
+      <div class="style-toggle" id="styleToggle">
+        <button class="style-toggle-btn active" data-style="damen" onclick="setStyle('damen')">Damen</button>
+        <button class="style-toggle-btn" data-style="herren" onclick="setStyle('herren')">Herren</button>
+      </div>
     </div>
-    <button class="nav-mobile" onclick="toggleMobile()" aria-label="Menu">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="style-toggle" id="styleToggleMobile" style="margin-left:0">
+        <button class="style-toggle-btn active" data-style="damen" onclick="setStyle('damen')">D</button>
+        <button class="style-toggle-btn" data-style="herren" onclick="setStyle('herren')">H</button>
+      </div>
+      <button class="nav-mobile" onclick="toggleMobile()" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
+    </div>
   </nav>
 
   <!-- Mobile Menu -->
@@ -455,9 +596,9 @@
     <div class="hero-bg"></div>
     <div class="hero-particles" id="heroParticles"></div>
     <div class="hero-content">
-      <div class="hero-badge"><span class="hero-badge-dot"></span>Persoenliche Beratung</div>
-      <h1>Ihr Haar.<br>Unsere <em>Leidenschaft.</em></h1>
-      <p class="hero-sub">Premium Haarstyling in Muenchen — mit ungeteilter Aufmerksamkeit, persoenlicher Beratung und voller Zeit nur fuer Sie.</p>
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Ihre Wellness-Oase</div>
+      <h1>Entspannen.<br>Geniessen. <em>Strahlen.</em></h1>
+      <p class="hero-sub">Ankommen, Kaffee geniessen, eine wohltuende Kopfmassage erleben — und mit Ihrer Traumfrisur den Salon verlassen. Bei uns haben Sie unsere volle Aufmerksamkeit.</p>
       <div class="hero-actions">
         <a href="#booking" class="btn btn-gold">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -480,13 +621,13 @@
     <div class="container">
       <div class="about-grid">
         <div class="reveal">
-          <div class="section-label">Unser Salon</div>
-          <h2 class="section-title">Ein Platz zum<br><em>Wohlfuehlen</em></h2>
-          <p class="section-desc">Bei Rena Rados Friseure erwartet Sie ungeteilte Aufmerksamkeit und individuelle Beratung. Unser Team bildet sich permanent weiter, um Ihnen die neuesten Trends und Techniken bieten zu koennen.</p>
-          <p class="section-desc" style="margin-top:12px">Wir arbeiten ausschliesslich mit hochwertigen Produkten von La Biosthetique und setzen auf nachhaltige, schonende Behandlungen.</p>
+          <div class="section-label">Ihre Wellness-Oase</div>
+          <h2 class="section-title">Mehr als nur ein<br><em>Friseurbesuch</em></h2>
+          <p class="section-desc">Treten Sie ein und lassen Sie den Alltag hinter sich. Bei uns beginnt Ihr Besuch mit einer Tasse Kaffee, einem persoenlichen Gespraech und einer entspannenden Kopfmassage — bevor die eigentliche Verwandlung beginnt.</p>
+          <p class="section-desc" style="margin-top:12px">Wir nehmen uns Zeit. Keine Hektik, kein Zeitdruck. Nur Sie, Ihr Wunsch und unser ganzes Koennen mit hochwertigen Produkten von La Biosthetique.</p>
           <div class="about-stats">
             <div class="about-stat reveal reveal-delay-1"><div class="about-stat-val">15+</div><div class="about-stat-label">Jahre Erfahrung</div></div>
-            <div class="about-stat reveal reveal-delay-2"><div class="about-stat-val">5.000+</div><div class="about-stat-label">Zufriedene Kunden</div></div>
+            <div class="about-stat reveal reveal-delay-2"><div class="about-stat-val">100%</div><div class="about-stat-label">Zeit fuer Sie</div></div>
             <div class="about-stat reveal reveal-delay-3"><div class="about-stat-val">4.9</div><div class="about-stat-label">Google Bewertung</div></div>
           </div>
         </div>
@@ -495,8 +636,8 @@
             <div class="about-visual-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </div>
-            <div class="about-visual-text">Leidenschaft<br>&amp; Hingabe</div>
-            <div class="about-visual-sub">Seit 2009 in Muenchen</div>
+            <div class="about-visual-text">Ihre Zeit.<br>Ihr Moment.</div>
+            <div class="about-visual-sub">Wellness &amp; Styling seit 2009</div>
           </div>
         </div>
       </div>
@@ -772,9 +913,42 @@
   <script>
     var webhookBase = '';
 
-    // Nav scroll
+    // Style Toggle: Damen (hell) / Herren (dunkel)
+    function setStyle(style) {
+      if (style === 'herren') {
+        document.body.classList.add('herren-style');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e0e0e');
+      } else {
+        document.body.classList.remove('herren-style');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#faf8f6');
+      }
+      // Update all toggle buttons
+      document.querySelectorAll('.style-toggle-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-style') === style);
+      });
+      localStorage.setItem('renarados_style', style);
+    }
+    // Restore saved style
+    (function() {
+      var saved = localStorage.getItem('renarados_style');
+      if (saved === 'herren') setStyle('herren');
+    })();
+
+    // Nav scroll + active section highlight
+    var navSections = ['about', 'services', 'wunschfrisur', 'booking', 'contact'];
     window.addEventListener('scroll', function() {
       document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+      // Highlight active section in nav
+      var scrollY = window.scrollY + 120;
+      var activeId = '';
+      navSections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) activeId = id;
+      });
+      document.querySelectorAll('.nav-links a:not(.nav-cta):not(.style-toggle-btn)').forEach(function(a) {
+        var href = a.getAttribute('href');
+        a.classList.toggle('active', href === '#' + activeId);
+      });
     });
 
     function toggleMobile() {
