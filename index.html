@@ -144,7 +144,7 @@
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(250,248,246,0.78) 0%, rgba(240,235,228,0.72) 40%, rgba(232,223,212,0.75) 70%, rgba(245,240,234,0.82) 100%);
+      background: linear-gradient(160deg, rgba(250,248,246,0.55) 0%, rgba(240,235,228,0.62) 30%, rgba(245,242,238,0.68) 55%, rgba(248,245,240,0.58) 80%, rgba(250,248,246,0.50) 100%);
     }
     .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-particle {
@@ -242,7 +242,7 @@
     .services::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.04;
+      opacity: 0.10;
     }
     .services .container { position: relative; z-index: 1; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
@@ -272,7 +272,7 @@
     .ki-section::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.12;
+      opacity: 0.18;
     }
     .ki-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
     .ki-content .section-desc { color: var(--text-light); }
@@ -327,7 +327,7 @@
     .booking::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.08;
+      opacity: 0.14;
     }
     .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
     .booking-form { background: var(--cream); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
@@ -351,7 +351,7 @@
     .contact::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.04;
+      opacity: 0.10;
     }
     .contact .container { position: relative; z-index: 1; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
@@ -360,7 +360,7 @@
       background: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800&q=80') center/cover no-repeat;
       display: flex; align-items: center; justify-content: center; position: relative;
     }
-    .contact-map::before { content: ''; position: absolute; inset: 0; background: rgba(245,240,234,0.85); }
+    .contact-map::before { content: ''; position: absolute; inset: 0; background: rgba(245,240,234,0.75); }
     .contact-map-placeholder { text-align: center; color: var(--text-muted); font-size: 13px; position: relative; z-index: 1; }
     .contact-map-placeholder svg { width: 48px; height: 48px; color: var(--gold); margin-bottom: 12px; display: block; margin: 0 auto 12px; }
     .contact-details { display: flex; flex-direction: column; gap: 20px; }
@@ -382,7 +382,7 @@
     .karriere::before {
       content: ''; position: absolute; inset: 0;
       background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.05;
+      opacity: 0.12;
     }
     .karriere .container { position: relative; z-index: 1; }
     .karriere-intro { max-width: 640px; margin-bottom: 48px; }
@@ -437,6 +437,35 @@
     body.herren-style .karriere-card:hover { border-color: var(--border-gold); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
     body.herren-style .karriere-benefit { background: var(--cream); border-color: var(--border); }
     body.herren-style .karriere-cta { background: var(--cream); border-color: var(--border-gold); }
+    /* Legal Modal */
+    .legal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .legal-overlay.open { display: flex; animation: fadeIn 200ms; }
+    .legal-modal {
+      background: var(--white); border-radius: var(--radius); padding: 40px;
+      max-width: 680px; width: 100%; max-height: 80vh; overflow-y: auto;
+      box-shadow: var(--shadow-lg); position: relative;
+    }
+    .legal-modal h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 24px; color: var(--text); }
+    .legal-modal h3 { font-size: 16px; font-weight: 600; margin: 20px 0 8px; color: var(--text); }
+    .legal-modal p, .legal-modal li { font-size: 14px; color: var(--text-light); line-height: 1.8; margin-bottom: 8px; }
+    .legal-modal ul { padding-left: 20px; }
+    .legal-modal a { color: var(--gold); text-decoration: none; }
+    .legal-close {
+      position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
+      border-radius: 50%; border: 1px solid var(--border); background: var(--cream);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      transition: all 200ms;
+    }
+    .legal-close:hover { background: var(--gold-dim); border-color: var(--border-gold); }
+    .legal-close svg { width: 16px; height: 16px; color: var(--text); }
+
+    body.herren-style .legal-modal { background: var(--white); }
+    body.herren-style .legal-close { background: var(--cream); border-color: var(--border); }
+
     body.herren-style .karriere::before {
       background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
       opacity: 0.08;
@@ -658,7 +687,7 @@
 
   <!-- Navigation -->
   <nav class="nav" id="mainNav">
-    <a href="#" class="nav-logo"><em>Rena Rados</em> Friseure</a>
+    <a href="#hero" class="nav-logo"><em>Rena Rados</em> Friseure</a>
     <div class="nav-links">
       <a href="#about">Salon</a>
       <a href="#services">Leistungen</a>
@@ -1079,12 +1108,12 @@
       </div>
       <div>
         <h4>Rechtliches</h4>
-        <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+        <div class="footer-links"><a href="#" onclick="openLegal('impressum');return false">Impressum</a><a href="#" onclick="openLegal('datenschutz');return false">Datenschutz</a><a href="#" onclick="openLegal('agb');return false">AGB</a></div>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Rena Rados Friseure. Alle Rechte vorbehalten.</span>
-      <a href="#" class="footer-casa">
+      <a href="#hero" class="footer-casa">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
         Powered by Casa 2035
       </a>
@@ -1092,10 +1121,68 @@
   </footer>
 
   <!-- Casa 2035 Badge -->
-  <a class="casa-badge" id="casaBadge" title="KI-Innovation von Casa 2035">
+  <a href="#hero" class="casa-badge" id="casaBadge" title="KI-Innovation von Casa 2035">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
     Casa 2035
   </a>
+
+  <!-- Legal Modals -->
+  <div class="legal-overlay" id="impressumOverlay" onclick="if(event.target===this)closeLegal('impressum')">
+    <div class="legal-modal">
+      <button class="legal-close" onclick="closeLegal('impressum')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <h2>Impressum</h2>
+      <h3>Angaben gemaess &sect;5 TMG</h3>
+      <p>Rena Rados Friseure<br>Erzgiessereistr. 51<br>Eingang Dachauer Str. 143<br>80335 Muenchen</p>
+      <h3>Kontakt</h3>
+      <p>Telefon: <a href="tel:08912962940">089 - 1296294</a><br>E-Mail: <a href="mailto:renarados.friseure@hotmail.com">renarados.friseure@hotmail.com</a></p>
+      <h3>Vertretungsberechtigte Person</h3>
+      <p>Rena Rados</p>
+      <h3>Umsatzsteuer-ID</h3>
+      <p>Umsatzsteuer-Identifikationsnummer gemaess &sect;27a Umsatzsteuergesetz: wird nachgetragen</p>
+      <h3>Verantwortlich fuer den Inhalt nach &sect;55 Abs.2 RStV</h3>
+      <p>Rena Rados<br>Erzgiessereistr. 51<br>80335 Muenchen</p>
+      <h3>Streitschlichtung</h3>
+      <p>Die Europaeische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit. Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+    </div>
+  </div>
+
+  <div class="legal-overlay" id="datenschutzOverlay" onclick="if(event.target===this)closeLegal('datenschutz')">
+    <div class="legal-modal">
+      <button class="legal-close" onclick="closeLegal('datenschutz')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <h2>Datenschutzerklaerung</h2>
+      <h3>1. Datenschutz auf einen Blick</h3>
+      <p>Wir nehmen den Schutz Ihrer persoenlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und gemaess der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklaerung.</p>
+      <h3>2. Verantwortliche Stelle</h3>
+      <p>Rena Rados Friseure<br>Erzgiessereistr. 51, 80335 Muenchen<br>E-Mail: <a href="mailto:renarados.friseure@hotmail.com">renarados.friseure@hotmail.com</a></p>
+      <h3>3. Datenerfassung auf dieser Website</h3>
+      <p>Diese Website verwendet keine Cookies und kein Tracking. Wenn Sie ueber unsere Formulare eine Anfrage senden, werden Ihre Angaben (Name, E-Mail, Telefon, Nachricht) ausschliesslich zur Bearbeitung Ihrer Anfrage gespeichert und nicht an Dritte weitergegeben.</p>
+      <h3>4. Hosting</h3>
+      <p>Diese Website wird bei GitHub Pages gehostet. Der Anbieter ist GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Beim Besuch der Website werden automatisch Informationen in Server-Log-Files gespeichert (Browser, Betriebssystem, Uhrzeit, IP-Adresse).</p>
+      <h3>5. Ihre Rechte</h3>
+      <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Loeschung und Einschraenkung der Verarbeitung Ihrer Daten. Kontaktieren Sie uns dazu unter den oben genannten Kontaktdaten.</p>
+      <h3>6. Externe Dienste</h3>
+      <p>Wir binden Google Fonts und Unsplash-Bilder ein. Beim Laden dieser Ressourcen werden Daten an die jeweiligen Server uebertragen. Naehere Informationen finden Sie in den Datenschutzerklaerungen von Google und Unsplash.</p>
+    </div>
+  </div>
+
+  <div class="legal-overlay" id="agbOverlay" onclick="if(event.target===this)closeLegal('agb')">
+    <div class="legal-modal">
+      <button class="legal-close" onclick="closeLegal('agb')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <h2>Allgemeine Geschaeftsbedingungen</h2>
+      <h3>1. Geltungsbereich</h3>
+      <p>Diese AGB gelten fuer alle Dienstleistungen und Produkte von Rena Rados Friseure, Erzgiessereistr. 51, 80335 Muenchen.</p>
+      <h3>2. Terminvereinbarung</h3>
+      <p>Online-Terminanfragen sind unverbindlich bis zur Bestaetigung durch den Salon. Eine telefonische oder schriftliche Bestaetigung macht den Termin verbindlich. Bitte sagen Sie Termine mindestens 24 Stunden vorher ab.</p>
+      <h3>3. Preise</h3>
+      <p>Alle Preise verstehen sich inklusive der gesetzlichen Mehrwertsteuer. Die aktuellen Preise finden Sie in unserem Salon oder auf dieser Website. Preisaenderungen bleiben vorbehalten.</p>
+      <h3>4. Haftung</h3>
+      <p>Wir haften fuer Schaeden nur bei Vorsatz oder grober Fahrlaessigkeit. Fuer leichte Fahrlaessigkeit haften wir nur bei Verletzung wesentlicher Vertragspflichten.</p>
+      <h3>5. Reklamationen</h3>
+      <p>Sollten Sie mit einer Dienstleistung nicht zufrieden sein, bitten wir Sie, uns dies innerhalb von 7 Tagen mitzuteilen. Wir bemuheen uns um eine zufriedenstellende Loesung.</p>
+      <h3>6. Datenschutz</h3>
+      <p>Informationen zum Datenschutz finden Sie in unserer <a href="#" onclick="closeLegal('agb');openLegal('datenschutz');return false">Datenschutzerklaerung</a>.</p>
+    </div>
+  </div>
 
   <script>
     var webhookBase = '';
@@ -1277,6 +1364,16 @@
         showToast('Terminanfrage gesendet! (Demo-Modus)', 'success');
         e.target.reset();
       }
+    }
+
+    // Legal modals
+    function openLegal(type) {
+      document.getElementById(type + 'Overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLegal(type) {
+      document.getElementById(type + 'Overlay').classList.remove('open');
+      document.body.style.overflow = '';
     }
 
     // Min date = today
