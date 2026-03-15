@@ -1295,7 +1295,7 @@
   </div>
 
   <script>
-    var webhookBase = '';
+    var webhookBase = 'https://niniho13.app.n8n.cloud/webhook';
 
     // Style Toggle: Feminin (hell) / Maskulin (dunkel)
     var currentStyle = 'feminin';
@@ -1425,23 +1425,38 @@
       }, 4000);
     }
 
-    // Submit Wunschfrisur
+    // Submit Wunschfrisur — geht an WF-01 /homepage (Intent: wunschfrisur)
     function submitWunschfrisur(e) {
       e.preventDefault();
+      var vorname = document.getElementById('wfVorname').value.trim();
+      var nachname = document.getElementById('wfNachname').value.trim();
+      var email = document.getElementById('wfEmail').value.trim();
+      var telefon = document.getElementById('wfTelefon').value.trim();
+      var nachricht = document.getElementById('wfNachricht').value.trim();
+      // WF-01 erwartet: from, name, message, timestamp, message_id
+      // Plus Extra-Felder die an Sub-Workflow durchgereicht werden
       var payload = {
-        kanal: 'homepage', typ: 'wunschfrisur',
-        vorname: document.getElementById('wfVorname').value.trim(),
-        nachname: document.getElementById('wfNachname').value.trim(),
-        email: document.getElementById('wfEmail').value.trim(),
-        telefon: document.getElementById('wfTelefon').value.trim(),
-        nachricht: document.getElementById('wfNachricht').value.trim(),
-        timestamp: new Date().toISOString()
+        from: email,
+        name: vorname + ' ' + nachname,
+        message: 'Wunschfrisur-Anfrage: ' + nachricht,
+        timestamp: new Date().toISOString(),
+        message_id: 'web_wf_' + Date.now(),
+        media_url: null,
+        referrer: window.location.href,
+        kanal: 'homepage',
+        typ: 'wunschfrisur',
+        vorname: vorname,
+        nachname: nachname,
+        email: email,
+        telefon: telefon,
+        nachricht: nachricht
       };
       if (webhookBase) {
-        fetch(webhookBase + '/pwa-events', {
+        fetch(webhookBase + '/homepage', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).then(function() {
+        }).then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
           showToast('Ihre Wunschfrisur-Anfrage wurde gesendet! Wir melden uns in Kuerze.', 'success');
           e.target.reset(); document.getElementById('uploadPreview').textContent = '';
         }).catch(function() { showToast('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error'); });
@@ -1451,26 +1466,45 @@
       }
     }
 
-    // Submit Booking
+    // Submit Booking — geht an WF-01 /homepage (Intent: termin_buchen)
     function submitBooking(e) {
       e.preventDefault();
+      var vorname = document.getElementById('bkVorname').value.trim();
+      var nachname = document.getElementById('bkNachname').value.trim();
+      var email = document.getElementById('bkEmail').value.trim();
+      var telefon = document.getElementById('bkTelefon').value.trim();
+      var datum = document.getElementById('bkDatum').value;
+      var uhrzeit = document.getElementById('bkUhrzeit').value;
+      var leistung = document.getElementById('bkLeistung').value;
+      var notiz = (document.getElementById('bkNotiz').value || '').trim();
+      // WF-01 erwartet: from, name, message, timestamp, message_id
+      // message muss den Intent erkennen lassen (termin_buchen)
       var payload = {
-        kanal: 'homepage', typ: 'terminanfrage',
-        vorname: document.getElementById('bkVorname').value.trim(),
-        nachname: document.getElementById('bkNachname').value.trim(),
-        email: document.getElementById('bkEmail').value.trim(),
-        telefon: document.getElementById('bkTelefon').value.trim(),
-        datum: document.getElementById('bkDatum').value,
-        uhrzeit: document.getElementById('bkUhrzeit').value,
-        leistung: document.getElementById('bkLeistung').value,
-        notiz: (document.getElementById('bkNotiz').value || '').trim(),
-        timestamp: new Date().toISOString()
+        from: email,
+        name: vorname + ' ' + nachname,
+        message: 'Terminanfrage: ' + leistung + ' am ' + datum + ' um ' + uhrzeit + (notiz ? '. ' + notiz : ''),
+        timestamp: new Date().toISOString(),
+        message_id: 'web_bk_' + Date.now(),
+        media_url: null,
+        referrer: window.location.href,
+        kanal: 'homepage',
+        typ: 'terminanfrage',
+        vorname: vorname,
+        nachname: nachname,
+        email: email,
+        telefon: telefon,
+        datum: datum,
+        uhrzeit: uhrzeit,
+        leistung: leistung,
+        notiz: notiz,
+        stil: currentStyle
       };
       if (webhookBase) {
-        fetch(webhookBase + '/pwa-termine', {
+        fetch(webhookBase + '/homepage', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).then(function() {
+        }).then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
           showToast('Terminanfrage gesendet! Sie erhalten in Kuerze eine Bestaetigung.', 'success');
           e.target.reset();
         }).catch(function() { showToast('Fehler beim Senden. Bitte rufen Sie uns an.', 'error'); });
