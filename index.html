@@ -41,8 +41,8 @@
       --shadow-lg: 0 12px 48px rgba(120,100,70,0.12);
     }
 
-    /* === Maenner-Style (Dark Mode) === */
-    body.herren-style {
+    /* === Maskulin-Style (Dark Mode) === */
+    body.maskulin-style {
       --cream: #0e0e0e;
       --warm: #161616;
       --white: #1a1a1a;
@@ -353,10 +353,10 @@
     .svc-sheet-actions { display: flex; gap: 10px; margin-top: 16px; }
     .svc-sheet-actions .btn { flex: 1; justify-content: center; }
 
-    body.herren-style .svc-sheet { background: var(--white); }
-    body.herren-style .svc-sheet-close { background: var(--cream); border-color: var(--border); }
-    body.herren-style .svc-addon { background: var(--cream); border-color: var(--border); }
-    body.herren-style .svc-product { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .svc-sheet { background: var(--white); }
+    body.maskulin-style .svc-sheet-close { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .svc-addon { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .svc-product { background: var(--cream); border-color: var(--border); }
 
     /* KI Wunschfrisur — Spa Light */
     .ki-section { background: var(--warm); color: var(--text); position: relative; overflow: hidden; }
@@ -524,11 +524,11 @@
     .karriere-cta p { font-size: 14px; color: var(--text-light); margin-bottom: 24px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.7; }
     .karriere-cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-    body.herren-style .karriere { background: var(--white); }
-    body.herren-style .karriere-card { background: var(--cream); border-color: var(--border); }
-    body.herren-style .karriere-card:hover { border-color: var(--border-gold); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
-    body.herren-style .karriere-benefit { background: var(--cream); border-color: var(--border); }
-    body.herren-style .karriere-cta { background: var(--cream); border-color: var(--border-gold); }
+    body.maskulin-style .karriere { background: var(--white); }
+    body.maskulin-style .karriere-card { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .karriere-card:hover { border-color: var(--border-gold); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+    body.maskulin-style .karriere-benefit { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .karriere-cta { background: var(--cream); border-color: var(--border-gold); }
     /* Legal Modal */
     .legal-overlay {
       display: none; position: fixed; inset: 0; z-index: 300;
@@ -555,10 +555,10 @@
     .legal-close:hover { background: var(--gold-dim); border-color: var(--border-gold); }
     .legal-close svg { width: 16px; height: 16px; color: var(--text); }
 
-    body.herren-style .legal-modal { background: var(--white); }
-    body.herren-style .legal-close { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .legal-modal { background: var(--white); }
+    body.maskulin-style .legal-close { background: var(--cream); border-color: var(--border); }
 
-    body.herren-style .karriere::before {
+    body.maskulin-style .karriere::before {
       background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
       opacity: 0.08;
     }
@@ -623,138 +623,141 @@
     .toast.success .toast-icon { color: var(--success); }
     .toast.info .toast-icon { color: var(--gold); }
 
-    /* === Style Toggle (Maenner/Damen) === */
+    /* === Style Toggle (Feminin/Maskulin) — Prominent === */
     .style-toggle {
       display: flex; gap: 2px;
-      background: rgba(0,0,0,0.06); border-radius: var(--radius-full);
+      background: rgba(0,0,0,0.08); border-radius: var(--radius-full);
       padding: 3px; margin-left: 16px;
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 0 12px rgba(184,150,46,0.08);
     }
     .style-toggle-btn {
-      padding: 7px 14px; border: none; border-radius: var(--radius-full);
-      font-size: 11px; font-weight: 600; font-family: 'Inter', sans-serif;
-      cursor: pointer; transition: all 250ms ease;
-      letter-spacing: 0.3px; background: transparent; color: var(--text-light);
+      padding: 8px 18px; border: none; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 700; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all 300ms var(--ease);
+      letter-spacing: 0.5px; text-transform: uppercase;
+      background: transparent; color: var(--text-light);
     }
     .style-toggle-btn.active {
       background: var(--gold); color: #fff;
-      box-shadow: 0 2px 8px rgba(184,150,46,0.3);
+      box-shadow: 0 2px 12px rgba(184,150,46,0.4);
     }
-    .style-toggle-btn:not(.active):hover { color: var(--gold); }
+    .style-toggle-btn:not(.active):hover { color: var(--gold); background: rgba(184,150,46,0.08); }
 
-    /* === Herren-Style Dark Overrides === */
-    body.herren-style .nav {
+    /* === Maskulin-Style Dark Overrides === */
+    body.maskulin-style .nav {
       background: rgba(14,14,14,0.9);
       border-bottom-color: rgba(255,255,255,0.06);
     }
-    body.herren-style .nav.scrolled {
+    body.maskulin-style .nav.scrolled {
       background: rgba(14,14,14,0.95);
       border-bottom-color: rgba(255,255,255,0.08);
     }
-    body.herren-style .nav-logo { color: var(--text); }
-    body.herren-style .nav-links a { color: var(--text-light); }
-    body.herren-style .nav-mobile svg { color: var(--text); }
-    body.herren-style .style-toggle { background: rgba(255,255,255,0.08); }
-    body.herren-style .style-toggle-btn { color: var(--text-light); }
-    body.herren-style .style-toggle-btn.active { background: var(--gold); color: #fff; }
+    body.maskulin-style .nav-logo { color: var(--text); }
+    body.maskulin-style .nav-links a { color: var(--text-light); }
+    body.maskulin-style .nav-mobile svg { color: var(--text); }
+    body.maskulin-style .style-toggle { background: rgba(255,255,255,0.08); }
+    body.maskulin-style .style-toggle-btn { color: var(--text-light); }
+    body.maskulin-style .style-toggle-btn.active { background: var(--gold); color: #fff; }
 
-    body.herren-style .mobile-menu {
+    body.maskulin-style .mobile-menu {
       background: rgba(14,14,14,0.98);
     }
-    body.herren-style .mobile-menu a { color: var(--text); }
-    body.herren-style .mobile-close svg { color: var(--text); }
+    body.maskulin-style .mobile-menu a { color: var(--text); }
+    body.maskulin-style .mobile-close svg { color: var(--text); }
 
-    /* Herren-Style: Eigene Barbershop-Bilder */
-    body.herren-style .hero-bg {
+    /* Maskulin-Style: Eigene Barbershop-Bilder */
+    body.maskulin-style .hero-bg {
       background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920&q=80') center/cover no-repeat;
     }
-    body.herren-style .hero-bg::after {
+    body.maskulin-style .hero-bg::after {
       background: linear-gradient(160deg, rgba(14,14,14,0.82) 0%, rgba(20,20,20,0.78) 40%, rgba(16,16,16,0.8) 70%, rgba(14,14,14,0.85) 100%);
     }
-    body.herren-style .hero-particle { background: var(--gold); }
+    body.maskulin-style .hero-particle { background: var(--gold); }
 
-    body.herren-style .about-visual {
+    body.maskulin-style .about-visual {
       background: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800&q=80') center/cover no-repeat;
     }
 
-    body.herren-style .ki-section::before {
+    body.maskulin-style .ki-section::before {
       background: url('https://images.unsplash.com/photo-1585747860019-8e8705a7fa68?w=1920&q=80') center/cover no-repeat;
       opacity: 0.15;
     }
 
-    body.herren-style .booking::before {
+    body.maskulin-style .booking::before {
       background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
       opacity: 0.1;
     }
 
-    body.herren-style .contact-map {
+    body.maskulin-style .contact-map {
       background: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800&q=80') center/cover no-repeat;
     }
 
-    body.herren-style .services::before {
+    body.maskulin-style .services::before {
       background: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80') center/cover no-repeat;
       opacity: 0.08;
     }
 
-    body.herren-style .about-visual-inner {
+    body.maskulin-style .about-visual-inner {
       background: rgba(14,14,14,0.7);
     }
 
-    body.herren-style .service-card {
+    body.maskulin-style .service-card {
       background: var(--white); border-color: var(--border);
     }
-    body.herren-style .service-card:hover {
+    body.maskulin-style .service-card:hover {
       border-color: var(--border-gold);
       box-shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
 
-    body.herren-style .ki-section { background: var(--warm); }
-    body.herren-style .ki-feature {
+    body.maskulin-style .ki-section { background: var(--warm); }
+    body.maskulin-style .ki-feature {
       background: var(--white); border-color: var(--border);
     }
-    body.herren-style .ki-form-card {
+    body.maskulin-style .ki-form-card {
       background: var(--white); border-color: var(--border);
     }
-    body.herren-style .form-group input,
-    body.herren-style .form-group select,
-    body.herren-style .form-group textarea {
+    body.maskulin-style .form-group input,
+    body.maskulin-style .form-group select,
+    body.maskulin-style .form-group textarea {
       background: var(--cream); border-color: var(--border);
       color: var(--text);
     }
-    body.herren-style .form-group input::placeholder,
-    body.herren-style .form-group textarea::placeholder { color: var(--text-muted); }
+    body.maskulin-style .form-group input::placeholder,
+    body.maskulin-style .form-group textarea::placeholder { color: var(--text-muted); }
 
-    body.herren-style .booking { background: var(--white); }
-    body.herren-style .booking-form { background: var(--cream); border-color: var(--border); }
-    body.herren-style .booking .form-group input,
-    body.herren-style .booking .form-group select,
-    body.herren-style .booking .form-group textarea {
+    body.maskulin-style .booking { background: var(--white); }
+    body.maskulin-style .booking-form { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .booking .form-group input,
+    body.maskulin-style .booking .form-group select,
+    body.maskulin-style .booking .form-group textarea {
       background: var(--warm); border-color: var(--border); color: var(--text);
     }
-    body.herren-style .booking-info-card { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .booking-info-card { background: var(--cream); border-color: var(--border); }
 
-    body.herren-style .contact-map::before { background: rgba(14,14,14,0.85); }
-    body.herren-style .contact-item { background: var(--white); border-color: var(--border); }
-    body.herren-style .about-stat { background: var(--cream); border-color: var(--border); }
-    body.herren-style .upload-zone { background: var(--cream); border-color: rgba(184,150,46,0.2); }
+    body.maskulin-style .contact-map::before { background: rgba(14,14,14,0.85); }
+    body.maskulin-style .contact-item { background: var(--white); border-color: var(--border); }
+    body.maskulin-style .about-stat { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style .upload-zone { background: var(--cream); border-color: rgba(184,150,46,0.2); }
 
-    body.herren-style .footer { background: #060606; }
+    body.maskulin-style .footer { background: #060606; }
 
-    body.herren-style .casa-badge {
+    body.maskulin-style .casa-badge {
       background: rgba(26,26,26,0.9); border-color: var(--border-gold);
       color: var(--gold);
     }
-    body.herren-style .toast { background: #222; color: #f0ece8; }
+    body.maskulin-style .toast { background: #222; color: #f0ece8; }
 
-    body.herren-style .hero h1 { color: var(--text); }
-    body.herren-style .hero-sub { color: var(--text-light); }
-    body.herren-style .btn-outline {
+    body.maskulin-style .hero h1 { color: var(--text); }
+    body.maskulin-style .hero-sub { color: var(--text-light); }
+    body.maskulin-style .btn-outline {
       color: var(--text); border-color: rgba(255,255,255,0.2);
     }
-    body.herren-style .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    body.herren-style .hero-scroll { color: var(--text-muted); }
-    body.herren-style .section-title { color: var(--text); }
-    body.herren-style .booking-form h3 { color: var(--text); }
-    body.herren-style .ki-form-card h3 { color: var(--text); }
+    body.maskulin-style .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    body.maskulin-style .hero-scroll { color: var(--text-muted); }
+    body.maskulin-style .section-title { color: var(--text); }
+    body.maskulin-style .booking-form h3 { color: var(--text); }
+    body.maskulin-style .ki-form-card h3 { color: var(--text); }
 
     /* Responsive */
     #styleToggleMobile { display: none; }
@@ -789,14 +792,14 @@
       <a href="#karriere">Karriere</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
       <div class="style-toggle" id="styleToggle">
-        <button class="style-toggle-btn active" data-style="damen" onclick="setStyle('damen')">Damen</button>
-        <button class="style-toggle-btn" data-style="herren" onclick="setStyle('herren')">Herren</button>
+        <button class="style-toggle-btn active" data-style="feminin" onclick="setStyle('feminin')">Feminin</button>
+        <button class="style-toggle-btn" data-style="maskulin" onclick="setStyle('maskulin')">Maskulin</button>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
       <div class="style-toggle" id="styleToggleMobile" style="margin-left:0">
-        <button class="style-toggle-btn active" data-style="damen" onclick="setStyle('damen')">D</button>
-        <button class="style-toggle-btn" data-style="herren" onclick="setStyle('herren')">H</button>
+        <button class="style-toggle-btn active" data-style="feminin" onclick="setStyle('feminin')">F</button>
+        <button class="style-toggle-btn" data-style="maskulin" onclick="setStyle('maskulin')">M</button>
       </div>
       <button class="nav-mobile" onclick="toggleMobile()" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -884,7 +887,7 @@
         <div class="service-card reveal reveal-delay-1" onclick="openService(0)">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
           <h3>Haarschnitte</h3>
-          <p>Individuelle Schnitte fuer Damen und Herren — von klassisch bis modern, perfekt auf Ihre Gesichtsform abgestimmt.</p>
+          <p id="svcHaarschnittDesc">Individuelle Schnitte — von klassisch bis modern, perfekt auf Ihre Gesichtsform abgestimmt.</p>
           <div class="service-price">ab 35 &euro;</div>
           <div class="service-cta">Details &amp; buchen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
@@ -1019,7 +1022,7 @@
             <div class="form-group"><label>Gewuenschte Leistung</label>
               <select id="bkLeistung" required>
                 <option value="">Bitte waehlen</option>
-                <option>Damenhaarschnitt</option><option>Herrenschnitt</option><option>Kinderhaarschnitt</option>
+                <option>Damenhaarschnitt</option><option>Kinderhaarschnitt</option>
                 <option>Farbbehandlung</option><option>Balayage / Highlights</option><option>Haarpflege / Treatment</option>
                 <option>Brautstyling</option><option>Beratung</option><option>Sonstiges</option>
               </select>
@@ -1111,16 +1114,16 @@
       </div>
 
       <div class="karriere-grid">
-        <div class="karriere-card reveal" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Friseur%20/%20Stylist'">
+        <div class="karriere-card reveal" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Friseur/in'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
-          <h3>Friseur / Stylist (m/w/d)</h3>
-          <p>Du bist leidenschaftlicher Friseur mit Erfahrung in Schnitt und Farbe? Du liebst es, Kunden gluecklich zu machen und ihnen ein Laecheln ins Gesicht zu zaubern? Dann bist du bei uns richtig.</p>
+          <h3>Friseur/in (m/w/d)</h3>
+          <p>Du liebst es, Menschen zu verwoehnen, und arbeitest gerne mit Farbe und Schere? Dann bist du bei uns genau richtig. Ob Balayage, kreative Schnitte oder Brautstyling.</p>
           <span class="karriere-tag">Voll- oder Teilzeit</span>
         </div>
-        <div class="karriere-card reveal reveal-delay-1" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Herrenfriseur%20/%20Barber'">
+        <div class="karriere-card reveal reveal-delay-1" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Stylist/in'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Herrenfriseur / Barber (m/w/d)</h3>
-          <p>Klassischer Herrenschnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auch Maenner auf hoechstem Niveau bedient.</p>
+          <h3>Stylist/in (m/w/d)</h3>
+          <p>Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf hoechstem Niveau bedient.</p>
           <span class="karriere-tag">Voll- oder Teilzeit</span>
         </div>
         <div class="karriere-card reveal reveal-delay-2" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Auszubildende/r'">
@@ -1294,13 +1297,15 @@
   <script>
     var webhookBase = '';
 
-    // Style Toggle: Damen (hell) / Herren (dunkel)
+    // Style Toggle: Feminin (hell) / Maskulin (dunkel)
+    var currentStyle = 'feminin';
     function setStyle(style) {
-      if (style === 'herren') {
-        document.body.classList.add('herren-style');
+      currentStyle = style;
+      if (style === 'maskulin') {
+        document.body.classList.add('maskulin-style');
         document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e0e0e');
       } else {
-        document.body.classList.remove('herren-style');
+        document.body.classList.remove('maskulin-style');
         document.querySelector('meta[name="theme-color"]').setAttribute('content', '#faf8f6');
       }
       // Update all toggle buttons
@@ -1308,11 +1313,13 @@
         btn.classList.toggle('active', btn.getAttribute('data-style') === style);
       });
       localStorage.setItem('renarados_style', style);
+      // Update dynamic content per mode
+      updateContentForStyle(style);
     }
     // Restore saved style
     (function() {
       var saved = localStorage.getItem('renarados_style');
-      if (saved === 'herren') setStyle('herren');
+      if (saved === 'maskulin') setStyle('maskulin');
     })();
 
     // Nav scroll + active section highlight
@@ -1473,15 +1480,15 @@
       }
     }
 
-    // Service data + detail sheets
-    var serviceData = [
-      { name: 'Damenhaarschnitt', leistung: 'Damenhaarschnitt', price: 35, dur: '45-60 Min',
+    // Service data per mode — Feminin & Maskulin
+    var serviceDataFeminin = [
+      { name: 'Haarschnitt', leistung: 'Damenhaarschnitt', price: 35, dur: '45-60 Min',
         desc: 'Beratung, Waschen mit Kopfmassage, Schnitt und Styling. Wir nehmen uns Zeit fuer Sie — kein Zeitdruck, nur volle Aufmerksamkeit.',
         addons: [{n:'Ansatzfarbe',p:30},{n:'Intensivpflege Olaplex',p:20},{n:'Augenbrauen zupfen',p:8},{n:'Kopfmassage Extra (10 Min)',p:12}],
         products: [{n:'La Biosthetique Shampoo',i:'Passend zu Ihrem Haartyp'},{n:'Styling Mousse',i:'Fuer Volumen & Halt'}]
       },
       { name: 'Farbbehandlung', leistung: 'Farbbehandlung', price: 65, dur: '90-150 Min',
-        desc: 'Von zartem Balayage bis hin zur kompletten Verwandlung. Wir verwenden ausschliesslich Premium-Produkte von La Biosthetique fuer strahlende, langanhaltende Farben.',
+        desc: 'Von zartem Balayage bis hin zur kompletten Verwandlung. Premium-Produkte von La Biosthetique fuer strahlende, langanhaltende Farben.',
         addons: [{n:'Balayage / Highlights',p:40},{n:'Olaplex Schutzbehandlung',p:25},{n:'Glossing / Toenung',p:20},{n:'Haarschnitt dazu',p:25}],
         products: [{n:'Color Care Shampoo',i:'Farbschutz & Glanz'},{n:'Color Protect Maske',i:'Intensive Farbpflege'}]
       },
@@ -1504,6 +1511,37 @@
         addons: [], products: [{n:'La Biosthetique Shampoos',i:'ab 18 EUR'},{n:'Olaplex Serie',i:'ab 26 EUR'},{n:'Styling-Produkte',i:'ab 14 EUR'},{n:'Haarkuren & Masken',i:'ab 22 EUR'}], isShop: true
       }
     ];
+    var serviceDataMaskulin = [
+      { name: 'Herrenschnitt', leistung: 'Herrenschnitt', price: 28, dur: '30-45 Min',
+        desc: 'Praeziser Schnitt mit Maschine oder Schere. Kontur, Fade, Undercut oder klassisch — wir finden den Look, der zu Ihnen passt.',
+        addons: [{n:'Bartpflege / Bart-Trim',p:15},{n:'Hot Towel Rasur',p:20},{n:'Augenbrauen korrigieren',p:8},{n:'Kopfmassage (10 Min)',p:12}],
+        products: [{n:'Styling Paste Matt',i:'Natuerlicher Halt ohne Glanz'},{n:'Bartoel Premium',i:'Pflege & Geschmeidigkeit'}]
+      },
+      { name: 'Bartpflege', leistung: 'Bartpflege', price: 18, dur: '20-30 Min',
+        desc: 'Bart trimmen, formen und pflegen — vom 3-Tage-Bart bis zum Vollbart. Heisses Tuch, Bartoele und praezise Konturen.',
+        addons: [{n:'Hot Towel Rasur',p:20},{n:'Bartfaerbung',p:15},{n:'Gesichtspflege dazu',p:18},{n:'Augenbrauen korrigieren',p:8}],
+        products: [{n:'Bartoel Classic',i:'Fuer geschmeidigen Bart'},{n:'Bartwachs',i:'Styling & Halt'}]
+      },
+      { name: 'Wunschfrisur-Service', leistung: 'Beratung', price: 0, dur: 'Kostenlos',
+        desc: 'Zeigen Sie uns Ihren Wunsch-Look — wir sagen Ihnen ehrlich, was moeglich ist und beraten Sie zur optimalen Umsetzung.',
+        addons: [], products: [], isWunsch: true
+      },
+      { name: 'Haar- & Kopfhautpflege', leistung: 'Haarpflege / Treatment', price: 20, dur: '20-30 Min',
+        desc: 'Kopfhaut-Treatment, Anti-Schuppen-Kur oder Feuchtigkeitspflege. Fuer gesundes Haar und eine gepflegte Kopfhaut.',
+        addons: [{n:'Kopfhaut-Peeling',p:15},{n:'Anti-Haarausfall Treatment',p:25},{n:'Tiefenreinigung',p:12},{n:'Relaxing Kopfmassage',p:15}],
+        products: [{n:'Kopfhaut-Tonikum',i:'Gegen Schuppen & Juckreiz'},{n:'Caffeine Shampoo',i:'Staerkt die Haarwurzel'}]
+      },
+      { name: 'Grooming', leistung: 'Beratung', price: 35, dur: '45-60 Min',
+        desc: 'Das Rundum-Paket: Schnitt, Bartstyling und Pflege in einer Sitzung. Der perfekte Look fuer Business oder Event.',
+        addons: [{n:'Nasenhaare trimmen',p:5},{n:'Gesichtspflege-Maske',p:18},{n:'Styling-Beratung',p:0},{n:'Augenbrauen korrigieren',p:8}],
+        products: [{n:'Face Moisturizer',i:'Leichte Tagespflege'},{n:'Hair & Body Wash',i:'2-in-1 Premium'}]
+      },
+      { name: 'Shop — Produkte', leistung: 'Beratung', price: 0, dur: 'Im Salon',
+        desc: 'Premium-Pflegeprodukte fuer den modernen Mann. Bartpflege, Styling, Haar- und Hautpflege — alles was Mann braucht.',
+        addons: [], products: [{n:'Bartpflege-Set',i:'ab 24 EUR'},{n:'Styling-Produkte',i:'ab 14 EUR'},{n:'Haar- & Kopfhautpflege',i:'ab 18 EUR'},{n:'Gesichtspflege',i:'ab 16 EUR'}], isShop: true
+      }
+    ];
+    var serviceData = serviceDataFeminin;
     var selectedAddons = [];
 
     function openService(idx) {
@@ -1682,6 +1720,149 @@
     function closeLegal(type) {
       document.getElementById(type + 'Overlay').classList.remove('open');
       document.body.style.overflow = '';
+    }
+
+    // Content per mode
+    var modeContent = {
+      feminin: {
+        heroTitle: 'Entspannen.<br>Geniessen. <em>Strahlen.</em>',
+        heroSub: 'Hier stehen Sie im Mittelpunkt. Ankommen, durchatmen, bei einem Kaffee ankommen. Eine wohltuende Kopfmassage geniessen — und mit Ihrem Wunschlook den Salon verlassen. Bei uns dreht sich alles um Sie.',
+        heroBadge: 'Willkommen im Jahr 2035',
+        aboutTitle: 'Mehr als nur ein<br><em>Friseurbesuch</em>',
+        aboutDesc: 'Wir hoeren Ihnen zu. Was bewegt Sie? Was wuenschen Sie sich? Bei uns beginnt alles mit einem persoenlichen Gespraech bei einer Tasse Kaffee — bevor die erste Schere angesetzt wird.',
+        aboutDesc2: 'Entspannende Kopfmassage, individuelle Beratung, null Zeitdruck. Bei uns sind Sie keine Nummer — Sie sind der Mittelpunkt. Mit hochwertigen Produkten von La Biosthetique und modernster Technik.',
+        svcTitle: 'Premium <em>Services</em>',
+        svcDesc: 'Von klassischen Schnitten bis zu aufwendigen Farbbehandlungen — wir bieten das volle Programm.',
+        cardNames: ['Haarschnitte', 'Farbbehandlung', 'Wunschfrisur-Service', 'Haarpflege', 'Styling', 'Shop'],
+        cardDescs: [
+          'Individuelle Schnitte — von klassisch bis modern, perfekt auf Ihre Gesichtsform abgestimmt.',
+          'Balayage, Highlights, Komplett-Coloration — mit Premium-Produkten von La Biosthetique fuer langanhaltende Farbergebnisse.',
+          'Schicken Sie uns ein Foto Ihrer Wunschfrisur — wir analysieren Ihren Haartyp und geben eine persoenliche Empfehlung.',
+          'Intensive Treatments, Olaplex-Behandlungen und individuelle Pflegekonzepte fuer gesundes, glaenzendes Haar.',
+          'Brautstyling, Event-Styling und besondere Anlaesse — wir machen Sie zum Star des Abends.',
+          'Hochwertige Haarpflege-Produkte von La Biosthetique — professionelle Qualitaet fuer zu Hause.'
+        ],
+        cardPrices: ['ab 35 \u20AC', 'ab 65 \u20AC', 'Kostenlos', 'ab 25 \u20AC', 'ab 45 \u20AC', 'Im Salon'],
+        cardCtas: ['Details & buchen', 'Details & buchen', 'Jetzt anfragen', 'Details & buchen', 'Details & buchen', 'Produkte entdecken'],
+        bookingOptions: ['Damenhaarschnitt', 'Kinderhaarschnitt', 'Farbbehandlung', 'Balayage / Highlights', 'Haarpflege / Treatment', 'Brautstyling', 'Beratung', 'Sonstiges'],
+        karriereTitle1: 'Friseur/in (m/w/d)',
+        karriereDesc1: 'Du liebst es, Menschen zu verwoehnen, und arbeitest gerne mit Farbe und Schere? Dann bist du bei uns genau richtig. Ob Balayage, kreative Schnitte oder Brautstyling.',
+        karriereTitle2: 'Stylist/in (m/w/d)',
+        karriereDesc2: 'Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf hoechstem Niveau bedient.',
+        karriereEmail1: 'Bewerbung%20als%20Friseur/in',
+        karriereEmail2: 'Bewerbung%20als%20Stylist/in'
+      },
+      maskulin: {
+        heroTitle: 'Stil.<br>Praezision. <em>Charakter.</em>',
+        heroSub: 'Kein Schnickschnack, nur Handwerk auf hoechstem Niveau. Praeziser Schnitt, perfekter Bart, starker Auftritt. Ihr persoenlicher Barber wartet.',
+        heroBadge: 'Maskulin. Modern. Muenchen.',
+        aboutTitle: 'Mehr als nur ein<br><em>Barbershop</em>',
+        aboutDesc: 'Hier wird nicht gequatscht, hier wird geliefert. Praezise Schnitte, saubere Konturen, erstklassige Bartpflege. Mit heissem Tuch und den besten Produkten am Markt.',
+        aboutDesc2: 'Ob Fade, Undercut oder klassischer Seitenscheitel — wir finden den Look, der zu Ihrem Gesicht und Ihrem Stil passt. Kein Zeitdruck, nur Qualitaet.',
+        svcTitle: 'Maskulin <em>Grooming</em>',
+        svcDesc: 'Schnitt, Bart, Pflege — alles was Mann braucht, auf Premium-Niveau.',
+        cardNames: ['Herrenschnitt', 'Bartpflege', 'Wunschfrisur-Service', 'Haar- & Kopfhautpflege', 'Grooming', 'Shop'],
+        cardDescs: [
+          'Praeziser Schnitt mit Maschine oder Schere. Fade, Undercut oder klassisch — perfekt auf Sie abgestimmt.',
+          'Bart trimmen, formen und pflegen. Vom 3-Tage-Bart bis zum Vollbart — mit heissem Tuch und Premium-Oelen.',
+          'Zeigen Sie uns Ihren Wunsch-Look — wir sagen Ihnen ehrlich, was moeglich ist.',
+          'Kopfhaut-Treatment, Anti-Schuppen-Kur, Feuchtigkeitspflege — fuer gesundes Haar.',
+          'Das Rundum-Paket: Schnitt, Bart und Pflege in einer Sitzung. Business oder Event — Sie sind ready.',
+          'Premium-Pflegeprodukte fuer den modernen Mann. Bartpflege, Styling und Hautpflege.'
+        ],
+        cardPrices: ['ab 28 \u20AC', 'ab 18 \u20AC', 'Kostenlos', 'ab 20 \u20AC', 'ab 35 \u20AC', 'Im Salon'],
+        cardCtas: ['Details & buchen', 'Details & buchen', 'Jetzt anfragen', 'Details & buchen', 'Details & buchen', 'Produkte entdecken'],
+        bookingOptions: ['Herrenschnitt', 'Bartpflege', 'Bart + Schnitt Kombi', 'Haarpflege / Treatment', 'Grooming Paket', 'Beratung', 'Sonstiges'],
+        karriereTitle1: 'Barber (m/w/d)',
+        karriereDesc1: 'Fades, Konturen, Bartkunst — du bist der Profi fuer maskuline Looks. Arbeite in einem Salon, der Handwerk und Innovation verbindet.',
+        karriereTitle2: 'Stylist/in (m/w/d)',
+        karriereDesc2: 'Du liebst Haare und hast ein Auge fuer den perfekten Look. Ob feminin oder maskulin — bei uns kannst du beides.',
+        karriereEmail1: 'Bewerbung%20als%20Barber',
+        karriereEmail2: 'Bewerbung%20als%20Stylist/in'
+      }
+    };
+
+    function updateContentForStyle(style) {
+      var m = modeContent[style];
+      if (!m) return;
+      serviceData = (style === 'maskulin') ? serviceDataMaskulin : serviceDataFeminin;
+
+      // Hero
+      var heroH1 = document.querySelector('.hero h1');
+      if (heroH1) heroH1.innerHTML = m.heroTitle;
+      var heroSub = document.querySelector('.hero-sub');
+      if (heroSub) heroSub.textContent = m.heroSub;
+      var heroBadge = document.querySelector('.hero-badge');
+      if (heroBadge) {
+        heroBadge.textContent = '';
+        var dot = document.createElement('span');
+        dot.className = 'hero-badge-dot';
+        heroBadge.appendChild(dot);
+        heroBadge.appendChild(document.createTextNode(m.heroBadge));
+      }
+
+      // About
+      var aboutTitle = document.querySelector('.about .section-title');
+      if (aboutTitle) aboutTitle.innerHTML = m.aboutTitle;
+      var aboutDescs = document.querySelectorAll('.about .section-desc');
+      if (aboutDescs[0]) aboutDescs[0].textContent = m.aboutDesc;
+      if (aboutDescs[1]) aboutDescs[1].textContent = m.aboutDesc2;
+
+      // Services header
+      var svcTitle = document.querySelector('.services .section-title');
+      if (svcTitle) svcTitle.innerHTML = m.svcTitle;
+      var svcDesc = document.querySelector('.services .section-desc');
+      if (svcDesc) svcDesc.textContent = m.svcDesc;
+
+      // Service cards
+      var cards = document.querySelectorAll('.service-card');
+      cards.forEach(function(card, i) {
+        if (i < m.cardNames.length) {
+          var h3 = card.querySelector('h3');
+          if (h3) h3.textContent = m.cardNames[i];
+          var p = card.querySelector('p');
+          if (p) p.textContent = m.cardDescs[i];
+          var price = card.querySelector('.service-price');
+          if (price) price.textContent = m.cardPrices[i];
+          var cta = card.querySelector('.service-cta');
+          if (cta) {
+            var svg = cta.querySelector('svg');
+            cta.textContent = m.cardCtas[i] + ' ';
+            if (svg) cta.appendChild(svg);
+          }
+        }
+      });
+
+      // Booking form options
+      var bkSelect = document.getElementById('bkLeistung');
+      if (bkSelect) {
+        bkSelect.textContent = '';
+        var defOpt = document.createElement('option');
+        defOpt.value = '';
+        defOpt.textContent = 'Bitte waehlen';
+        bkSelect.appendChild(defOpt);
+        m.bookingOptions.forEach(function(opt) {
+          var o = document.createElement('option');
+          o.textContent = opt;
+          bkSelect.appendChild(o);
+        });
+      }
+
+      // Karriere cards
+      var karriereCards = document.querySelectorAll('.karriere-card');
+      if (karriereCards.length >= 2) {
+        var h3a = karriereCards[0].querySelector('h3');
+        if (h3a) h3a.textContent = m.karriereTitle1;
+        var pa = karriereCards[0].querySelector('p');
+        if (pa) pa.textContent = m.karriereDesc1;
+        karriereCards[0].onclick = function() { location.href = 'mailto:renarados.friseure@hotmail.com?subject=' + m.karriereEmail1; };
+
+        var h3b = karriereCards[1].querySelector('h3');
+        if (h3b) h3b.textContent = m.karriereTitle2;
+        var pb = karriereCards[1].querySelector('p');
+        if (pb) pb.textContent = m.karriereDesc2;
+        karriereCards[1].onclick = function() { location.href = 'mailto:renarados.friseure@hotmail.com?subject=' + m.karriereEmail2; };
+      }
     }
 
     // Min date = today
