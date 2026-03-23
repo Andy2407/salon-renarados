@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Rena Rados Friseure in Muenchen — Ihr Premium-Salon mit persoenlicher Beratung, Online-Terminbuchung und Wunschfrisur-Service.">
   <meta name="theme-color" content="#faf8f6">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>Rena Rados Friseure | Muenchen — Premium Haarstyling</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -778,6 +780,163 @@
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
     }
+
+    /* =============================================================
+       Enhanced Responsive — @designer (23.03.2026)
+       ============================================================= */
+
+    @media (max-width: 479px) {
+      .nav { padding: 12px 16px; }
+      .nav.scrolled { padding: 8px 16px; }
+      .nav-logo { font-size: 18px; }
+      .mobile-close { top: 16px; right: 16px; }
+      .mobile-menu a { font-size: 24px; }
+      .hero-content { padding: 0 16px; }
+      .hero h1 { letter-spacing: -0.5px; margin-bottom: 16px; }
+      .hero-sub { font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
+      .hero-actions { flex-direction: column; gap: 10px; align-items: center; }
+      .btn { padding: 14px 28px; font-size: 13px; min-height: 48px; width: 100%; max-width: 300px; justify-content: center; }
+      .hero-badge { font-size: 10px; padding: 6px 16px; margin-bottom: 20px; }
+      .hero-scroll { bottom: 20px; font-size: 10px; }
+      section { padding: 48px 16px; }
+      .section-desc { font-size: 14px; line-height: 1.7; }
+      .about-stats { grid-template-columns: 1fr; gap: 12px; margin-top: 28px; }
+      .about-stat { padding: 18px 12px; }
+      .about-stat-val { font-size: 28px; }
+      .about-visual { aspect-ratio: 3/4; }
+      .about-visual-text { font-size: 20px; }
+      .about-visual-inner { padding: 20px; gap: 12px; }
+      .services-grid { margin-top: 32px; gap: 14px; }
+      .service-card { padding: 24px 20px; }
+      .service-card h3 { font-size: 18px; }
+      .service-card p { font-size: 12px; }
+      .service-price { font-size: 16px; }
+      .service-cta { opacity: 1; transform: translateY(0); }
+      .svc-sheet { padding: 24px 20px 32px; border-radius: 16px 16px 0 0; max-height: 90vh; }
+      .svc-sheet-title { font-size: 20px; }
+      .svc-sheet-header { gap: 12px; }
+      .svc-sheet-icon { width: 48px; height: 48px; border-radius: 14px; }
+      .svc-sheet-meta { flex-wrap: wrap; gap: 10px; }
+      .svc-sheet-actions { flex-direction: column; }
+      .svc-sheet-actions .btn { max-width: 100%; }
+      .svc-addon { padding: 14px; min-height: 48px; }
+      .svc-addon-name { font-size: 12px; }
+      .ki-grid { gap: 32px; }
+      .ki-form-card { padding: 24px 18px; }
+      .ki-form-card h3 { font-size: 19px; margin-bottom: 18px; }
+      .ki-feature { padding: 14px; }
+      .ki-feature h4 { font-size: 13px; }
+      .upload-zone { padding: 28px 16px; min-height: 80px; }
+      .upload-zone svg { width: 32px; height: 32px; }
+      .upload-thumb { width: 56px; height: 56px; }
+      #calendarWidget { padding: 12px; }
+      .booking-grid { gap: 32px; }
+      .booking-form { padding: 24px 18px; }
+      .booking-form h3 { font-size: 19px; }
+      .booking-info-card { padding: 16px; }
+      .form-group input, .form-group select, .form-group textarea { font-size: 16px; padding: 14px; }
+      .contact-grid { gap: 32px; }
+      .contact-map { min-height: 240px; }
+      .contact-item { padding: 14px; }
+      .hours-row { font-size: 12px; padding: 8px 0; }
+      .karriere-grid { gap: 14px; }
+      .karriere-card { padding: 22px 18px; }
+      .karriere-card h3 { font-size: 18px; }
+      .karriere-benefits { gap: 10px; }
+      .karriere-benefit { padding: 16px; }
+      .karriere-cta { padding: 28px 18px; }
+      .karriere-cta h3 { font-size: 20px; }
+      .karriere-cta-buttons { flex-direction: column; align-items: center; }
+      .karriere-cta-buttons .btn { width: 100%; max-width: 300px; }
+      .legal-overlay { padding: 12px; }
+      .legal-modal { padding: 24px 18px; max-height: 88vh; border-radius: 12px; }
+      .legal-modal h2 { font-size: 22px; margin-bottom: 16px; }
+      .legal-modal h3 { font-size: 14px; }
+      .legal-modal p, .legal-modal li { font-size: 13px; line-height: 1.7; }
+      .legal-close { top: 12px; right: 12px; width: 40px; height: 40px; }
+      .footer { padding: 40px 16px 20px; }
+      .footer-brand { font-size: 20px; }
+      .footer-desc { font-size: 12px; }
+      .footer-social a { width: 44px; height: 44px; }
+      .casa-badge { padding: 8px 14px; font-size: 10px; bottom: 14px; left: 14px; }
+      .toast-container { right: 12px; top: 80px; }
+      .toast { padding: 12px 16px; font-size: 12px; max-width: 300px; }
+      .style-toggle { margin-left: 8px; }
+      .style-toggle-btn { padding: 6px 12px; font-size: 10px; }
+    }
+
+    @media (min-width: 480px) and (max-width: 767px) {
+      section { padding: 56px 20px; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .about-stat { padding: 16px 8px; }
+      .about-stat-val { font-size: 26px; }
+      .service-card { padding: 26px 22px; }
+      .svc-sheet { max-width: 480px; }
+      .ki-form-card { padding: 28px 22px; }
+      .booking-form { padding: 28px 22px; }
+      .legal-modal { padding: 32px 24px; }
+      .hero-actions { flex-direction: row; }
+      .btn { width: auto; }
+      .karriere-cta-buttons { flex-direction: row; }
+      .karriere-cta-buttons .btn { width: auto; }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .nav { padding: 14px 28px; }
+      .nav.scrolled { padding: 10px 28px; }
+      section { padding: 72px 28px; }
+      .container { max-width: 700px; }
+      .about-stats { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .services-grid { gap: 18px; }
+      .service-card { padding: 28px 22px; }
+      .svc-sheet { max-width: 520px; }
+      .contact-map { min-height: 320px; }
+      .legal-modal { max-width: 600px; padding: 36px 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1199px) {
+      .nav { padding: 14px 28px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 12px; }
+      .nav-cta { padding: 8px 18px; font-size: 12px; }
+      .style-toggle-btn { padding: 6px 14px; font-size: 11px; }
+      .about-grid { gap: 48px; }
+      .ki-grid { gap: 48px; }
+      .booking-grid { gap: 36px; }
+      .contact-grid { gap: 36px; }
+    }
+
+    @media (min-width: 1280px) {
+      .container { max-width: 1200px; }
+      section { padding: 100px 32px; }
+      .hero-content { max-width: 860px; }
+    }
+
+    @media (orientation: landscape) and (max-height: 420px) {
+      .hero { min-height: auto; padding: 80px 0 40px; }
+      .hero-content { padding: 0 20px; }
+      .hero h1 { font-size: 32px; margin-bottom: 10px; }
+      .hero-sub { font-size: 13px; margin-bottom: 20px; }
+      .hero-scroll { display: none; }
+      .hero-badge { margin-bottom: 14px; }
+      section { padding: 36px 16px; }
+      .nav { padding: 8px 20px; }
+      .nav.scrolled { padding: 6px 20px; }
+      .nav-logo { font-size: 18px; }
+      .about-grid { gap: 24px; }
+      .ki-grid { gap: 24px; }
+      .about-visual { aspect-ratio: 16/9; }
+      .casa-badge { display: none; }
+    }
+
+    @media (orientation: landscape) and (min-width: 800px) and (max-height: 500px) {
+      .hero { min-height: auto; padding: 80px 0 48px; }
+      .hero h1 { font-size: 36px; }
+      .hero-sub { font-size: 14px; }
+      .hero-scroll { display: none; }
+      section { padding: 40px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -841,7 +1000,7 @@
         </a>
         <a href="#wunschfrisur" class="btn btn-outline">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
-          Wunschfrisur senden
+          <span id="heroBtnWunschText">Wunschfrisur senden</span>
         </a>
       </div>
     </div>
@@ -856,7 +1015,7 @@
     <div class="container">
       <div class="about-grid">
         <div class="reveal">
-          <div class="section-label">Die Zukunft erleben</div>
+          <div class="section-label" id="aboutLabel">Die Zukunft erleben</div>
           <h2 class="section-title">Mehr als nur ein<br><em>Friseurbesuch</em></h2>
           <p class="section-desc">Wir hoeren Ihnen zu. Was bewegt Sie? Was wuenschen Sie sich? Bei uns beginnt alles mit einem persoenlichen Gespraech bei einer Tasse Kaffee — bevor die erste Schere angesetzt wird.</p>
           <p class="section-desc" style="margin-top:12px">Entspannende Kopfmassage, individuelle Beratung, null Zeitdruck. Bei uns sind Sie keine Nummer — Sie sind der Mittelpunkt. Mit hochwertigen Produkten von La Biosthetique und modernster Technik.</p>
@@ -883,7 +1042,7 @@
   <section class="services" id="services">
     <div class="container">
       <div class="reveal">
-        <div class="section-label">Unsere Leistungen</div>
+        <div class="section-label" id="svcLabel">Unsere Leistungen</div>
         <h2 class="section-title">Premium <em>Services</em></h2>
         <p class="section-desc">Von klassischen Schnitten bis zu aufwendigen Farbbehandlungen — wir bieten das volle Programm.</p>
       </div>
@@ -978,7 +1137,7 @@
           <div class="upload-zone" id="haarUploadZone" onclick="document.getElementById('haarUpload').click()" style="cursor:pointer">
             <input type="file" id="haarUpload" accept="image/*" style="display:none" onchange="previewHaarUpload(this.files)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Haar-Foto hier ablegen oder tippen</span>
+            <span id="haarUploadHint">Haar-Foto hier ablegen oder tippen</span>
           </div>
           <div id="haarPreview" style="margin:12px 0;display:none;text-align:center">
             <img id="haarPreviewImg" style="max-width:100%;max-height:200px;border-radius:var(--radius);border:1px solid var(--border)" alt="Haar-Vorschau">
@@ -992,7 +1151,7 @@
             <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Erste Einschaetzung per KI &middot; Ergebnis per E-Mail &middot; unverbindlich</div>
           </div>
           <button class="btn-gold" id="haarBtn" onclick="submitHaaranalyse()" style="width:100%;margin-top:12px">
-            Schnell-Check starten
+            Haaranalyse starten
           </button>
           <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Profi-Analyse mit PDF-Report erhalten Sie im Salon. Powered by Casa 2035.</p>
         </div>
@@ -1009,25 +1168,25 @@
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               </div>
-              <div><strong style="font-size:14px">Foto hochladen</strong><br><span style="font-size:12px;color:var(--text-muted)">Schicken Sie ein Bild Ihrer Wunschfrisur oder Ihres aktuellen Looks</span></div>
+              <div><strong style="font-size:14px" id="wunschStep1">Foto hochladen</strong><br><span style="font-size:12px;color:var(--text-muted)" id="wunschStep1Sub">Schicken Sie ein Bild Ihrer Wunschfrisur oder Ihres aktuellen Looks</span></div>
             </div>
             <div style="display:flex;align-items:center;gap:14px">
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
               </div>
-              <div><strong style="font-size:14px">Professionelle Analyse</strong><br><span style="font-size:12px;color:var(--text-muted)">Wir pruefen Haartyp, Farbe und Style — ehrliche Machbarkeits-Einschaetzung</span></div>
+              <div><strong style="font-size:14px" id="wunschStep2">Professionelle Analyse</strong><br><span style="font-size:12px;color:var(--text-muted)" id="wunschStep2Sub">Wir pruefen Haartyp, Farbe und Style — ehrliche Machbarkeits-Einschaetzung</span></div>
             </div>
             <div style="display:flex;align-items:center;gap:14px">
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               </div>
-              <div><strong style="font-size:14px">Persoenliche Antwort</strong><br><span style="font-size:12px;color:var(--text-muted)">Innerhalb weniger Minuten mit Produkt- und Terminvorschlag</span></div>
+              <div><strong style="font-size:14px" id="wunschStep3">Persoenliche Antwort</strong><br><span style="font-size:12px;color:var(--text-muted)" id="wunschStep3Sub">Innerhalb weniger Minuten mit Produkt- und Terminvorschlag</span></div>
             </div>
           </div>
         </div>
         <div class="reveal reveal-delay-2">
           <div class="ki-form-card">
-            <h3>Wunschfrisur anfragen</h3>
+            <h3 id="wunschFormTitle">Wunschfrisur anfragen</h3>
             <form id="wunschfrisurForm" onsubmit="submitWunschfrisur(event)">
               <div class="form-row">
                 <div class="form-group"><label>Vorname</label><input type="text" id="wfVorname" placeholder="Anna" required></div>
@@ -1060,76 +1219,7 @@
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
                 <button type="submit" class="btn btn-gold" style="justify-content:center">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
-                  Wunschfrisur senden
-                </button>
-                <a href="#booking" class="btn btn-outline" style="justify-content:center;text-align:center" onclick="prefillBooking()">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-                  + Termin buchen
-                </a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-    <div class="container">
-      <div class="ki-grid">
-        <div class="ki-content reveal">
-          <div class="section-label">Ihr Wunsch</div>
-          <h2 class="section-title">Ihre <em>Wunschfrisur</em><br>wird Realitaet</h2>
-          <p class="section-desc">Zeigen Sie uns, wovon Sie traeumen. Ein Foto, eine Idee, ein Wunsch — wir hoeren zu und sagen Ihnen ehrlich, was moeglich ist. Persoenlich, schnell und ganz auf Sie zugeschnitten.</p>
-          <div class="ki-features">
-            <div class="ki-feature">
-              <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div><h4>Foto hochladen</h4><p>Schicken Sie ein Bild Ihrer Wunschfrisur oder Ihres aktuellen Looks</p></div>
-            </div>
-            <div class="ki-feature">
-              <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg></div>
-              <div><h4>Professionelle Analyse</h4><p>Wir pruefen Haartyp, Farbe und Style und geben eine ehrliche Machbarkeits-Einschaetzung</p></div>
-            </div>
-            <div class="ki-feature">
-              <div class="ki-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-              <div><h4>Ihre persoenliche Antwort</h4><p>Innerhalb weniger Minuten erhalten Sie eine Antwort mit Produkt- und Terminvorschlag</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="reveal reveal-delay-2">
-          <div class="ki-form-card">
-            <h3>Wunschfrisur anfragen</h3>
-            <form id="wunschfrisurForm" onsubmit="submitWunschfrisur(event)">
-              <div class="form-row">
-                <div class="form-group"><label>Vorname</label><input type="text" id="wfVorname" placeholder="Anna" required></div>
-                <div class="form-group"><label>Nachname</label><input type="text" id="wfNachname" placeholder="Schmidt" required></div>
-              </div>
-              <div class="form-row">
-                <div class="form-group"><label>E-Mail</label><input type="email" id="wfEmail" placeholder="anna@beispiel.de" required></div>
-                <div class="form-group"><label>Telefon</label><input type="tel" id="wfTelefon" placeholder="0171 1234567"></div>
-              </div>
-              <div class="form-group"><label>Was wuenschen Sie sich?</label><textarea id="wfNachricht" placeholder="Beschreiben Sie Ihre Wunschfrisur oder stellen Sie eine Frage..." rows="3" required></textarea></div>
-              <div class="form-group">
-                <label>Fotos hochladen (optional)</label>
-                <div class="upload-zone" id="uploadZone">
-                  <input type="file" id="wfFiles" accept="image/*" multiple onchange="handleFiles(this.files)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                  <p><span>Klicken</span> oder Bilder hierher ziehen</p>
-                </div>
-                <div class="upload-preview" id="uploadPreview"></div>
-              </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-                <div class="form-group" style="margin-bottom:0"><label>Wunschtermin (optional)</label><input type="date" id="wfDatum"></div>
-                <div class="form-group" style="margin-bottom:0"><label>Uhrzeit (optional)</label>
-                  <select id="wfUhrzeit" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:'Inter',sans-serif">
-                    <option value="">Flexibel</option>
-                    <option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option>
-                    <option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
-                  </select>
-                </div>
-              </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-                <button type="submit" class="btn btn-gold" style="justify-content:center">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
-                  Wunschfrisur senden
+                  <span id="wunschBtnText">Wunschfrisur senden</span>
                 </button>
                 <a href="#booking" class="btn btn-outline" style="justify-content:center;text-align:center" onclick="prefillBooking()">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
@@ -1147,9 +1237,9 @@
   <section class="booking" id="booking">
     <div class="container">
       <div class="reveal">
-        <div class="section-label">Online-Terminbuchung</div>
-        <h2 class="section-title">Ihren <em>Termin</em> buchen</h2>
-        <p class="section-desc">Waehlen Sie Ihren Wunschtermin — wir nehmen uns Zeit fuer Sie und bestaetigen persoenlich.</p>
+        <div class="section-label" id="bookingLabel">Online-Terminbuchung</div>
+        <h2 class="section-title" id="bookingTitle">Ihren <em>Termin</em> buchen</h2>
+        <p class="section-desc" id="bookingDesc">Waehlen Sie Ihren Wunschtermin — wir nehmen uns Zeit fuer Sie und bestaetigen persoenlich.</p>
       </div>
       <div class="booking-grid">
         <div class="booking-form reveal">
@@ -1328,9 +1418,9 @@
   <section class="karriere" id="karriere">
     <div class="container">
       <div class="karriere-intro reveal">
-        <div class="section-label">Werde Teil unseres Teams</div>
-        <h2 class="section-title">Deine <em>Karriere</em><br>bei Rena Rados</h2>
-        <p class="section-desc">Wir suchen Menschen, die fuer ihren Beruf brennen. Ob erfahrener Stylist, Barber oder Azubi am Anfang — bei uns zaehlt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.</p>
+        <div class="section-label" id="karriereLabel">Werde Teil unseres Teams</div>
+        <h2 class="section-title" id="karriereIntroTitle">Deine <em>Karriere</em><br>bei Rena Rados</h2>
+        <p class="section-desc" id="karriereIntroDesc">Wir suchen Menschen, die fuer ihren Beruf brennen. Ob erfahrener Stylist, Barber oder Azubi am Anfang — bei uns zaehlt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.</p>
       </div>
 
       <div class="karriere-grid">
@@ -1426,7 +1516,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><em>Rena Rados</em> Friseure</div>
-        <p class="footer-desc">Sie stehen im Mittelpunkt. Premium Haarstyling in Muenchen — mit Kaffee, Kopfmassage, persoenlicher Beratung und voller Aufmerksamkeit. Willkommen im Jahr 2035.</p>
+        <p class="footer-desc" id="footerDesc">Sie stehen im Mittelpunkt. Premium Haarstyling in Muenchen — mit Kaffee, Kopfmassage, persoenlicher Beratung und voller Aufmerksamkeit. Willkommen im Jahr 2035.</p>
         <div class="footer-social">
           <a href="https://www.instagram.com/rena_rados_friseure/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -1438,11 +1528,11 @@
       </div>
       <div>
         <h4>Navigation</h4>
-        <div class="footer-links"><a href="#about">Salon</a><a href="#services">Leistungen</a><a href="#wunschfrisur">Wunschfrisur</a><a href="#booking">Termin buchen</a><a href="#contact">Kontakt</a><a href="#karriere">Karriere</a></div>
+        <div class="footer-links"><a href="#about">Salon</a><a href="#services">Leistungen</a><a href="#wunschfrisur" id="footerNavWunsch">Wunschfrisur</a><a href="#booking">Termin buchen</a><a href="#contact">Kontakt</a><a href="#karriere">Karriere</a></div>
       </div>
       <div>
         <h4>Leistungen</h4>
-        <div class="footer-links"><a href="#services">Haarschnitte</a><a href="#services">Farbbehandlung</a><a href="#services">Haarpflege</a><a href="#services">Styling</a><a href="#wunschfrisur">Wunschfrisur</a></div>
+        <div class="footer-links" id="footerServiceLinks"><a href="#services">Haarschnitte</a><a href="#services">Farbbehandlung</a><a href="#services">Haarpflege</a><a href="#services">Styling</a><a href="#wunschfrisur">Wunschfrisur</a></div>
       </div>
       <div>
         <h4>Rechtliches</h4>
@@ -2273,11 +2363,42 @@
         haarFormDesc: 'Fotografieren Sie Ihr Haar bei Tageslicht. Unsere KI analysiert Struktur, Schaedigung und Zustand.',
         haarBtn: 'Haaranalyse starten',
         haarTabName: 'Haaranalyse',
+        haarUploadHint: 'Haar-Foto hier ablegen oder tippen',
         // Wunschfrisur-Tab Texte (feminin)
         wunschLabel: 'Ihr Wunsch',
         wunschTitle: 'Ihre <em>Wunschfrisur</em><br>wird Realitaet',
         wunschDesc: 'Zeigen Sie uns, wovon Sie traeumen. Ein Foto, eine Idee, ein Wunsch — wir hoeren zu und sagen Ihnen ehrlich, was moeglich ist. Persoenlich, schnell und ganz auf Sie zugeschnitten.',
-        wunschTabName: 'Wunschfrisur'
+        wunschTabName: 'Wunschfrisur',
+        wunschFormTitle: 'Wunschfrisur anfragen',
+        wunschBtnText: 'Wunschfrisur senden',
+        wunschStep1: 'Foto hochladen',
+        wunschStep1Sub: 'Schicken Sie ein Bild Ihrer Wunschfrisur oder Ihres aktuellen Looks',
+        wunschStep2: 'Professionelle Analyse',
+        wunschStep2Sub: 'Wir pruefen Haartyp, Farbe und Style — ehrliche Machbarkeits-Einschaetzung',
+        wunschStep3: 'Persoenliche Antwort',
+        wunschStep3Sub: 'Innerhalb weniger Minuten mit Produkt- und Terminvorschlag',
+        wunschPlaceholderVorname: 'Anna',
+        wunschPlaceholderNachname: 'Schmidt',
+        wunschPlaceholderEmail: 'anna@beispiel.de',
+        wunschPlaceholderMsg: 'Beschreiben Sie Ihre Wunschfrisur oder stellen Sie eine Frage...',
+        // Hero-Button-Texte
+        heroBtnWunsch: 'Wunschfrisur senden',
+        // Booking section
+        bookingLabel: 'Online-Terminbuchung',
+        bookingTitle: 'Ihren <em>Termin</em> buchen',
+        bookingDesc: 'Waehlen Sie Ihren Wunschtermin — wir nehmen uns Zeit fuer Sie und bestaetigen persoenlich.',
+        // About section label
+        aboutLabel: 'Die Zukunft erleben',
+        // Services section label
+        svcLabel: 'Unsere Leistungen',
+        // Karriere section
+        karriereLabel: 'Werde Teil unseres Teams',
+        karriereIntroTitle: 'Deine <em>Karriere</em><br>bei Rena Rados',
+        karriereIntroDesc: 'Wir suchen Menschen, die fuer ihren Beruf brennen. Ob erfahrener Stylist, Barber oder Azubi am Anfang — bei uns zaehlt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.',
+        // Footer
+        footerDesc: 'Sie stehen im Mittelpunkt. Premium Haarstyling in Muenchen — mit Kaffee, Kopfmassage, persoenlicher Beratung und voller Aufmerksamkeit. Willkommen im Jahr 2035.',
+        footerNavWunsch: 'Wunschfrisur',
+        footerServiceNames: ['Haarschnitte', 'Farbbehandlung', 'Haarpflege', 'Styling', 'Wunschfrisur']
       },
       maskulin: {
         heroTitle: 'Stil.<br>Praezision. <em>Charakter.</em>',
@@ -2320,11 +2441,42 @@
         haarFormDesc: 'Fotografieren Sie Ihr Haar, Ihren Bart oder Ihre Kopfhaut bei Tageslicht. Unsere KI analysiert Zustand und Struktur.',
         haarBtn: 'Analyse starten',
         haarTabName: 'Haar & Bart',
+        haarUploadHint: 'Haar- oder Bart-Foto hier ablegen oder tippen',
         // Wunschfrisur-Tab Texte (maskulin)
         wunschLabel: 'Ihr Look',
         wunschTitle: 'Ihr <em>Wunsch-Look</em><br>wird Realitaet',
         wunschDesc: 'Zeigen Sie uns, was Sie sich vorstellen. Fade, Undercut, Bartform — wir sagen Ihnen ehrlich, was moeglich ist und liefern das Ergebnis.',
-        wunschTabName: 'Wunsch-Look'
+        wunschTabName: 'Wunsch-Look',
+        wunschFormTitle: 'Wunsch-Look anfragen',
+        wunschBtnText: 'Wunsch-Look senden',
+        wunschStep1: 'Foto hochladen',
+        wunschStep1Sub: 'Zeigen Sie uns Ihren Wunsch-Look — Fade, Undercut, Bartform',
+        wunschStep2: 'Professionelle Analyse',
+        wunschStep2Sub: 'Wir pruefen Haartyp, Kopfform und Style — ehrliche Machbarkeits-Einschaetzung',
+        wunschStep3: 'Persoenliche Antwort',
+        wunschStep3Sub: 'Innerhalb weniger Minuten mit Styling- und Terminvorschlag',
+        wunschPlaceholderVorname: 'Max',
+        wunschPlaceholderNachname: 'Mueller',
+        wunschPlaceholderEmail: 'max@beispiel.de',
+        wunschPlaceholderMsg: 'Beschreiben Sie Ihren Wunsch-Look oder stellen Sie eine Frage...',
+        // Hero-Button-Texte
+        heroBtnWunsch: 'Wunsch-Look senden',
+        // Booking section
+        bookingLabel: 'Online-Terminbuchung',
+        bookingTitle: 'Ihren <em>Termin</em> buchen',
+        bookingDesc: 'Waehlen Sie Ihren Wunschtermin — wir liefern Ergebnisse und bestaetigen persoenlich.',
+        // About section label
+        aboutLabel: 'Die Zukunft erleben',
+        // Services section label
+        svcLabel: 'Unsere Leistungen',
+        // Karriere section
+        karriereLabel: 'Werde Teil unseres Teams',
+        karriereIntroTitle: 'Deine <em>Karriere</em><br>bei Rena Rados',
+        karriereIntroDesc: 'Wir suchen Menschen, die fuer ihren Beruf brennen. Ob erfahrener Barber, Stylist oder Azubi am Anfang — bei uns zaehlt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.',
+        // Footer
+        footerDesc: 'Praezision trifft Handwerk. Maskulines Grooming in Muenchen — praeziser Schnitt, perfekter Bart, starker Auftritt. Willkommen im Jahr 2035.',
+        footerNavWunsch: 'Wunsch-Look',
+        footerServiceNames: ['Herrenschnitt', 'Bartpflege', 'Kopfhautpflege', 'Grooming', 'Wunsch-Look']
       }
     };
 
@@ -2451,6 +2603,79 @@
       if (tabH) tabH.textContent = m.haarTabName;
       var tabW = document.getElementById('tabWunschfrisur');
       if (tabW) tabW.textContent = m.wunschTabName;
+
+      // Haaranalyse upload zone hint
+      var haarHint = document.getElementById('haarUploadHint');
+      if (haarHint) haarHint.textContent = m.haarUploadHint;
+
+      // Wunschfrisur form title + button + steps
+      var wfFT = document.getElementById('wunschFormTitle');
+      if (wfFT) wfFT.textContent = m.wunschFormTitle;
+      var wfBT = document.getElementById('wunschBtnText');
+      if (wfBT) wfBT.textContent = m.wunschBtnText;
+      var ws1 = document.getElementById('wunschStep1');
+      if (ws1) ws1.textContent = m.wunschStep1;
+      var ws1s = document.getElementById('wunschStep1Sub');
+      if (ws1s) ws1s.textContent = m.wunschStep1Sub;
+      var ws2 = document.getElementById('wunschStep2');
+      if (ws2) ws2.textContent = m.wunschStep2;
+      var ws2s = document.getElementById('wunschStep2Sub');
+      if (ws2s) ws2s.textContent = m.wunschStep2Sub;
+      var ws3 = document.getElementById('wunschStep3');
+      if (ws3) ws3.textContent = m.wunschStep3;
+      var ws3s = document.getElementById('wunschStep3Sub');
+      if (ws3s) ws3s.textContent = m.wunschStep3Sub;
+
+      // Wunschfrisur placeholders
+      var wfV = document.getElementById('wfVorname');
+      if (wfV) wfV.placeholder = m.wunschPlaceholderVorname;
+      var wfN = document.getElementById('wfNachname');
+      if (wfN) wfN.placeholder = m.wunschPlaceholderNachname;
+      var wfE = document.getElementById('wfEmail');
+      if (wfE) wfE.placeholder = m.wunschPlaceholderEmail;
+      var wfM = document.getElementById('wfNachricht');
+      if (wfM) wfM.placeholder = m.wunschPlaceholderMsg;
+
+      // Hero button text
+      var heroBtnW = document.getElementById('heroBtnWunschText');
+      if (heroBtnW) heroBtnW.textContent = m.heroBtnWunsch;
+
+      // Booking section — NOTE: innerHTML used for <em> tags, all values from hardcoded modeContent (safe)
+      var bkLabel = document.getElementById('bookingLabel');
+      if (bkLabel) bkLabel.textContent = m.bookingLabel;
+      var bkTitle = document.getElementById('bookingTitle');
+      if (bkTitle) bkTitle.innerHTML = m.bookingTitle;
+      var bkDesc = document.getElementById('bookingDesc');
+      if (bkDesc) bkDesc.textContent = m.bookingDesc;
+
+      // About section label
+      var abLabel = document.getElementById('aboutLabel');
+      if (abLabel) abLabel.textContent = m.aboutLabel;
+
+      // Services section label
+      var svLabel = document.getElementById('svcLabel');
+      if (svLabel) svLabel.textContent = m.svcLabel;
+
+      // Karriere section — NOTE: innerHTML used for <em> tags, all values from hardcoded modeContent (safe)
+      var krLabel = document.getElementById('karriereLabel');
+      if (krLabel) krLabel.textContent = m.karriereLabel;
+      var krTitle = document.getElementById('karriereIntroTitle');
+      if (krTitle) krTitle.innerHTML = m.karriereIntroTitle;
+      var krDesc = document.getElementById('karriereIntroDesc');
+      if (krDesc) krDesc.textContent = m.karriereIntroDesc;
+
+      // Footer
+      var ftDesc = document.getElementById('footerDesc');
+      if (ftDesc) ftDesc.textContent = m.footerDesc;
+      var ftNavW = document.getElementById('footerNavWunsch');
+      if (ftNavW) ftNavW.textContent = m.footerNavWunsch;
+      var ftSvcLinks = document.getElementById('footerServiceLinks');
+      if (ftSvcLinks && m.footerServiceNames) {
+        var links = ftSvcLinks.querySelectorAll('a');
+        m.footerServiceNames.forEach(function(name, i) {
+          if (links[i]) links[i].textContent = name;
+        });
+      }
     }
 
     // Gespeicherten Stil erneut anwenden (modeContent ist jetzt verfuegbar)
@@ -2478,6 +2703,411 @@
       if (uhrzeit) document.getElementById('bkUhrzeit').value = uhrzeit;
     }
 
+    // =============================================================
+    // CONFIG.JSON LOADER — Casa 2035 Template System
+    // Loads all salon-specific data from config.json at page load.
+    // Falls back to hardcoded defaults if config.json fails to load.
+    // Stand: 23.03.2026 | Agent: @hp-entwickler
+    // =============================================================
+
+    function loadConfig() {
+      fetch('config.json')
+        .then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function(cfg) {
+          applyConfig(cfg);
+        })
+        .catch(function(err) {
+          console.warn('config.json konnte nicht geladen werden, verwende Standardwerte:', err.message);
+        });
+    }
+
+    function applyConfig(cfg) {
+      // --- 1. Branding: CSS Custom Properties ---
+      if (cfg.branding) {
+        var root = document.documentElement;
+        if (cfg.branding.primaryColor) {
+          root.style.setProperty('--gold', cfg.branding.primaryColor);
+          root.style.setProperty('--gold-dim', hexToRgba(cfg.branding.primaryColor, 0.12));
+          root.style.setProperty('--gold-glow', hexToRgba(cfg.branding.primaryColor, 0.06));
+          root.style.setProperty('--border-gold', hexToRgba(cfg.branding.primaryColor, 0.2));
+        }
+        if (cfg.branding.accentColor) {
+          root.style.setProperty('--gold-light', cfg.branding.accentColor);
+        }
+      }
+
+      // --- 2. Salon Info: Nav Logo, Footer, Meta ---
+      if (cfg.salon) {
+        var s = cfg.salon;
+        if (s.name) {
+          document.title = s.name + ' | ' + (s.city || '') + ' \u2014 ' + (s.slogan || 'Premium Haarstyling');
+        }
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc && s.name) {
+          metaDesc.setAttribute('content', s.name + ' in ' + (s.city || '') + ' \u2014 Ihr Premium-Salon mit persoenlicher Beratung, Online-Terminbuchung und Wunschfrisur-Service.');
+        }
+        applyBrandName('.nav-logo', s.name);
+        applyBrandName('.footer-brand', s.name);
+        var footerDesc = document.querySelector('.footer-desc');
+        if (footerDesc && s.slogan && s.city) {
+          footerDesc.textContent = 'Sie stehen im Mittelpunkt. ' + s.slogan + ' in ' + s.city + ' \u2014 mit Kaffee, Kopfmassage, persoenlicher Beratung und voller Aufmerksamkeit. Willkommen im Jahr 2035.';
+        }
+        var footerBottom = document.querySelector('.footer-bottom span');
+        if (footerBottom && s.name) {
+          footerBottom.textContent = '\u00A9 ' + new Date().getFullYear() + ' ' + s.name + '. Alle Rechte vorbehalten.';
+        }
+        var contactAddrP = document.querySelector('.contact-map-placeholder p');
+        if (contactAddrP && s.address) applyAddressToElement(contactAddrP, s);
+        if (s.mapsUrl) {
+          var mapsLink = document.querySelector('.contact-map-placeholder .btn-dark');
+          if (mapsLink) mapsLink.setAttribute('href', s.mapsUrl);
+        }
+        applyContactCards(s);
+        applyBookingInfoCards(s);
+        if (s.oeffnungszeiten) applyOpeningHours(s.oeffnungszeiten);
+      }
+
+      // --- 3. Social Media Links ---
+      if (cfg.social) {
+        document.querySelectorAll('.footer-social a').forEach(function(a) {
+          var label = (a.getAttribute('aria-label') || '').toLowerCase();
+          if (label === 'instagram' && cfg.social.instagram) a.href = cfg.social.instagram;
+          if (label === 'facebook' && cfg.social.facebook) a.href = cfg.social.facebook;
+        });
+        if (cfg.social.linkedin) {
+          document.querySelectorAll('a[href*="linkedin.com"]').forEach(function(a) { a.href = cfg.social.linkedin; });
+        }
+      }
+
+      // --- 4. Webhook Base URL ---
+      if (cfg.webhooks && cfg.webhooks.base) webhookBase = cfg.webhooks.base;
+
+      // --- 5. Service Data ---
+      if (cfg.services) {
+        if (cfg.services.feminin) serviceDataFeminin = buildServiceData(cfg.services.feminin);
+        if (cfg.services.maskulin) serviceDataMaskulin = buildServiceData(cfg.services.maskulin);
+        serviceData = (currentStyle === 'maskulin') ? serviceDataMaskulin : serviceDataFeminin;
+      }
+
+      // --- 6. Mode Content (Hero, About, Services titles) ---
+      if (cfg.content) {
+        if (cfg.content.feminin) applyModeContent('feminin', cfg.content.feminin);
+        if (cfg.content.maskulin) applyModeContent('maskulin', cfg.content.maskulin);
+      }
+
+      // --- 7. Karriere Positions ---
+      if (cfg.karriere && cfg.karriere.positions) {
+        applyKarrierePositions(cfg.karriere.positions, cfg.salon ? cfg.salon.email : null);
+      }
+
+      // --- 8. Legal / Impressum ---
+      if (cfg.legal && cfg.legal.impressum) applyImpressum(cfg.legal.impressum);
+
+      // --- 9. Re-apply current style to refresh all dynamic content ---
+      updateContentForStyle(currentStyle);
+    }
+
+    function hexToRgba(hex, alpha) {
+      var r = parseInt(hex.slice(1, 3), 16);
+      var g = parseInt(hex.slice(3, 5), 16);
+      var b = parseInt(hex.slice(5, 7), 16);
+      return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+    }
+
+    function applyBrandName(selector, name) {
+      var el = document.querySelector(selector);
+      if (!el || !name) return;
+      var parts = name.split(' ');
+      if (parts.length >= 2) {
+        var emPart = parts.slice(0, -1).join(' ');
+        var lastPart = parts[parts.length - 1];
+        el.innerHTML = '';
+        var em = document.createElement('em');
+        em.textContent = emPart;
+        el.appendChild(em);
+        el.appendChild(document.createTextNode(' ' + lastPart));
+      } else {
+        el.textContent = name;
+      }
+    }
+
+    function applyAddressToElement(el, salon) {
+      el.innerHTML = '';
+      var addrParts = salon.address.split(',');
+      el.appendChild(document.createTextNode(addrParts[0].trim()));
+      if (salon.addressNote) {
+        el.appendChild(document.createElement('br'));
+        el.appendChild(document.createTextNode(salon.addressNote));
+      }
+      if (addrParts[1]) {
+        el.appendChild(document.createElement('br'));
+        el.appendChild(document.createTextNode(addrParts[1].trim()));
+      }
+    }
+
+    function applyContactCards(s) {
+      document.querySelectorAll('.contact-item').forEach(function(item) {
+        var h4 = item.querySelector('h4');
+        if (!h4) return;
+        var label = h4.textContent.trim();
+        if (label === 'Adresse' && s.address) {
+          var p = item.querySelector('p');
+          if (p) applyAddressToElement(p, s);
+        }
+        if (label === 'Telefon' && s.phone) {
+          var telP = item.querySelector('p');
+          if (telP) {
+            telP.innerHTML = '';
+            var a = document.createElement('a');
+            a.href = 'tel:' + s.phone.replace(/[\s\-]/g, '');
+            a.textContent = s.phone;
+            telP.appendChild(a);
+          }
+        }
+        if (label === 'E-Mail' && s.email) {
+          var emailP = item.querySelector('p');
+          if (emailP) {
+            emailP.innerHTML = '';
+            var ea = document.createElement('a');
+            ea.href = 'mailto:' + s.email;
+            ea.textContent = s.email;
+            emailP.appendChild(ea);
+          }
+        }
+      });
+    }
+
+    function applyBookingInfoCards(s) {
+      document.querySelectorAll('.booking-info-card').forEach(function(card) {
+        var h4 = card.querySelector('h4');
+        if (!h4) return;
+        if (h4.textContent.trim() === 'Telefonisch buchen' && s.phone) {
+          var p = card.querySelector('p');
+          if (p) {
+            p.innerHTML = '';
+            var a = document.createElement('a');
+            a.href = 'tel:' + s.phone.replace(/[\s\-]/g, '');
+            a.textContent = s.phone;
+            p.appendChild(a);
+            p.appendChild(document.createElement('br'));
+            p.appendChild(document.createTextNode('Wir sind waehrend der Oeffnungszeiten erreichbar.'));
+          }
+        }
+        if (h4.textContent.trim() === 'Per E-Mail' && s.email) {
+          var ep = card.querySelector('p');
+          if (ep) {
+            ep.innerHTML = '';
+            var ea = document.createElement('a');
+            ea.href = 'mailto:' + s.email;
+            ea.textContent = s.email;
+            ep.appendChild(ea);
+          }
+        }
+      });
+    }
+
+    function buildServiceData(cfgServices) {
+      return cfgServices.map(function(s) {
+        var addons = (s.addons || []).map(function(a) {
+          var match = a.match(/^(.+?)\s*\(\+?(\d+)\s*EUR\)$/);
+          if (match) return { n: match[1].trim(), p: parseInt(match[2]) };
+          return { n: a, p: 0 };
+        });
+        var products = (s.products || []).map(function(p) {
+          return { n: p, i: '' };
+        });
+        var priceNum = 0;
+        var priceMatch = (s.price || '').match(/(\d+)/);
+        if (priceMatch) priceNum = parseInt(priceMatch[1]);
+        return {
+          name: s.name,
+          leistung: s.leistung || s.name,
+          price: priceNum,
+          dur: s.dur || '',
+          desc: s.desc || '',
+          addons: addons,
+          products: products,
+          isWunsch: s.isWunsch || false,
+          isShop: s.isShop || false
+        };
+      });
+    }
+
+    function applyModeContent(mode, cfgContent) {
+      if (!modeContent[mode]) return;
+      var m = modeContent[mode];
+      if (cfgContent.heroTitle) m.heroTitle = cfgContent.heroTitle;
+      if (cfgContent.heroSub) m.heroSub = cfgContent.heroSub;
+      if (cfgContent.heroBadge) m.heroBadge = cfgContent.heroBadge;
+      if (cfgContent.aboutTitle) m.aboutTitle = cfgContent.aboutTitle;
+      if (cfgContent.aboutDesc) m.aboutDesc = cfgContent.aboutDesc;
+      if (cfgContent.svcTitle) m.svcTitle = cfgContent.svcTitle;
+      if (cfgContent.svcDesc) m.svcDesc = cfgContent.svcDesc;
+    }
+
+    function applyOpeningHours(hours) {
+      var hoursGrid = document.querySelector('.hours-grid');
+      if (!hoursGrid) return;
+      var dayMap = { 'Mo': 'Montag', 'Di': 'Dienstag', 'Mi': 'Mittwoch', 'Do': 'Donnerstag', 'Fr': 'Freitag', 'Sa': 'Samstag', 'So': 'Sonntag' };
+      var dayOrder = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+      hoursGrid.innerHTML = '';
+      dayOrder.forEach(function(key) {
+        var val = hours[key];
+        var row = document.createElement('div');
+        row.className = 'hours-row';
+        var daySpan = document.createElement('span');
+        daySpan.className = 'hours-day';
+        daySpan.textContent = dayMap[key] || key;
+        row.appendChild(daySpan);
+        var timeSpan = document.createElement('span');
+        if (!val || val === 'Geschlossen') {
+          timeSpan.className = 'hours-closed';
+          timeSpan.textContent = 'Geschlossen';
+        } else {
+          timeSpan.className = 'hours-time';
+          timeSpan.textContent = val.replace(' - ', ' \u2014 ');
+        }
+        row.appendChild(timeSpan);
+        hoursGrid.appendChild(row);
+      });
+      var jsDayMap = { 'Mo': 1, 'Di': 2, 'Mi': 3, 'Do': 4, 'Fr': 5, 'Sa': 6, 'So': 0 };
+      dayOrder.forEach(function(key) {
+        var val = hours[key];
+        var jsDay = jsDayMap[key];
+        if (!val || val === 'Geschlossen') {
+          salonHours[jsDay] = null;
+        } else {
+          var parts = val.split('-').map(function(t) { return t.trim(); });
+          salonHours[jsDay] = { open: parseInt(parts[0]), close: parseInt(parts[1]) };
+        }
+      });
+      renderCalendar();
+    }
+
+    function applyKarrierePositions(positions, salonEmail) {
+      if (!positions || !positions.length) return;
+      var email = salonEmail || 'renarados.friseure@hotmail.com';
+      if (positions[0]) {
+        var p0 = positions[0];
+        if (p0.title) {
+          if (p0.title.feminin) modeContent.feminin.karriereTitle1 = p0.title.feminin;
+          if (p0.title.maskulin) modeContent.maskulin.karriereTitle1 = p0.title.maskulin;
+        }
+        if (p0.desc) {
+          if (p0.desc.feminin) modeContent.feminin.karriereDesc1 = p0.desc.feminin;
+          if (p0.desc.maskulin) modeContent.maskulin.karriereDesc1 = p0.desc.maskulin;
+        }
+        if (p0.emailSubject) {
+          if (p0.emailSubject.feminin) modeContent.feminin.karriereEmail1 = p0.emailSubject.feminin;
+          if (p0.emailSubject.maskulin) modeContent.maskulin.karriereEmail1 = p0.emailSubject.maskulin;
+        }
+      }
+      if (positions[1]) {
+        var p1 = positions[1];
+        if (p1.title) {
+          if (p1.title.feminin) modeContent.feminin.karriereTitle2 = p1.title.feminin;
+          if (p1.title.maskulin) modeContent.maskulin.karriereTitle2 = p1.title.maskulin;
+        }
+        if (p1.desc) {
+          if (p1.desc.feminin) modeContent.feminin.karriereDesc2 = p1.desc.feminin;
+          if (p1.desc.maskulin) modeContent.maskulin.karriereDesc2 = p1.desc.maskulin;
+        }
+        if (p1.emailSubject) {
+          if (p1.emailSubject.feminin) modeContent.feminin.karriereEmail2 = p1.emailSubject.feminin;
+          if (p1.emailSubject.maskulin) modeContent.maskulin.karriereEmail2 = p1.emailSubject.maskulin;
+        }
+      }
+      var karriereCta = document.querySelector('.karriere-cta .btn-gold');
+      if (karriereCta && email) {
+        karriereCta.href = 'mailto:' + email + '?subject=Bewerbung%20bei%20' + encodeURIComponent(document.title.split('|')[0].trim());
+      }
+    }
+
+    function applyImpressum(imp) {
+      var overlay = document.getElementById('impressumOverlay');
+      if (!overlay) return;
+      var paragraphs = overlay.querySelectorAll('.legal-modal p');
+      if (paragraphs[0] && imp.firmenname) {
+        paragraphs[0].innerHTML = '';
+        paragraphs[0].appendChild(document.createTextNode(imp.firmenname));
+        paragraphs[0].appendChild(document.createElement('br'));
+        paragraphs[0].appendChild(document.createTextNode(imp.strasse || ''));
+        paragraphs[0].appendChild(document.createElement('br'));
+        paragraphs[0].appendChild(document.createTextNode((imp.plz || '') + ' ' + (imp.stadt || '')));
+      }
+      if (paragraphs[1]) {
+        paragraphs[1].innerHTML = '';
+        if (imp.telefon) {
+          paragraphs[1].appendChild(document.createTextNode('Telefon: '));
+          var telA = document.createElement('a');
+          telA.href = 'tel:' + imp.telefon.replace(/[\s\-]/g, '');
+          telA.textContent = imp.telefon;
+          paragraphs[1].appendChild(telA);
+        }
+        if (imp.email) {
+          paragraphs[1].appendChild(document.createElement('br'));
+          paragraphs[1].appendChild(document.createTextNode('E-Mail: '));
+          var emailA = document.createElement('a');
+          emailA.href = 'mailto:' + imp.email;
+          emailA.textContent = imp.email;
+          paragraphs[1].appendChild(emailA);
+        }
+      }
+      if (paragraphs[2] && imp.inhaber) paragraphs[2].textContent = imp.inhaber;
+      if (paragraphs[3] && imp.steuernummer) {
+        paragraphs[3].textContent = 'Umsatzsteuer-Identifikationsnummer gemaess \u00A727a Umsatzsteuergesetz: ' + (imp.steuernummer === '000/000/00000' ? 'wird nachgetragen' : imp.steuernummer);
+      }
+      if (paragraphs[4] && imp.inhaber) {
+        paragraphs[4].innerHTML = '';
+        paragraphs[4].appendChild(document.createTextNode(imp.inhaber));
+        paragraphs[4].appendChild(document.createElement('br'));
+        paragraphs[4].appendChild(document.createTextNode(imp.strasse || ''));
+        paragraphs[4].appendChild(document.createElement('br'));
+        paragraphs[4].appendChild(document.createTextNode((imp.plz || '') + ' ' + (imp.stadt || '')));
+      }
+      var dsModal = document.getElementById('datenschutzOverlay');
+      if (dsModal && imp.firmenname) {
+        var dsParagraphs = dsModal.querySelectorAll('.legal-modal p');
+        if (dsParagraphs[1]) {
+          dsParagraphs[1].innerHTML = '';
+          dsParagraphs[1].appendChild(document.createTextNode(imp.firmenname));
+          dsParagraphs[1].appendChild(document.createElement('br'));
+          dsParagraphs[1].appendChild(document.createTextNode((imp.strasse || '') + ', ' + (imp.plz || '') + ' ' + (imp.stadt || '')));
+          if (imp.email) {
+            dsParagraphs[1].appendChild(document.createElement('br'));
+            dsParagraphs[1].appendChild(document.createTextNode('E-Mail: '));
+            var dsEmailA = document.createElement('a');
+            dsEmailA.href = 'mailto:' + imp.email;
+            dsEmailA.textContent = imp.email;
+            dsParagraphs[1].appendChild(dsEmailA);
+          }
+        }
+      }
+      var agbModal = document.getElementById('agbOverlay');
+      if (agbModal && imp.firmenname) {
+        var agbP = agbModal.querySelectorAll('.legal-modal p');
+        if (agbP[0]) {
+          agbP[0].textContent = 'Diese AGB gelten fuer alle Dienstleistungen und Produkte von ' + imp.firmenname + ', ' + (imp.strasse || '') + ', ' + (imp.plz || '') + ' ' + (imp.stadt || '') + '.';
+        }
+      }
+    }
+
+    // --- Load config on DOMContentLoaded ---
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadConfig);
+    } else {
+      loadConfig();
+    }
+
+
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    }
   </script>
 </body>
 </html>
