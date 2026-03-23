@@ -787,7 +787,7 @@
     <div class="nav-links">
       <a href="#about">Salon</a>
       <a href="#services">Leistungen</a>
-      <a href="#haaranalyse">Haaranalyse</a>
+      <a href="#haaranalyse">Haar & Style</a>
       <a href="#booking">Termin</a>
       <a href="#contact">Kontakt</a>
       <a href="#karriere">Karriere</a>
@@ -816,7 +816,7 @@
     </button>
     <a href="#about" onclick="toggleMobile()">Salon</a>
     <a href="#services" onclick="toggleMobile()">Leistungen</a>
-    <a href="#wunschfrisur" onclick="toggleMobile()">Wunschfrisur</a>
+    <a href="#haaranalyse" onclick="toggleMobile()">Haar & Style</a>
     <a href="#booking" onclick="toggleMobile()">Termin buchen</a>
     <a href="#nachbestellungen" onclick="toggleMobile()">Produkte</a>
     <a href="#contact" onclick="toggleMobile()">Kontakt</a>
@@ -933,35 +933,41 @@
     </div>
   </section>
 
-  <!-- KI Haaranalyse -->
-  <section class="ki-section" id="haaranalyse" style="background:var(--white)">
+  <!-- KI Haar- & Wunschfrisur-Analyse (kombiniert mit Tabs) -->
+  <section class="ki-section" id="haaranalyse">
     <div class="container">
-      <div class="ki-grid">
+      <!-- Tab-Umschaltung -->
+      <div style="display:flex;justify-content:center;margin-bottom:40px" class="reveal">
+        <div style="display:inline-flex;gap:4px;background:rgba(0,0,0,0.06);border-radius:var(--radius-full);padding:4px;border:1px solid var(--border-gold)">
+          <button id="tabHaaranalyse" onclick="switchKiTab('haaranalyse')" style="padding:12px 28px;border:none;border-radius:var(--radius-full);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:var(--gold);color:#fff;letter-spacing:0.3px">Haaranalyse</button>
+          <button id="tabWunschfrisur" onclick="switchKiTab('wunschfrisur')" style="padding:12px 28px;border:none;border-radius:var(--radius-full);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Wunschfrisur</button>
+        </div>
+      </div>
+
+      <!-- TAB 1: Haaranalyse -->
+      <div id="kiTabHaaranalyse" class="ki-grid">
         <div class="ki-content reveal">
-          <div class="section-label">KI-Analyse</div>
-          <h2 class="section-title">Ihre <em>Haaranalyse</em><br>in 30 Sekunden</h2>
-          <p class="section-desc">Laden Sie ein Foto Ihres Haares hoch — unsere KI analysiert Haarstruktur, Zustand und empfiehlt die passende Pflege. Kostenlos und unverbindlich.</p>
-          <div class="ki-features">
-            <div class="ki-feature">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-              <div>
-                <strong>Foto hochladen</strong>
-                <span>Ein Bild Ihres Haares genuegt</span>
+          <div class="section-label" id="haarLabel">KI-Analyse</div>
+          <h2 class="section-title" id="haarTitle">Ihre <em>Haaranalyse</em><br>in 30 Sekunden</h2>
+          <p class="section-desc" id="haarDesc">Laden Sie ein Foto Ihres Haares hoch — unsere KI analysiert Haarstruktur, Zustand und empfiehlt die passende Pflege. Kostenlos und unverbindlich.</p>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               </div>
+              <div><strong style="font-size:14px">Foto hochladen</strong><br><span style="font-size:12px;color:var(--text-muted)">Ein Bild Ihres Haares bei Tageslicht genuegt</span></div>
             </div>
-            <div class="ki-feature">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/><path d="M9 6.5C7.33 7.83 5 10.6 5 14c0 3 2.5 6 7 8"/><path d="M15 6.5c1.67 1.33 4 4.1 4 7.5 0 3-2.5 6-7 8"/></svg>
-              <div>
-                <strong>KI-Analyse</strong>
-                <span>Struktur, Zustand, Porostitaet</span>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               </div>
+              <div><strong style="font-size:14px">KI analysiert</strong><br><span style="font-size:12px;color:var(--text-muted)">Struktur, Schaedigung, Porostitaet, Farbhistorie</span></div>
             </div>
-            <div class="ki-feature">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-              <div>
-                <strong>Pflegeempfehlung</strong>
-                <span>Produkte & Behandlungen</span>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
               </div>
+              <div><strong style="font-size:14px">Ergebnis per E-Mail</strong><br><span style="font-size:12px;color:var(--text-muted)">Pflegeempfehlung + passende Produkte</span></div>
             </div>
           </div>
         </div>
@@ -970,7 +976,7 @@
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht. Unsere KI analysiert Struktur, Schaedigung und Zustand.</p>
           <div class="upload-zone" id="haarUploadZone" onclick="document.getElementById('haarUpload').click()" style="cursor:pointer">
             <input type="file" id="haarUpload" accept="image/*" style="display:none" onchange="previewHaarUpload(this.files)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><circle cx="11" cy="11" r="8"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             <span>Haar-Foto hier ablegen oder tippen</span>
           </div>
           <div id="haarPreview" style="margin:12px 0;display:none;text-align:center">
@@ -981,17 +987,87 @@
             <div class="form-group"><input type="email" id="haarEmail" placeholder="E-Mail fuer Ergebnis"></div>
           </div>
           <button class="btn-gold" onclick="submitHaaranalyse()" style="width:100%;margin-top:8px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             Haaranalyse starten
           </button>
-          <p style="font-size:11px;color:var(--text-muted);margin-top:12px;text-align:center">Kostenlos. Ergebnis per E-Mail in wenigen Minuten. Powered by Casa 2035 KI.</p>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:12px;text-align:center">Kostenlos. Ergebnis in wenigen Minuten. Powered by Casa 2035 KI.</p>
+        </div>
+      </div>
+
+      <!-- TAB 2: Wunschfrisur (anfangs versteckt) -->
+      <div id="kiTabWunschfrisur" class="ki-grid" style="display:none">
+        <div class="ki-content reveal">
+          <div class="section-label" id="wunschLabel">Ihr Wunsch</div>
+          <h2 class="section-title" id="wunschTitle">Ihre <em>Wunschfrisur</em><br>wird Realitaet</h2>
+          <p class="section-desc" id="wunschDesc">Zeigen Sie uns, wovon Sie traeumen. Ein Foto, eine Idee, ein Wunsch — wir hoeren zu und sagen Ihnen ehrlich, was moeglich ist. Persoenlich, schnell und ganz auf Sie zugeschnitten.</p>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <div><strong style="font-size:14px">Foto hochladen</strong><br><span style="font-size:12px;color:var(--text-muted)">Schicken Sie ein Bild Ihrer Wunschfrisur oder Ihres aktuellen Looks</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
+              </div>
+              <div><strong style="font-size:14px">Professionelle Analyse</strong><br><span style="font-size:12px;color:var(--text-muted)">Wir pruefen Haartyp, Farbe und Style — ehrliche Machbarkeits-Einschaetzung</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div><strong style="font-size:14px">Persoenliche Antwort</strong><br><span style="font-size:12px;color:var(--text-muted)">Innerhalb weniger Minuten mit Produkt- und Terminvorschlag</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="ki-form-card">
+            <h3>Wunschfrisur anfragen</h3>
+            <form id="wunschfrisurForm" onsubmit="submitWunschfrisur(event)">
+              <div class="form-row">
+                <div class="form-group"><label>Vorname</label><input type="text" id="wfVorname" placeholder="Anna" required></div>
+                <div class="form-group"><label>Nachname</label><input type="text" id="wfNachname" placeholder="Schmidt" required></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>E-Mail</label><input type="email" id="wfEmail" placeholder="anna@beispiel.de" required></div>
+                <div class="form-group"><label>Telefon</label><input type="tel" id="wfTelefon" placeholder="0171 1234567"></div>
+              </div>
+              <div class="form-group"><label>Was wuenschen Sie sich?</label><textarea id="wfNachricht" placeholder="Beschreiben Sie Ihre Wunschfrisur oder stellen Sie eine Frage..." rows="3" required></textarea></div>
+              <div class="form-group">
+                <label>Fotos hochladen (optional)</label>
+                <div class="upload-zone" id="uploadZone">
+                  <input type="file" id="wfFiles" accept="image/*" multiple onchange="handleFiles(this.files)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <p><span>Klicken</span> oder Bilder hierher ziehen</p>
+                </div>
+                <div class="upload-preview" id="uploadPreview"></div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+                <div class="form-group" style="margin-bottom:0"><label>Wunschtermin (optional)</label><input type="date" id="wfDatum"></div>
+                <div class="form-group" style="margin-bottom:0"><label>Uhrzeit (optional)</label>
+                  <select id="wfUhrzeit" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:'Inter',sans-serif">
+                    <option value="">Flexibel</option>
+                    <option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option>
+                    <option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
+                  </select>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+                <button type="submit" class="btn btn-gold" style="justify-content:center">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
+                  Wunschfrisur senden
+                </button>
+                <a href="#booking" class="btn btn-outline" style="justify-content:center;text-align:center" onclick="prefillBooking()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                  + Termin buchen
+                </a>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- KI Wunschfrisur -->
-  <section class="ki-section" id="wunschfrisur">
     <div class="container">
       <div class="ki-grid">
         <div class="ki-content reveal">
@@ -1574,6 +1650,23 @@
       }, 4000);
     }
 
+    // KI-Tab Umschaltung (Haaranalyse / Wunschfrisur)
+    function switchKiTab(tab) {
+      var tabH = document.getElementById('tabHaaranalyse');
+      var tabW = document.getElementById('tabWunschfrisur');
+      var panelH = document.getElementById('kiTabHaaranalyse');
+      var panelW = document.getElementById('kiTabWunschfrisur');
+      if (tab === 'haaranalyse') {
+        tabH.style.background = 'var(--gold)'; tabH.style.color = '#fff';
+        tabW.style.background = 'transparent'; tabW.style.color = 'var(--text-light)';
+        panelH.style.display = ''; panelW.style.display = 'none';
+      } else {
+        tabW.style.background = 'var(--gold)'; tabW.style.color = '#fff';
+        tabH.style.background = 'transparent'; tabH.style.color = 'var(--text-light)';
+        panelW.style.display = ''; panelH.style.display = 'none';
+      }
+    }
+
     // Haaranalyse Preview + Submit
     function previewHaarUpload(files) {
       if (!files || !files[0]) return;
@@ -1966,7 +2059,26 @@
         karriereTitle2: 'Stylist/in (m/w/d)',
         karriereDesc2: 'Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf hoechstem Niveau bedient.',
         karriereEmail1: 'Bewerbung%20als%20Friseur/in',
-        karriereEmail2: 'Bewerbung%20als%20Stylist/in'
+        karriereEmail2: 'Bewerbung%20als%20Stylist/in',
+        // Haaranalyse-Tab Texte (feminin)
+        haarLabel: 'KI-Analyse',
+        haarTitle: 'Ihre <em>Haaranalyse</em><br>in 30 Sekunden',
+        haarDesc: 'Laden Sie ein Foto Ihres Haares hoch — unsere KI analysiert Haarstruktur, Zustand und empfiehlt die passende Pflege. Kostenlos und unverbindlich.',
+        haarStep1: 'Foto hochladen',
+        haarStep1Sub: 'Ein Bild Ihres Haares bei Tageslicht genuegt',
+        haarStep2: 'KI analysiert',
+        haarStep2Sub: 'Struktur, Schaedigung, Porostitaet, Farbhistorie',
+        haarStep3: 'Ergebnis per E-Mail',
+        haarStep3Sub: 'Pflegeempfehlung + passende Produkte',
+        haarFormTitle: 'Haar-Foto hochladen',
+        haarFormDesc: 'Fotografieren Sie Ihr Haar bei Tageslicht. Unsere KI analysiert Struktur, Schaedigung und Zustand.',
+        haarBtn: 'Haaranalyse starten',
+        haarTabName: 'Haaranalyse',
+        // Wunschfrisur-Tab Texte (feminin)
+        wunschLabel: 'Ihr Wunsch',
+        wunschTitle: 'Ihre <em>Wunschfrisur</em><br>wird Realitaet',
+        wunschDesc: 'Zeigen Sie uns, wovon Sie traeumen. Ein Foto, eine Idee, ein Wunsch — wir hoeren zu und sagen Ihnen ehrlich, was moeglich ist. Persoenlich, schnell und ganz auf Sie zugeschnitten.',
+        wunschTabName: 'Wunschfrisur'
       },
       maskulin: {
         heroTitle: 'Stil.<br>Praezision. <em>Charakter.</em>',
@@ -1994,7 +2106,26 @@
         karriereTitle2: 'Stylist/in (m/w/d)',
         karriereDesc2: 'Du liebst Haare und hast ein Auge fuer den perfekten Look. Ob feminin oder maskulin — bei uns kannst du beides.',
         karriereEmail1: 'Bewerbung%20als%20Barber',
-        karriereEmail2: 'Bewerbung%20als%20Stylist/in'
+        karriereEmail2: 'Bewerbung%20als%20Stylist/in',
+        // Haaranalyse-Tab Texte (maskulin)
+        haarLabel: 'KI-Analyse',
+        haarTitle: 'Haar- & <em>Bartanalyse</em><br>in 30 Sekunden',
+        haarDesc: 'Foto hochladen — unsere KI analysiert Haar, Bart und Kopfhaut. Ob Haarausfall, duenner werdendes Haar oder Bartpflege — wir finden die passende Loesung.',
+        haarStep1: 'Foto hochladen',
+        haarStep1Sub: 'Haar, Bart oder Kopfhaut bei Tageslicht fotografieren',
+        haarStep2: 'KI analysiert',
+        haarStep2Sub: 'Haarausfall, Dichte, Kopfhaut, Bartstruktur',
+        haarStep3: 'Ergebnis per E-Mail',
+        haarStep3Sub: 'Behandlungsempfehlung + Pflegeprodukte',
+        haarFormTitle: 'Haar- oder Bart-Foto hochladen',
+        haarFormDesc: 'Fotografieren Sie Ihr Haar, Ihren Bart oder Ihre Kopfhaut bei Tageslicht. Unsere KI analysiert Zustand und Struktur.',
+        haarBtn: 'Analyse starten',
+        haarTabName: 'Haar & Bart',
+        // Wunschfrisur-Tab Texte (maskulin)
+        wunschLabel: 'Ihr Look',
+        wunschTitle: 'Ihr <em>Wunsch-Look</em><br>wird Realitaet',
+        wunschDesc: 'Zeigen Sie uns, was Sie sich vorstellen. Fade, Undercut, Bartform — wir sagen Ihnen ehrlich, was moeglich ist und liefern das Ergebnis.',
+        wunschTabName: 'Wunsch-Look'
       }
     };
 
@@ -2079,6 +2210,27 @@
         if (pb) pb.textContent = m.karriereDesc2;
         karriereCards[1].onclick = function() { location.href = 'mailto:renarados.friseure@hotmail.com?subject=' + m.karriereEmail2; };
       }
+
+      // Haar & Style Section — update labels, descriptions, tab names
+      // NOTE: All content values come from hardcoded modeContent object (no user input), safe to use
+      var haarLabel = document.getElementById('haarLabel');
+      if (haarLabel) haarLabel.textContent = m.haarLabel;
+      var haarDesc = document.getElementById('haarDesc');
+      if (haarDesc) haarDesc.textContent = m.haarDesc;
+      var wunschLabel = document.getElementById('wunschLabel');
+      if (wunschLabel) wunschLabel.textContent = m.wunschLabel;
+      var wunschDesc = document.getElementById('wunschDesc');
+      if (wunschDesc) wunschDesc.textContent = m.wunschDesc;
+      // Titles contain <em> tags — use same pattern as heroTitle which also uses innerHTML
+      var haarTitle = document.getElementById('haarTitle');
+      if (haarTitle) haarTitle.innerHTML = m.haarTitle; // eslint-disable-line -- static trusted content
+      var wunschTitle = document.getElementById('wunschTitle');
+      if (wunschTitle) wunschTitle.innerHTML = m.wunschTitle; // eslint-disable-line -- static trusted content
+      // Tab button labels
+      var tabH = document.getElementById('tabHaaranalyse');
+      if (tabH) tabH.textContent = m.haarTabName;
+      var tabW = document.getElementById('tabWunschfrisur');
+      if (tabW) tabW.textContent = m.wunschTabName;
     }
 
     // Min date = today
