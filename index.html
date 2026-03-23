@@ -734,6 +734,7 @@
       background: var(--warm); border-color: var(--border); color: var(--text);
     }
     body.maskulin-style .booking-info-card { background: var(--cream); border-color: var(--border); }
+    body.maskulin-style #calendarWidget { background: var(--warm); border-color: var(--border); }
 
     body.maskulin-style .contact-map::before { background: rgba(14,14,14,0.85); }
     body.maskulin-style .contact-item { background: var(--white); border-color: var(--border); }
@@ -955,25 +956,25 @@
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               </div>
-              <div><strong style="font-size:14px">Foto hochladen</strong><br><span style="font-size:12px;color:var(--text-muted)">Ein Bild Ihres Haares bei Tageslicht genuegt</span></div>
+              <div><strong style="font-size:14px" id="haarStep1">Foto hochladen</strong><br><span style="font-size:12px;color:var(--text-muted)" id="haarStep1Sub">Ein Bild Ihres Haares bei Tageslicht genuegt</span></div>
             </div>
             <div style="display:flex;align-items:center;gap:14px">
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               </div>
-              <div><strong style="font-size:14px">KI analysiert</strong><br><span style="font-size:12px;color:var(--text-muted)">Struktur, Schaedigung, Porostitaet, Farbhistorie</span></div>
+              <div><strong style="font-size:14px" id="haarStep2">KI analysiert</strong><br><span style="font-size:12px;color:var(--text-muted)" id="haarStep2Sub">Struktur, Schaedigung, Porostitaet, Farbhistorie</span></div>
             </div>
             <div style="display:flex;align-items:center;gap:14px">
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
               </div>
-              <div><strong style="font-size:14px">Ergebnis per E-Mail</strong><br><span style="font-size:12px;color:var(--text-muted)">Pflegeempfehlung + passende Produkte</span></div>
+              <div><strong style="font-size:14px" id="haarStep3">Ergebnis per E-Mail</strong><br><span style="font-size:12px;color:var(--text-muted)" id="haarStep3Sub">Pflegeempfehlung + passende Produkte</span></div>
             </div>
           </div>
         </div>
         <div class="ki-form-card reveal">
-          <h3>Haar-Foto hochladen</h3>
-          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht. Unsere KI analysiert Struktur, Schaedigung und Zustand.</p>
+          <h3 id="haarFormTitle">Haar-Foto hochladen</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px" id="haarFormDesc">Fotografieren Sie Ihr Haar bei Tageslicht. Unsere KI analysiert Struktur, Schaedigung und Zustand.</p>
           <div class="upload-zone" id="haarUploadZone" onclick="document.getElementById('haarUpload').click()" style="cursor:pointer">
             <input type="file" id="haarUpload" accept="image/*" style="display:none" onchange="previewHaarUpload(this.files)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -990,7 +991,7 @@
             <div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">Kostenloser Schnell-Check</div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Erste Einschaetzung per KI &middot; Ergebnis per E-Mail &middot; unverbindlich</div>
           </div>
-          <button class="btn-gold" onclick="submitHaaranalyse()" style="width:100%;margin-top:12px">
+          <button class="btn-gold" id="haarBtn" onclick="submitHaaranalyse()" style="width:100%;margin-top:12px">
             Schnell-Check starten
           </button>
           <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Profi-Analyse mit PDF-Report erhalten Sie im Salon. Powered by Casa 2035.</p>
@@ -1162,18 +1163,40 @@
               <div class="form-group"><label>E-Mail</label><input type="email" id="bkEmail" placeholder="ihre@email.de" required></div>
               <div class="form-group"><label>Telefon</label><input type="tel" id="bkTelefon" placeholder="0171 1234567" required></div>
             </div>
-            <div class="form-row">
-              <div class="form-group"><label>Wunschtermin</label><input type="date" id="bkDatum" required></div>
-              <div class="form-group"><label>Uhrzeit</label>
-                <select id="bkUhrzeit" required>
-                  <option value="">Bitte waehlen</option>
-                  <option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option>
-                  <option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option>
-                  <option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option>
-                  <option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option>
-                  <option>17:00</option><option>17:30</option><option>18:00</option>
-                </select>
+            <!-- Visueller Kalender + Zeitfenster -->
+            <input type="hidden" id="bkDatum" required>
+            <input type="hidden" id="bkUhrzeit" required>
+            <div class="form-group">
+              <label>Wunschtermin waehlen</label>
+              <div id="calendarWidget" style="background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-top:4px">
+                <!-- Kalender Header -->
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                  <button type="button" onclick="calNav(-1)" style="background:none;border:1px solid var(--border);border-radius:50%;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><polyline points="15 18 9 12 15 6"/></svg>
+                  </button>
+                  <div id="calMonthYear" style="font-size:15px;font-weight:600;color:var(--text);font-family:'Playfair Display',serif"></div>
+                  <button type="button" onclick="calNav(1)" style="background:none;border:1px solid var(--border);border-radius:50%;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                </div>
+                <!-- Wochentage -->
+                <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--text-muted);padding:4px">Mo</div>
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--text-muted);padding:4px">Di</div>
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--text-muted);padding:4px">Mi</div>
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--text-muted);padding:4px">Do</div>
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--text-muted);padding:4px">Fr</div>
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--text-muted);padding:4px">Sa</div>
+                  <div style="text-align:center;font-size:11px;font-weight:600;color:var(--gold);padding:4px">So</div>
+                </div>
+                <!-- Tage-Grid -->
+                <div id="calDays" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"></div>
               </div>
+            </div>
+            <!-- Zeitfenster (erscheint nach Tag-Auswahl) -->
+            <div id="timeSlotWrap" class="form-group" style="display:none">
+              <label id="timeSlotLabel">Uhrzeit waehlen</label>
+              <div id="timeSlots" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px"></div>
             </div>
             <div class="form-group"><label>Gewuenschte Leistung</label>
               <select id="bkLeistung" required>
@@ -1514,17 +1537,7 @@
     // Style Toggle: Feminin (hell) / Maskulin (dunkel)
     // Shop Integration — oeffnet externen Shop im Hintergrund
     function openShop(category) {
-      // TODO: Shop-URL konfigurieren (z.B. Shopify, WooCommerce)
-      var shopBase = 'https://shop.renarados.de';
-      var urls = {
-        shampoo: shopBase + '/collections/shampoo-pflege',
-        treatment: shopBase + '/collections/treatments',
-        styling: shopBase + '/collections/styling',
-        all: shopBase + '/collections/all'
-      };
-      var url = urls[category] || shopBase;
-      // Seamless redirect
-      window.open(url, '_blank');
+      showToast('Produkte erhalten Sie direkt im Salon. Sprechen Sie uns an!', 'info');
     }
 
     var currentStyle = 'feminin';
@@ -1696,12 +1709,42 @@
         showToast('Bitte Vorname und E-Mail angeben.', 'error');
         return;
       }
-      // Demo-Modus: Zeige Erfolg (in Produktion geht das an WF-03)
-      showToast('Haaranalyse gestartet! Ergebnis kommt per E-Mail.', 'success');
-      document.getElementById('haarName').value = '';
-      document.getElementById('haarEmail').value = '';
-      document.getElementById('haarPreview').style.display = 'none';
-      fileInput.value = '';
+      // Bild als Base64 lesen und an Webhook senden
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        var payload = {
+          from: email,
+          name: name,
+          message: 'Haaranalyse-Anfrage von ' + name,
+          timestamp: new Date().toISOString(),
+          message_id: 'web_ha_' + Date.now(),
+          media_url: ev.target.result,
+          referrer: window.location.href,
+          kanal: 'homepage',
+          typ: 'haaranalyse',
+          email: email,
+          stil: currentStyle
+        };
+
+        fetch(webhookBase + '/homepage', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function(res) {
+          if (res.ok) {
+            showToast('Haaranalyse gestartet! Ergebnis kommt per E-Mail.', 'success');
+            document.getElementById('haarName').value = '';
+            document.getElementById('haarEmail').value = '';
+            document.getElementById('haarPreview').style.display = 'none';
+            fileInput.value = '';
+          } else {
+            showToast('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error');
+          }
+        }).catch(function() {
+          showToast('Verbindungsfehler. Bitte pruefen Sie Ihre Internetverbindung.', 'error');
+        });
+      };
+      reader.readAsDataURL(fileInput.files[0]);
     }
 
     // Submit Wunschfrisur — geht an WF-01 /homepage (Intent: wunschfrisur)
@@ -1745,6 +1788,156 @@
       }
     }
 
+    // === Visueller Kalender fuer Terminbuchung ===
+    var calMonth = new Date().getMonth();
+    var calYear = new Date().getFullYear();
+    var calSelectedDate = null;
+
+    // Oeffnungszeiten: Wochentag (0=So) -> {open, close} oder null (geschlossen)
+    var salonHours = {
+      0: null,                    // Sonntag: geschlossen
+      1: { open: 9, close: 18 }, // Montag
+      2: { open: 9, close: 18 }, // Dienstag
+      3: { open: 9, close: 18 }, // Mittwoch
+      4: { open: 9, close: 20 }, // Donnerstag (bis 20 Uhr)
+      5: { open: 9, close: 18 }, // Freitag
+      6: { open: 9, close: 14 }  // Samstag (bis 14 Uhr)
+    };
+
+    var monthNames = ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+
+    function renderCalendar() {
+      var header = document.getElementById('calMonthYear');
+      header.textContent = monthNames[calMonth] + ' ' + calYear;
+
+      var grid = document.getElementById('calDays');
+      grid.textContent = '';
+
+      var firstDay = new Date(calYear, calMonth, 1).getDay();
+      // Montag = 0, convert from JS Sunday=0
+      var startOffset = (firstDay === 0) ? 6 : firstDay - 1;
+      var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Leere Zellen vor dem 1.
+      for (var i = 0; i < startOffset; i++) {
+        var empty = document.createElement('div');
+        empty.style.cssText = 'padding:8px;text-align:center';
+        grid.appendChild(empty);
+      }
+
+      for (var d = 1; d <= daysInMonth; d++) {
+        var date = new Date(calYear, calMonth, d);
+        var dayOfWeek = date.getDay();
+        var isPast = date < today;
+        var isClosed = !salonHours[dayOfWeek];
+        var isDisabled = isPast || isClosed;
+        var isSelected = calSelectedDate && date.getTime() === calSelectedDate.getTime();
+
+        var cell = document.createElement('button');
+        cell.type = 'button';
+        cell.textContent = d;
+        cell.style.cssText = 'border:none;border-radius:8px;padding:8px 4px;font-size:13px;font-family:Inter,sans-serif;cursor:pointer;transition:all .2s;text-align:center;font-weight:500;';
+
+        if (isSelected) {
+          cell.style.background = 'var(--gold)';
+          cell.style.color = '#fff';
+          cell.style.fontWeight = '700';
+        } else if (isDisabled) {
+          cell.style.background = 'transparent';
+          cell.style.color = 'var(--border)';
+          cell.style.cursor = 'not-allowed';
+          cell.style.textDecoration = isClosed && !isPast ? 'line-through' : 'none';
+        } else {
+          cell.style.background = 'transparent';
+          cell.style.color = 'var(--text)';
+        }
+
+        if (!isDisabled) {
+          (function(selectedDate) {
+            cell.onclick = function() { selectCalDate(selectedDate); };
+          })(new Date(calYear, calMonth, d));
+        }
+
+        grid.appendChild(cell);
+      }
+    }
+
+    function calNav(dir) {
+      calMonth += dir;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+      // Nicht in die Vergangenheit blaettern
+      var now = new Date();
+      if (calYear < now.getFullYear() || (calYear === now.getFullYear() && calMonth < now.getMonth())) {
+        calMonth = now.getMonth();
+        calYear = now.getFullYear();
+      }
+      renderCalendar();
+    }
+
+    function selectCalDate(date) {
+      calSelectedDate = date;
+      // ISO-Format fuer hidden input
+      var y = date.getFullYear();
+      var m = String(date.getMonth() + 1).padStart(2, '0');
+      var d = String(date.getDate()).padStart(2, '0');
+      document.getElementById('bkDatum').value = y + '-' + m + '-' + d;
+
+      renderCalendar();
+      renderTimeSlots(date);
+    }
+
+    function renderTimeSlots(date) {
+      var dayOfWeek = date.getDay();
+      var hours = salonHours[dayOfWeek];
+      if (!hours) return;
+
+      var wrap = document.getElementById('timeSlotWrap');
+      wrap.style.display = 'block';
+
+      var dayNames = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+      document.getElementById('timeSlotLabel').textContent = 'Uhrzeit — ' + dayNames[dayOfWeek] + ', ' + date.getDate() + '. ' + monthNames[date.getMonth()];
+
+      var container = document.getElementById('timeSlots');
+      container.textContent = '';
+
+      // 30-Minuten-Slots generieren (letzter Slot 30 Min vor Schluss)
+      for (var h = hours.open; h < hours.close; h++) {
+        for (var m = 0; m < 60; m += 30) {
+          if (h === hours.close - 1 && m === 30) continue; // Kein Slot 30 Min vor Schluss
+          var timeStr = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = timeStr;
+          btn.style.cssText = 'padding:8px 14px;border:1px solid var(--border-gold);border-radius:var(--radius-full);font-size:13px;font-family:Inter,sans-serif;cursor:pointer;transition:all .2s;background:transparent;color:var(--text);font-weight:500';
+
+          (function(t) {
+            btn.onclick = function() {
+              document.getElementById('bkUhrzeit').value = t;
+              // Alle deselektieren, diesen markieren
+              var all = container.querySelectorAll('button');
+              all.forEach(function(b) {
+                b.style.background = 'transparent';
+                b.style.color = 'var(--text)';
+                b.style.fontWeight = '500';
+              });
+              this.style.background = 'var(--gold)';
+              this.style.color = '#fff';
+              this.style.fontWeight = '700';
+            };
+          })(timeStr);
+
+          container.appendChild(btn);
+        }
+      }
+    }
+
+    // Kalender beim Laden initialisieren
+    renderCalendar();
+
     // Submit Booking — geht an WF-01 /homepage (Intent: termin_buchen)
     function submitBooking(e) {
       e.preventDefault();
@@ -1756,6 +1949,8 @@
       var uhrzeit = document.getElementById('bkUhrzeit').value;
       var leistung = document.getElementById('bkLeistung').value;
       var notiz = (document.getElementById('bkNotiz').value || '').trim();
+      if (!datum) { showToast('Bitte waehlen Sie einen Tag im Kalender aus.', 'error'); return; }
+      if (!uhrzeit) { showToast('Bitte waehlen Sie eine Uhrzeit aus.', 'error'); return; }
       // WF-01 erwartet: from, name, message, timestamp, message_id
       // message muss den Intent erkennen lassen (termin_buchen)
       var payload = {
@@ -2134,6 +2329,7 @@
     };
 
     function updateContentForStyle(style) {
+      if (typeof modeContent === 'undefined') return;
       var m = modeContent[style];
       if (!m) return;
       serviceData = (style === 'maskulin') ? serviceDataMaskulin : serviceDataFeminin;
@@ -2230,12 +2426,35 @@
       if (haarTitle) haarTitle.innerHTML = m.haarTitle; // eslint-disable-line -- static trusted content
       var wunschTitle = document.getElementById('wunschTitle');
       if (wunschTitle) wunschTitle.innerHTML = m.wunschTitle; // eslint-disable-line -- static trusted content
+      // Haaranalyse step texts
+      var s1 = document.getElementById('haarStep1');
+      if (s1) s1.textContent = m.haarStep1;
+      var s1s = document.getElementById('haarStep1Sub');
+      if (s1s) s1s.textContent = m.haarStep1Sub;
+      var s2 = document.getElementById('haarStep2');
+      if (s2) s2.textContent = m.haarStep2;
+      var s2s = document.getElementById('haarStep2Sub');
+      if (s2s) s2s.textContent = m.haarStep2Sub;
+      var s3 = document.getElementById('haarStep3');
+      if (s3) s3.textContent = m.haarStep3;
+      var s3s = document.getElementById('haarStep3Sub');
+      if (s3s) s3s.textContent = m.haarStep3Sub;
+      // Haaranalyse form title, description, button
+      var haarFT = document.getElementById('haarFormTitle');
+      if (haarFT) haarFT.textContent = m.haarFormTitle;
+      var haarFD = document.getElementById('haarFormDesc');
+      if (haarFD) haarFD.textContent = m.haarFormDesc;
+      var haarB = document.getElementById('haarBtn');
+      if (haarB) haarB.textContent = m.haarBtn;
       // Tab button labels
       var tabH = document.getElementById('tabHaaranalyse');
       if (tabH) tabH.textContent = m.haarTabName;
       var tabW = document.getElementById('tabWunschfrisur');
       if (tabW) tabW.textContent = m.wunschTabName;
     }
+
+    // Gespeicherten Stil erneut anwenden (modeContent ist jetzt verfuegbar)
+    if (currentStyle === 'maskulin') updateContentForStyle('maskulin');
 
     // Min date = today
     var dateInput = document.getElementById('bkDatum');

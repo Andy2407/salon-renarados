@@ -1,0 +1,107 @@
+{
+  "salon": {
+    "name": "Rena Rados Friseure",
+    "slogan": "Premium Haarstyling",
+    "city": "Muenchen",
+    "address": "Erzgiessereistr. 51, 80335 Muenchen",
+    "addressNote": "Eingang Dachauer Str. 143",
+    "phone": "089 - 1296294",
+    "email": "renarados.friseure@hotmail.com",
+    "mapsUrl": "https://maps.google.com/?q=Erzgiessereistr.+51,+80335+Muenchen",
+    "oeffnungszeiten": {
+      "Mo": "09:00 - 18:00",
+      "Di": "09:00 - 18:00",
+      "Mi": "09:00 - 18:00",
+      "Do": "09:00 - 20:00",
+      "Fr": "09:00 - 18:00",
+      "Sa": "09:00 - 14:00",
+      "So": "Geschlossen"
+    }
+  },
+  "social": {
+    "instagram": "https://instagram.com/rena_rados_friseure",
+    "instagramHandle": "@rena_rados_friseure",
+    "facebook": "https://facebook.com/Rena.Rados",
+    "linkedin": "https://linkedin.com/company/rena-rados-friseure"
+  },
+  "branding": {
+    "primaryColor": "#b8962e",
+    "accentColor": "#c9a93d",
+    "femininBg": "#faf8f6",
+    "maskulinBg": "#0e0e0e",
+    "fontHeading": "Playfair Display",
+    "fontBody": "Inter"
+  },
+  "images": {
+    "heroFeminin": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920",
+    "heroMaskulin": "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1920",
+    "about": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800",
+    "kiSection": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=1920"
+  },
+  "content": {
+    "feminin": {
+      "heroTitle": "Entspannen.<br>Geniessen. <em>Strahlen.</em>",
+      "heroSub": "Hier stehen Sie im Mittelpunkt. Ankommen, durchatmen, bei einem Kaffee ankommen. Eine wohltuende Kopfmassage geniessen — und mit Ihrem Wunschlook den Salon verlassen. Bei uns dreht sich alles um Sie.",
+      "heroBadge": "Willkommen im Jahr 2035.",
+      "aboutTitle": "Mehr als nur ein<br><em>Friseur</em>",
+      "aboutDesc": "Bei Rena Rados geht es nicht nur um Haare. Es geht um Sie. Um Ihren Moment.",
+      "svcTitle": "Unsere <em>Leistungen</em>",
+      "svcDesc": "Von der sanften Pflege bis zum kompletten Umstyling — alles aus einer Hand."
+    },
+    "maskulin": {
+      "heroTitle": "Stil.<br>Praezision. <em>Charakter.</em>",
+      "heroSub": "Kein Schnickschnack, nur Handwerk auf hoechstem Niveau. Praeziser Schnitt, perfekter Bart, starker Auftritt. Ihr persoenlicher Barber wartet.",
+      "heroBadge": "Maskulin. Modern. Muenchen.",
+      "aboutTitle": "Mehr als nur ein<br><em>Barbershop</em>",
+      "aboutDesc": "Hier wird nicht gequatscht, hier wird geliefert. Praezise Schnitte, saubere Konturen, erstklassige Bartpflege.",
+      "svcTitle": "Maskulin <em>Grooming</em>",
+      "svcDesc": "Schnitt, Bart, Pflege — alles was Mann braucht, auf Premium-Niveau."
+    }
+  },
+  "services": {
+    "feminin": [
+      { "name": "Haarschnitt", "leistung": "Waschen, Schneiden, Foehnen", "price": "ab 35 EUR", "dur": "45-60 Min.", "desc": "Beratung, praeziser Schnitt und professionelles Finish.", "addons": ["Ansatzfarbe (+25 EUR)", "Olaplex Treatment (+15 EUR)", "Intensivpflege (+12 EUR)"], "products": ["La Biosthetique Shampoo Vital", "Olaplex No.3"] },
+      { "name": "Farbbehandlung", "leistung": "Coloration, Straehnen, Balayage", "price": "ab 65 EUR", "dur": "90-150 Min.", "desc": "Balayage, Highlights, Glossing oder komplette Farbveraenderung.", "addons": ["Glossing (+20 EUR)", "Olaplex (+15 EUR)", "Highlights (+35 EUR)"], "products": ["La Biosthetique Color", "Olaplex Bond Multiplier"] },
+      { "name": "Wunschfrisur-Service", "leistung": "KI-Beratung", "price": "Kostenlos", "dur": "", "desc": "Zeigen Sie uns Ihren Traumlook.", "isWunsch": true },
+      { "name": "Haarpflege-Treatment", "leistung": "Pflege & Repair", "price": "ab 25 EUR", "dur": "30-45 Min.", "desc": "Olaplex, Keratin, Kopfhaut-Peeling.", "addons": ["Keratin Glaettung (+40 EUR)", "Kopfhaut-Peeling (+15 EUR)"], "products": ["Olaplex No.3", "La Biosthetique Mask"] },
+      { "name": "Styling", "leistung": "Event & Braut", "price": "ab 45 EUR", "dur": "60-90 Min.", "desc": "Brautstyling, Event-Look, Hochsteckfrisuren.", "addons": ["Probetermin (+25 EUR)", "Make-up (+35 EUR)"], "products": [] },
+      { "name": "Shop — Produkte", "leistung": "Im Salon erhaeltlich", "price": "Im Salon", "dur": "", "desc": "Premium-Pflegeprodukte.", "isShop": true }
+    ],
+    "maskulin": [
+      { "name": "Herrenschnitt", "leistung": "Schneiden, Styling", "price": "ab 28 EUR", "dur": "30-45 Min.", "desc": "Fade, Undercut oder klassisch.", "addons": ["Augenbrauen (+5 EUR)", "Heisses Tuch (+8 EUR)"], "products": ["American Crew Fiber"] },
+      { "name": "Bartpflege", "leistung": "Trim, Pflege, Rasur", "price": "ab 18 EUR", "dur": "20-30 Min.", "desc": "Bart trimmen, formen und pflegen.", "addons": ["Hot Towel Rasur (+12 EUR)", "Bart-Oel Treatment (+8 EUR)"], "products": ["Proraso Bart-Oel"] },
+      { "name": "Wunschfrisur-Service", "leistung": "KI-Beratung", "price": "Kostenlos", "dur": "", "desc": "Zeigen Sie uns Ihren Wunsch-Look.", "isWunsch": true },
+      { "name": "Haar- & Kopfhautpflege", "leistung": "Treatment", "price": "ab 20 EUR", "dur": "20-30 Min.", "desc": "Kopfhaut-Treatment, Anti-Haarausfall.", "addons": ["Anti-Haarausfall Kur (+15 EUR)"], "products": ["Alpecin Coffein Shampoo"] },
+      { "name": "Grooming", "leistung": "Schnitt + Bart + Pflege", "price": "ab 35 EUR", "dur": "45-60 Min.", "desc": "Das Rundum-Paket.", "addons": ["Hot Towel (+8 EUR)", "Augenbrauen (+5 EUR)"], "products": [] },
+      { "name": "Shop — Produkte", "leistung": "Im Salon erhaeltlich", "price": "Im Salon", "dur": "", "desc": "Premium-Pflegeprodukte fuer den modernen Mann.", "isShop": true }
+    ]
+  },
+  "karriere": {
+    "positions": [
+      { "title": { "feminin": "Friseur/in (m/w/d)", "maskulin": "Barber (m/w/d)" }, "desc": { "feminin": "Balayage, kreative Schnitte, Brautstyling.", "maskulin": "Fades, Konturen, Bartkunst." }, "emailSubject": { "feminin": "Bewerbung%20als%20Friseur/in", "maskulin": "Bewerbung%20als%20Barber" } },
+      { "title": { "feminin": "Stylist/in (m/w/d)", "maskulin": "Stylist/in (m/w/d)" }, "desc": { "feminin": "Klassischer Schnitt, Bartpflege, maskuline Styles.", "maskulin": "Ob feminin oder maskulin — bei uns kannst du beides." }, "emailSubject": { "feminin": "Bewerbung%20als%20Stylist/in", "maskulin": "Bewerbung%20als%20Stylist/in" } }
+    ]
+  },
+  "webhooks": {
+    "base": "https://niniho13.app.n8n.cloud/webhook",
+    "homepage": "/homepage"
+  },
+  "legal": {
+    "impressum": {
+      "firmenname": "Rena Rados Friseure",
+      "inhaber": "Rena Rados",
+      "strasse": "Erzgiessereistr. 51",
+      "plz": "80335",
+      "stadt": "Muenchen",
+      "telefon": "089 - 1296294",
+      "email": "renarados.friseure@hotmail.com",
+      "steuernummer": "000/000/00000"
+    }
+  },
+  "_meta": {
+    "version": "1.0",
+    "template": "casa2035-salon",
+    "generatedAt": "2026-03-23",
+    "poweredBy": "Casa 2035"
+  }
+}
