@@ -142,15 +142,17 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      /* Abstrakter Premium-Gradient — kein fremder Salon, keine Marken */
-      background: linear-gradient(135deg, #1a1714 0%, #2a2420 25%, #1e1a16 45%, #2c2620 65%, #1a1714 100%);
+      /* Feminin: Warmes Roségold-Schwarz — Spa, Luxus, Wohlfuehlen */
+      background: linear-gradient(160deg, #2a2018 0%, #1e1814 20%, #2c2218 40%, #241e16 60%, #1a1612 80%, #2a2018 100%);
     }
     .hero-bg::before {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(184,150,46,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(184,150,46,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(200,170,80,0.04) 0%, transparent 50%);
+        radial-gradient(ellipse 90% 70% at 25% 40%, rgba(200,160,100,0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 90% at 75% 25%, rgba(220,180,140,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 50% 75%, rgba(184,150,46,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 30% at 15% 70%, rgba(200,140,120,0.05) 0%, transparent 40%),
+        radial-gradient(ellipse 35% 35% at 85% 65%, rgba(180,150,130,0.04) 0%, transparent 45%);
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
@@ -1224,6 +1226,7 @@
             Haaranalyse starten
           </button>
           <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Profi-Analyse mit PDF-Report erhalten Sie im Salon. Powered by Casa 2035.</p>
+          <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestuetzte Analyse (EU AI Act konform). Ihr Foto wird ausschliesslich fuer die Haaranalyse verwendet und nach 30 Tagen geloescht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
         </div>
       </div>
 
@@ -1409,6 +1412,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               Termin buchen
             </button>
+            <p style="font-size:9px;color:var(--text-muted);margin-top:8px;text-align:center;line-height:1.4">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten zur Terminvereinbarung zu. Ihre Daten werden nicht an Dritte weitergegeben. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
           </form>
         </div>
         <div class="booking-info reveal reveal-delay-2">
@@ -3350,11 +3354,23 @@
     var chatResponses = {
       oeffnungszeiten: 'Unsere Oeffnungszeiten:\nDi-Mi + Fr: 9:00-18:00 Uhr\nDo: 9:00-20:00 Uhr\nSa: 9:00-15:00 Uhr\nMo + So: Geschlossen',
       termin: 'Sie koennen direkt auf unserer Website einen Termin buchen — scrollen Sie zum Bereich "Termin buchen" oder rufen Sie uns an unter 089-1296294.',
-      services: 'Unsere Services:\n- Haarschnitte (ab 35 EUR, ca. 45 Min.)\n- Farbbehandlung (ab 65 EUR, ca. 90 Min.)\n- Haarpflege/Treatment (ab 25 EUR, ca. 30 Min.)\n- Styling/Brautstyling (ab 45 EUR, ca. 60 Min.)\n- Wunschfrisur-Service (kostenlos)\n- La Biosthetique Produkte im Salon',
-      adresse: 'Rena Rados Friseure\nErzgiessereistr. 51\n80335 Muenchen\nTelefon: 089-1296294',
-      parken: 'Unser Salon liegt in der Erzgiessereistr. 51. In der Naehe gibt es Strassenparkplaetze sowie das Parkhaus am Stiglmaierplatz.',
-      haaranalyse: 'Wir bieten eine KI-gestuetzte Haaranalyse an! Senden Sie uns einfach ein Foto Ihres Haars und erhalten Sie eine erste Einschaetzung. Die detaillierte Profi-Analyse gibt es dann im Salon.',
-      preis: 'Unsere Preise:\n- Damenhaarschnitt ab 35 EUR\n- Herrenschnitt ab 25 EUR\n- Farbbehandlung ab 65 EUR\n- Haarpflege ab 25 EUR\n- Styling ab 45 EUR\nAlle Preise inkl. MwSt.'
+      services: 'Unsere Services:\n- Haarschnitte (ab 35 EUR, ca. 45 Min.)\n- Farbbehandlung (ab 65 EUR, ca. 90 Min.)\n- Haarpflege/Treatment (ab 25 EUR, ca. 30 Min.)\n- Styling/Brautstyling (ab 45 EUR, ca. 60 Min.)\n- Wunschfrisur-Service (kostenlos)\n- KI-Haaranalyse (kostenloser Schnell-Check + Profi im Salon)\n- La Biosthetique Produkte im Salon',
+      adresse: 'Rena Rados Friseure\nErzgiessereistr. 51 (Eingang Dachauer Str. 143)\n80335 Muenchen\nTelefon: 089-1296294\n\nAm besten mit der U-Bahn (Stiglmaierplatz) oder Tram.',
+      parken: 'Strassenparkplaetze in der Erzgiessereistrasse und umliegenden Strassen. Das Parkhaus am Stiglmaierplatz ist ca. 3 Minuten Fussweg entfernt. Alternativ: U-Bahn Stiglmaierplatz (2 Min.).',
+      haaranalyse: 'Wir bieten eine KI-gestuetzte Haaranalyse an!\n\n1. Kostenloser Schnell-Check: Foto hochladen, KI analysiert\n2. Profi-Analyse im Salon: Friseur fotografiert vor Ort, KI analysiert, Profi entscheidet\n3. Sie erhalten ein PDF-Protokoll mit Pflegeplan\n\nDie finale Beurteilung macht IMMER unser Friseur persoenlich.',
+      preis: 'Unsere Preise:\n- Damenhaarschnitt ab 35 EUR\n- Herrenschnitt ab 25 EUR\n- Farbbehandlung ab 65 EUR\n- Balayage/Highlights ab 95 EUR\n- Haarpflege ab 25 EUR\n- Styling ab 45 EUR\n- Brautstyling ab 85 EUR\n- Haaranalyse Profi-Paket: im Termin buchbar\nAlle Preise inkl. MwSt. Genaue Preise je nach Haarlaenge.',
+      wunschfrisur: 'Senden Sie uns einfach ein Foto Ihrer Wunschfrisur — per WhatsApp, Instagram oder ueber das Formular auf unserer Website. Wir sagen Ihnen ehrlich, was moeglich ist, und beraten Sie persoenlich.',
+      storno: 'Terminabsagen bitte mindestens 24 Stunden vorher per Telefon (089-1296294), WhatsApp oder E-Mail. Kurzfristige Stornos oder No-Shows behalten wir uns vor, beim naechsten Mal eine Anzahlung zu bitten.',
+      produkte: 'Wir arbeiten ausschliesslich mit La Biosthetique — einem der fuehrenden Premium-Hersteller aus Frankreich. Die gleichen Produkte, die wir im Salon verwenden, koennen Sie auch fuer Zuhause bei uns erwerben.',
+      team: 'Unser Team besteht aus erfahrenen Friseurmeistern und Stylisten unter der Leitung von Rena Rados — ueber 25 Jahre Erfahrung in Muenchen. Wir bilden uns regelmaessig weiter und arbeiten mit La Biosthetique zusammen.',
+      crazy: 'Das klingt nach einer spannenden Idee! Bei uns im Salon besprechen wir gerne, was moeglich und was fuer Ihr Haar gesund ist. Manche Looks brauchen eine ehrliche Beratung — und genau dafuer sind wir da. Rufen Sie uns an (089-1296294) oder kommen Sie vorbei!',
+      bart: 'Bartpflege, Trimmen und Formen gehoert zu unserem Maskulin-Programm. Vom 3-Tage-Bart bis zum Vollbart — mit heissem Tuch und Premium-Oelen. Ab 18 EUR, ca. 20 Min.',
+      glatze: 'Auch ohne Haare sind Sie bei uns richtig! Wir bieten Kopfhautpflege, Anti-Haarausfall-Treatments und Beratung fuer duenner werdendes Haar. Kommen Sie vorbei — wir kuemmern uns.',
+      bewertung: 'Wir haben 4.9 von 5 Sternen bei Google Reviews! Unsere Kunden schaetzen besonders die persoenliche Beratung, die entspannte Atmosphaere und die Qualitaet unserer Arbeit.',
+      hochzeit: 'Fuer Brautstyling bieten wir ein Probe-Styling (ab 85 EUR) und das Styling am grossen Tag. Wir empfehlen, fruehzeitig zu buchen — mindestens 4-6 Wochen vorher. Rufen Sie uns an fuer eine persoenliche Beratung!',
+      kinder: 'Kinderhaarschnitte bieten wir ab 25 EUR an. Wir nehmen uns viel Zeit und sorgen dafuer, dass sich auch die Kleinen bei uns wohlfuehlen.',
+      whatsapp: 'Sie erreichen uns per WhatsApp unter 089-1296294. Schicken Sie uns gerne Fotos, Sprachnachrichten oder Ihre Wunschfrisur — wir antworten schnell!',
+      fallback: 'Das ist eine interessante Frage! Dazu kann ich Ihnen leider keine genaue Antwort geben. Am besten rufen Sie uns an (089-1296294) oder kommen Sie einfach vorbei — wir beraten Sie gerne persoenlich.\n\nIch kann Ihnen helfen bei:\n- Terminen & Buchung\n- Services & Preise\n- Oeffnungszeiten & Anfahrt\n- Haaranalyse & Wunschfrisur\n- Produkte & Pflege'
     };
     function chatQuickReply(key) {
       var labels = {oeffnungszeiten:'Oeffnungszeiten',termin:'Termin buchen',services:'Services & Preise'};
@@ -3373,24 +3389,45 @@
       input.value = '';
       var lower = text.toLowerCase();
       var answer = '';
-      if (lower.indexOf('oeffnungszeit') !== -1 || lower.indexOf('geoeffnet') !== -1 || lower.indexOf('wann') !== -1 || lower.indexOf('offen') !== -1) {
+      // Keyword-Matching (Reihenfolge = Prioritaet)
+      if (lower.indexOf('oeffnungszeit') !== -1 || lower.indexOf('geoeffnet') !== -1 || lower.indexOf('offen') !== -1 || (lower.indexOf('wann') !== -1 && (lower.indexOf('auf') !== -1 || lower.indexOf('zu') !== -1))) {
         answer = chatResponses.oeffnungszeiten;
-      } else if (lower.indexOf('termin') !== -1 || lower.indexOf('buchen') !== -1 || lower.indexOf('buchung') !== -1) {
+      } else if (lower.indexOf('termin') !== -1 || lower.indexOf('buchen') !== -1 || lower.indexOf('buchung') !== -1 || lower.indexOf('vereinbar') !== -1) {
         answer = chatResponses.termin;
-      } else if (lower.indexOf('preis') !== -1 || lower.indexOf('kost') !== -1 || lower.indexOf('euro') !== -1 || lower.indexOf('eur') !== -1) {
-        answer = chatResponses.preis;
-      } else if (lower.indexOf('service') !== -1 || lower.indexOf('leistung') !== -1 || lower.indexOf('angebot') !== -1) {
-        answer = chatResponses.services;
-      } else if (lower.indexOf('adresse') !== -1 || lower.indexOf('wo ') !== -1 || lower.indexOf('standort') !== -1 || lower.indexOf('anfahrt') !== -1) {
-        answer = chatResponses.adresse;
-      } else if (lower.indexOf('park') !== -1) {
-        answer = chatResponses.parken;
+      } else if (lower.indexOf('crazy') !== -1 || lower.indexOf('verrueckt') !== -1 || lower.indexOf('neon') !== -1 || lower.indexOf('regenbogen') !== -1 || lower.indexOf('rainbow') !== -1 || lower.indexOf('extrem') !== -1 || lower.indexOf('punk') !== -1 || lower.indexOf('mohawk') !== -1 || lower.indexOf('irokese') !== -1) {
+        answer = chatResponses.crazy;
+      } else if (lower.indexOf('storn') !== -1 || lower.indexOf('absag') !== -1 || lower.indexOf('cancel') !== -1) {
+        answer = chatResponses.storno;
+      } else if (lower.indexOf('hochzeit') !== -1 || lower.indexOf('braut') !== -1 || lower.indexOf('wedding') !== -1) {
+        answer = chatResponses.hochzeit;
+      } else if (lower.indexOf('kind') !== -1 || lower.indexOf('maedchen') !== -1 || lower.indexOf('junge') !== -1) {
+        answer = chatResponses.kinder;
+      } else if (lower.indexOf('bart') !== -1 || lower.indexOf('rasur') !== -1 || lower.indexOf('rasier') !== -1) {
+        answer = chatResponses.bart;
+      } else if (lower.indexOf('glatze') !== -1 || lower.indexOf('haarausfall') !== -1 || lower.indexOf('duenn') !== -1 || lower.indexOf('kopfhaut') !== -1 || lower.indexOf('ausfal') !== -1) {
+        answer = chatResponses.glatze;
+      } else if (lower.indexOf('whatsapp') !== -1 || lower.indexOf('wa ') !== -1 || lower.indexOf('schreiben') !== -1) {
+        answer = chatResponses.whatsapp;
+      } else if (lower.indexOf('bewert') !== -1 || lower.indexOf('review') !== -1 || lower.indexOf('sterne') !== -1 || lower.indexOf('empfehl') !== -1) {
+        answer = chatResponses.bewertung;
       } else if (lower.indexOf('haar') !== -1 && lower.indexOf('analyse') !== -1) {
         answer = chatResponses.haaranalyse;
-      } else if (lower.indexOf('schnitt') !== -1 || lower.indexOf('farb') !== -1 || lower.indexOf('balayage') !== -1 || lower.indexOf('highlight') !== -1) {
+      } else if (lower.indexOf('wunsch') !== -1 || lower.indexOf('inspirat') !== -1 || lower.indexOf('look') !== -1 || lower.indexOf('foto') !== -1) {
+        answer = chatResponses.wunschfrisur;
+      } else if (lower.indexOf('preis') !== -1 || lower.indexOf('kost') !== -1 || lower.indexOf('euro') !== -1 || lower.indexOf('teuer') !== -1 || lower.indexOf('guenstig') !== -1 || lower.indexOf('billig') !== -1) {
+        answer = chatResponses.preis;
+      } else if (lower.indexOf('service') !== -1 || lower.indexOf('leistung') !== -1 || lower.indexOf('angebot') !== -1 || lower.indexOf('schnitt') !== -1 || lower.indexOf('farb') !== -1 || lower.indexOf('balayage') !== -1 || lower.indexOf('highlight') !== -1 || lower.indexOf('straehne') !== -1 || lower.indexOf('pflege') !== -1 || lower.indexOf('olaplex') !== -1) {
         answer = chatResponses.services;
+      } else if (lower.indexOf('adresse') !== -1 || lower.indexOf('wo ') !== -1 || lower.indexOf('standort') !== -1 || lower.indexOf('anfahrt') !== -1 || lower.indexOf('finden') !== -1 || lower.indexOf('hinkomm') !== -1) {
+        answer = chatResponses.adresse;
+      } else if (lower.indexOf('park') !== -1 || lower.indexOf('auto') !== -1 || lower.indexOf('u-bahn') !== -1 || lower.indexOf('tram') !== -1) {
+        answer = chatResponses.parken;
+      } else if (lower.indexOf('produkt') !== -1 || lower.indexOf('shampoo') !== -1 || lower.indexOf('biosthet') !== -1 || lower.indexOf('kaufen') !== -1) {
+        answer = chatResponses.produkte;
+      } else if (lower.indexOf('team') !== -1 || lower.indexOf('rena') !== -1 || lower.indexOf('wer ') !== -1 || lower.indexOf('friseur') !== -1 || lower.indexOf('stylist') !== -1) {
+        answer = chatResponses.team;
       } else {
-        answer = 'Ich helfe gerne bei Fragen rund um Ihren Besuch bei Rena Rados. Fragen Sie mich zu Terminen, Services, Preisen oder unserer Haaranalyse.';
+        answer = chatResponses.fallback;
       }
       setTimeout(function() { addBotMessage(answer); }, 500);
     }
