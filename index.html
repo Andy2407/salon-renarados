@@ -142,11 +142,11 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1920&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=1920&q=80') center/cover no-repeat;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(250,244,238,0.65) 0%, rgba(245,238,228,0.58) 30%, rgba(248,242,234,0.62) 55%, rgba(250,244,238,0.55) 80%, rgba(248,240,232,0.50) 100%);
+      background: linear-gradient(160deg, rgba(250,244,238,0.78) 0%, rgba(245,238,228,0.72) 30%, rgba(248,242,234,0.70) 55%, rgba(250,244,238,0.68) 80%, rgba(248,240,232,0.60) 100%);
     }
     .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .hero-particle {
@@ -170,8 +170,9 @@
     }
     .hero h1 em { color: var(--gold); font-style: italic; }
     .hero-sub {
-      font-size: 18px; color: var(--text-light); line-height: 1.7;
-      max-width: 540px; margin: 0 auto 36px; font-weight: 300;
+      font-size: 18px; color: var(--text); line-height: 1.7;
+      max-width: 560px; margin: 0 auto 36px; font-weight: 400;
+      text-shadow: 0 1px 2px rgba(250,244,238,0.6);
       animation: fadeUp 0.8s var(--ease) 0.4s both;
     }
     .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.8s var(--ease) 0.6s both; }
@@ -1127,6 +1128,14 @@
           <div class="section-label" id="haarLabel">KI-Analyse</div>
           <h2 class="section-title" id="haarTitle">Ihre <em>Haaranalyse</em><br>in 30 Sekunden</h2>
           <p class="section-desc" id="haarDesc">Laden Sie ein Foto Ihres Haares hoch — unsere KI analysiert Haarstruktur, Zustand und empfiehlt die passende Pflege. Kostenlos und unverbindlich.</p>
+          <div style="margin-top:16px;padding:16px 20px;background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(184,150,46,0.03));border:1px solid var(--border-gold);border-radius:var(--radius-sm)">
+            <div style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">Profi-Analyse im Salon</div>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0">Buchen Sie Ihre professionelle Haaranalyse direkt als Termin-Paket. Unser Friseur fotografiert Ihr Haar vor Ort unter optimalen Bedingungen, die KI analysiert — und der Profi trifft die finale Entscheidung. Sie erhalten ein detailliertes PDF-Protokoll mit Pflegeplan.</p>
+            <a href="#booking" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:600;color:var(--gold);text-decoration:none">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Profi-Analyse buchen &rarr;
+            </a>
+          </div>
           <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px">
             <div style="display:flex;align-items:center;gap:14px">
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
@@ -1305,14 +1314,52 @@
               <label id="timeSlotLabel">Uhrzeit waehlen</label>
               <div id="timeSlots" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px"></div>
             </div>
-            <div class="form-group"><label>Gewuenschte Leistung</label>
-              <select id="bkLeistung" required>
-                <option value="">Bitte waehlen</option>
-                <option>Damenhaarschnitt</option><option>Herrenschnitt</option><option>Herrenschnitt + Bartpflege</option><option>Kinderhaarschnitt</option>
-                <option>Farbbehandlung</option><option>Balayage / Highlights</option><option>Haarpflege / Treatment</option>
-                <option>Brautstyling</option><option>Beratung</option><option>Sonstiges</option>
-              </select>
+            <div class="form-group"><label>Gewuenschte Leistungen <span style="font-size:10px;color:var(--text-muted);font-weight:400">(Mehrfachauswahl moeglich)</span></label>
+              <div id="bkLeistungCheckboxes" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
+              </div>
+              <input type="hidden" id="bkLeistung" required>
             </div>
+            <script>
+            (function() {
+              var services = [
+                {name: 'Damenhaarschnitt', icon: '\u2702\uFE0F'},
+                {name: 'Herrenschnitt', icon: '\u2702\uFE0F'},
+                {name: 'Herrenschnitt + Bartpflege', icon: '\uD83E\uDDD4'},
+                {name: 'Kinderhaarschnitt', icon: '\uD83D\uDC76'},
+                {name: 'Farbbehandlung', icon: '\uD83C\uDFA8'},
+                {name: 'Balayage / Highlights', icon: '\u2728'},
+                {name: 'Haarpflege / Treatment', icon: '\uD83E\uDDF4'},
+                {name: 'Brautstyling', icon: '\uD83D\uDC70'},
+                {name: 'Haaranalyse (Profi mit PDF)', icon: '\uD83D\uDD2C'},
+                {name: 'Beratung', icon: '\uD83D\uDCAC'},
+                {name: 'Sonstiges', icon: '\u2795'}
+              ];
+              var container = document.getElementById('bkLeistungCheckboxes');
+              var hidden = document.getElementById('bkLeistung');
+              services.forEach(function(svc) {
+                var chip = document.createElement('label');
+                chip.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-full);font-size:12px;font-weight:500;cursor:pointer;transition:all 200ms;user-select:none;color:var(--text-light);background:var(--white)';
+                var cb = document.createElement('input');
+                cb.type = 'checkbox';
+                cb.value = svc.name;
+                cb.style.display = 'none';
+                cb.addEventListener('change', function() {
+                  chip.style.background = cb.checked ? 'var(--gold-dim)' : 'var(--white)';
+                  chip.style.borderColor = cb.checked ? 'var(--gold)' : 'var(--border)';
+                  chip.style.color = cb.checked ? 'var(--gold)' : 'var(--text-light)';
+                  chip.style.fontWeight = cb.checked ? '600' : '500';
+                  var selected = Array.from(container.querySelectorAll('input:checked')).map(function(c) { return c.value; });
+                  hidden.value = selected.join(', ');
+                });
+                var iconSpan = document.createElement('span');
+                iconSpan.textContent = svc.icon;
+                chip.appendChild(cb);
+                chip.appendChild(iconSpan);
+                chip.appendChild(document.createTextNode(svc.name));
+                container.appendChild(chip);
+              });
+            })();
+            </script>
             <div class="form-group"><label>Anmerkungen (optional)</label><textarea id="bkNotiz" placeholder="Besondere Wuensche oder Hinweise..." rows="2"></textarea></div>
             <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
