@@ -456,8 +456,7 @@
     .contact { background: var(--cream); position: relative; overflow: hidden; }
     .contact::before {
       content: ''; position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.10;
+      background: linear-gradient(135deg, rgba(184,150,46,0.04) 0%, rgba(120,100,70,0.02) 50%, rgba(184,150,46,0.03) 100%);
     }
     .contact .container { position: relative; z-index: 1; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; }
@@ -487,8 +486,7 @@
     .karriere { background: var(--white); position: relative; overflow: hidden; }
     .karriere::before {
       content: ''; position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center/cover no-repeat;
-      opacity: 0.12;
+      background: linear-gradient(180deg, rgba(26,22,18,0.03) 0%, rgba(184,150,46,0.04) 50%, rgba(26,22,18,0.02) 100%);
     }
     .karriere .container { position: relative; z-index: 1; }
     .karriere-intro { max-width: 640px; margin-bottom: 48px; }
@@ -1315,7 +1313,7 @@
       </div>
       <div class="booking-grid">
         <div class="booking-form reveal">
-          <h3>Termin anfragen</h3>
+          <h3>Termin buchen</h3>
           <form id="bookingForm" onsubmit="submitBooking(event)">
             <div class="form-row">
               <div class="form-group"><label>Vorname</label><input type="text" id="bkVorname" placeholder="Ihr Vorname" required></div>
@@ -1409,7 +1407,7 @@
             <div class="form-group"><label>Anmerkungen (optional)</label><textarea id="bkNotiz" placeholder="Besondere Wuensche oder Hinweise..." rows="2"></textarea></div>
             <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              Termin anfragen
+              Termin buchen
             </button>
           </form>
         </div>
@@ -1484,15 +1482,8 @@
         <h2 class="section-title">Besuchen Sie <em>uns</em></h2>
       </div>
       <div class="contact-grid">
-        <div class="contact-map reveal">
-          <div class="contact-map-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <p>Erzgiessereistr. 51<br>Eingang Dachauer Str. 143<br>80335 Muenchen</p>
-            <a href="https://maps.google.com/?q=Erzgie%C3%9Fereistr.+51,+80335+M%C3%BCnchen" target="_blank" rel="noopener" class="btn btn-dark" style="margin-top:16px;font-size:12px;padding:10px 20px">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              In Google Maps oeffnen
-            </a>
-          </div>
+        <div class="contact-map reveal" style="min-height:350px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2661.8!2d11.5555!3d48.1525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e75f77f29c64d%3A0x123456!2sErzgie%C3%9Fereistra%C3%9Fe%2051%2C%2080335%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1" width="100%" height="100%" style="border:0;min-height:350px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Rena Rados Friseure auf Google Maps"></iframe>
         </div>
         <div class="contact-details reveal reveal-delay-2">
           <div class="contact-item">
@@ -1531,6 +1522,19 @@
         <div class="section-label" id="karriereLabel">Werde Teil unseres Teams</div>
         <h2 class="section-title" id="karriereIntroTitle">Deine <em>Karriere</em><br>bei Rena Rados</h2>
         <p class="section-desc" id="karriereIntroDesc">Wir suchen Menschen, die fuer ihren Beruf brennen. Ob erfahrener Stylist, Barber oder Azubi am Anfang — bei uns zaehlt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.</p>
+      </div>
+
+      <!-- Urgency-Banner: Spitzenfriseure gesucht -->
+      <div style="background:linear-gradient(135deg,rgba(184,150,46,0.12),rgba(184,150,46,0.04));border:2px solid var(--gold);border-radius:var(--radius);padding:32px;margin-bottom:40px;text-align:center" class="reveal">
+        <div style="font-size:28px;margin-bottom:8px">🔥</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Wir suchen JETZT Spitzenfriseure</h3>
+        <p style="font-size:14px;color:var(--text-light);line-height:1.6;max-width:560px;margin:0 auto 16px">Unsere Kunden warten 2-3 Wochen auf einen Termin. Wir haben die Nachfrage, die Technik, die Produkte — uns fehlen nur noch die besten Haende. Bist du dabei?</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+          <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">Ueberdurchschnittliches Gehalt</div>
+          <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">Modernste KI-Technik</div>
+          <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">La Biosthetique Produkte</div>
+          <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">Null Verwaltung — KI macht den Rest</div>
+        </div>
       </div>
 
       <div class="karriere-grid">
@@ -3345,7 +3349,7 @@
     }
     var chatResponses = {
       oeffnungszeiten: 'Unsere Oeffnungszeiten:\nDi-Mi + Fr: 9:00-18:00 Uhr\nDo: 9:00-20:00 Uhr\nSa: 9:00-15:00 Uhr\nMo + So: Geschlossen',
-      termin: 'Sie koennen direkt auf unserer Website einen Termin anfragen — scrollen Sie zum Bereich "Termin buchen" oder rufen Sie uns an unter 089-1296294.',
+      termin: 'Sie koennen direkt auf unserer Website einen Termin buchen — scrollen Sie zum Bereich "Termin buchen" oder rufen Sie uns an unter 089-1296294.',
       services: 'Unsere Services:\n- Haarschnitte (ab 35 EUR, ca. 45 Min.)\n- Farbbehandlung (ab 65 EUR, ca. 90 Min.)\n- Haarpflege/Treatment (ab 25 EUR, ca. 30 Min.)\n- Styling/Brautstyling (ab 45 EUR, ca. 60 Min.)\n- Wunschfrisur-Service (kostenlos)\n- La Biosthetique Produkte im Salon',
       adresse: 'Rena Rados Friseure\nErzgiessereistr. 51\n80335 Muenchen\nTelefon: 089-1296294',
       parken: 'Unser Salon liegt in der Erzgiessereistr. 51. In der Naehe gibt es Strassenparkplaetze sowie das Parkhaus am Stiglmaierplatz.',
