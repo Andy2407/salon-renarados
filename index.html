@@ -2702,16 +2702,31 @@
 
       // Booking form options
       var bkSelect = document.getElementById('bkLeistung');
-      if (bkSelect) {
-        bkSelect.textContent = '';
-        var defOpt = document.createElement('option');
-        defOpt.value = '';
-        defOpt.textContent = 'Bitte waehlen';
-        bkSelect.appendChild(defOpt);
-        m.bookingOptions.forEach(function(opt) {
-          var o = document.createElement('option');
-          o.textContent = opt;
-          bkSelect.appendChild(o);
+
+      // Rebuild Booking Chips dynamisch (Feminin vs Maskulin)
+      var chipContainer = document.getElementById('bkLeistungCheckboxes');
+      if (chipContainer && m.bookingOptions) {
+        chipContainer.textContent = '';
+        if (bkSelect) bkSelect.value = '';
+        var emojis = { Damenhaarschnitt: '\u2702\uFE0F', Herrenschnitt: '\u2702\uFE0F', Kinderhaarschnitt: '\uD83D\uDC76', Farbbehandlung: '\uD83C\uDFA8', 'Balayage / Highlights': '\u2728', 'Haarpflege / Treatment': '\uD83E\uDDF4', Brautstyling: '\uD83D\uDC70', 'Haaranalyse (Profi mit PDF)': '\uD83D\uDD2C', Beratung: '\uD83D\uDCAC', Sonstiges: '\u2795', Bartpflege: '\uD83E\uDDD4', 'Herrenschnitt + Bartpflege': '\uD83E\uDDD4', 'Bart + Schnitt Kombi': '\u2702\uFE0F\uD83E\uDDD4', 'Kopfhaut- & Glatzen-Pflege': '\uD83E\uDDF4', 'Grooming Paket': '\uD83D\uDC88' };
+        m.bookingOptions.forEach(function(svcName) {
+          var chip = document.createElement('label');
+          chip.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-full);font-size:12px;font-weight:500;cursor:pointer;transition:all 200ms;user-select:none;color:var(--text-light);background:var(--white)';
+          var cb = document.createElement('input');
+          cb.type = 'checkbox'; cb.value = svcName; cb.style.display = 'none';
+          cb.addEventListener('change', function() {
+            chip.style.background = cb.checked ? 'var(--gold-dim)' : 'var(--white)';
+            chip.style.borderColor = cb.checked ? 'var(--gold)' : 'var(--border)';
+            chip.style.color = cb.checked ? 'var(--gold)' : 'var(--text-light)';
+            chip.style.fontWeight = cb.checked ? '600' : '500';
+            var sel = Array.from(chipContainer.querySelectorAll('input:checked')).map(function(c) { return c.value; });
+            if (bkSelect) bkSelect.value = sel.join(', ');
+          });
+          var icon = document.createElement('span');
+          icon.textContent = emojis[svcName] || '\u2702\uFE0F';
+          chip.appendChild(cb); chip.appendChild(icon);
+          chip.appendChild(document.createTextNode(svcName));
+          chipContainer.appendChild(chip);
         });
       }
 
