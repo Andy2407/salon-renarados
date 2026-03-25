@@ -2542,11 +2542,26 @@
         // Scroll zum Booking und Service-Chip vorauswaehlen
         setTimeout(function(){
           var chips=document.querySelectorAll('#bkLeistungCheckboxes input[type=checkbox]');
+          // Service-Name zu Chip-Name Mapping
+          var nameToChip = {'Haarschnitt':'Damenhaarschnitt','Farbbehandlung':'Farbbehandlung','Haarpflege':'Haarpflege / Treatment','Haarpflege-Treatment':'Haarpflege / Treatment','Styling':'Brautstyling','Herrenschnitt':'Herrenschnitt','Bartpflege':'Bartpflege','Haar- & Kopfhautpflege':'Kopfhaut- & Glatzen-Pflege','Grooming':'Grooming Paket'};
+          var targetChip = nameToChip[s.name] || s.leistung || s.name;
+          var matched = false;
           chips.forEach(function(cb){
-            if(cb.value===s.leistung || s.name.indexOf(cb.value)!==-1 || cb.value.indexOf(s.leistung)!==-1){
+            if(cb.value === targetChip && !matched){
               if(!cb.checked){cb.click();}
+              matched = true;
             }
           });
+          // Fallback: partieller Match
+          if(!matched){
+            var target = targetChip.toLowerCase();
+            chips.forEach(function(cb){
+              if(cb.value.toLowerCase().indexOf(target)!==-1 && !matched){
+                if(!cb.checked){cb.click();}
+                matched = true;
+              }
+            });
+          }
         },500);
       });
       var callBtn=document.createElement('a');callBtn.href='tel:08912962940';callBtn.className='btn btn-outline';
@@ -3193,8 +3208,10 @@
           if (match) return { n: match[1].trim(), p: parseInt(match[2]) };
           return { n: a, p: 0 };
         });
+        var productPrices = {'La Biosthetique Shampoo Vital':'18,90','Olaplex No.3':'28,00','Glanz-Serum':'24,90','Color Care Shampoo':'22,90','Color Protect Maske':'28,90','Haarspray Strong Hold':'19,90','Repair Maske':'24,90','Olaplex Treatment':'26,00','Styling Mousse':'16,90','Alpecin Coffein Shampoo':'12,90','Bartoel Premium':'22,90','Bartwachs':'14,90','Styling Paste Matt':'16,90','Kopfhaut-Tonikum':'19,90','Face Moisturizer':'24,90','Hair & Body Wash':'18,90'};
         var products = (s.products || []).map(function(p) {
-          return { n: p, i: '' };
+          var price = productPrices[p] || null;
+          return { n: p, i: price ? 'La Biosthetique' : '', p: price };
         });
         var priceNum = 0;
         var priceMatch = (s.price || '').match(/(\d+)/);
