@@ -4,7 +4,7 @@
 // Stand: 23.03.2026 | Agent: @hp-entwickler
 // =============================================================
 
-const CACHE_NAME = 'renarados-v2';
+const CACHE_NAME = 'renarados-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',

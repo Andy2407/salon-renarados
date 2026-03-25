@@ -3056,20 +3056,7 @@
       if (cfg.content) {
         if (cfg.content.feminin) applyModeContent('feminin', cfg.content.feminin);
         if (cfg.content.maskulin) applyModeContent('maskulin', cfg.content.maskulin);
-        // Re-apply hero badge directly from config
-        var currentMode = document.body.classList.contains('maskulin-style') ? 'maskulin' : 'feminin';
-        var badgeText = cfg.content[currentMode] && cfg.content[currentMode].heroBadge ? cfg.content[currentMode].heroBadge : null;
-        if (badgeText) {
-          var heroBadge = document.querySelector('.hero-badge');
-          if (heroBadge) {
-            heroBadge.textContent = '';
-            var dot = document.createElement('span');
-            dot.className = 'hero-badge-dot';
-            heroBadge.appendChild(dot);
-            heroBadge.appendChild(document.createTextNode(badgeText));
-          }
-          modeContent[currentMode].heroBadge = badgeText;
-        }
+        // Hero badge wird aus JS-defaults geladen (cache-sicher, kein config.json-Override)
       }
 
       // --- 7. Karriere Positions ---
@@ -3215,7 +3202,7 @@
       var m = modeContent[mode];
       if (cfgContent.heroTitle) m.heroTitle = cfgContent.heroTitle;
       if (cfgContent.heroSub) m.heroSub = cfgContent.heroSub;
-      if (cfgContent.heroBadge) m.heroBadge = cfgContent.heroBadge;
+      // heroBadge: nicht aus config.json uebernehmen — hardcoded im HTML + JS defaults (Cache-sicher)
       if (cfgContent.aboutTitle) m.aboutTitle = cfgContent.aboutTitle;
       if (cfgContent.aboutDesc) m.aboutDesc = cfgContent.aboutDesc;
       if (cfgContent.svcTitle) m.svcTitle = cfgContent.svcTitle;
