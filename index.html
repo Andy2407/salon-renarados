@@ -2116,12 +2116,12 @@
     // Oeffnungszeiten: Wochentag (0=So) -> {open, close} oder null (geschlossen)
     var salonHours = {
       0: null,                    // Sonntag: geschlossen
-      1: { open: 9, close: 18 }, // Montag
+      1: null,                    // Montag: geschlossen
       2: { open: 9, close: 18 }, // Dienstag
       3: { open: 9, close: 18 }, // Mittwoch
       4: { open: 9, close: 20 }, // Donnerstag (bis 20 Uhr)
       5: { open: 9, close: 18 }, // Freitag
-      6: { open: 9, close: 14 }  // Samstag (bis 14 Uhr)
+      6: { open: 9, close: 15 }  // Samstag (bis 15 Uhr)
     };
 
     var monthNames = ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
