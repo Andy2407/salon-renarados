@@ -9,12 +9,12 @@
     "email": "renarados.friseure@hotmail.com",
     "mapsUrl": "https://maps.google.com/?q=Erzgiessereistr.+51,+80335+Muenchen",
     "oeffnungszeiten": {
-      "Mo": "09:00 - 18:00",
+      "Mo": "Geschlossen",
       "Di": "09:00 - 18:00",
       "Mi": "09:00 - 18:00",
       "Do": "09:00 - 20:00",
       "Fr": "09:00 - 18:00",
-      "Sa": "09:00 - 14:00",
+      "Sa": "09:00 - 15:00",
       "So": "Geschlossen"
     }
   },
@@ -42,7 +42,7 @@
     "feminin": {
       "heroTitle": "Entspannen.<br>Geniessen. <em>Strahlen.</em>",
       "heroSub": "Hier stehen Sie im Mittelpunkt. Ankommen, durchatmen, bei einem Kaffee ankommen. Eine wohltuende Kopfmassage geniessen — und mit Ihrem Wunschlook den Salon verlassen. Bei uns dreht sich alles um Sie.",
-      "heroBadge": "Willkommen im Jahr 2035.",
+      "heroBadge": "Die Zukunft der Haarpflege. Jetzt.",
       "aboutTitle": "Mehr als nur ein<br><em>Friseur</em>",
       "aboutDesc": "Bei Rena Rados geht es nicht nur um Haare. Es geht um Sie. Um Ihren Moment.",
       "svcTitle": "Unsere <em>Leistungen</em>",

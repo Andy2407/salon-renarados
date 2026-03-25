@@ -2971,7 +2971,7 @@
     // =============================================================
 
     function loadConfig() {
-      fetch('config.json')
+      fetch('config.json?v=' + Date.now())
         .then(function(res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
           return res.json();
@@ -3056,6 +3056,20 @@
       if (cfg.content) {
         if (cfg.content.feminin) applyModeContent('feminin', cfg.content.feminin);
         if (cfg.content.maskulin) applyModeContent('maskulin', cfg.content.maskulin);
+        // Re-apply hero badge directly from config
+        var currentMode = document.body.classList.contains('maskulin-style') ? 'maskulin' : 'feminin';
+        var badgeText = cfg.content[currentMode] && cfg.content[currentMode].heroBadge ? cfg.content[currentMode].heroBadge : null;
+        if (badgeText) {
+          var heroBadge = document.querySelector('.hero-badge');
+          if (heroBadge) {
+            heroBadge.textContent = '';
+            var dot = document.createElement('span');
+            dot.className = 'hero-badge-dot';
+            heroBadge.appendChild(dot);
+            heroBadge.appendChild(document.createTextNode(badgeText));
+          }
+          modeContent[currentMode].heroBadge = badgeText;
+        }
       }
 
       // --- 7. Karriere Positions ---
