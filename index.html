@@ -790,13 +790,134 @@
     body.maskulin-style .ki-form-card h3 { color: var(--text); }
     /* nachbestellung-section removed — now uses .services class */
 
+    /* === Trust Bar (USP-Leiste) === */
+    .trust-bar {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 20px 24px; position: relative; overflow: hidden;
+    }
+    .trust-bar::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+    .trust-bar .container {
+      display: flex; align-items: center; justify-content: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px; border-radius: var(--radius-full);
+      background: var(--cream); border: 1px solid var(--border);
+      font-size: 12px; font-weight: 600; color: var(--text);
+      transition: all 300ms var(--ease); white-space: nowrap;
+    }
+    .trust-badge:hover { border-color: var(--border-gold); background: var(--gold-dim); }
+    .trust-badge-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .trust-badge-icon svg { width: 16px; height: 16px; color: var(--gold); }
+
+    /* === Human-in-the-Loop Section === */
+    .human-section {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+      padding: 60px 24px; position: relative; overflow: hidden;
+    }
+    .human-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .human-visual {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .human-diagram {
+      display: flex; align-items: center; gap: 12px; justify-content: center;
+      flex-wrap: wrap;
+    }
+    .human-step {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 16px; border-radius: var(--radius); background: var(--white);
+      border: 1px solid var(--border); min-width: 100px; text-align: center;
+      transition: all 300ms var(--ease);
+    }
+    .human-step:hover { border-color: var(--border-gold); box-shadow: var(--shadow); }
+    .human-step-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .human-step-icon svg { width: 20px; height: 20px; }
+    .human-step-label { font-size: 11px; font-weight: 600; color: var(--text); }
+    .human-step-sub { font-size: 10px; color: var(--text-muted); }
+    .human-arrow { font-size: 18px; color: var(--gold); font-weight: 700; }
+    .human-guarantee {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 24px; border-radius: var(--radius-full);
+      background: linear-gradient(135deg, rgba(184,150,46,0.12), rgba(184,150,46,0.04));
+      border: 1px solid var(--border-gold); margin-top: 8px;
+    }
+    .human-guarantee svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+    .human-guarantee span { font-size: 13px; font-weight: 700; color: var(--gold); }
+
+    /* === Feedback Widget === */
+    .feedback-fab {
+      position: fixed; bottom: 24px; left: 24px; z-index: 100;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      color: var(--gold); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 200ms var(--ease);
+      box-shadow: 0 2px 12px rgba(184,150,46,0.15);
+    }
+    .feedback-fab:hover { transform: scale(1.1); background: var(--gold); color: #fff; border-color: var(--gold); }
+    .feedback-fab svg { width: 20px; height: 20px; }
+    .feedback-panel {
+      display: none; position: fixed; bottom: 82px; left: 24px; z-index: 101;
+      width: 320px; border-radius: 16px; background: var(--white);
+      border: 1px solid var(--border); box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+      overflow: hidden; font-family: 'Inter', sans-serif;
+    }
+    .feedback-panel.open { display: block; animation: fadeIn 200ms; }
+    .feedback-panel-header {
+      padding: 14px 18px; background: var(--gold); color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .feedback-panel-header span { font-weight: 600; font-size: 14px; }
+    .feedback-panel-body { padding: 16px; }
+    .feedback-panel textarea {
+      width: 100%; min-height: 80px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px;
+      font-family: 'Inter', sans-serif; resize: vertical; outline: none;
+      background: var(--cream); color: var(--text);
+    }
+    .feedback-panel textarea:focus { border-color: var(--gold); }
+    .feedback-panel-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .feedback-panel-actions select {
+      flex: 1; padding: 8px 10px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 12px; font-family: 'Inter', sans-serif;
+      background: var(--cream); color: var(--text);
+    }
+    .feedback-panel-actions button {
+      padding: 8px 18px; border: none; border-radius: var(--radius-sm);
+      background: var(--gold); color: #fff; font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all 200ms;
+    }
+    .feedback-panel-actions button:hover { background: var(--gold-light); }
+
+    /* === KI-Hinweis Badge (global, wiederverwendbar) === */
+    .ki-hinweis {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: var(--radius-full);
+      background: var(--gold-dim); border: 1px solid var(--border-gold);
+      font-size: 10px; font-weight: 600; color: var(--gold);
+      letter-spacing: 0.3px;
+    }
+    .ki-hinweis svg { width: 14px; height: 14px; }
+
     /* Responsive */
     #styleToggleMobile { display: none; }
     @media (max-width: 1200px) {
       .nav-links { display: none; }
       .nav-mobile { display: block; }
       #styleToggleMobile { display: flex; }
-      .about-grid, .ki-grid, .booking-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-grid, .ki-grid, .booking-grid, .contact-grid, .human-grid { grid-template-columns: 1fr; gap: 40px; }
       .services-grid, .karriere-grid { grid-template-columns: 1fr; }
       .karriere-benefits { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -813,6 +934,16 @@
        ============================================================= */
 
     @media (max-width: 479px) {
+      .trust-bar .container { gap: 10px; }
+      .trust-badge { padding: 8px 12px; font-size: 11px; }
+      .trust-badge-icon { width: 28px; height: 28px; }
+      .trust-badge-icon svg { width: 14px; height: 14px; }
+      .human-grid { grid-template-columns: 1fr; gap: 32px; }
+      .human-diagram { flex-direction: column; }
+      .human-arrow { transform: rotate(90deg); }
+      .human-section { padding: 40px 16px; }
+      .feedback-panel { width: calc(100% - 32px); left: 16px; bottom: 78px; }
+      .feedback-fab { bottom: 20px; left: 16px; width: 44px; height: 44px; }
       .nav { padding: 12px 16px; }
       .nav.scrolled { padding: 8px 16px; }
       .nav-logo { font-size: 18px; }
@@ -1086,6 +1217,97 @@
       <span>Entdecken</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </a>
+  </section>
+
+  <!-- Trust Bar — USP-Leiste -->
+  <div class="trust-bar reveal">
+    <div class="container">
+      <div class="trust-badge">
+        <div class="trust-badge-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700">100% DSGVO</div>
+          <div style="font-size:10px;color:var(--text-muted);font-weight:400">Datenschutz-konform</div>
+        </div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700">EU AI Act</div>
+          <div style="font-size:10px;color:var(--text-muted);font-weight:400">KI-Regulierung konform</div>
+        </div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700">Mensch entscheidet</div>
+          <div style="font-size:10px;color:var(--text-muted);font-weight:400">KI unterstuetzt nur</div>
+        </div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700">Server in DE</div>
+          <div style="font-size:10px;color:var(--text-muted);font-weight:400">Kein Drittland-Transfer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Human-in-the-Loop Section -->
+  <section class="human-section" id="human-loop">
+    <div class="container">
+      <div class="human-grid">
+        <div class="reveal">
+          <div class="section-label">Unser Versprechen</div>
+          <h2 class="section-title">KI unterstuetzt.<br><em>Ihr Friseur</em> entscheidet.</h2>
+          <p class="section-desc">Wir nutzen modernste KI-Technologie fuer Haaranalyse, Terminplanung und Produktempfehlungen. Aber die finale Entscheidung trifft immer ein Mensch — Ihr Friseurmeister mit jahrelanger Erfahrung.</p>
+          <p class="section-desc" style="margin-top:12px">Bei Casa 2035 steht der Mensch im Mittelpunkt. Die KI liefert praezise Daten und Analysen. Unsere Meisterfriseure machen daraus das Beste fuer Ihr Haar.</p>
+          <div class="human-guarantee reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>100% Human-in-the-Loop Garantie</span>
+          </div>
+        </div>
+        <div class="human-visual reveal reveal-delay-2">
+          <div class="human-diagram">
+            <div class="human-step">
+              <div class="human-step-icon" style="background:var(--gold-dim)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2"/></svg>
+              </div>
+              <div class="human-step-label">KI analysiert</div>
+              <div class="human-step-sub">Daten &amp; Muster</div>
+            </div>
+            <div class="human-arrow">&rarr;</div>
+            <div class="human-step">
+              <div class="human-step-icon" style="background:var(--gold-dim)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div class="human-step-label">Ergebnis</div>
+              <div class="human-step-sub">Empfehlung</div>
+            </div>
+            <div class="human-arrow">&rarr;</div>
+            <div class="human-step" style="border-color:var(--border-gold);background:var(--gold-dim)">
+              <div class="human-step-icon" style="background:var(--gold);border:none">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+              </div>
+              <div class="human-step-label" style="color:var(--gold)">Profi entscheidet</div>
+              <div class="human-step-sub">Finale Beratung</div>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:16px 20px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
+            <div style="font-size:11px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Das Ergebnis</div>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin:0">Praezise KI-Daten + menschliche Expertise = das Beste fuer Ihr Haar. Keine automatisierten Entscheidungen — nur fundierte Empfehlungen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- About -->
@@ -2033,6 +2255,11 @@
     }
 
     function submitHaaranalyse() {
+      // Rate-Limiting: max 3 Haaranalysen pro Stunde
+      if (typeof checkRateLimit === 'function' && !checkRateLimit('haaranalyse', 3)) {
+        showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error');
+        return;
+      }
       var name = document.getElementById('haarName').value.trim();
       var email = document.getElementById('haarEmail').value.trim();
       var fileInput = document.getElementById('haarUpload');
@@ -2044,6 +2271,14 @@
       if (!name || !email) {
         showToast('Bitte Vorname und E-Mail angeben.', 'error');
         return;
+      }
+      // Input-Sanitierung
+      if (typeof sanitizeInput === 'function') {
+        name = sanitizeInput(name, 100);
+        if (name === '__FLAGGED__') {
+          showToast('Ungueltige Eingabe erkannt.', 'error');
+          return;
+        }
       }
       // Bild als Base64 lesen und an Webhook senden
       var reader = new FileReader();
@@ -2086,11 +2321,26 @@
     // Submit Wunschfrisur — geht an WF-01 /homepage (Intent: wunschfrisur)
     function submitWunschfrisur(e) {
       e.preventDefault();
+      // Rate-Limiting: max 5 Wunschfrisur-Anfragen pro Stunde
+      if (typeof checkRateLimit === 'function' && !checkRateLimit('wunschfrisur', 5)) {
+        showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error');
+        return;
+      }
       var vorname = document.getElementById('wfVorname').value.trim();
       var nachname = document.getElementById('wfNachname').value.trim();
       var email = document.getElementById('wfEmail').value.trim();
       var telefon = document.getElementById('wfTelefon').value.trim();
       var nachricht = document.getElementById('wfNachricht').value.trim();
+      // Input-Sanitierung
+      if (typeof sanitizeInput === 'function') {
+        vorname = sanitizeInput(vorname, 100);
+        nachname = sanitizeInput(nachname, 100);
+        nachricht = sanitizeInput(nachricht, 1000);
+        if (vorname === '__FLAGGED__' || nachname === '__FLAGGED__' || nachricht === '__FLAGGED__') {
+          showToast('Ungueltige Eingabe erkannt. Bitte versuchen Sie es erneut.', 'error');
+          return;
+        }
+      }
       // WF-01 erwartet: from, name, message, timestamp, message_id
       // Plus Extra-Felder die an Sub-Workflow durchgereicht werden
       var payload = {
@@ -3399,6 +3649,31 @@
 
 
   </script>
+  <!-- Feedback Widget (Tester-Feedback) -->
+  <div class="feedback-fab" onclick="toggleFeedback()" title="Feedback geben">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
+  </div>
+  <div class="feedback-panel" id="feedbackPanel">
+    <div class="feedback-panel-header">
+      <span>Feedback geben</span>
+      <button onclick="toggleFeedback()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;padding:0;line-height:1">&times;</button>
+    </div>
+    <div class="feedback-panel-body">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Ihnen ist etwas aufgefallen? Fehler, Verbesserung, Idee — jedes Feedback hilft uns!</p>
+      <textarea id="feedbackText" placeholder="Was ist Ihnen aufgefallen?" maxlength="1000"></textarea>
+      <div class="feedback-panel-actions">
+        <select id="feedbackType">
+          <option value="bug">Fehler</option>
+          <option value="verbesserung">Verbesserung</option>
+          <option value="idee">Idee</option>
+          <option value="design">Design</option>
+          <option value="sonstiges">Sonstiges</option>
+        </select>
+        <button onclick="submitFeedback()">Senden</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Chatbot -->
   <div id="chatBotBtn" onclick="toggleChatBot()" style="position:fixed;bottom:24px;right:24px;z-index:100;width:56px;height:56px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(184,150,46,0.4);transition:transform 200ms">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -3522,6 +3797,11 @@
     }
     function chatSend(e) {
       e.preventDefault();
+      // Rate-Limiting: max 20 Chat-Nachrichten pro Stunde
+      if (typeof checkRateLimit === 'function' && !checkRateLimit('chat', 20)) {
+        addBotMessage('Sie senden zu viele Nachrichten. Bitte warten Sie einen Moment oder rufen Sie uns an: 089-1296294.');
+        return;
+      }
       var input = document.getElementById('chatInput');
       var text = input.value.trim();
       if (!text) return;
@@ -3571,6 +3851,102 @@
         answer = chatResponses.fallback;
       }
       setTimeout(function() { addBotMessage(answer); }, 500);
+    }
+  </script>
+  <script>
+    // === Feedback Widget ===
+    var feedbackOpen = false;
+    function toggleFeedback() {
+      feedbackOpen = !feedbackOpen;
+      var panel = document.getElementById('feedbackPanel');
+      if (feedbackOpen) {
+        panel.classList.add('open');
+      } else {
+        panel.classList.remove('open');
+      }
+    }
+    function submitFeedback() {
+      var text = document.getElementById('feedbackText').value.trim();
+      var type = document.getElementById('feedbackType').value;
+      if (!text) {
+        showToast('Bitte geben Sie Ihr Feedback ein.', 'error');
+        return;
+      }
+      if (text.length < 5) {
+        showToast('Bitte etwas mehr Details.', 'error');
+        return;
+      }
+      var payload = {
+        feedback: text,
+        type: type,
+        page: 'homepage',
+        url: window.location.href,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        viewport: window.innerWidth + 'x' + window.innerHeight,
+        style: currentStyle || 'feminin'
+      };
+      // An Webhook senden (wenn verfuegbar)
+      if (typeof webhookBase !== 'undefined' && webhookBase) {
+        fetch(webhookBase + '/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(function() {});
+      }
+      // Lokal speichern als Fallback
+      var stored = JSON.parse(localStorage.getItem('casa_feedback') || '[]');
+      stored.push(payload);
+      localStorage.setItem('casa_feedback', JSON.stringify(stored));
+      showToast('Vielen Dank fuer Ihr Feedback!', 'success');
+      document.getElementById('feedbackText').value = '';
+      toggleFeedback();
+    }
+
+    // === Rate Limiting (Spam-Schutz) ===
+    var rateLimits = {};
+    function checkRateLimit(action, maxPerHour) {
+      maxPerHour = maxPerHour || 5;
+      var now = Date.now();
+      var hourAgo = now - 3600000;
+      if (!rateLimits[action]) rateLimits[action] = [];
+      // Alte Eintraege entfernen
+      rateLimits[action] = rateLimits[action].filter(function(t) { return t > hourAgo; });
+      if (rateLimits[action].length >= maxPerHour) {
+        return false; // Limit erreicht
+      }
+      rateLimits[action].push(now);
+      return true;
+    }
+
+    // === Prompt-Injection Schutz ===
+    function sanitizeInput(text, maxLen) {
+      if (!text) return '';
+      maxLen = maxLen || 500;
+      text = text.substring(0, maxLen);
+      // Verdaechtige Muster entfernen
+      var suspicious = [
+        /ignore\s+(previous|all|above)/gi,
+        /system\s*prompt/gi,
+        /you\s+are\s+(now|a)/gi,
+        /\bpretend\b/gi,
+        /\brole\s*play/gi,
+        /\bjailbreak/gi,
+        /\bprompt\s*inject/gi,
+        /<\/?script/gi,
+        /javascript\s*:/gi,
+        /on\w+\s*=/gi
+      ];
+      var flagged = false;
+      suspicious.forEach(function(pattern) {
+        if (pattern.test(text)) flagged = true;
+      });
+      // XSS-Schutz
+      text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      if (flagged) {
+        return '__FLAGGED__';
+      }
+      return text;
     }
   </script>
   <script>
