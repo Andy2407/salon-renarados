@@ -911,6 +911,25 @@
     }
     .ki-hinweis svg { width: 14px; height: 14px; }
 
+    /* === Cookie-Banner === */
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9990;
+      background: rgba(26,26,26,0.97); backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(184,150,46,0.2);
+      padding: 16px 24px; display: none; align-items: center; justify-content: center; gap: 14px;
+      flex-wrap: wrap; font-size: 13px; color: #ccc;
+    }
+    .cookie-banner.show { display: flex; }
+    .cookie-banner a { color: var(--gold); text-decoration: underline; }
+    .cookie-btn { padding: 10px 18px; border-radius: var(--radius-full); font-size: 12px; font-weight: 600; cursor: pointer; border: none; font-family: 'Inter', sans-serif; }
+    .cookie-btn-accept { background: linear-gradient(135deg, #b8962e, #c9a93d); color: #fff; }
+    .cookie-btn-reject { background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.15); }
+
+    /* === Logout-Button === */
+    .nav-logout-salon { background: none; border: 1px solid rgba(184,150,46,0.3); border-radius: var(--radius-full); padding: 5px 12px; font-size: 11px; font-weight: 600; color: var(--gold); cursor: pointer; font-family: 'Inter', sans-serif; transition: all 200ms; display: none; }
+    .nav-logout-salon:hover { background: rgba(184,150,46,0.1); border-color: var(--gold); }
+    .nav-logout-salon.show { display: inline-flex; align-items: center; gap: 4px; }
+
     /* Responsive */
     #styleToggleMobile { display: none; }
     @media (max-width: 1200px) {
@@ -933,6 +952,9 @@
        Enhanced Responsive — @designer (23.03.2026)
        ============================================================= */
 
+    @media (max-width: 600px) {
+      .cookie-banner { flex-direction: column; text-align: center; padding: 14px; gap: 10px; }
+    }
     @media (max-width: 479px) {
       .trust-bar .container { gap: 10px; }
       .trust-badge { padding: 8px 12px; font-size: 11px; }
@@ -1117,6 +1139,7 @@
       <a href="#nachbestellungen">Produkte</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
       <span id="openStatus" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--radius-full);letter-spacing:0.3px"></span>
+      <button class="nav-logout-salon" id="salonLogout" onclick="doSalonLogout()">Abmelden</button>
       <div class="style-toggle" id="styleToggle">
         <button class="style-toggle-btn active" data-style="feminin" onclick="setStyle('feminin')">Feminin</button>
         <button class="style-toggle-btn" data-style="maskulin" onclick="setStyle('maskulin')">Maskulin</button>
@@ -1145,6 +1168,7 @@
     <a href="#nachbestellungen" onclick="toggleMobile()">Produkte</a>
     <a href="#contact" onclick="toggleMobile()">Kontakt</a>
     <a href="#karriere" onclick="toggleMobile()">Karriere</a>
+    <a href="#" id="salonMobileLogout" onclick="event.preventDefault();toggleMobile();doSalonLogout()" style="color:#e53e3e;display:none">Abmelden</a>
   </div>
 
   <div class="toast-container" id="toastContainer"></div>
@@ -3652,10 +3676,19 @@
 
 
   </script>
+  <!-- Cookie-Banner (DSGVO) -->
+  <div class="cookie-banner" id="cookieBanner">
+    <span>Diese Website verwendet nur technisch notwendige Cookies. Wir laden Google Fonts extern. <a href="#" onclick="event.preventDefault();openLegal('datenschutz')">Datenschutz</a></span>
+    <div style="display:flex;gap:8px;flex-shrink:0">
+      <button class="cookie-btn cookie-btn-reject" onclick="handleCookies('reject')">Nur notwendige</button>
+      <button class="cookie-btn cookie-btn-accept" onclick="handleCookies('accept')">Verstanden</button>
+    </div>
+  </div>
+
   <!-- Login Overlay -->
   <div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px">
     <div style="text-align:center">
-      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:4px"><em style="color:#b8962e;font-style:italic">Casa</em> 2035</div>
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:4px"><em style="color:#b8962e;font-style:italic">Rena Rados</em> Friseure</div>
       <div style="font-size:11px;color:#888;letter-spacing:1px;text-transform:uppercase">Salon Website — Testphase</div>
     </div>
     <div style="background:#222;border:1px solid rgba(184,150,46,0.2);border-radius:16px;padding:32px;width:90%;max-width:340px;text-align:center">
@@ -3674,6 +3707,7 @@
       if (pw === 'casa2035') {
         document.getElementById('loginOverlay').style.display = 'none';
         sessionStorage.setItem('casa_auth', '1');
+        showSalonLogout(true);
       } else {
         document.getElementById('loginError').style.display = 'block';
         document.getElementById('loginPw').value = '';
@@ -3683,6 +3717,31 @@
     }
     if (sessionStorage.getItem('casa_auth') === '1') {
       document.getElementById('loginOverlay').style.display = 'none';
+      showSalonLogout(true);
+    }
+
+    // Logout
+    function showSalonLogout(show) {
+      var nav = document.getElementById('salonLogout');
+      var mob = document.getElementById('salonMobileLogout');
+      if (nav) nav.classList.toggle('show', show);
+      if (mob) mob.style.display = show ? '' : 'none';
+    }
+    function doSalonLogout() {
+      sessionStorage.removeItem('casa_auth');
+      showSalonLogout(false);
+      document.getElementById('loginOverlay').style.display = 'flex';
+      document.getElementById('loginPw').value = '';
+      document.getElementById('loginError').style.display = 'none';
+    }
+
+    // Cookie-Banner
+    function handleCookies(choice) {
+      localStorage.setItem('salon_rr_cookies', choice);
+      document.getElementById('cookieBanner').classList.remove('show');
+    }
+    if (!localStorage.getItem('salon_rr_cookies')) {
+      setTimeout(function() { document.getElementById('cookieBanner').classList.add('show'); }, 1500);
     }
   </script>
 
