@@ -1122,6 +1122,60 @@
       .hero-scroll { display: none; }
       section { padding: 40px 24px; }
     }
+
+    /* === Kunden-Login System === */
+    .customer-bar {
+      display: none; align-items: center; gap: 10px;
+      padding: 8px 16px; background: var(--gold-dim); border: 1px solid var(--border-gold);
+      border-radius: var(--radius-full); font-size: 12px; font-weight: 500; color: var(--gold);
+      cursor: pointer; transition: all 200ms; white-space: nowrap;
+    }
+    .customer-bar.show { display: inline-flex; }
+    .customer-bar:hover { background: rgba(184,150,46,0.15); }
+    .customer-bar svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .customer-login-overlay {
+      position: fixed; inset: 0; z-index: 9997; background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center;
+    }
+    .customer-login-overlay.show { display: flex; }
+    .customer-login-card {
+      background: var(--white); border: 1px solid var(--border-gold); border-radius: var(--radius);
+      padding: 32px; width: 92%; max-width: 400px; box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .customer-login-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
+    .customer-login-card p { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+    .cl-field { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      font-size: 14px; font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text);
+      margin-bottom: 10px; box-sizing: border-box; transition: border-color 200ms; }
+    .cl-field:focus { outline: none; border-color: var(--gold); }
+    .cl-row { display: flex; gap: 10px; }
+    .cl-row .cl-field { flex: 1; }
+    .cl-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #fff; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+      font-family: 'Inter', sans-serif; cursor: pointer; margin-top: 6px; transition: opacity 200ms; }
+    .cl-btn:hover { opacity: 0.9; }
+    .cl-toggle { text-align: center; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
+    .cl-toggle a { color: var(--gold); font-weight: 600; cursor: pointer; text-decoration: none; }
+    .cl-error { font-size: 12px; color: #e53e3e; margin-bottom: 8px; display: none; }
+    .cl-welcome { display: none; padding: 14px 18px; background: var(--gold-dim); border: 1px solid var(--border-gold);
+      border-radius: var(--radius-sm); margin-bottom: 16px; }
+    .cl-welcome.show { display: flex; align-items: center; gap: 12px; }
+    .cl-welcome-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .cl-welcome-info { flex: 1; }
+    .cl-welcome-name { font-size: 14px; font-weight: 600; }
+    .cl-welcome-sub { font-size: 11px; color: var(--text-muted); }
+    .cl-welcome-logout { background: none; border: 1px solid var(--border); border-radius: var(--radius-full);
+      padding: 6px 12px; font-size: 11px; font-weight: 500; cursor: pointer; color: var(--text-muted);
+      font-family: 'Inter', sans-serif; transition: all 200ms; }
+    .cl-welcome-logout:hover { border-color: var(--gold); color: var(--gold); }
+    .cl-ai-hint { margin-top: 8px; padding: 10px 14px; background: rgba(184,150,46,0.05);
+      border: 1px solid var(--border-gold); border-radius: var(--radius-sm);
+      font-size: 12px; color: var(--text-light); cursor: pointer; transition: all 200ms; }
+    .cl-ai-hint:hover { background: rgba(184,150,46,0.1); }
+    .cl-ai-hint strong { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -1139,6 +1193,10 @@
       <a href="#nachbestellungen">Produkte</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
       <span id="openStatus" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--radius-full);letter-spacing:0.3px"></span>
+      <div class="customer-bar" id="customerBarNav" onclick="openCustomerLogin()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="customerBarName">Mein Konto</span>
+      </div>
       <button class="nav-logout-salon" id="salonLogout" onclick="doSalonLogout()">Abmelden</button>
       <div class="style-toggle" id="styleToggle">
         <button class="style-toggle-btn active" data-style="feminin" onclick="setStyle('feminin')">Feminin</button>
@@ -1442,24 +1500,27 @@
         <p class="section-desc">Echte Ergebnisse unserer Kundinnen und Kunden — jedes Bild erzählt eine Geschichte.</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px" id="galerieGrid" class="reveal">
-        <div style="aspect-ratio:3/4;border-radius:var(--radius);background:var(--warm);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all 200ms" onclick="document.getElementById('haaranalyse').scrollIntoView({behavior:'smooth'})">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:32px;height:32px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span style="font-size:12px;color:var(--text-muted);font-weight:500">Balayage</span>
-          <span style="font-size:9px;color:var(--gold);font-weight:600">Foto folgt</span>
+        <div style="aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer;transition:transform 200ms" onclick="document.getElementById('haaranalyse').scrollIntoView({behavior:'smooth'})" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&q=80" alt="Balayage Ergebnis" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 10px 10px;background:linear-gradient(transparent,rgba(0,0,0,0.7));text-align:center">
+            <span style="font-size:13px;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.5)">Balayage</span>
+          </div>
         </div>
-        <div style="aspect-ratio:3/4;border-radius:var(--radius);background:var(--warm);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:32px;height:32px"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg>
-          <span style="font-size:12px;color:var(--text-muted);font-weight:500">Haarschnitt</span>
-          <span style="font-size:9px;color:var(--gold);font-weight:600">Foto folgt</span>
+        <div style="aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer;transition:transform 200ms" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80" alt="Haarschnitt Ergebnis" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 10px 10px;background:linear-gradient(transparent,rgba(0,0,0,0.7));text-align:center">
+            <span style="font-size:13px;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.5)">Haarschnitt</span>
+          </div>
         </div>
-        <div style="aspect-ratio:3/4;border-radius:var(--radius);background:var(--warm);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:32px;height:32px"><path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg>
-          <span style="font-size:12px;color:var(--text-muted);font-weight:500">Farbbehandlung</span>
-          <span style="font-size:9px;color:var(--gold);font-weight:600">Foto folgt</span>
+        <div style="aspect-ratio:3/4;border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer;transition:transform 200ms" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80" alt="Farbbehandlung Ergebnis" style="width:100%;height:100%;object-fit:cover" loading="lazy">
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 10px 10px;background:linear-gradient(transparent,rgba(0,0,0,0.7));text-align:center">
+            <span style="font-size:13px;color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.5)">Farbbehandlung</span>
+          </div>
         </div>
       </div>
       <div style="text-align:center;margin-top:32px" class="reveal">
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Echte Kundenfotos folgen in Kürze. Folgen Sie uns auf Instagram für aktuelle Ergebnisse!</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">Noch mehr Ergebnisse und aktuelle Looks auf unserem Instagram!</p>
         <a href="https://www.instagram.com/rena_rados_friseure/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--border-gold);border-radius:var(--radius-full);font-size:13px;font-weight:600;color:var(--gold);text-decoration:none;transition:all 200ms">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
           @rena_rados_friseure folgen
@@ -1632,6 +1693,14 @@
       </div>
       <div class="booking-grid">
         <div class="booking-form reveal">
+          <div class="cl-welcome" id="clWelcomeBooking">
+            <div class="cl-welcome-avatar" id="clWelcomeAvatar">K</div>
+            <div class="cl-welcome-info">
+              <div class="cl-welcome-name" id="clWelcomeName">Kunde</div>
+              <div class="cl-welcome-sub">Ihre Daten sind vorausgefüllt</div>
+            </div>
+            <button class="cl-welcome-logout" onclick="customerLogout()">Abmelden</button>
+          </div>
           <h3>Termin buchen</h3>
           <form id="bookingForm" onsubmit="submitBooking(event)">
             <div class="form-row">
@@ -1746,7 +1815,7 @@
           </div>
           <div class="booking-info-card">
             <div class="booking-info-icon dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div class="booking-info-text"><h4>Schnelle Bestaetigung</h4><p>Online-Anfragen werden automatisch bearbeitet. Sie erhalten innerhalb weniger Minuten eine Bestaetigung per E-Mail.</p></div>
+            <div class="booking-info-text"><h4>Schnelle Bestätigung</h4><p>Online-Anfragen werden automatisch bearbeitet. Sie erhalten innerhalb weniger Minuten eine Bestätigung per E-Mail.</p></div>
           </div>
         </div>
       </div>
@@ -1863,13 +1932,13 @@
         <div class="karriere-card reveal" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Friseur/in'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M20.83 14.83a4.24 4.24 0 0 0-6-6L6 18H4v-2l9.17-9.17"/></svg></div>
           <h3>Friseur/in (m/w/d)</h3>
-          <p>Du liebst es, Menschen zu verwoehnen, und arbeitest gerne mit Farbe und Schere? Dann bist du bei uns genau richtig. Ob Balayage, kreative Schnitte oder Brautstyling.</p>
+          <p>Du liebst es, Menschen zu verwöhnen, und arbeitest gerne mit Farbe und Schere? Dann bist du bei uns genau richtig. Ob Balayage, kreative Schnitte oder Brautstyling.</p>
           <span class="karriere-tag">Voll- oder Teilzeit</span>
         </div>
         <div class="karriere-card reveal reveal-delay-1" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Stylist/in'">
           <div class="karriere-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <h3>Stylist/in (m/w/d)</h3>
-          <p>Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf hoechstem Niveau bedient.</p>
+          <p>Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf höchstem Niveau bedient.</p>
           <span class="karriere-tag">Voll- oder Teilzeit</span>
         </div>
         <div class="karriere-card reveal reveal-delay-2" onclick="location.href='mailto:renarados.friseure@hotmail.com?subject=Bewerbung%20als%20Auszubildende/r'">
@@ -1889,7 +1958,7 @@
       <div class="karriere-benefits">
         <div class="karriere-benefit reveal">
           <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-          <div><h4>Familienaeres Team</h4><p>Kein Stress, kein Druck — bei uns arbeitet man miteinander, nicht gegeneinander</p></div>
+          <div><h4>Familiäres Team</h4><p>Kein Stress, kein Druck — bei uns arbeitet man miteinander, nicht gegeneinander</p></div>
         </div>
         <div class="karriere-benefit reveal reveal-delay-1">
           <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg></div>
@@ -1897,7 +1966,7 @@
         </div>
         <div class="karriere-benefit reveal reveal-delay-2">
           <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></div>
-          <div><h4>Weiterbildung</h4><p>Regelmaessige Schulungen und Seminare auf Salonkosten</p></div>
+          <div><h4>Weiterbildung</h4><p>Regelmäßige Schulungen und Seminare auf Salonkosten</p></div>
         </div>
         <div class="karriere-benefit reveal">
           <div class="karriere-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
@@ -2417,7 +2486,7 @@
       6: { open: 9, close: 15 }  // Samstag (bis 15 Uhr)
     };
 
-    var monthNames = ['Januar', 'Februar', 'Maerz', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+    var monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
 
     function renderCalendar() {
       var header = document.getElementById('calMonthYear');
@@ -2610,7 +2679,7 @@
       },
       { name: 'Farbbehandlung', leistung: 'Farbbehandlung', price: 65, dur: '90-150 Min',
         desc: 'Von zartem Balayage bis hin zur kompletten Verwandlung. Premium-Produkte von La Biosthetique für strahlende, langanhaltende Farben.',
-        addons: [{n:'Balayage / Highlights',p:40},{n:'Olaplex Schutzbehandlung',p:25},{n:'Glossing / Toenung',p:20},{n:'Haarschnitt dazu',p:25}],
+        addons: [{n:'Balayage / Highlights',p:40},{n:'Olaplex Schutzbehandlung',p:25},{n:'Glossing / Tönung',p:20},{n:'Haarschnitt dazu',p:25}],
         products: [{n:'Color Care Shampoo',i:'Farbschutz & Glanz',p:'22,90'},{n:'Color Protect Maske',i:'Intensive Farbpflege',p:'28,90'}]
       },
       { name: 'Wunschfrisur-Service', leistung: 'Beratung', price: 0, dur: 'Kostenlos',
@@ -2619,12 +2688,12 @@
       },
       { name: 'Haarpflege-Treatment', leistung: 'Haarpflege / Treatment', price: 25, dur: '30-45 Min',
         desc: 'Intensive Pflege für strapaziertes Haar. Olaplex, Keratin oder individuelle Kuren — wir finden die perfekte Behandlung für Ihr Haar.',
-        addons: [{n:'Olaplex Stand-Alone',p:35},{n:'Keratin-Glaettung',p:80},{n:'Kopfhaut-Peeling',p:15},{n:'Haarbad mit aetherischen Oelen',p:18}],
+        addons: [{n:'Olaplex Stand-Alone',p:35},{n:'Keratin-Glättung',p:80},{n:'Kopfhaut-Peeling',p:15},{n:'Haarbad mit ätherischen Ölen',p:18}],
         products: [{n:'Olaplex No. 3',i:'Reparatur für zu Hause',p:'28,00'},{n:'Repair Maske',i:'Tiefenpflege',p:'24,90'}]
       },
       { name: 'Styling', leistung: 'Brautstyling', price: 45, dur: '60-90 Min',
         desc: 'Hochsteckfrisuren, Brautstyling, Event-Looks — wir zaubern Ihnen den perfekten Style für Ihren besonderen Anlass. Inklusive Probestyling auf Wunsch.',
-        addons: [{n:'Make-up dazu',p:40},{n:'Probestyling (separater Termin)',p:35},{n:'Haarschmuck / Accessoires',p:15},{n:'Glaetteisen-Finish',p:10}],
+        addons: [{n:'Make-up dazu',p:40},{n:'Probestyling (separater Termin)',p:35},{n:'Haarschmuck / Accessoires',p:15},{n:'Glätteisen-Finish',p:10}],
         products: [{n:'Haarspray Strong Hold',i:'Den ganzen Tag perfekt',p:'19,90'},{n:'Glanz-Serum',i:'Seidig & strahlend',p:'24,90'}]
       },
       { name: 'Shop — Produkte', leistung: 'Beratung', price: 0, dur: 'Im Salon',
@@ -2640,7 +2709,7 @@
       },
       { name: 'Bartpflege', leistung: 'Bartpflege', price: 18, dur: '20-30 Min',
         desc: 'Bart trimmen, formen und pflegen — vom 3-Tage-Bart bis zum Vollbart. Heisses Tuch, Bartöle und präzise Konturen.',
-        addons: [{n:'Hot Towel Rasur',p:20},{n:'Bartfaerbung',p:15},{n:'Gesichtspflege dazu',p:18},{n:'Augenbrauen korrigieren',p:8}],
+        addons: [{n:'Hot Towel Rasur',p:20},{n:'Bartfärbung',p:15},{n:'Gesichtspflege dazu',p:18},{n:'Augenbrauen korrigieren',p:8}],
         products: [{n:'Bartöl Classic',i:'Für geschmeidigen Bart',p:'18,90'},{n:'Bartwachs',i:'Styling & Halt',p:'14,90'}]
       },
       { name: 'Wunschfrisur-Service', leistung: 'Beratung', price: 0, dur: 'Kostenlos',
@@ -2650,7 +2719,7 @@
       { name: 'Haar- & Kopfhautpflege', leistung: 'Haarpflege / Treatment', price: 20, dur: '20-30 Min',
         desc: 'Kopfhaut-Treatment, Anti-Schuppen-Kur oder Feuchtigkeitspflege. Für gesundes Haar und eine gepflegte Kopfhaut.',
         addons: [{n:'Kopfhaut-Peeling',p:15},{n:'Anti-Haarausfall Treatment',p:25},{n:'Tiefenreinigung',p:12},{n:'Relaxing Kopfmassage',p:15}],
-        products: [{n:'Kopfhaut-Tonikum',i:'Gegen Schuppen & Juckreiz',p:'19,90'},{n:'Caffeine Shampoo',i:'Staerkt die Haarwurzel',p:'16,90'}]
+        products: [{n:'Kopfhaut-Tonikum',i:'Gegen Schuppen & Juckreiz',p:'19,90'},{n:'Caffeine Shampoo',i:'Stärkt die Haarwurzel',p:'16,90'}]
       },
       { name: 'Grooming', leistung: 'Beratung', price: 35, dur: '45-60 Min',
         desc: 'Das Rundum-Paket: Schnitt, Bartstyling und Pflege in einer Sitzung. Der perfekte Look für Business oder Event.',
@@ -2898,9 +2967,9 @@
         cardCtas: ['Details & buchen', 'Details & buchen', 'Jetzt anfragen', 'Details & buchen', 'Details & buchen', 'Produkte entdecken'],
         bookingOptions: ['Damenhaarschnitt', 'Kinderhaarschnitt', 'Farbbehandlung', 'Balayage / Highlights', 'Haarpflege / Treatment', 'Brautstyling', 'Beratung', 'Sonstiges'],
         karriereTitle1: 'Friseur/in (m/w/d)',
-        karriereDesc1: 'Du liebst es, Menschen zu verwoehnen, und arbeitest gerne mit Farbe und Schere? Dann bist du bei uns genau richtig. Ob Balayage, kreative Schnitte oder Brautstyling.',
+        karriereDesc1: 'Du liebst es, Menschen zu verwöhnen, und arbeitest gerne mit Farbe und Schere? Dann bist du bei uns genau richtig. Ob Balayage, kreative Schnitte oder Brautstyling.',
         karriereTitle2: 'Stylist/in (m/w/d)',
-        karriereDesc2: 'Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf hoechstem Niveau bedient.',
+        karriereDesc2: 'Klassischer Schnitt, Bartpflege, maskuline Styles — du kennst dich aus und willst in einem modernen Salon arbeiten, der auf höchstem Niveau bedient.',
         karriereEmail1: 'Bewerbung%20als%20Friseur/in',
         karriereEmail2: 'Bewerbung%20als%20Stylist/in',
         // Haaranalyse-Tab Texte (feminin)
@@ -3674,8 +3743,224 @@
       loadConfig();
     }
 
+    // =============================================================
+    // Kunden-Login System
+    // Registrierung + Login + Auto-Fill + KI-Textvorschlag
+    // Stand: 02.04.2026 | @leitung
+    // =============================================================
+
+    var salonCustomers = JSON.parse(localStorage.getItem('salon_customers') || '{}');
+    var activeCustomer = JSON.parse(sessionStorage.getItem('salon_customer') || 'null');
+
+    function openCustomerLogin() {
+      if (activeCustomer) {
+        if (confirm('Eingeloggt als ' + activeCustomer.vorname + ' ' + activeCustomer.nachname + '.\n\nAbmelden?')) {
+          customerLogout();
+        }
+        return;
+      }
+      document.getElementById('clLoginMode').style.display = '';
+      document.getElementById('clRegisterMode').style.display = 'none';
+      document.getElementById('clLoginError').style.display = 'none';
+      document.getElementById('customerLoginOverlay').classList.add('show');
+    }
+    function closeCustomerLogin() {
+      document.getElementById('customerLoginOverlay').classList.remove('show');
+    }
+    function showCustomerRegister() {
+      document.getElementById('clLoginMode').style.display = 'none';
+      document.getElementById('clRegisterMode').style.display = '';
+      document.getElementById('clRegError').style.display = 'none';
+    }
+    function showCustomerLogin() {
+      document.getElementById('clLoginMode').style.display = '';
+      document.getElementById('clRegisterMode').style.display = 'none';
+    }
+
+    function customerRegister() {
+      var vorname = document.getElementById('clRegVorname').value.trim();
+      var nachname = document.getElementById('clRegNachname').value.trim();
+      var email = document.getElementById('clRegEmail').value.trim().toLowerCase();
+      var telefon = document.getElementById('clRegTelefon').value.trim();
+      var pw = document.getElementById('clRegPw').value;
+      var pw2 = document.getElementById('clRegPw2').value;
+      var errEl = document.getElementById('clRegError');
+
+      if (!vorname || !nachname || !email || !pw) {
+        errEl.textContent = 'Bitte alle Pflichtfelder ausfüllen.';
+        errEl.style.display = 'block'; return;
+      }
+      if (!email.includes('@') || !email.includes('.')) {
+        errEl.textContent = 'Bitte eine gültige E-Mail eingeben.';
+        errEl.style.display = 'block'; return;
+      }
+      if (pw.length < 4) {
+        errEl.textContent = 'Passwort muss mindestens 4 Zeichen haben.';
+        errEl.style.display = 'block'; return;
+      }
+      if (pw !== pw2) {
+        errEl.textContent = 'Passwörter stimmen nicht überein.';
+        errEl.style.display = 'block'; return;
+      }
+      if (salonCustomers[email]) {
+        errEl.textContent = 'E-Mail bereits registriert. Bitte anmelden.';
+        errEl.style.display = 'block'; return;
+      }
+      salonCustomers[email] = {
+        vorname: vorname, nachname: nachname, email: email,
+        telefon: telefon, pw: pw, services: [], createdAt: new Date().toISOString()
+      };
+      localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
+      activeCustomer = salonCustomers[email];
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      closeCustomerLogin();
+      applyCustomerLogin();
+    }
+
+    function customerLogin() {
+      var email = document.getElementById('clLoginEmail').value.trim().toLowerCase();
+      var pw = document.getElementById('clLoginPw').value;
+      var errEl = document.getElementById('clLoginError');
+      var customer = salonCustomers[email];
+      if (!customer || customer.pw !== pw) {
+        errEl.textContent = 'E-Mail oder Passwort falsch.';
+        errEl.style.display = 'block'; return;
+      }
+      activeCustomer = customer;
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      closeCustomerLogin();
+      applyCustomerLogin();
+    }
+
+    function customerLogout() {
+      activeCustomer = null;
+      sessionStorage.removeItem('salon_customer');
+      var nameEl = document.getElementById('customerBarName');
+      if (nameEl) nameEl.textContent = 'Mein Konto';
+      var welcome = document.getElementById('clWelcomeBooking');
+      if (welcome) welcome.classList.remove('show');
+      ['bkVorname','bkNachname','bkEmail','bkTelefon','haarName','haarEmail','wfVorname','wfNachname','wfEmail'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      var hint = document.getElementById('clAiHint');
+      if (hint) hint.remove();
+    }
+
+    function applyCustomerLogin() {
+      if (!activeCustomer) return;
+      var c = activeCustomer;
+
+      // Nav-Bar
+      var nameEl = document.getElementById('customerBarName');
+      if (nameEl) nameEl.textContent = c.vorname;
+
+      // Willkommen-Bar
+      var welcome = document.getElementById('clWelcomeBooking');
+      if (welcome) {
+        welcome.classList.add('show');
+        var avatar = document.getElementById('clWelcomeAvatar');
+        if (avatar) avatar.textContent = (c.vorname.charAt(0) + c.nachname.charAt(0)).toUpperCase();
+        var nameFull = document.getElementById('clWelcomeName');
+        if (nameFull) nameFull.textContent = c.vorname + ' ' + c.nachname;
+      }
+
+      // Auto-Fill Buchungsformular
+      [{id:'bkVorname',v:c.vorname},{id:'bkNachname',v:c.nachname},{id:'bkEmail',v:c.email},{id:'bkTelefon',v:c.telefon||''}].forEach(function(f) {
+        var el = document.getElementById(f.id);
+        if (el && !el.value) el.value = f.v;
+      });
+
+      // Auto-Fill Haaranalyse
+      var hn = document.getElementById('haarName');
+      var he = document.getElementById('haarEmail');
+      if (hn && !hn.value) hn.value = c.vorname;
+      if (he && !he.value) he.value = c.email;
+
+      // Auto-Fill Wunschfrisur
+      var wv = document.getElementById('wfVorname');
+      var wn = document.getElementById('wfNachname');
+      var we = document.getElementById('wfEmail');
+      if (wv && !wv.value) wv.value = c.vorname;
+      if (wn && !wn.value) wn.value = c.nachname;
+      if (we && !we.value) we.value = c.email;
+
+      // KI-Textvorschlag (sicher, ohne innerHTML)
+      var notiz = document.getElementById('bkNotiz');
+      if (notiz && !notiz.value && !document.getElementById('clAiHint')) {
+        var hints = [
+          'Ich hätte gerne eine ausführliche Beratung zum Thema Haarpflege.',
+          'Bitte etwas mehr Zeit einplanen — ich bin unentschlossen beim Stil.',
+          'Ich komme zum ersten Mal und freue mich auf die Beratung!',
+          'Bitte auf Empfindlichkeit bei der Kopfhaut achten.',
+          'Gerne einen Kaffee zum Start — und dann lasse ich mich überraschen!'
+        ];
+        var hintText = hints[Math.floor(Math.random() * hints.length)];
+        var aiHint = document.createElement('div');
+        aiHint.className = 'cl-ai-hint';
+        aiHint.id = 'clAiHint';
+        aiHint.onclick = function() { notiz.value = hintText; aiHint.style.display = 'none'; };
+        var strong = document.createElement('strong');
+        strong.textContent = 'KI-Vorschlag: ';
+        aiHint.appendChild(strong);
+        aiHint.appendChild(document.createTextNode(hintText));
+        var br = document.createElement('br');
+        aiHint.appendChild(br);
+        var tip = document.createElement('span');
+        tip.style.cssText = 'font-size:10px;color:var(--gold);margin-top:4px;display:inline-block';
+        tip.textContent = 'Tippen zum Übernehmen';
+        aiHint.appendChild(tip);
+        if (notiz.parentNode) notiz.parentNode.insertBefore(aiHint, notiz.nextSibling);
+      }
+    }
+
+    // Wiederherstellen bei Seitenlade
+    if (activeCustomer) applyCustomerLogin();
+    var customerBar = document.getElementById('customerBarNav');
+    if (customerBar) customerBar.classList.add('show');
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var ov = document.getElementById('customerLoginOverlay');
+        if (ov && ov.classList.contains('show')) closeCustomerLogin();
+      }
+    });
+
 
   </script>
+  <!-- Kunden-Login Overlay -->
+  <div class="customer-login-overlay" id="customerLoginOverlay" onclick="if(event.target===this)closeCustomerLogin()">
+    <div class="customer-login-card">
+      <!-- Login-Modus -->
+      <div id="clLoginMode">
+        <h3>Willkommen zurück</h3>
+        <p>Melden Sie sich an, um Formulare automatisch auszufüllen.</p>
+        <input type="email" class="cl-field" id="clLoginEmail" placeholder="E-Mail-Adresse" onkeypress="if(event.key==='Enter')document.getElementById('clLoginPw').focus()">
+        <input type="password" class="cl-field" id="clLoginPw" placeholder="Passwort" onkeypress="if(event.key==='Enter')customerLogin()">
+        <div class="cl-error" id="clLoginError">E-Mail oder Passwort falsch</div>
+        <button class="cl-btn" onclick="customerLogin()">Anmelden</button>
+        <div class="cl-toggle">Noch kein Konto? <a onclick="showCustomerRegister()">Jetzt registrieren</a></div>
+      </div>
+      <!-- Registrierung -->
+      <div id="clRegisterMode" style="display:none">
+        <h3>Konto erstellen</h3>
+        <p>Registrieren Sie sich für schnellere Buchungen und persönliche Vorschläge.</p>
+        <div class="cl-row">
+          <input type="text" class="cl-field" id="clRegVorname" placeholder="Vorname" maxlength="50">
+          <input type="text" class="cl-field" id="clRegNachname" placeholder="Nachname" maxlength="50">
+        </div>
+        <input type="email" class="cl-field" id="clRegEmail" placeholder="E-Mail-Adresse" maxlength="120">
+        <input type="tel" class="cl-field" id="clRegTelefon" placeholder="Telefon (optional)" maxlength="30">
+        <input type="password" class="cl-field" id="clRegPw" placeholder="Passwort (min. 4 Zeichen)" minlength="4">
+        <input type="password" class="cl-field" id="clRegPw2" placeholder="Passwort wiederholen" onkeypress="if(event.key==='Enter')customerRegister()">
+        <div class="cl-error" id="clRegError"></div>
+        <button class="cl-btn" onclick="customerRegister()">Konto erstellen</button>
+        <div class="cl-toggle">Schon registriert? <a onclick="showCustomerLogin()">Zur Anmeldung</a></div>
+        <p style="font-size:9px;color:var(--text-muted);margin-top:12px;text-align:center;line-height:1.4">Ihre Daten werden nur lokal gespeichert und für die Terminbuchung verwendet. <a href="#" onclick="event.preventDefault();openLegal('datenschutz')" style="color:var(--gold)">Datenschutz</a></p>
+      </div>
+    </div>
+  </div>
+
   <!-- Cookie-Banner (DSGVO) -->
   <div class="cookie-banner" id="cookieBanner">
     <span>Diese Website verwendet nur technisch notwendige Cookies. Wir laden Google Fonts extern. <a href="#" onclick="event.preventDefault();openLegal('datenschutz')">Datenschutz</a></span>
@@ -3782,7 +4067,7 @@
       </div>
       <button onclick="toggleChatBot()" style="background:none;border:none;color:#fff;cursor:pointer;padding:0;line-height:1;font-size:20px">&times;</button>
     </div>
-    <div style="padding:6px 12px;background:rgba(184,150,46,0.08);font-size:10px;color:var(--text-muted);text-align:center">KI-gestuetzter Assistent &mdash; Angaben ohne Gewaehr</div>
+    <div style="padding:6px 12px;background:rgba(184,150,46,0.08);font-size:10px;color:var(--text-muted);text-align:center">KI-gestützter Assistent &mdash; Angaben ohne Gewähr</div>
     <div id="chatMessages" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:320px"></div>
     <div id="chatQuickReplies" style="padding:0 16px 8px;display:flex;flex-wrap:wrap;gap:6px">
       <button class="cb-qr" onclick="chatQuickReply('oeffnungszeiten')" style="padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif">Öffnungszeiten</button>
