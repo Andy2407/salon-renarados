@@ -2,12 +2,12 @@
   "salon": {
     "name": "Rena Rados Friseure",
     "slogan": "Premium Haarstyling",
-    "city": "Muenchen",
-    "address": "Erzgiessereistr. 51, 80335 Muenchen",
+    "city": "München",
+    "address": "Erzgiessereistr. 51, 80335 München",
     "addressNote": "Eingang Dachauer Str. 143",
     "phone": "089 - 1296294",
     "email": "renarados.friseure@hotmail.com",
-    "mapsUrl": "https://maps.google.com/?q=Erzgiessereistr.+51,+80335+Muenchen",
+    "mapsUrl": "https://maps.google.com/?q=Erzgiessereistr.+51,+80335+München",
     "oeffnungszeiten": {
       "Mo": "Geschlossen",
       "Di": "09:00 - 18:00",
@@ -40,8 +40,8 @@
   },
   "content": {
     "feminin": {
-      "heroTitle": "Entspannen.<br>Geniessen. <em>Strahlen.</em>",
-      "heroSub": "Hier stehen Sie im Mittelpunkt. Ankommen, durchatmen, bei einem Kaffee ankommen. Eine wohltuende Kopfmassage geniessen — und mit Ihrem Wunschlook den Salon verlassen. Bei uns dreht sich alles um Sie.",
+      "heroTitle": "Entspannen.<br>Genießen. <em>Strahlen.</em>",
+      "heroSub": "Hier stehen Sie im Mittelpunkt. Ankommen, durchatmen, bei einem Kaffee ankommen. Eine wohltuende Kopfmassage genießen — und mit Ihrem Wunschlook den Salon verlassen. Bei uns dreht sich alles um Sie.",
       "heroBadge": "Die Zukunft der Haarpflege. Jetzt.",
       "aboutTitle": "Mehr als nur ein<br><em>Friseur</em>",
       "aboutDesc": "Bei Rena Rados geht es nicht nur um Haare. Es geht um Sie. Um Ihren Moment.",
@@ -49,31 +49,31 @@
       "svcDesc": "Von der sanften Pflege bis zum kompletten Umstyling — alles aus einer Hand."
     },
     "maskulin": {
-      "heroTitle": "Stil.<br>Praezision. <em>Charakter.</em>",
-      "heroSub": "Kein Schnickschnack, nur Handwerk auf hoechstem Niveau. Praeziser Schnitt, perfekter Bart, starker Auftritt. Ihr persoenlicher Barber wartet.",
-      "heroBadge": "Maskulin. Modern. Muenchen.",
+      "heroTitle": "Stil.<br>Präzision. <em>Charakter.</em>",
+      "heroSub": "Kein Schnickschnack, nur Handwerk auf höchstem Niveau. Präziser Schnitt, perfekter Bart, starker Auftritt. Ihr persönlicher Barber wartet.",
+      "heroBadge": "Maskulin. Modern. München.",
       "aboutTitle": "Mehr als nur ein<br><em>Barbershop</em>",
-      "aboutDesc": "Hier wird nicht gequatscht, hier wird geliefert. Praezise Schnitte, saubere Konturen, erstklassige Bartpflege.",
+      "aboutDesc": "Hier wird nicht gequatscht, hier wird geliefert. Präzise Schnitte, saubere Konturen, erstklassige Bartpflege.",
       "svcTitle": "Maskulin <em>Grooming</em>",
       "svcDesc": "Schnitt, Bart, Pflege — alles was Mann braucht, auf Premium-Niveau."
     }
   },
   "services": {
     "feminin": [
-      { "name": "Haarschnitt", "leistung": "Waschen, Schneiden, Foehnen", "price": "ab 35 EUR", "dur": "45-60 Min.", "desc": "Beratung, praeziser Schnitt und professionelles Finish.", "addons": ["Ansatzfarbe (+25 EUR)", "Olaplex Treatment (+15 EUR)", "Intensivpflege (+12 EUR)"], "products": ["La Biosthetique Shampoo Vital", "Olaplex No.3"] },
-      { "name": "Farbbehandlung", "leistung": "Coloration, Straehnen, Balayage", "price": "ab 65 EUR", "dur": "90-150 Min.", "desc": "Balayage, Highlights, Glossing oder komplette Farbveraenderung.", "addons": ["Glossing (+20 EUR)", "Olaplex (+15 EUR)", "Highlights (+35 EUR)"], "products": ["La Biosthetique Color", "Olaplex Bond Multiplier"] },
+      { "name": "Haarschnitt", "leistung": "Waschen, Schneiden, Föhnen", "price": "ab 35 EUR", "dur": "45-60 Min.", "desc": "Beratung, präziser Schnitt und professionelles Finish.", "addons": ["Ansatzfarbe (+25 EUR)", "Olaplex Treatment (+15 EUR)", "Intensivpflege (+12 EUR)"], "products": ["La Biosthetique Shampoo Vital", "Olaplex No.3"] },
+      { "name": "Farbbehandlung", "leistung": "Coloration, Strähnen, Balayage", "price": "ab 65 EUR", "dur": "90-150 Min.", "desc": "Balayage, Highlights, Glossing oder komplette Farbveränderung.", "addons": ["Glossing (+20 EUR)", "Olaplex (+15 EUR)", "Highlights (+35 EUR)"], "products": ["La Biosthetique Color", "Olaplex Bond Multiplier"] },
       { "name": "Wunschfrisur-Service", "leistung": "KI-Beratung", "price": "Kostenlos", "dur": "", "desc": "Zeigen Sie uns Ihren Traumlook.", "isWunsch": true },
-      { "name": "Haarpflege-Treatment", "leistung": "Pflege & Repair", "price": "ab 25 EUR", "dur": "30-45 Min.", "desc": "Olaplex, Keratin, Kopfhaut-Peeling.", "addons": ["Keratin Glaettung (+40 EUR)", "Kopfhaut-Peeling (+15 EUR)"], "products": ["Olaplex No.3", "La Biosthetique Mask"] },
+      { "name": "Haarpflege-Treatment", "leistung": "Pflege & Repair", "price": "ab 25 EUR", "dur": "30-45 Min.", "desc": "Olaplex, Keratin, Kopfhaut-Peeling.", "addons": ["Keratin Glättung (+40 EUR)", "Kopfhaut-Peeling (+15 EUR)"], "products": ["Olaplex No.3", "La Biosthetique Mask"] },
       { "name": "Styling", "leistung": "Event & Braut", "price": "ab 45 EUR", "dur": "60-90 Min.", "desc": "Brautstyling, Event-Look, Hochsteckfrisuren.", "addons": ["Probetermin (+25 EUR)", "Make-up (+35 EUR)"], "products": [] },
-      { "name": "Shop — Produkte", "leistung": "Im Salon erhaeltlich", "price": "Im Salon", "dur": "", "desc": "Premium-Pflegeprodukte.", "isShop": true }
+      { "name": "Shop — Produkte", "leistung": "Im Salon erhältlich", "price": "Im Salon", "dur": "", "desc": "Premium-Pflegeprodukte.", "isShop": true }
     ],
     "maskulin": [
-      { "name": "Herrenschnitt", "leistung": "Schneiden, Styling", "price": "ab 28 EUR", "dur": "30-45 Min.", "desc": "Fade, Undercut oder klassisch.", "addons": ["Augenbrauen (+5 EUR)", "Heisses Tuch (+8 EUR)"], "products": ["American Crew Fiber"] },
-      { "name": "Bartpflege", "leistung": "Trim, Pflege, Rasur", "price": "ab 18 EUR", "dur": "20-30 Min.", "desc": "Bart trimmen, formen und pflegen.", "addons": ["Hot Towel Rasur (+12 EUR)", "Bart-Oel Treatment (+8 EUR)"], "products": ["Proraso Bart-Oel"] },
+      { "name": "Herrenschnitt", "leistung": "Schneiden, Styling", "price": "ab 28 EUR", "dur": "30-45 Min.", "desc": "Fade, Undercut oder klassisch.", "addons": ["Augenbrauen (+5 EUR)", "Heißes Tuch (+8 EUR)"], "products": ["American Crew Fiber"] },
+      { "name": "Bartpflege", "leistung": "Trim, Pflege, Rasur", "price": "ab 18 EUR", "dur": "20-30 Min.", "desc": "Bart trimmen, formen und pflegen.", "addons": ["Hot Towel Rasur (+12 EUR)", "Bart-Öl Treatment (+8 EUR)"], "products": ["Proraso Bart-Öl"] },
       { "name": "Wunschfrisur-Service", "leistung": "KI-Beratung", "price": "Kostenlos", "dur": "", "desc": "Zeigen Sie uns Ihren Wunsch-Look.", "isWunsch": true },
       { "name": "Haar- & Kopfhautpflege", "leistung": "Treatment", "price": "ab 20 EUR", "dur": "20-30 Min.", "desc": "Kopfhaut-Treatment, Anti-Haarausfall.", "addons": ["Anti-Haarausfall Kur (+15 EUR)"], "products": ["Alpecin Coffein Shampoo"] },
       { "name": "Grooming", "leistung": "Schnitt + Bart + Pflege", "price": "ab 35 EUR", "dur": "45-60 Min.", "desc": "Das Rundum-Paket.", "addons": ["Hot Towel (+8 EUR)", "Augenbrauen (+5 EUR)"], "products": [] },
-      { "name": "Shop — Produkte", "leistung": "Im Salon erhaeltlich", "price": "Im Salon", "dur": "", "desc": "Premium-Pflegeprodukte fuer den modernen Mann.", "isShop": true }
+      { "name": "Shop — Produkte", "leistung": "Im Salon erhältlich", "price": "Im Salon", "dur": "", "desc": "Premium-Pflegeprodukte für den modernen Mann.", "isShop": true }
     ]
   },
   "karriere": {
@@ -92,10 +92,10 @@
       "inhaber": "Rena Rados",
       "strasse": "Erzgiessereistr. 51",
       "plz": "80335",
-      "stadt": "Muenchen",
+      "stadt": "München",
       "telefon": "089 - 1296294",
       "email": "renarados.friseure@hotmail.com",
-      "steuernummer": "000/000/00000"
+      "steuernummer": "Wird beantragt"
     }
   },
   "_meta": {
