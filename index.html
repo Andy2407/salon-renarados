@@ -688,6 +688,8 @@
     body.maskulin-style .style-toggle { background: rgba(255,255,255,0.08); }
     body.maskulin-style .style-toggle-btn { color: var(--text-light); }
     body.maskulin-style .style-toggle-btn.active { background: var(--gold); color: #fff; }
+    body.maskulin-style .customer-bar-mobile { border-color: rgba(184,150,46,0.4); background: rgba(184,150,46,0.1); }
+    body.maskulin-style .customer-bar { border-color: rgba(184,150,46,0.4); background: rgba(184,150,46,0.1); }
 
     body.maskulin-style .mobile-menu {
       background: rgba(14,14,14,0.98);
@@ -936,6 +938,7 @@
       .nav-links { display: none; }
       .nav-mobile { display: block; }
       #styleToggleMobile { display: flex; }
+      .customer-bar-mobile { display: flex; }
       .about-grid, .ki-grid, .booking-grid, .contact-grid, .human-grid { grid-template-columns: 1fr; gap: 40px; }
       .services-grid, .karriere-grid { grid-template-columns: 1fr; }
       .karriere-benefits { grid-template-columns: 1fr; }
@@ -1125,14 +1128,22 @@
 
     /* === Kunden-Login System === */
     .customer-bar {
-      display: none; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; gap: 10px;
       padding: 8px 16px; background: var(--gold-dim); border: 1px solid var(--border-gold);
       border-radius: var(--radius-full); font-size: 12px; font-weight: 500; color: var(--gold);
       cursor: pointer; transition: all 200ms; white-space: nowrap;
     }
-    .customer-bar.show { display: inline-flex; }
     .customer-bar:hover { background: rgba(184,150,46,0.15); }
     .customer-bar svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .customer-bar-mobile {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--border-gold);
+      background: var(--gold-dim); cursor: pointer; transition: all 200ms; padding: 0;
+    }
+    @media (min-width: 1401px) { .customer-bar-mobile { display: none; } }
+    .customer-bar-mobile:hover { background: rgba(184,150,46,0.15); }
+    .customer-bar-mobile.logged-in { background: var(--gold); border-color: var(--gold); }
+    .customer-bar-mobile.logged-in svg { stroke: #fff; }
     .customer-login-overlay {
       position: fixed; inset: 0; z-index: 9997; background: rgba(0,0,0,0.5);
       backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center;
@@ -1193,9 +1204,9 @@
       <a href="#nachbestellungen">Produkte</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
       <span id="openStatus" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--radius-full);letter-spacing:0.3px"></span>
-      <div class="customer-bar" id="customerBarNav" onclick="openCustomerLogin()">
+      <div class="customer-bar show" id="customerBarDesktop" onclick="openCustomerLogin()" style="margin-left:8px">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span id="customerBarName">Mein Konto</span>
+        <span id="customerBarDesktopName">Mein Konto</span>
       </div>
       <button class="nav-logout-salon" id="salonLogout" onclick="doSalonLogout()">Abmelden</button>
       <div class="style-toggle" id="styleToggle">
@@ -1204,6 +1215,9 @@
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
+      <button class="customer-bar-mobile" id="customerBarMobile" onclick="openCustomerLogin()" aria-label="Mein Konto" title="Mein Konto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="width:22px;height:22px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
       <div class="style-toggle" id="styleToggleMobile" style="margin-left:0">
         <button class="style-toggle-btn active" data-style="feminin" onclick="setStyle('feminin')">F</button>
         <button class="style-toggle-btn" data-style="maskulin" onclick="setStyle('maskulin')">M</button>
@@ -1226,6 +1240,12 @@
     <a href="#nachbestellungen" onclick="toggleMobile()">Produkte</a>
     <a href="#contact" onclick="toggleMobile()">Kontakt</a>
     <a href="#karriere" onclick="toggleMobile()">Karriere</a>
+    <div style="border-top:1px solid rgba(184,150,46,0.2);margin:16px 0;padding-top:16px">
+      <a href="#" id="mobileCustomerLogin" onclick="event.preventDefault();toggleMobile();openCustomerLogin()" style="display:flex;align-items:center;gap:10px;color:var(--gold)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="mobileCustomerName">Mein Konto</span>
+      </a>
+    </div>
     <a href="#" id="salonMobileLogout" onclick="event.preventDefault();toggleMobile();doSalonLogout()" style="color:#e53e3e;display:none">Abmelden</a>
   </div>
 
@@ -1582,10 +1602,16 @@
         <div class="ki-form-card reveal">
           <h3 id="haarFormTitle">Haar-Foto hochladen</h3>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px" id="haarFormDesc">Fotografieren Sie Ihr Haar bei Tageslicht. Unsere KI analysiert Struktur, Schädigung und Zustand.</p>
-          <div class="upload-zone" id="haarUploadZone" onclick="document.getElementById('haarUpload').click()" style="cursor:pointer">
+          <div style="position:relative">
+          <div class="upload-zone upload-zone-gated" id="haarUploadZone" onclick="document.getElementById('haarUpload').click()" style="cursor:pointer">
             <input type="file" id="haarUpload" accept="image/*" style="display:none" onchange="previewHaarUpload(this.files)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             <span id="haarUploadHint">Haar-Foto hier ablegen oder tippen</span>
+          </div>
+          <div class="upload-gate" onclick="openCustomerLogin()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Bitte anmelden, um Fotos hochzuladen
+          </div>
           </div>
           <div id="haarPreview" style="margin:12px 0;display:none;text-align:center">
             <img id="haarPreviewImg" style="max-width:100%;max-height:200px;border-radius:var(--radius);border:1px solid var(--border)" alt="Haar-Vorschau">
@@ -1649,10 +1675,16 @@
               <div class="form-group"><label>Was wünschen Sie sich?</label><textarea id="wfNachricht" placeholder="Beschreiben Sie Ihre Wunschfrisur oder stellen Sie eine Frage..." rows="3" required></textarea></div>
               <div class="form-group">
                 <label>Fotos hochladen (optional)</label>
-                <div class="upload-zone" id="uploadZone">
+                <div style="position:relative">
+                <div class="upload-zone upload-zone-gated" id="uploadZone">
                   <input type="file" id="wfFiles" accept="image/*" multiple onchange="handleFiles(this.files)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                   <p><span>Klicken</span> oder Bilder hierher ziehen</p>
+                </div>
+                <div class="upload-gate" onclick="openCustomerLogin()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  Bitte anmelden, um Fotos hochzuladen
+                </div>
                 </div>
                 <div class="upload-preview" id="uploadPreview"></div>
               </div>
@@ -3832,11 +3864,22 @@
       applyCustomerLogin();
     }
 
+    function updateCustomerUI(name) {
+      ['customerBarDesktopName','mobileCustomerName'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = name;
+      });
+      var mobileBtn = document.getElementById('customerBarMobile');
+      if (mobileBtn) {
+        if (name !== 'Mein Konto') { mobileBtn.classList.add('logged-in'); }
+        else { mobileBtn.classList.remove('logged-in'); }
+      }
+    }
+
     function customerLogout() {
       activeCustomer = null;
       sessionStorage.removeItem('salon_customer');
-      var nameEl = document.getElementById('customerBarName');
-      if (nameEl) nameEl.textContent = 'Mein Konto';
+      updateCustomerUI('Mein Konto');
       var welcome = document.getElementById('clWelcomeBooking');
       if (welcome) welcome.classList.remove('show');
       ['bkVorname','bkNachname','bkEmail','bkTelefon','haarName','haarEmail','wfVorname','wfNachname','wfEmail'].forEach(function(id) {
@@ -3845,15 +3888,15 @@
       });
       var hint = document.getElementById('clAiHint');
       if (hint) hint.remove();
+      updateUploadGates();
     }
 
     function applyCustomerLogin() {
       if (!activeCustomer) return;
       var c = activeCustomer;
 
-      // Nav-Bar
-      var nameEl = document.getElementById('customerBarName');
-      if (nameEl) nameEl.textContent = c.vorname;
+      // Nav-Bars (Desktop + Mobile + Menu)
+      updateCustomerUI(c.vorname);
 
       // Willkommen-Bar
       var welcome = document.getElementById('clWelcomeBooking');
@@ -3912,12 +3955,26 @@
         aiHint.appendChild(tip);
         if (notiz.parentNode) notiz.parentNode.insertBefore(aiHint, notiz.nextSibling);
       }
+      updateUploadGates();
+    }
+
+    // Upload-Gate: Bilder hochladen nur mit Login
+    function updateUploadGates() {
+      var loggedIn = !!activeCustomer;
+      var gates = document.querySelectorAll('.upload-gate');
+      gates.forEach(function(gate) {
+        gate.style.display = loggedIn ? 'none' : 'flex';
+      });
+      var uploads = document.querySelectorAll('.upload-zone-gated');
+      uploads.forEach(function(uz) {
+        uz.style.pointerEvents = loggedIn ? 'auto' : 'none';
+        uz.style.opacity = loggedIn ? '1' : '0.4';
+      });
     }
 
     // Wiederherstellen bei Seitenlade
     if (activeCustomer) applyCustomerLogin();
-    var customerBar = document.getElementById('customerBarNav');
-    if (customerBar) customerBar.classList.add('show');
+    updateUploadGates();
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
