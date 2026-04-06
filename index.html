@@ -1187,6 +1187,39 @@
       font-size: 12px; color: var(--text-light); cursor: pointer; transition: all 200ms; }
     .cl-ai-hint:hover { background: rgba(184,150,46,0.1); }
     .cl-ai-hint strong { color: var(--gold); }
+    /* Kunden-Dropdown-Menü */
+    .customer-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0; min-width: 220px;
+      background: var(--white); border: 1px solid var(--border-gold); border-radius: var(--radius);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.12); z-index: 9998; display: none;
+      overflow: hidden; animation: dropIn 150ms ease;
+    }
+    .customer-dropdown.show { display: block; }
+    @keyframes dropIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+    .customer-dropdown-header {
+      padding: 14px 16px; background: var(--gold-dim); border-bottom: 1px solid var(--border-gold);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .customer-dropdown-avatar {
+      width: 34px; height: 34px; border-radius: 50%; background: var(--gold);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .customer-dropdown-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .customer-dropdown-email { font-size: 11px; color: var(--text-muted); }
+    .customer-dropdown-item {
+      display: flex; align-items: center; gap: 10px; padding: 11px 16px;
+      font-size: 13px; color: var(--text); cursor: pointer; transition: background 150ms;
+      border: none; background: none; width: 100%; text-align: left; font-family: 'Inter', sans-serif;
+    }
+    .customer-dropdown-item:hover { background: var(--gold-dim); }
+    .customer-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; stroke: var(--gold); fill: none; stroke-width: 2; }
+    .customer-dropdown-sep { height: 1px; background: var(--border); margin: 0; }
+    .customer-dropdown-item.logout { color: #e53e3e; }
+    .customer-dropdown-item.logout svg { stroke: #e53e3e; }
+    body.maskulin-style .customer-dropdown { background: var(--card-bg); border-color: rgba(184,150,46,0.3); }
+    body.maskulin-style .customer-dropdown-header { background: rgba(184,150,46,0.08); border-color: rgba(184,150,46,0.2); }
+    body.maskulin-style .customer-dropdown-item:hover { background: rgba(184,150,46,0.08); }
   </style>
 </head>
 <body>
@@ -1204,9 +1237,12 @@
       <a href="#nachbestellungen">Produkte</a>
       <a href="#booking" class="nav-cta">Termin buchen</a>
       <span id="openStatus" style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--radius-full);letter-spacing:0.3px"></span>
-      <div class="customer-bar show" id="customerBarDesktop" onclick="openCustomerLogin()" style="margin-left:8px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span id="customerBarDesktopName">Mein Konto</span>
+      <div style="position:relative">
+        <div class="customer-bar show" id="customerBarDesktop" onclick="toggleCustomerDropdown('desktop')" style="margin-left:8px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span id="customerBarDesktopName">Mein Konto</span>
+        </div>
+        <div class="customer-dropdown" id="customerDropdownDesktop"></div>
       </div>
       <button class="nav-logout-salon" id="salonLogout" onclick="doSalonLogout()">Abmelden</button>
       <div class="style-toggle" id="styleToggle">
@@ -1215,9 +1251,12 @@
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <button class="customer-bar-mobile" id="customerBarMobile" onclick="openCustomerLogin()" aria-label="Mein Konto" title="Mein Konto">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="width:22px;height:22px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
+      <div style="position:relative">
+        <button class="customer-bar-mobile" id="customerBarMobile" onclick="toggleCustomerDropdown('mobile')" aria-label="Mein Konto" title="Mein Konto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="width:22px;height:22px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+        <div class="customer-dropdown" id="customerDropdownMobile" style="right:0;left:auto"></div>
+      </div>
       <div class="style-toggle" id="styleToggleMobile" style="margin-left:0">
         <button class="style-toggle-btn active" data-style="feminin" onclick="setStyle('feminin')">F</button>
         <button class="style-toggle-btn" data-style="maskulin" onclick="setStyle('maskulin')">M</button>
@@ -1241,7 +1280,7 @@
     <a href="#contact" onclick="toggleMobile()">Kontakt</a>
     <a href="#karriere" onclick="toggleMobile()">Karriere</a>
     <div style="border-top:1px solid rgba(184,150,46,0.2);margin:16px 0;padding-top:16px">
-      <a href="#" id="mobileCustomerLogin" onclick="event.preventDefault();toggleMobile();openCustomerLogin()" style="display:flex;align-items:center;gap:10px;color:var(--gold)">
+      <a href="#" id="mobileCustomerLogin" onclick="event.preventDefault();toggleMobile();toggleCustomerDropdown('mobile')" style="display:flex;align-items:center;gap:10px;color:var(--gold)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span id="mobileCustomerName">Mein Konto</span>
       </a>
@@ -1608,7 +1647,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             <span id="haarUploadHint">Haar-Foto hier ablegen oder tippen</span>
           </div>
-          <div class="upload-gate" onclick="openCustomerLogin()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+          <div class="upload-gate" onclick="showUploadLoginHint()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             Bitte anmelden, um Fotos hochzuladen
           </div>
@@ -1681,7 +1720,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                   <p><span>Klicken</span> oder Bilder hierher ziehen</p>
                 </div>
-                <div class="upload-gate" onclick="openCustomerLogin()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+                <div class="upload-gate" onclick="showUploadLoginHint()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                   Bitte anmelden, um Fotos hochzuladen
                 </div>
@@ -3785,19 +3824,15 @@
     var activeCustomer = JSON.parse(sessionStorage.getItem('salon_customer') || 'null');
 
     function openCustomerLogin() {
-      if (activeCustomer) {
-        if (confirm('Eingeloggt als ' + activeCustomer.vorname + ' ' + activeCustomer.nachname + '.\n\nAbmelden?')) {
-          customerLogout();
-        }
-        return;
-      }
       document.getElementById('clLoginMode').style.display = '';
       document.getElementById('clRegisterMode').style.display = 'none';
       document.getElementById('clLoginError').style.display = 'none';
       document.getElementById('customerLoginOverlay').classList.add('show');
+      closeAllDropdowns();
     }
     function closeCustomerLogin() {
       document.getElementById('customerLoginOverlay').classList.remove('show');
+      var p = document.getElementById('clProfileMode'); if (p) p.remove();
     }
     function showCustomerRegister() {
       document.getElementById('clLoginMode').style.display = 'none';
@@ -3808,6 +3843,239 @@
       document.getElementById('clLoginMode').style.display = '';
       document.getElementById('clRegisterMode').style.display = 'none';
     }
+
+    // Dropdown-Menü für Kunden-Button
+    function closeAllDropdowns() {
+      document.querySelectorAll('.customer-dropdown').forEach(function(d) { d.classList.remove('show'); });
+    }
+
+    function toggleCustomerDropdown(target) {
+      var ddDesktop = document.getElementById('customerDropdownDesktop');
+      var ddMobile = document.getElementById('customerDropdownMobile');
+      var dd = target === 'desktop' ? ddDesktop : ddMobile;
+      var other = target === 'desktop' ? ddMobile : ddDesktop;
+      if (other) other.classList.remove('show');
+
+      if (dd.classList.contains('show')) {
+        dd.classList.remove('show');
+        return;
+      }
+      // Dropdown-Inhalt generieren
+      renderDropdownContent(dd);
+      dd.classList.add('show');
+    }
+
+    function renderDropdownContent(dd) {
+      dd.innerHTML = '';
+      if (activeCustomer) {
+        // Eingeloggt: Profil-Header + Menü-Items
+        var c = activeCustomer;
+        var header = document.createElement('div');
+        header.className = 'customer-dropdown-header';
+        var avatar = document.createElement('div');
+        avatar.className = 'customer-dropdown-avatar';
+        avatar.textContent = (c.vorname.charAt(0) + c.nachname.charAt(0)).toUpperCase();
+        var info = document.createElement('div');
+        var nameEl = document.createElement('div');
+        nameEl.className = 'customer-dropdown-name';
+        nameEl.textContent = c.vorname + ' ' + c.nachname;
+        var emailEl = document.createElement('div');
+        emailEl.className = 'customer-dropdown-email';
+        emailEl.textContent = c.email;
+        info.appendChild(nameEl);
+        info.appendChild(emailEl);
+        header.appendChild(avatar);
+        header.appendChild(info);
+        dd.appendChild(header);
+
+        // Menü-Items
+        var items = [
+          {icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',label:'Mein Profil',action:function(){closeAllDropdowns();openCustomerProfile();}},
+          {icon:'<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',label:'Passwort ändern',action:function(){closeAllDropdowns();openChangePassword();}},
+          {icon:'<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',label:'E-Mail ändern',action:function(){closeAllDropdowns();openChangeEmail();}},
+          {icon:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',label:'Telefon ändern',action:function(){closeAllDropdowns();openChangeTelefon();}},
+          {sep:true},
+          {icon:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',label:'Abmelden',cls:'logout',action:function(){closeAllDropdowns();customerLogout();}}
+        ];
+        items.forEach(function(item) {
+          if (item.sep) {
+            var sep = document.createElement('div');
+            sep.className = 'customer-dropdown-sep';
+            dd.appendChild(sep);
+            return;
+          }
+          var btn = document.createElement('button');
+          btn.className = 'customer-dropdown-item' + (item.cls ? ' ' + item.cls : '');
+          var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+          svg.setAttribute('viewBox','0 0 24 24');
+          svg.innerHTML = item.icon;
+          btn.appendChild(svg);
+          var span = document.createElement('span');
+          span.textContent = item.label;
+          btn.appendChild(span);
+          btn.onclick = item.action;
+          dd.appendChild(btn);
+        });
+      } else {
+        // Nicht eingeloggt: Anmelden + Registrieren
+        var items2 = [
+          {icon:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>',label:'Anmelden',action:function(){closeAllDropdowns();openCustomerLogin();}},
+          {icon:'<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>',label:'Konto erstellen',action:function(){closeAllDropdowns();openCustomerLogin();showCustomerRegister();}}
+        ];
+        items2.forEach(function(item) {
+          var btn = document.createElement('button');
+          btn.className = 'customer-dropdown-item';
+          var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+          svg.setAttribute('viewBox','0 0 24 24');
+          svg.innerHTML = item.icon;
+          btn.appendChild(svg);
+          var span = document.createElement('span');
+          span.textContent = item.label;
+          btn.appendChild(span);
+          btn.onclick = item.action;
+          dd.appendChild(btn);
+        });
+      }
+    }
+
+    // Profil-Änderungen (Overlay wiederverwendet)
+    function openCustomerProfile() {
+      var c = activeCustomer;
+      var card = document.querySelector('.customer-login-card');
+      document.getElementById('clLoginMode').style.display = 'none';
+      document.getElementById('clRegisterMode').style.display = 'none';
+      // Dynamisches Profil-Panel
+      var existing = document.getElementById('clProfileMode');
+      if (existing) existing.remove();
+      var div = document.createElement('div');
+      div.id = 'clProfileMode';
+      div.innerHTML = '<h3>Mein Profil</h3><p>Ihre gespeicherten Daten</p>'
+        + '<div class="cl-row"><input type="text" class="cl-field" id="clProfVorname" value="' + escHtml(c.vorname) + '" placeholder="Vorname"><input type="text" class="cl-field" id="clProfNachname" value="' + escHtml(c.nachname) + '" placeholder="Nachname"></div>'
+        + '<input type="email" class="cl-field" id="clProfEmail" value="' + escHtml(c.email) + '" disabled style="opacity:0.6">'
+        + '<input type="tel" class="cl-field" id="clProfTelefon" value="' + escHtml(c.telefon || '') + '" placeholder="Telefon">'
+        + '<div class="cl-error" id="clProfError"></div>'
+        + '<button class="cl-btn" onclick="saveProfile()">Speichern</button>'
+        + '<div class="cl-toggle"><a onclick="closeCustomerLogin()">Schließen</a></div>';
+      card.appendChild(div);
+      document.getElementById('customerLoginOverlay').classList.add('show');
+    }
+
+    function saveProfile() {
+      var v = document.getElementById('clProfVorname').value.trim();
+      var n = document.getElementById('clProfNachname').value.trim();
+      var t = document.getElementById('clProfTelefon').value.trim();
+      if (!v || !n) { document.getElementById('clProfError').textContent='Vorname und Nachname sind Pflicht.'; document.getElementById('clProfError').style.display='block'; return; }
+      activeCustomer.vorname = v; activeCustomer.nachname = n; activeCustomer.telefon = t;
+      salonCustomers[activeCustomer.email] = activeCustomer;
+      localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      updateCustomerUI(v);
+      closeCustomerLogin();
+      var p = document.getElementById('clProfileMode'); if (p) p.remove();
+    }
+
+    function openChangePassword() {
+      var card = document.querySelector('.customer-login-card');
+      document.getElementById('clLoginMode').style.display = 'none';
+      document.getElementById('clRegisterMode').style.display = 'none';
+      var existing = document.getElementById('clProfileMode'); if (existing) existing.remove();
+      var div = document.createElement('div');
+      div.id = 'clProfileMode';
+      div.innerHTML = '<h3>Passwort ändern</h3><p>Geben Sie Ihr neues Passwort ein.</p>'
+        + '<input type="password" class="cl-field" id="clChgPwOld" placeholder="Aktuelles Passwort">'
+        + '<input type="password" class="cl-field" id="clChgPwNew" placeholder="Neues Passwort (min. 4 Zeichen)">'
+        + '<input type="password" class="cl-field" id="clChgPwNew2" placeholder="Neues Passwort wiederholen">'
+        + '<div class="cl-error" id="clChgPwError"></div>'
+        + '<button class="cl-btn" onclick="doChangePassword()">Passwort ändern</button>'
+        + '<div class="cl-toggle"><a onclick="closeCustomerLogin();var p=document.getElementById(\'clProfileMode\');if(p)p.remove();">Abbrechen</a></div>';
+      card.appendChild(div);
+      document.getElementById('customerLoginOverlay').classList.add('show');
+    }
+
+    function doChangePassword() {
+      var old = document.getElementById('clChgPwOld').value;
+      var pw1 = document.getElementById('clChgPwNew').value;
+      var pw2 = document.getElementById('clChgPwNew2').value;
+      var err = document.getElementById('clChgPwError');
+      if (old !== activeCustomer.pw) { err.textContent='Aktuelles Passwort falsch.'; err.style.display='block'; return; }
+      if (pw1.length < 4) { err.textContent='Neues Passwort muss mind. 4 Zeichen haben.'; err.style.display='block'; return; }
+      if (pw1 !== pw2) { err.textContent='Passwörter stimmen nicht überein.'; err.style.display='block'; return; }
+      activeCustomer.pw = pw1;
+      salonCustomers[activeCustomer.email] = activeCustomer;
+      localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      closeCustomerLogin();
+      var p = document.getElementById('clProfileMode'); if (p) p.remove();
+    }
+
+    function openChangeEmail() {
+      var card = document.querySelector('.customer-login-card');
+      document.getElementById('clLoginMode').style.display = 'none';
+      document.getElementById('clRegisterMode').style.display = 'none';
+      var existing = document.getElementById('clProfileMode'); if (existing) existing.remove();
+      var div = document.createElement('div');
+      div.id = 'clProfileMode';
+      div.innerHTML = '<h3>E-Mail ändern</h3><p>Geben Sie Ihre neue E-Mail-Adresse ein.</p>'
+        + '<input type="email" class="cl-field" id="clChgEmail" value="' + escHtml(activeCustomer.email) + '" placeholder="Neue E-Mail-Adresse">'
+        + '<input type="password" class="cl-field" id="clChgEmailPw" placeholder="Passwort zur Bestätigung">'
+        + '<div class="cl-error" id="clChgEmailError"></div>'
+        + '<button class="cl-btn" onclick="doChangeEmail()">E-Mail ändern</button>'
+        + '<div class="cl-toggle"><a onclick="closeCustomerLogin();var p=document.getElementById(\'clProfileMode\');if(p)p.remove();">Abbrechen</a></div>';
+      card.appendChild(div);
+      document.getElementById('customerLoginOverlay').classList.add('show');
+    }
+
+    function doChangeEmail() {
+      var newEmail = document.getElementById('clChgEmail').value.trim().toLowerCase();
+      var pw = document.getElementById('clChgEmailPw').value;
+      var err = document.getElementById('clChgEmailError');
+      if (pw !== activeCustomer.pw) { err.textContent='Passwort falsch.'; err.style.display='block'; return; }
+      if (!newEmail || newEmail.indexOf('@') === -1) { err.textContent='Bitte gültige E-Mail eingeben.'; err.style.display='block'; return; }
+      if (salonCustomers[newEmail] && newEmail !== activeCustomer.email) { err.textContent='Diese E-Mail ist bereits registriert.'; err.style.display='block'; return; }
+      var oldEmail = activeCustomer.email;
+      delete salonCustomers[oldEmail];
+      activeCustomer.email = newEmail;
+      salonCustomers[newEmail] = activeCustomer;
+      localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      closeCustomerLogin();
+      var p = document.getElementById('clProfileMode'); if (p) p.remove();
+    }
+
+    function openChangeTelefon() {
+      var card = document.querySelector('.customer-login-card');
+      document.getElementById('clLoginMode').style.display = 'none';
+      document.getElementById('clRegisterMode').style.display = 'none';
+      var existing = document.getElementById('clProfileMode'); if (existing) existing.remove();
+      var div = document.createElement('div');
+      div.id = 'clProfileMode';
+      div.innerHTML = '<h3>Telefon ändern</h3><p>Geben Sie Ihre neue Telefonnummer ein.</p>'
+        + '<input type="tel" class="cl-field" id="clChgTelefon" value="' + escHtml(activeCustomer.telefon || '') + '" placeholder="Neue Telefonnummer">'
+        + '<div class="cl-error" id="clChgTelError"></div>'
+        + '<button class="cl-btn" onclick="doChangeTelefon()">Telefon ändern</button>'
+        + '<div class="cl-toggle"><a onclick="closeCustomerLogin();var p=document.getElementById(\'clProfileMode\');if(p)p.remove();">Abbrechen</a></div>';
+      card.appendChild(div);
+      document.getElementById('customerLoginOverlay').classList.add('show');
+    }
+
+    function doChangeTelefon() {
+      var tel = document.getElementById('clChgTelefon').value.trim();
+      activeCustomer.telefon = tel;
+      salonCustomers[activeCustomer.email] = activeCustomer;
+      localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      closeCustomerLogin();
+      var p = document.getElementById('clProfileMode'); if (p) p.remove();
+    }
+
+    function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    // Dropdown schließen bei Klick außerhalb
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.customer-bar') && !e.target.closest('.customer-bar-mobile') && !e.target.closest('.customer-dropdown') && !e.target.closest('#mobileCustomerLogin')) {
+        closeAllDropdowns();
+      }
+    });
 
     function customerRegister() {
       var vorname = document.getElementById('clRegVorname').value.trim();
@@ -3958,6 +4226,47 @@
       updateUploadGates();
     }
 
+    // Upload-Login-Hinweis Popup
+    function showUploadLoginHint() {
+      // Entferne altes Popup falls vorhanden
+      var old = document.getElementById('uploadLoginPopup');
+      if (old) old.remove();
+      var overlay = document.createElement('div');
+      overlay.id = 'uploadLoginPopup';
+      overlay.style.cssText = 'position:fixed;inset:0;z-index:9996;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center';
+      overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+      var card = document.createElement('div');
+      card.style.cssText = 'background:var(--white);border:1px solid var(--border-gold);border-radius:var(--radius);padding:28px;width:90%;max-width:360px;box-shadow:0 16px 48px rgba(0,0,0,0.15);text-align:center';
+      var iconDiv = document.createElement('div');
+      iconDiv.style.cssText = 'width:56px;height:56px;border-radius:50%;background:var(--gold-dim);border:2px solid var(--border-gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px';
+      iconDiv.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" style="width:28px;height:28px"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+      card.appendChild(iconDiv);
+      var h = document.createElement('h3');
+      h.style.cssText = 'font-family:Playfair Display,serif;font-size:18px;margin-bottom:8px';
+      h.textContent = 'Anmeldung erforderlich';
+      card.appendChild(h);
+      var p = document.createElement('p');
+      p.style.cssText = 'font-size:13px;color:var(--text-light);margin-bottom:20px;line-height:1.5';
+      p.textContent = 'Um Fotos hochzuladen, melden Sie sich bitte an oder erstellen Sie ein kostenloses Konto.';
+      card.appendChild(p);
+      var btnRow = document.createElement('div');
+      btnRow.style.cssText = 'display:flex;gap:10px';
+      var btnLogin = document.createElement('button');
+      btnLogin.className = 'cl-btn';
+      btnLogin.style.cssText = 'flex:1;margin:0';
+      btnLogin.textContent = 'Anmelden';
+      btnLogin.onclick = function() { overlay.remove(); openCustomerLogin(); };
+      var btnReg = document.createElement('button');
+      btnReg.style.cssText = 'flex:1;padding:14px;background:none;border:2px solid var(--gold);border-radius:var(--radius-sm);font-size:14px;font-weight:600;font-family:Inter,sans-serif;cursor:pointer;color:var(--gold);transition:all 200ms;margin:0';
+      btnReg.textContent = 'Registrieren';
+      btnReg.onclick = function() { overlay.remove(); openCustomerLogin(); showCustomerRegister(); };
+      btnRow.appendChild(btnLogin);
+      btnRow.appendChild(btnReg);
+      card.appendChild(btnRow);
+      overlay.appendChild(card);
+      document.body.appendChild(overlay);
+    }
+
     // Upload-Gate: Bilder hochladen nur mit Login
     function updateUploadGates() {
       var loggedIn = !!activeCustomer;
@@ -3978,6 +4287,7 @@
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
+        closeAllDropdowns();
         var ov = document.getElementById('customerLoginOverlay');
         if (ov && ov.classList.contains('show')) closeCustomerLogin();
       }
