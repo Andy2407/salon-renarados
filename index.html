@@ -1713,7 +1713,7 @@
           <button class="btn-gold" id="haarBtn" onclick="submitHaaranalyse()" style="width:100%;margin-top:12px">
             Haaranalyse starten
           </button>
-          <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Profi-Analyse mit PDF-Report erhalten Sie im Salon. Powered by Casa 2035.</p>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Profi-Analyse mit PDF-Report erhalten Sie im Salon. Powered by <a href="https://casa2035.de" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">Casa 2035</a>.</p>
           <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestützte Analyse (EU AI Act konform). Ihr Foto wird ausschließlich für die Haaranalyse verwendet und nach 30 Tagen gelöscht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
         </div>
       </div>
@@ -2213,7 +2213,7 @@
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Rena Rados Friseure. Alle Rechte vorbehalten.</span>
-      <a href="#hero" class="footer-casa">
+      <a href="https://casa2035.de" target="_blank" rel="noopener" class="footer-casa">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
         Powered by Casa 2035
       </a>
@@ -2221,7 +2221,7 @@
   </footer>
 
   <!-- Casa 2035 Badge -->
-  <a href="#hero" class="casa-badge" id="casaBadge" title="KI-Innovation von Casa 2035" style="font-size:9px;padding:6px 12px;opacity:0.6;animation:none">
+  <a href="https://casa2035.de" target="_blank" rel="noopener" class="casa-badge" id="casaBadge" title="KI-Innovation von Casa 2035" style="font-size:9px;padding:6px 12px;opacity:0.6;animation:none">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
     Powered by Casa 2035
   </a>
@@ -2270,7 +2270,7 @@
       <h3>5. Ihre Rechte</h3>
       <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Kontaktieren Sie uns dazu unter den oben genannten Kontaktdaten.</p>
       <h3>6. KI-gestützte Haaranalyse</h3>
-      <p>Wenn Sie unsere KI-Haaranalyse nutzen, wird das hochgeladene Foto ausschließlich zur Analyse Ihrer Haarstruktur verwendet. Die Verarbeitung erfolgt auf EU-Servern (Mistral AI, Paris). Fotos werden nach 30 Tagen automatisch gelöscht. Die finale Beurteilung erfolgt stets durch unser Fachpersonal (Human-in-the-Loop). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). EU AI Act: Begrenztes Risiko, Transparenzpflicht erfüllt.</p>
+      <p>Wenn Sie unsere KI-Haaranalyse nutzen, wird das hochgeladene Foto ausschließlich zur Analyse Ihrer Haarstruktur verwendet. Die Verarbeitung erfolgt ausschliesslich auf EU-Servern. Fotos werden nach 30 Tagen automatisch gelöscht. Die finale Beurteilung erfolgt stets durch unser Fachpersonal (Human-in-the-Loop). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). EU AI Act: Begrenztes Risiko, Transparenzpflicht erfüllt.</p>
       <h3>7. Externe Dienste</h3>
       <p>Wir binden Google Fonts und Google Maps ein. Beim Laden dieser Ressourcen werden Daten an Google-Server übertragen. Nähere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Datenschutzerklärung</a>.</p>
       <h3>8. Social-Media-Kanäle</h3>
@@ -4401,7 +4401,7 @@
         <button type="submit" style="width:100%;padding:14px;background:linear-gradient(135deg,#b8962e,#c9a93d);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:0.5px">Anmelden</button>
       </form>
     </div>
-    <div style="font-size:10px;color:#555">Rena Rados Friseure &middot; Powered by Casa 2035</div>
+    <div style="font-size:10px;color:#555">Rena Rados Friseure &middot; Powered by <a href="https://casa2035.de" target="_blank" rel="noopener" style="color:#b8962e;text-decoration:none">Casa 2035</a></div>
   </div>
   <script>
     function checkLogin() {
@@ -4741,7 +4741,7 @@
       var stored = JSON.parse(localStorage.getItem('casa_feedback') || '[]');
       stored.push(payload);
       localStorage.setItem('casa_feedback', JSON.stringify(stored));
-      // 2. An n8n Webhook senden (Notion-Sync)
+      // 2. An Webhook senden (Notion-Sync)
       fetch('https://niniho13.app.n8n.cloud/webhook/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
