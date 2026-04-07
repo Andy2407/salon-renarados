@@ -15,7 +15,7 @@
     /* =============================================================
        Rena Rados Friseure — Salon Website
        Powered by Casa 2035 | KI-First Innovation
-       Stand: 14.03.2026
+       Stand: 07.04.2026
        ============================================================= */
 
     :root {
@@ -673,14 +673,30 @@
     }
     .style-toggle-btn:not(.active):hover { color: var(--gold); background: rgba(184,150,46,0.08); }
 
+    /* === Maskulin-Style: Premium Ambient Glow (wie Dashboard) === */
+    body.maskulin-style {
+      background: linear-gradient(165deg, #0c0b09 0%, #0a0a0a 30%, #080a0c 60%, #0a0908 100%);
+      background-attachment: fixed;
+    }
+    body.maskulin-style::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(184,150,46,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 85%, rgba(184,150,46,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(184,150,46,0.02) 0%, transparent 70%);
+    }
+
     /* === Maskulin-Style Dark Overrides === */
     body.maskulin-style .nav {
-      background: rgba(14,14,14,0.9);
+      background: rgba(14,14,14,0.88);
+      backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
       border-bottom-color: rgba(255,255,255,0.06);
     }
     body.maskulin-style .nav.scrolled {
       background: rgba(14,14,14,0.95);
+      backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
       border-bottom-color: rgba(255,255,255,0.08);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     body.maskulin-style .nav-logo { color: var(--text); }
     body.maskulin-style .nav-links a { color: var(--text-light); }
