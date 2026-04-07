@@ -862,46 +862,76 @@
     /* === Feedback Widget === */
     .feedback-fab {
       position: fixed; bottom: 80px; left: 24px; z-index: 100;
-      width: 48px; height: 48px; border-radius: 50%;
-      background: var(--gold-dim); border: 1px solid var(--border-gold);
-      color: var(--gold); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: all 200ms var(--ease);
-      box-shadow: 0 2px 12px rgba(184,150,46,0.15);
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--gold); color: #fff; border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 250ms cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 4px 16px rgba(184,150,46,0.3);
     }
-    .feedback-fab:hover { transform: scale(1.1); background: var(--gold); color: #fff; border-color: var(--gold); }
-    .feedback-fab svg { width: 20px; height: 20px; }
+    .feedback-fab:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(184,150,46,0.4); }
+    .feedback-fab svg { width: 22px; height: 22px; }
+    .feedback-fab .fab-tooltip {
+      position: absolute; left: 60px; white-space: nowrap; background: var(--white); color: var(--text);
+      padding: 6px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1); border: 1px solid var(--border); pointer-events: none;
+      opacity: 0; transform: translateX(-8px); transition: all 250ms;
+    }
+    .feedback-fab:hover .fab-tooltip { opacity: 1; transform: translateX(0); }
     .feedback-panel {
-      display: none; position: fixed; bottom: 138px; left: 24px; z-index: 101;
-      width: 320px; border-radius: 16px; background: var(--white);
-      border: 1px solid var(--border); box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+      display: none; position: fixed; bottom: 142px; left: 24px; z-index: 101;
+      width: min(340px, calc(100vw - 48px)); border-radius: 16px; background: var(--white);
+      border: 1px solid var(--border); box-shadow: 0 12px 40px rgba(0,0,0,0.15);
       overflow: hidden; font-family: 'Inter', sans-serif;
     }
-    .feedback-panel.open { display: block; animation: fadeIn 200ms; }
+    .feedback-panel.open { display: block; animation: fbSlideUp 300ms cubic-bezier(.4,0,.2,1); }
+    @keyframes fbSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .feedback-panel-header {
-      padding: 14px 18px; background: var(--gold); color: #fff;
+      padding: 16px 20px; background: var(--gold); color: #fff;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .feedback-panel-header span { font-weight: 600; font-size: 14px; }
-    .feedback-panel-body { padding: 16px; }
+    .feedback-panel-header h4 { margin: 0; font-weight: 700; font-size: 15px; }
+    .feedback-panel-header .fb-close-btn {
+      background: rgba(255,255,255,0.2); border: none; color: #fff; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: background 150ms;
+    }
+    .feedback-panel-header .fb-close-btn:hover { background: rgba(255,255,255,0.35); }
+    .feedback-panel-body { padding: 18px 20px; }
+    .feedback-panel-body > p { font-size: 13px; color: var(--text-muted); margin: 0 0 14px 0; line-height: 1.5; }
+    .fb-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .fb-chip {
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid var(--border); background: var(--cream); color: var(--text-muted);
+      transition: all 150ms; user-select: none;
+    }
+    .fb-chip.active { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
+    .fb-chip:hover { border-color: var(--gold); }
+    .fb-stars-row { display: flex; gap: 4px; margin-bottom: 14px; }
+    .fb-star-icon { width: 28px; height: 28px; cursor: pointer; color: var(--border); transition: all 150ms; }
+    .fb-star-icon.active { color: #f5a623; }
+    .fb-star-icon:hover { transform: scale(1.15); }
     .feedback-panel textarea {
-      width: 100%; min-height: 80px; border: 1px solid var(--border);
-      border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px;
+      width: 100%; min-height: 72px; border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 12px 14px; font-size: 13px;
       font-family: 'Inter', sans-serif; resize: vertical; outline: none;
-      background: var(--cream); color: var(--text);
+      background: var(--cream); color: var(--text); transition: border-color 200ms;
     }
     .feedback-panel textarea:focus { border-color: var(--gold); }
-    .feedback-panel-actions { display: flex; gap: 8px; margin-top: 10px; }
-    .feedback-panel-actions select {
-      flex: 1; padding: 8px 10px; border: 1px solid var(--border);
-      border-radius: var(--radius-sm); font-size: 12px; font-family: 'Inter', sans-serif;
-      background: var(--cream); color: var(--text);
-    }
-    .feedback-panel-actions button {
-      padding: 8px 18px; border: none; border-radius: var(--radius-sm);
-      background: var(--gold); color: #fff; font-size: 12px; font-weight: 600;
+    .feedback-panel textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
+    .fb-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+    .fb-counter { font-size: 11px; color: var(--text-muted); }
+    .fb-submit-btn {
+      padding: 10px 24px; border: none; border-radius: 12px;
+      background: var(--gold); color: #fff; font-size: 13px; font-weight: 700;
       cursor: pointer; font-family: 'Inter', sans-serif; transition: all 200ms;
+      box-shadow: 0 2px 8px rgba(184,150,46,0.25);
     }
-    .feedback-panel-actions button:hover { background: var(--gold-light); }
+    .fb-submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,150,46,0.35); }
+    .fb-submit-btn:disabled { opacity: 0.5; pointer-events: none; }
+    .fb-success-view { display: none; text-align: center; padding: 32px 20px; }
+    .fb-success-view svg { width: 56px; height: 56px; color: #34c759; margin-bottom: 12px; }
+    .fb-success-view h4 { margin: 0 0 6px 0; font-size: 16px; color: var(--text); }
+    .fb-success-view p { margin: 0; font-size: 13px; color: var(--text-muted); }
 
     /* === KI-Hinweis Badge (global, wiederverwendbar) === */
     .ki-hinweis {
@@ -968,7 +998,8 @@
       .human-arrow { transform: rotate(90deg); }
       .human-section { padding: 40px 16px; }
       .feedback-panel { width: calc(100% - 32px); left: 16px; bottom: 130px; }
-      .feedback-fab { bottom: 72px; left: 16px; width: 44px; height: 44px; }
+      .feedback-fab { bottom: 72px; left: 16px; width: 48px; height: 48px; }
+      .feedback-panel.open { bottom: 130px; left: 16px; }
       .nav { padding: 12px 16px; }
       .nav.scrolled { padding: 8px 16px; }
       .nav-logo { font-size: 18px; }
@@ -3770,7 +3801,7 @@
       }
       if (paragraphs[2] && imp.inhaber) paragraphs[2].textContent = imp.inhaber;
       if (paragraphs[3] && imp.steuernummer) {
-        paragraphs[3].textContent = 'Umsatzsteuer-Identifikationsnummer gemaess \u00A727a Umsatzsteuergesetz: ' + (imp.steuernummer === '000/000/00000' ? 'wird nachgetragen' : imp.steuernummer);
+        paragraphs[3].textContent = 'Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz: ' + (imp.steuernummer === '000/000/00000' ? 'wird nachgetragen' : imp.steuernummer);
       }
       if (paragraphs[4] && imp.inhaber) {
         paragraphs[4].innerHTML = '';
@@ -4356,7 +4387,7 @@
   <script>
     function checkLogin() {
       var pw = document.getElementById('loginPw').value;
-      if (pw === 'casa2035') {
+      if (pw === 'Peter&Ruediger13') {
         document.getElementById('loginOverlay').style.display = 'none';
         sessionStorage.setItem('casa_auth', '1');
         showSalonLogout(true);
@@ -4399,26 +4430,41 @@
 
   <!-- Feedback Widget (Tester-Feedback) -->
   <div class="feedback-fab" onclick="toggleFeedback()" title="Feedback geben">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="fab-tooltip">Feedback geben</span>
   </div>
   <div class="feedback-panel" id="feedbackPanel">
     <div class="feedback-panel-header">
-      <span>Feedback geben</span>
-      <button onclick="toggleFeedback()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;padding:0;line-height:1">&times;</button>
+      <h4>Feedback geben</h4>
+      <button class="fb-close-btn" onclick="toggleFeedback()">&times;</button>
     </div>
-    <div class="feedback-panel-body">
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Ihnen ist etwas aufgefallen? Fehler, Verbesserung, Idee — jedes Feedback hilft uns!</p>
-      <textarea id="feedbackText" placeholder="Was ist Ihnen aufgefallen?" maxlength="1000"></textarea>
-      <div class="feedback-panel-actions">
-        <select id="feedbackType">
-          <option value="bug">Fehler</option>
-          <option value="verbesserung">Verbesserung</option>
-          <option value="idee">Idee</option>
-          <option value="design">Design</option>
-          <option value="sonstiges">Sonstiges</option>
-        </select>
-        <button onclick="submitFeedback()">Senden</button>
+    <div class="feedback-panel-body" id="fbFormView">
+      <p>Was funktioniert gut? Was fehlt? Jede Meldung hilft uns, die Seite besser zu machen.</p>
+      <div class="fb-chips" id="fbTypeChips">
+        <span class="fb-chip active" data-type="bug" onclick="selectFbChip(this)">Fehler</span>
+        <span class="fb-chip" data-type="verbesserung" onclick="selectFbChip(this)">Verbesserung</span>
+        <span class="fb-chip" data-type="idee" onclick="selectFbChip(this)">Idee</span>
+        <span class="fb-chip" data-type="design" onclick="selectFbChip(this)">Design</span>
+        <span class="fb-chip" data-type="lob" onclick="selectFbChip(this)">Lob</span>
       </div>
+      <div style="margin-bottom:6px;font-size:12px;font-weight:600;color:var(--text-muted)">Bewertung (optional)</div>
+      <div class="fb-stars-row" id="fbStars">
+        <svg class="fb-star-icon" data-val="1" onclick="setFbStars(1)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="fb-star-icon" data-val="2" onclick="setFbStars(2)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="fb-star-icon" data-val="3" onclick="setFbStars(3)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="fb-star-icon" data-val="4" onclick="setFbStars(4)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg class="fb-star-icon" data-val="5" onclick="setFbStars(5)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <textarea id="feedbackText" placeholder="Beschreibe, was dir aufgefallen ist..." maxlength="1000" oninput="updateFbCount()"></textarea>
+      <div class="fb-footer">
+        <span class="fb-counter" id="fbCounter">0 / 1000</span>
+        <button class="fb-submit-btn" id="fbSubmitBtn" onclick="submitFeedback()">Absenden</button>
+      </div>
+    </div>
+    <div class="fb-success-view" id="fbSuccessView">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+      <h4>Vielen Dank!</h4>
+      <p>Dein Feedback wurde gespeichert und an unser Team weitergeleitet.</p>
     </div>
   </div>
 
@@ -4475,7 +4521,7 @@
         var dot = document.createElement('span');
         dot.style.cssText = 'width:6px;height:6px;border-radius:50%;background:#2d8a4e;display:inline-block';
         el.appendChild(dot);
-        el.appendChild(document.createTextNode(' Jetzt geoeffnet'));
+        el.appendChild(document.createTextNode(' Jetzt geöffnet'));
       } else {
         el.style.background = 'rgba(120,100,80,0.08)';
         el.style.color = 'var(--text-muted)';
@@ -4604,29 +4650,67 @@
   <script>
     // === Feedback Widget ===
     var feedbackOpen = false;
+    var fbSelectedType = 'bug';
+    var fbRating = 0;
+
     function toggleFeedback() {
       feedbackOpen = !feedbackOpen;
       var panel = document.getElementById('feedbackPanel');
       if (feedbackOpen) {
         panel.classList.add('open');
+        resetFbForm();
       } else {
         panel.classList.remove('open');
       }
     }
+
+    function selectFbChip(el) {
+      var chips = document.querySelectorAll('#fbTypeChips .fb-chip');
+      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+      el.classList.add('active');
+      fbSelectedType = el.getAttribute('data-type');
+    }
+
+    function setFbStars(val) {
+      fbRating = val;
+      var stars = document.querySelectorAll('#fbStars .fb-star-icon');
+      for (var i = 0; i < stars.length; i++) {
+        stars[i].classList.toggle('active', (i + 1) <= val);
+      }
+    }
+
+    function updateFbCount() {
+      var text = document.getElementById('feedbackText').value;
+      document.getElementById('fbCounter').textContent = text.length + ' / 1000';
+    }
+
+    function resetFbForm() {
+      document.getElementById('fbFormView').style.display = 'block';
+      document.getElementById('fbSuccessView').style.display = 'none';
+      document.getElementById('feedbackText').value = '';
+      document.getElementById('fbCounter').textContent = '0 / 1000';
+      fbRating = 0;
+      setFbStars(0);
+      var chips = document.querySelectorAll('#fbTypeChips .fb-chip');
+      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+      if (chips[0]) chips[0].classList.add('active');
+      fbSelectedType = 'bug';
+    }
+
     function submitFeedback() {
       var text = document.getElementById('feedbackText').value.trim();
-      var type = document.getElementById('feedbackType').value;
-      if (!text) {
-        showToast('Bitte geben Sie Ihr Feedback ein.', 'error');
+      if (!text || text.length < 5) {
+        showToast('Bitte mindestens 5 Zeichen eingeben.', 'error');
         return;
       }
-      if (text.length < 5) {
-        showToast('Bitte etwas mehr Details.', 'error');
-        return;
-      }
+      var btn = document.getElementById('fbSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Wird gesendet...';
+
       var payload = {
         feedback: text,
-        type: type,
+        type: fbSelectedType,
+        rating: fbRating,
         page: 'homepage',
         url: window.location.href,
         timestamp: new Date().toISOString(),
@@ -4634,21 +4718,32 @@
         viewport: window.innerWidth + 'x' + window.innerHeight,
         style: currentStyle || 'feminin'
       };
-      // An Webhook senden (wenn verfuegbar)
-      if (typeof webhookBase !== 'undefined' && webhookBase) {
-        fetch(webhookBase + '/feedback', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).catch(function() {});
-      }
-      // Lokal speichern als Fallback
+      // 1. Lokal speichern (Backup)
       var stored = JSON.parse(localStorage.getItem('casa_feedback') || '[]');
       stored.push(payload);
       localStorage.setItem('casa_feedback', JSON.stringify(stored));
-      showToast('Vielen Dank für Ihr Feedback!', 'success');
-      document.getElementById('feedbackText').value = '';
-      toggleFeedback();
+      // 2. An n8n Webhook senden (Notion-Sync)
+      fetch('https://niniho13.app.n8n.cloud/webhook/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'homepage',
+          type: fbSelectedType,
+          rating: fbRating,
+          text: text,
+          viewport: payload.viewport,
+          timestamp: payload.timestamp,
+          notion_db: '6892c73ad1d44b9088fed5a56def130c'
+        })
+      }).catch(function() {});
+      // Erfolgs-Ansicht zeigen
+      document.getElementById('fbFormView').style.display = 'none';
+      document.getElementById('fbSuccessView').style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Absenden';
+      setTimeout(function() {
+        if (feedbackOpen) toggleFeedback();
+      }, 2500);
     }
 
     // === Rate Limiting (Spam-Schutz) ===
