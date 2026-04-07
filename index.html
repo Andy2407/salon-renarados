@@ -2304,7 +2304,7 @@
   </div>
 
   <script>
-    var webhookBase = 'https://niniho13.app.n8n.cloud/webhook';
+    var webhookBase = 'https://api.casa2035.de/webhook';
 
     // Style Toggle: Feminin (hell) / Maskulin (dunkel)
     // Shop Integration — oeffnet externen Shop im Hintergrund
@@ -4742,7 +4742,7 @@
       stored.push(payload);
       localStorage.setItem('casa_feedback', JSON.stringify(stored));
       // 2. An Webhook senden (Notion-Sync)
-      fetch('https://niniho13.app.n8n.cloud/webhook/feedback', {
+      fetch('https://api.casa2035.de/webhook/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

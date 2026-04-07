@@ -83,7 +83,7 @@
     ]
   },
   "webhooks": {
-    "base": "https://niniho13.app.n8n.cloud/webhook",
+    "base": "https://api.casa2035.de/webhook",
     "homepage": "/homepage"
   },
   "legal": {
