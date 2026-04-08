@@ -1641,8 +1641,9 @@
       <!-- Tab-Umschaltung -->
       <div style="display:flex;justify-content:center;margin-bottom:40px" class="reveal">
         <div style="display:inline-flex;gap:4px;background:rgba(0,0,0,0.06);border-radius:var(--radius-full);padding:4px;border:1px solid var(--border-gold)">
-          <button id="tabHaaranalyse" onclick="switchKiTab('haaranalyse')" style="padding:12px 28px;border:none;border-radius:var(--radius-full);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:var(--gold);color:#fff;letter-spacing:0.3px">Haaranalyse</button>
-          <button id="tabWunschfrisur" onclick="switchKiTab('wunschfrisur')" style="padding:12px 28px;border:none;border-radius:var(--radius-full);font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Wunschfrisur</button>
+          <button id="tabHaaranalyse" onclick="switchKiTab('haaranalyse')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:var(--gold);color:#fff;letter-spacing:0.3px">Haaranalyse</button>
+          <button id="tabFarbcode" onclick="switchKiTab('farbcode')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Farbcode</button>
+          <button id="tabWunschfrisur" onclick="switchKiTab('wunschfrisur')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Wunschfrisur</button>
         </div>
       </div>
 
@@ -1718,7 +1719,63 @@
         </div>
       </div>
 
-      <!-- TAB 2: Wunschfrisur (anfangs versteckt) -->
+      <!-- TAB 2: Farbcode (anfangs versteckt) -->
+      <div id="kiTabFarbcode" class="ki-grid" style="display:none">
+        <div class="ki-content reveal">
+          <div class="section-label">Farbberatung</div>
+          <h2 class="section-title">Ihr <em>Farbcode</em><br>Vorher &amp; Nachher</h2>
+          <p class="section-desc">Sehen Sie vorab, wie Ihre neue Haarfarbe aussehen wird. Laden Sie ein Foto hoch, waehlen Sie Ihren Wunschton &mdash; und erhalten Sie eine realistische Vorher/Nachher-Vorschau.</p>
+          <div style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:16px;height:16px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span style="font-size:12px;font-weight:600;color:var(--gold)">Exakte Mischungsformel inklusive</span>
+          </div>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <div><strong style="font-size:14px">Haar fotografieren</strong><br><span style="font-size:12px;color:var(--text-muted)">Ein Bild Ihres aktuellen Haartons bei Tageslicht</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div><strong style="font-size:14px">Wunschfarbe waehlen</strong><br><span style="font-size:12px;color:var(--text-muted)">10 Farbtonstufen von Schwarz bis Platinblond</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              </div>
+              <div><strong style="font-size:14px">Vorher/Nachher sehen</strong><br><span style="font-size:12px;color:var(--text-muted)">Realistische Simulation + Mischungsformel</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ki-form-card reveal">
+          <h3>Farbcode-Beratung</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht. Wir zeigen Ihnen, wie Ihre Wunschfarbe an Ihnen aussehen wird.</p>
+          <div class="upload-zone" onclick="document.getElementById('farbcodeHomepageUpload').click()" style="cursor:pointer">
+            <input type="file" id="farbcodeHomepageUpload" accept="image/*" style="display:none" onchange="previewFarbcodeHomepage(this.files)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Haar-Foto hier ablegen oder tippen</span>
+          </div>
+          <div id="farbcodeHomepagePreview" style="margin:12px 0;display:none;text-align:center">
+            <img id="farbcodeHomepageImg" style="max-width:100%;max-height:200px;border-radius:var(--radius);border:1px solid var(--border)" alt="Farbcode-Vorschau">
+          </div>
+          <div class="form-row">
+            <div class="form-group"><input type="text" id="fcName" placeholder="Ihr Vorname"></div>
+            <div class="form-group"><input type="email" id="fcEmail" placeholder="E-Mail fuer Ergebnis"></div>
+          </div>
+          <div class="form-group"><label>Wunschfarbe beschreiben</label><textarea id="fcNachricht" placeholder="z.B. Warmes Karamellblond, 2 Stufen heller..." rows="2"></textarea></div>
+          <div style="background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(184,150,46,0.02));border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:12px;margin-top:12px;text-align:center">
+            <div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">Kostenlose Farbberatung</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Vorher/Nachher-Vorschau &middot; Mischungsformel &middot; unverbindlich</div>
+          </div>
+          <button class="btn-gold" onclick="submitFarbcodeHomepage()" style="width:100%;margin-top:12px">Farbberatung starten</button>
+          <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestuetzte Farbanalyse (EU AI Act konform). Ihr Foto wird ausschliesslich fuer die Farbberatung verwendet und nach 30 Tagen geloescht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
+        </div>
+      </div>
+
+      <!-- TAB 3: Wunschfrisur (anfangs versteckt) -->
       <div id="wunschfrisur"></div>
       <div id="kiTabWunschfrisur" class="ki-grid" style="display:none">
         <div class="ki-content reveal">
@@ -2439,21 +2496,44 @@
       }, 4000);
     }
 
-    // KI-Tab Umschaltung (Haaranalyse / Wunschfrisur)
+    // KI-Tab Umschaltung (Haaranalyse / Farbcode / Wunschfrisur)
     function switchKiTab(tab) {
-      var tabH = document.getElementById('tabHaaranalyse');
-      var tabW = document.getElementById('tabWunschfrisur');
-      var panelH = document.getElementById('kiTabHaaranalyse');
-      var panelW = document.getElementById('kiTabWunschfrisur');
-      if (tab === 'haaranalyse') {
-        tabH.style.background = 'var(--gold)'; tabH.style.color = '#fff';
-        tabW.style.background = 'transparent'; tabW.style.color = 'var(--text-light)';
-        panelH.style.display = ''; panelW.style.display = 'none';
-      } else {
-        tabW.style.background = 'var(--gold)'; tabW.style.color = '#fff';
-        tabH.style.background = 'transparent'; tabH.style.color = 'var(--text-light)';
-        panelW.style.display = ''; panelH.style.display = 'none';
-      }
+      var tabs = {
+        haaranalyse: { btn: document.getElementById('tabHaaranalyse'), panel: document.getElementById('kiTabHaaranalyse') },
+        farbcode: { btn: document.getElementById('tabFarbcode'), panel: document.getElementById('kiTabFarbcode') },
+        wunschfrisur: { btn: document.getElementById('tabWunschfrisur'), panel: document.getElementById('kiTabWunschfrisur') }
+      };
+      Object.keys(tabs).forEach(function(key) {
+        var t = tabs[key];
+        if (!t.btn || !t.panel) return;
+        if (key === tab) {
+          t.btn.style.background = 'var(--gold)'; t.btn.style.color = '#fff';
+          t.panel.style.display = '';
+        } else {
+          t.btn.style.background = 'transparent'; t.btn.style.color = 'var(--text-light)';
+          t.panel.style.display = 'none';
+        }
+      });
+    }
+
+    // Farbcode Homepage Preview + Submit
+    function previewFarbcodeHomepage(files) {
+      if (!files || !files[0]) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('farbcodeHomepageImg').src = e.target.result;
+        document.getElementById('farbcodeHomepagePreview').style.display = 'block';
+      };
+      reader.readAsDataURL(files[0]);
+    }
+
+    function submitFarbcodeHomepage() {
+      var name = (document.getElementById('fcName') || {}).value || '';
+      var email = (document.getElementById('fcEmail') || {}).value || '';
+      var nachricht = (document.getElementById('fcNachricht') || {}).value || '';
+      if (!name || !email) { showToast('Bitte Name und E-Mail eingeben.', 'error'); return; }
+      // Demo mode
+      showToast('Farbberatung gesendet! Wir melden uns in Kuerze. (Demo-Modus)', 'success');
     }
 
     // Haaranalyse Preview + Submit
