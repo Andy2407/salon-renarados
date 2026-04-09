@@ -2593,8 +2593,9 @@
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         }).then(function(res) { return res.json(); })
-        .then(function(data) { resetFcBtn(); showKiResultPopup('Wunsch-Haarfarbe', data, email); })
-        .catch(function() { resetFcBtn(); showToast('Verbindungsfehler. Bitte versuchen Sie es erneut.', 'error'); });
+        .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+        .then(function(data) { resetFcBtn(); showKiResultPopup('Wunsch-Haarfarbe', data, email, false); })
+        .catch(function() { resetFcBtn(); showKiResultPopup('Wunsch-Haarfarbe', HOMEPAGE_DEMO.farbcode, email, true); });
       };
       if (fileInput && fileInput.files && fileInput.files[0]) {
         var reader = new FileReader();
@@ -2650,15 +2651,15 @@
         fetch(webhookBase + '/schnellcheck', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).then(function(res) { return res.json(); })
+        }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function(data) {
           document.getElementById('haarName').value = '';
           document.getElementById('haarEmail').value = '';
           document.getElementById('haarPreview').style.display = 'none';
           fileInput.value = '';
           btn.textContent = btnText; btn.disabled = false; btn.style.opacity = '1';
-          showKiResultPopup('Haaranalyse', data, email);
-        }).catch(function() { btn.textContent = btnText; btn.disabled = false; btn.style.opacity = '1'; showToast('Verbindungsfehler. Bitte versuchen Sie es erneut.', 'error'); });
+          showKiResultPopup('Haaranalyse', data, email, false);
+        }).catch(function() { btn.textContent = btnText; btn.disabled = false; btn.style.opacity = '1'; showKiResultPopup('Haaranalyse', HOMEPAGE_DEMO.haaranalyse, email, true); });
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
@@ -2721,16 +2722,29 @@
       fetch(webhookBase + '/wunschfrisur', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).then(function(res) { return res.json(); })
+      }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
       .then(function(data) {
         e.target.reset(); document.getElementById('uploadPreview').textContent = '';
         resetWfBtn();
-        showKiResultPopup('Wunschfrisur', data, email);
-      }).catch(function() { resetWfBtn(); showToast('Verbindungsfehler. Bitte versuchen Sie es erneut.', 'error'); });
+        showKiResultPopup('Wunschfrisur', data, email, false);
+      }).catch(function() { resetWfBtn(); showKiResultPopup('Wunschfrisur', HOMEPAGE_DEMO.wunschfrisur, email, true); });
     }
 
     // === KI-Ergebnis-Popup (geteilt von allen 3 Funktionen) ===
-    function showKiResultPopup(titel, data, email) {
+    // === DEMO-Daten fuer Homepage (Fallback wenn Webhooks nicht erreichbar) ===
+    var HOMEPAGE_DEMO = {
+      haaranalyse: {
+        antwort: 'Haartyp: Wellig (2B)\nSchaedigung: Leicht an den Spitzen\nKopfhaut: Normal, leicht trocken\nPorositaet: Mittel\n\nEmpfehlung: Feuchtigkeitskur 1x pro Woche, Hitzeschutz beim Foehnen. Olaplex Nr. 3 als Home-Treatment. Naechste Balayage-Auffrischung in 4-6 Wochen.\n\nHaar-Gesundheit: 68%'
+      },
+      farbcode: {
+        antwort: 'Machbarkeit: Gut realisierbar\nGeschaetzte Sitzungen: 2 (bei deutlicher Aufhellung)\n\nIhr aktueller Haarton laesst sich mit der gewuenschten Farbe gut vereinbaren. Bei starker Aufhellung empfehlen wir eine schrittweise Veraenderung mit Schutzbehandlung.\n\nEmpfehlung: Vereinbaren Sie einen Beratungstermin fuer eine individuelle Farbformel.'
+      },
+      wunschfrisur: {
+        antwort: 'Machbarkeit: 87%\n\nDie gewuenschte Frisur passt gut zu Ihrer Gesichtsform und Haarstruktur.\n\nSchnittform und Styling-Technik: Gut machbar\nFarbton: Bedingt — erfordert ggf. 2 Sitzungen\nEmpfohlene Technik: Balayage + Glossing\nGeschaetzte Dauer: 150 Min\n\nVereinbaren Sie einen Beratungstermin fuer eine detaillierte Planung.'
+      }
+    };
+
+    function showKiResultPopup(titel, data, email, isDemo) {
       // Vorhandenes Popup entfernen
       var existing = document.getElementById('kiResultPopup');
       if (existing) existing.remove();
@@ -2742,7 +2756,9 @@
       else if (typeof data === 'string') ergebnis = data;
       else ergebnis = 'Ihre Anfrage wurde erfolgreich verarbeitet. Wir melden uns in Kuerze bei Ihnen.';
       // KI-Hinweis (EU AI Act Pflicht)
-      var kiHinweis = 'KI-gestuetzte Analyse. Detaillierte Beratung erhalten Sie im Salon durch unsere Experten.';
+      var kiHinweis = isDemo
+        ? 'DEMO-Modus: Beispielergebnis zur Veranschaulichung. Im Live-Betrieb erhalten Sie hier eine echte KI-Analyse Ihres Fotos.'
+        : 'KI-gestuetzte Analyse. Detaillierte Beratung erhalten Sie im Salon durch unsere Experten.';
       // Popup erstellen
       var overlay = document.createElement('div');
       overlay.id = 'kiResultPopup';
@@ -2755,10 +2771,17 @@
       closeBtn.textContent = '\u00D7';
       closeBtn.onclick = function() { overlay.remove(); };
       card.appendChild(closeBtn);
+      // DEMO-Badge
+      if (isDemo) {
+        var demoBadge = document.createElement('div');
+        demoBadge.style.cssText = 'display:inline-block;padding:5px 14px;background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.5px;margin-bottom:10px;text-transform:uppercase';
+        demoBadge.textContent = 'DEMO-ERGEBNIS';
+        card.appendChild(demoBadge);
+      }
       // Titel
       var h3 = document.createElement('h3');
       h3.style.cssText = 'font-family:Playfair Display,serif;font-size:22px;color:#2c2420;margin:0 0 6px';
-      h3.textContent = titel + ' — Ergebnis';
+      h3.textContent = titel + (isDemo ? ' — Demo' : ' — Ergebnis');
       card.appendChild(h3);
       // Ergebnis
       var resultDiv = document.createElement('div');
