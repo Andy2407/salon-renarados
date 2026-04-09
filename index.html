@@ -1642,7 +1642,7 @@
       <div style="display:flex;justify-content:center;margin-bottom:40px" class="reveal">
         <div style="display:inline-flex;gap:4px;background:rgba(0,0,0,0.06);border-radius:var(--radius-full);padding:4px;border:1px solid var(--border-gold)">
           <button id="tabHaaranalyse" onclick="switchKiTab('haaranalyse')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:var(--gold);color:#fff;letter-spacing:0.3px">Haaranalyse</button>
-          <button id="tabFarbcode" onclick="switchKiTab('farbcode')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Farbcode</button>
+          <button id="tabFarbcode" onclick="switchKiTab('farbcode')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Wunsch-Haarfarbe</button>
           <button id="tabWunschfrisur" onclick="switchKiTab('wunschfrisur')" style="padding:10px 20px;border:none;border-radius:var(--radius-full);font-size:13px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 300ms;background:transparent;color:var(--text-light);letter-spacing:0.3px">Wunschfrisur</button>
         </div>
       </div>
@@ -1700,18 +1700,26 @@
             Bitte anmelden, um Fotos hochzuladen
           </div>
           </div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Tipp: Fotografieren Sie bei Tageslicht, Haar offen und trocken.
+          </div>
           <div id="haarPreview" style="margin:12px 0;display:none;text-align:center">
             <img id="haarPreviewImg" style="max-width:100%;max-height:200px;border-radius:var(--radius);border:1px solid var(--border)" alt="Haar-Vorschau">
           </div>
           <div class="form-row">
             <div class="form-group"><input type="text" id="haarName" placeholder="Ihr Vorname"></div>
-            <div class="form-group"><input type="email" id="haarEmail" placeholder="E-Mail für Ergebnis"></div>
+            <div class="form-group"><input type="email" id="haarEmail" placeholder="E-Mail fuer Ergebnis"></div>
           </div>
           <div style="background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(184,150,46,0.02));border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:12px;margin-top:12px;text-align:center">
             <div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">Kostenloser Schnell-Check</div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Erste Einschätzung per KI &middot; Ergebnis per E-Mail &middot; unverbindlich</div>
           </div>
-          <button class="btn-gold" id="haarBtn" onclick="submitHaaranalyse()" style="width:100%;margin-top:12px">
+          <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
+          </div>
+          <button class="btn-gold" id="haarBtn" onclick="submitHaaranalyse()" style="width:100%;margin-top:8px">
             Haaranalyse starten
           </button>
           <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Profi-Analyse mit PDF-Report erhalten Sie im Salon. Powered by <a href="https://casa2035.de" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">Casa 2035</a>.</p>
@@ -1722,12 +1730,12 @@
       <!-- TAB 2: Farbcode (anfangs versteckt) -->
       <div id="kiTabFarbcode" class="ki-grid" style="display:none">
         <div class="ki-content reveal">
-          <div class="section-label">Farbberatung</div>
-          <h2 class="section-title">Ihr <em>Farbcode</em><br>Vorher &amp; Nachher</h2>
-          <p class="section-desc">Sehen Sie vorab, wie Ihre neue Haarfarbe aussehen wird. Laden Sie ein Foto hoch, waehlen Sie Ihren Wunschton &mdash; und erhalten Sie eine realistische Vorher/Nachher-Vorschau.</p>
+          <div class="section-label">Farbwunsch</div>
+          <h2 class="section-title">Ihre <em>Wunsch-Haarfarbe</em><br>vorab pruefen</h2>
+          <p class="section-desc">Traeumen Sie von einer neuen Haarfarbe? Laden Sie ein Foto hoch und beschreiben Sie Ihren Wunsch &mdash; wir sagen Ihnen ehrlich, ob und wie es machbar ist.</p>
           <div style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:16px;height:16px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span style="font-size:12px;font-weight:600;color:var(--gold)">Exakte Mischungsformel inklusive</span>
+            <span style="font-size:12px;font-weight:600;color:var(--gold)">Kostenlose Ersteinschaetzung per KI</span>
           </div>
           <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px">
             <div style="display:flex;align-items:center;gap:14px">
@@ -1740,23 +1748,33 @@
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               </div>
-              <div><strong style="font-size:14px">Wunschfarbe waehlen</strong><br><span style="font-size:12px;color:var(--text-muted)">10 Farbtonstufen von Schwarz bis Platinblond</span></div>
+              <div><strong style="font-size:14px">Wunschfarbe beschreiben</strong><br><span style="font-size:12px;color:var(--text-muted)">Welcher Farbton schwebt Ihnen vor?</span></div>
             </div>
             <div style="display:flex;align-items:center;gap:14px">
               <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),rgba(184,150,46,0.7));display:flex;align-items:center;justify-content:center;flex-shrink:0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="width:22px;height:22px"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
               </div>
-              <div><strong style="font-size:14px">Vorher/Nachher sehen</strong><br><span style="font-size:12px;color:var(--text-muted)">Realistische Simulation + Mischungsformel</span></div>
+              <div><strong style="font-size:14px">Ehrliche Einschaetzung</strong><br><span style="font-size:12px;color:var(--text-muted)">Machbarkeit, Sitzungen, Empfehlung — per E-Mail</span></div>
             </div>
           </div>
         </div>
         <div class="ki-form-card reveal">
-          <h3>Farbcode-Beratung</h3>
-          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht. Wir zeigen Ihnen, wie Ihre Wunschfarbe an Ihnen aussehen wird.</p>
-          <div class="upload-zone" onclick="document.getElementById('farbcodeHomepageUpload').click()" style="cursor:pointer">
+          <h3>Wunsch-Haarfarbe pruefen</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht und beschreiben Sie Ihre Wunschfarbe. Wir sagen Ihnen ehrlich, was moeglich ist.</p>
+          <div style="position:relative">
+          <div class="upload-zone upload-zone-gated" onclick="document.getElementById('farbcodeHomepageUpload').click()" style="cursor:pointer">
             <input type="file" id="farbcodeHomepageUpload" accept="image/*" style="display:none" onchange="previewFarbcodeHomepage(this.files)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:40px;height:40px;color:var(--gold)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             <span>Haar-Foto hier ablegen oder tippen</span>
+          </div>
+          <div class="upload-gate" onclick="showUploadLoginHint()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Bitte anmelden, um Fotos hochzuladen
+          </div>
+          </div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Tipp: Bei Tageslicht fotografieren — zeigt den echten Farbton.
           </div>
           <div id="farbcodeHomepagePreview" style="margin:12px 0;display:none;text-align:center">
             <img id="farbcodeHomepageImg" style="max-width:100%;max-height:200px;border-radius:var(--radius);border:1px solid var(--border)" alt="Farbcode-Vorschau">
@@ -1765,13 +1783,18 @@
             <div class="form-group"><input type="text" id="fcName" placeholder="Ihr Vorname"></div>
             <div class="form-group"><input type="email" id="fcEmail" placeholder="E-Mail fuer Ergebnis"></div>
           </div>
-          <div class="form-group"><label>Wunschfarbe beschreiben</label><textarea id="fcNachricht" placeholder="z.B. Warmes Karamellblond, 2 Stufen heller..." rows="2"></textarea></div>
+          <div class="form-group"><label>Wunschfarbe beschreiben</label><textarea id="fcNachricht" placeholder="z.B. Warmes Karamellblond, 2 Stufen heller, Balayage-Effekt..." rows="2"></textarea></div>
           <div style="background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(184,150,46,0.02));border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:12px;margin-top:12px;text-align:center">
-            <div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">Kostenlose Farbberatung</div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Vorher/Nachher-Vorschau &middot; Mischungsformel &middot; unverbindlich</div>
+            <div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">Kostenlose Ersteinschaetzung</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Machbarkeit &middot; Anzahl Sitzungen &middot; Empfehlung &middot; unverbindlich</div>
           </div>
-          <button class="btn-gold" onclick="submitFarbcodeHomepage()" style="width:100%;margin-top:12px">Farbberatung starten</button>
-          <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestuetzte Farbanalyse (EU AI Act konform). Ihr Foto wird ausschliesslich fuer die Farbberatung verwendet und nach 30 Tagen geloescht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
+          </div>
+          <button class="btn-gold" onclick="submitFarbcodeHomepage()" style="width:100%;margin-top:8px">Wunsch-Haarfarbe pruefen</button>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Farbberatung mit Mischungsformel erhalten Sie im Salon. Powered by <a href="https://casa2035.de" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">Casa 2035</a>.</p>
+          <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestuetzte Analyse (EU AI Act konform). Ihr Foto wird ausschliesslich fuer die Farbberatung verwendet und nach 30 Tagen geloescht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
         </div>
       </div>
 
@@ -1830,6 +1853,10 @@
                 </div>
                 </div>
                 <div class="upload-preview" id="uploadPreview"></div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:6px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Tipp: Inspirations-Foto oder Selfie bei Tageslicht hochladen.
+                </div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
                 <div class="form-group" style="margin-bottom:0"><label>Wunschtermin (optional)</label><input type="date" id="wfDatum"></div>
@@ -1841,7 +1868,11 @@
                   </select>
                 </div>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+              <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
                 <button type="submit" class="btn btn-gold" style="justify-content:center">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
                   <span id="wunschBtnText">Wunschfrisur senden</span>
@@ -2528,12 +2559,48 @@
     }
 
     function submitFarbcodeHomepage() {
+      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
       var name = (document.getElementById('fcName') || {}).value || '';
       var email = (document.getElementById('fcEmail') || {}).value || '';
       var nachricht = (document.getElementById('fcNachricht') || {}).value || '';
+      var fileInput = document.getElementById('farbcodeHomepageUpload');
       if (!name || !email) { showToast('Bitte Name und E-Mail eingeben.', 'error'); return; }
-      // Demo mode
-      showToast('Farbberatung gesendet! Wir melden uns in Kuerze. (Demo-Modus)', 'success');
+      if (typeof sanitizeInput === 'function') {
+        name = sanitizeInput(name, 100);
+        nachricht = sanitizeInput(nachricht, 1000);
+        if (name === '__FLAGGED__' || nachricht === '__FLAGGED__') { showToast('Ungueltige Eingabe erkannt.', 'error'); return; }
+      }
+      if (typeof checkRateLimit === 'function' && !checkRateLimit('farbcode', 3)) {
+        showToast('Bitte warten Sie etwas — zu viele Anfragen.', 'error'); return;
+      }
+      var fcBtn = document.querySelector('[onclick="submitFarbcodeHomepage()"]');
+      var fcBtnText = fcBtn ? fcBtn.textContent : '';
+      if (fcBtn) { fcBtn.textContent = 'Analyse laeuft...'; fcBtn.disabled = true; fcBtn.style.opacity = '0.7'; }
+      showToast('Analyse wird gestartet...', 'info');
+      var resetFcBtn = function() { if (fcBtn) { fcBtn.textContent = fcBtnText; fcBtn.disabled = false; fcBtn.style.opacity = '1'; } };
+      var sendPayload = function(mediaUrl) {
+        var payload = {
+          from: email, name: name,
+          message: 'Wunsch-Haarfarbe: ' + (nachricht || 'Keine Beschreibung'),
+          timestamp: new Date().toISOString(),
+          message_id: 'web_fc_' + Date.now(),
+          media_url: mediaUrl || null,
+          referrer: window.location.href,
+          kanal: 'homepage', typ: 'farbcode',
+          email: email, stil: currentStyle
+        };
+        fetch(webhookBase + '/wf03d-farbcode', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(function(res) { return res.json(); })
+        .then(function(data) { resetFcBtn(); showKiResultPopup('Wunsch-Haarfarbe', data, email); })
+        .catch(function() { resetFcBtn(); showToast('Verbindungsfehler. Bitte versuchen Sie es erneut.', 'error'); });
+      };
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(ev) { sendPayload(ev.target.result); };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else { sendPayload(null); }
     }
 
     // Haaranalyse Preview + Submit
@@ -2549,123 +2616,193 @@
     }
 
     function submitHaaranalyse() {
-      // Rate-Limiting: max 3 Haaranalysen pro Stunde
+      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
       if (typeof checkRateLimit === 'function' && !checkRateLimit('haaranalyse', 3)) {
-        showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error');
-        return;
+        showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error'); return;
       }
       var name = document.getElementById('haarName').value.trim();
       var email = document.getElementById('haarEmail').value.trim();
       var fileInput = document.getElementById('haarUpload');
-
-      if (!fileInput.files || !fileInput.files[0]) {
-        showToast('Bitte laden Sie ein Haar-Foto hoch.', 'error');
-        return;
-      }
-      if (!name || !email) {
-        showToast('Bitte Vorname und E-Mail angeben.', 'error');
-        return;
-      }
-      // Input-Sanitierung
+      if (!fileInput.files || !fileInput.files[0]) { showToast('Bitte laden Sie ein Haar-Foto hoch.', 'error'); return; }
+      if (!name || !email) { showToast('Bitte Vorname und E-Mail angeben.', 'error'); return; }
       if (typeof sanitizeInput === 'function') {
         name = sanitizeInput(name, 100);
-        if (name === '__FLAGGED__') {
-          showToast('Ungültige Eingabe erkannt.', 'error');
-          return;
-        }
+        if (name === '__FLAGGED__') { showToast('Ungueltige Eingabe erkannt.', 'error'); return; }
       }
-      // Bild als Base64 lesen und an Webhook senden
+      var btn = document.getElementById('haarBtn');
+      var btnText = btn.textContent;
+      btn.textContent = 'Analyse laeuft...';
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+      showToast('KI analysiert Ihr Haar...', 'info');
       var reader = new FileReader();
       reader.onload = function(ev) {
         var payload = {
-          from: email,
-          name: name,
+          from: email, name: name,
           message: 'Haaranalyse-Anfrage von ' + name,
           timestamp: new Date().toISOString(),
           message_id: 'web_ha_' + Date.now(),
           media_url: ev.target.result,
           referrer: window.location.href,
-          kanal: 'homepage',
-          typ: 'haaranalyse',
-          email: email,
-          stil: currentStyle
+          kanal: 'homepage', typ: 'haaranalyse',
+          email: email, stil: currentStyle
         };
-
-        fetch(webhookBase + '/homepage', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        fetch(webhookBase + '/schnellcheck', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }).then(function(res) {
-          if (res.ok) {
-            showToast('Haaranalyse gestartet! Ergebnis kommt per E-Mail.', 'success');
-            document.getElementById('haarName').value = '';
-            document.getElementById('haarEmail').value = '';
-            document.getElementById('haarPreview').style.display = 'none';
-            fileInput.value = '';
-          } else {
-            showToast('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error');
-          }
-        }).catch(function() {
-          showToast('Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung.', 'error');
-        });
+        }).then(function(res) { return res.json(); })
+        .then(function(data) {
+          document.getElementById('haarName').value = '';
+          document.getElementById('haarEmail').value = '';
+          document.getElementById('haarPreview').style.display = 'none';
+          fileInput.value = '';
+          btn.textContent = btnText; btn.disabled = false; btn.style.opacity = '1';
+          showKiResultPopup('Haaranalyse', data, email);
+        }).catch(function() { btn.textContent = btnText; btn.disabled = false; btn.style.opacity = '1'; showToast('Verbindungsfehler. Bitte versuchen Sie es erneut.', 'error'); });
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
 
-    // Submit Wunschfrisur — geht an WF-01 /homepage (Intent: wunschfrisur)
+    // Submit Wunschfrisur — geht an WF-03a /wunschfrisur
     function submitWunschfrisur(e) {
       e.preventDefault();
-      // Rate-Limiting: max 5 Wunschfrisur-Anfragen pro Stunde
+      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
       if (typeof checkRateLimit === 'function' && !checkRateLimit('wunschfrisur', 5)) {
-        showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error');
-        return;
+        showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error'); return;
       }
       var vorname = document.getElementById('wfVorname').value.trim();
       var nachname = document.getElementById('wfNachname').value.trim();
       var email = document.getElementById('wfEmail').value.trim();
       var telefon = document.getElementById('wfTelefon').value.trim();
       var nachricht = document.getElementById('wfNachricht').value.trim();
-      // Input-Sanitierung
       if (typeof sanitizeInput === 'function') {
         vorname = sanitizeInput(vorname, 100);
         nachname = sanitizeInput(nachname, 100);
         nachricht = sanitizeInput(nachricht, 1000);
         if (vorname === '__FLAGGED__' || nachname === '__FLAGGED__' || nachricht === '__FLAGGED__') {
-          showToast('Ungültige Eingabe erkannt. Bitte versuchen Sie es erneut.', 'error');
-          return;
+          showToast('Ungueltige Eingabe erkannt.', 'error'); return;
         }
       }
-      // WF-01 erwartet: from, name, message, timestamp, message_id
-      // Plus Extra-Felder die an Sub-Workflow durchgereicht werden
+      var wfBtn = document.getElementById('wunschBtnText');
+      var wfBtnOrig = wfBtn ? wfBtn.textContent : '';
+      if (wfBtn) { wfBtn.textContent = 'Analyse laeuft...'; }
+      var wfSubmitBtn = wfBtn ? wfBtn.closest('button') : null;
+      if (wfSubmitBtn) { wfSubmitBtn.disabled = true; wfSubmitBtn.style.opacity = '0.7'; }
+      showToast('Wunschfrisur wird analysiert...', 'info');
       var payload = {
-        from: email,
-        name: vorname + ' ' + nachname,
+        from: email, name: vorname + ' ' + nachname,
         message: 'Wunschfrisur-Anfrage: ' + nachricht,
         timestamp: new Date().toISOString(),
         message_id: 'web_wf_' + Date.now(),
-        media_url: null,
-        referrer: window.location.href,
-        kanal: 'homepage',
-        typ: 'wunschfrisur',
-        vorname: vorname,
-        nachname: nachname,
-        email: email,
-        telefon: telefon,
-        nachricht: nachricht
+        media_url: null, referrer: window.location.href,
+        kanal: 'homepage', typ: 'wunschfrisur',
+        vorname: vorname, nachname: nachname,
+        email: email, telefon: telefon, nachricht: nachricht,
+        stil: currentStyle
       };
-      if (webhookBase) {
+      // Fotos hinzufuegen falls vorhanden
+      var fileInput = document.getElementById('wfFiles');
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          payload.media_url = ev.target.result;
+          doWunschfrisurSubmit(payload, email, e);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        doWunschfrisurSubmit(payload, email, e);
+      }
+    }
+    function doWunschfrisurSubmit(payload, email, e) {
+      var resetWfBtn = function() {
+        var b = document.getElementById('wunschBtnText');
+        if (b) { b.textContent = 'Wunschfrisur senden'; var p = b.closest('button'); if (p) { p.disabled = false; p.style.opacity = '1'; } }
+      };
+      fetch(webhookBase + '/wunschfrisur', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function(res) { return res.json(); })
+      .then(function(data) {
+        e.target.reset(); document.getElementById('uploadPreview').textContent = '';
+        resetWfBtn();
+        showKiResultPopup('Wunschfrisur', data, email);
+      }).catch(function() { resetWfBtn(); showToast('Verbindungsfehler. Bitte versuchen Sie es erneut.', 'error'); });
+    }
+
+    // === KI-Ergebnis-Popup (geteilt von allen 3 Funktionen) ===
+    function showKiResultPopup(titel, data, email) {
+      // Vorhandenes Popup entfernen
+      var existing = document.getElementById('kiResultPopup');
+      if (existing) existing.remove();
+      // Ergebnis-Text aus Workflow-Response extrahieren
+      var ergebnis = '';
+      if (data && data.antwort) ergebnis = data.antwort;
+      else if (data && data.message) ergebnis = data.message;
+      else if (data && data.ergebnis) ergebnis = data.ergebnis;
+      else if (typeof data === 'string') ergebnis = data;
+      else ergebnis = 'Ihre Anfrage wurde erfolgreich verarbeitet. Wir melden uns in Kuerze bei Ihnen.';
+      // KI-Hinweis (EU AI Act Pflicht)
+      var kiHinweis = 'KI-gestuetzte Analyse. Detaillierte Beratung erhalten Sie im Salon durch unsere Experten.';
+      // Popup erstellen
+      var overlay = document.createElement('div');
+      overlay.id = 'kiResultPopup';
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box';
+      var card = document.createElement('div');
+      card.style.cssText = 'background:#fff;border-radius:16px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative';
+      // Close Button
+      var closeBtn = document.createElement('button');
+      closeBtn.style.cssText = 'position:absolute;top:12px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#999;font-family:Inter,sans-serif';
+      closeBtn.textContent = '\u00D7';
+      closeBtn.onclick = function() { overlay.remove(); };
+      card.appendChild(closeBtn);
+      // Titel
+      var h3 = document.createElement('h3');
+      h3.style.cssText = 'font-family:Playfair Display,serif;font-size:22px;color:#2c2420;margin:0 0 6px';
+      h3.textContent = titel + ' — Ergebnis';
+      card.appendChild(h3);
+      // Ergebnis
+      var resultDiv = document.createElement('div');
+      resultDiv.style.cssText = 'font-size:14px;line-height:1.7;color:#4a3f37;margin:16px 0;padding:16px;background:#faf4ee;border:1px solid rgba(184,150,46,0.2);border-radius:10px;white-space:pre-line';
+      resultDiv.textContent = ergebnis;
+      card.appendChild(resultDiv);
+      // KI-Hinweis
+      var hinweis = document.createElement('div');
+      hinweis.style.cssText = 'font-size:11px;color:#8a7e76;margin:12px 0;padding:10px;background:rgba(184,150,46,0.06);border-radius:8px;text-align:center';
+      hinweis.textContent = kiHinweis;
+      card.appendChild(hinweis);
+      // Buttons
+      var btnRow = document.createElement('div');
+      btnRow.style.cssText = 'display:flex;gap:10px;margin-top:16px';
+      // Per E-Mail senden
+      var emailBtn = document.createElement('button');
+      emailBtn.style.cssText = 'flex:1;padding:12px;background:linear-gradient(135deg,#b8962e,#c9a93d);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif';
+      emailBtn.textContent = 'Per E-Mail senden';
+      emailBtn.onclick = function() {
+        emailBtn.textContent = 'Wird gesendet...';
+        emailBtn.disabled = true;
         fetch(webhookBase + '/homepage', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(function(res) {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          showToast('Ihre Wunschfrisur-Anfrage wurde gesendet! Wir melden uns in Kürze.', 'success');
-          e.target.reset(); document.getElementById('uploadPreview').textContent = '';
-        }).catch(function() { showToast('Fehler beim Senden. Bitte versuchen Sie es erneut.', 'error'); });
-      } else {
-        showToast('Wunschfrisur-Anfrage gesendet! (Demo-Modus)', 'success');
-        e.target.reset(); document.getElementById('uploadPreview').textContent = '';
-      }
+          body: JSON.stringify({ typ: 'ergebnis_email', email: email, titel: titel, ergebnis: ergebnis, timestamp: new Date().toISOString(), message_id: 'web_email_' + Date.now(), kanal: 'homepage' })
+        }).then(function() {
+          emailBtn.textContent = 'Gesendet!';
+          showToast('Ergebnis an ' + email + ' gesendet.', 'success');
+        }).catch(function() {
+          emailBtn.textContent = 'Per E-Mail senden';
+          emailBtn.disabled = false;
+          showToast('Fehler beim E-Mail-Versand.', 'error');
+        });
+      };
+      btnRow.appendChild(emailBtn);
+      // Termin buchen
+      var terminBtn = document.createElement('button');
+      terminBtn.style.cssText = 'flex:1;padding:12px;background:#fff;color:#b8962e;border:2px solid #b8962e;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif';
+      terminBtn.textContent = 'Termin buchen';
+      terminBtn.onclick = function() { overlay.remove(); document.getElementById('booking').scrollIntoView({behavior:'smooth'}); };
+      btnRow.appendChild(terminBtn);
+      card.appendChild(btnRow);
+      overlay.appendChild(card);
+      overlay.onclick = function(ev) { if (ev.target === overlay) overlay.remove(); };
+      document.body.appendChild(overlay);
     }
 
     // === Visueller Kalender fuer Terminbuchung ===
