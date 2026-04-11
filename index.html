@@ -3463,9 +3463,17 @@
         stil: currentStyle
       };
       if (webhookBase) {
-        fetch(webhookBase + '/homepage', {
+        // Direkt an WF-02a (Terminvorschlag) — bis WF-01 Intent-Router live ist
+        var payloadWf02a = Object.assign({}, payload, {
+          salon_id: '26230de8-a46e-4610-937c-c302547b5a73',
+          kundenname: ((payload.vorname || '') + ' ' + (payload.nachname || '')).trim(),
+          kontakt: payload.email || payload.telefon || '',
+          nachricht: (payload.leistung || '') + (payload.notiz ? ' — ' + payload.notiz : ''),
+          intent: 'termin_buchen'
+        });
+        fetch(webhookBase + '/terminvorschlag', {
           method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payloadWf02a)
         }).then(function(res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
           showToast('Terminanfrage gesendet! Sie erhalten in Kürze eine Bestätigung.', 'success');
