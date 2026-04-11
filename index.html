@@ -2,9 +2,11 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Rena Rados Friseure in München — Ihr Premium-Salon mit persönlicher Beratung, Online-Terminbuchung und Wunschfrisur-Service.">
   <meta name="theme-color" content="#faf8f6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>Rena Rados Friseure | München — Premium Haarstyling</title>
@@ -61,7 +63,7 @@
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
     body {
       font-family: 'Inter', -apple-system, system-ui, sans-serif;
       color: var(--text); background: var(--cream);
@@ -91,13 +93,14 @@
     /* Navigation */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 16px 32px; background: rgba(250,244,238,0.88);
+      padding: calc(env(safe-area-inset-top, 0px) + 16px) max(32px, env(safe-area-inset-right, 32px)) 16px max(32px, env(safe-area-inset-left, 32px));
+      background: rgba(250,244,238,0.88);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       display: flex; align-items: center; justify-content: space-between;
       transition: padding 300ms, background 300ms, box-shadow 300ms;
       border-bottom: 1px solid transparent;
     }
-    .nav.scrolled { padding: 10px 32px; background: rgba(250,244,238,0.96); border-bottom-color: var(--border); box-shadow: 0 2px 20px rgba(120,100,70,0.06); }
+    .nav.scrolled { padding: calc(env(safe-area-inset-top, 0px) + 10px) max(32px, env(safe-area-inset-right, 32px)) 10px max(32px, env(safe-area-inset-left, 32px)); background: rgba(250,244,238,0.96); border-bottom-color: var(--border); box-shadow: 0 2px 20px rgba(120,100,70,0.06); }
     .nav-logo {
       font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
       color: var(--black); text-decoration: none; letter-spacing: -0.3px;
@@ -1839,23 +1842,70 @@
                 <div class="form-group"><label>Telefon</label><input type="tel" id="wfTelefon" placeholder="0171 1234567"></div>
               </div>
               <div class="form-group"><label>Was wünschen Sie sich?</label><textarea id="wfNachricht" placeholder="Beschreiben Sie Ihre Wunschfrisur oder stellen Sie eine Frage..." rows="3" required></textarea></div>
+
+              <!-- Upload-Zone 1: Ist-Zustand -->
               <div class="form-group">
-                <label>Fotos hochladen (optional)</label>
+                <label>Ist-Zustand (Dein aktuelles Haar) <span style="font-size:10px;color:var(--text-muted);font-weight:400">max. 5 Bilder, je 10 MB</span></label>
                 <div style="position:relative">
-                <div class="upload-zone upload-zone-gated" id="uploadZone">
-                  <input type="file" id="wfFiles" accept="image/*" multiple onchange="handleFiles(this.files)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                  <p><span>Klicken</span> oder Bilder hierher ziehen</p>
+                  <div class="upload-zone upload-zone-gated" id="wfVorherZone" data-kind="vorher" ondragover="wfDragOver(event)" ondragleave="wfDragLeave(event)" ondrop="wfDrop(event,'vorher')" onclick="document.getElementById('wfFilesVorher').click()">
+                    <input type="file" id="wfFilesVorher" accept="image/jpeg,image/png,image/webp,image/heic" multiple style="display:none" onchange="wfAddFiles(this.files,'vorher')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p><span>Klicken</span> oder Bilder hierher ziehen</p>
+                  </div>
+                  <div class="upload-gate" onclick="showUploadLoginHint()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Bitte anmelden, um Fotos hochzuladen
+                  </div>
                 </div>
-                <div class="upload-gate" onclick="showUploadLoginHint()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Bitte anmelden, um Fotos hochzuladen
+                <div class="upload-preview" id="wfPreviewVorher"></div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:6px">Tipp: Selfie bei Tageslicht, frontal und seitlich.</div>
+              </div>
+
+              <!-- Upload-Zone 2: Wunsch-Referenz -->
+              <div class="form-group">
+                <label>Wunsch-Referenz (Was du willst) <span style="font-size:10px;color:var(--text-muted);font-weight:400">max. 5 Bilder, je 10 MB</span></label>
+                <div style="position:relative">
+                  <div class="upload-zone upload-zone-gated" id="wfReferenzZone" data-kind="referenz" ondragover="wfDragOver(event)" ondragleave="wfDragLeave(event)" ondrop="wfDrop(event,'referenz')" onclick="document.getElementById('wfFilesReferenz').click()">
+                    <input type="file" id="wfFilesReferenz" accept="image/jpeg,image/png,image/webp,image/heic" multiple style="display:none" onchange="wfAddFiles(this.files,'referenz')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p><span>Klicken</span> oder Inspirations-Bilder hierher ziehen</p>
+                  </div>
+                  <div class="upload-gate" onclick="showUploadLoginHint()" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(184,150,46,0.06);border:1px dashed var(--border-gold);border-radius:var(--radius-sm);cursor:pointer;margin-top:8px;font-size:12px;color:var(--gold)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;flex-shrink:0"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Bitte anmelden, um Fotos hochzuladen
+                  </div>
                 </div>
+                <div class="upload-preview" id="wfPreviewReferenz"></div>
+              </div>
+
+              <!-- Voice-Recorder -->
+              <div class="form-group" id="wfVoiceGroup">
+                <label>Sprachnachricht (optional) <span style="font-size:10px;color:var(--text-muted);font-weight:400">max. 2 Minuten</span></label>
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                  <button type="button" id="wfVoiceBtn" onclick="wfToggleVoice()" style="display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--border-gold);border-radius:var(--radius-full);background:var(--cream);cursor:pointer;font-size:13px;color:var(--text);font-family:'Inter',sans-serif">
+                    <span id="wfVoiceDot" style="width:10px;height:10px;border-radius:50%;background:var(--gold);display:inline-block"></span>
+                    <span id="wfVoiceLabel">Aufnahme starten</span>
+                  </button>
+                  <span id="wfVoiceTimer" style="font-size:12px;color:var(--text-muted);font-variant-numeric:tabular-nums">00:00</span>
+                  <audio id="wfVoicePreview" controls style="display:none;flex:1;min-width:200px;max-width:100%"></audio>
+                  <button type="button" id="wfVoiceClear" onclick="wfClearVoice()" style="display:none;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:transparent;cursor:pointer;font-size:11px;color:var(--text-muted)">Loeschen</button>
                 </div>
-                <div class="upload-preview" id="uploadPreview"></div>
-                <div style="font-size:11px;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:6px">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:14px;height:14px;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  Tipp: Inspirations-Foto oder Selfie bei Tageslicht hochladen.
+                <div id="wfVoiceHint" style="font-size:11px;color:var(--text-muted);margin-top:6px">Sprechen Sie frei — beschreiben Sie Ihren Wunsch, Ihre Haargeschichte, Ihre Fragen.</div>
+              </div>
+
+              <!-- DSGVO Einwilligung -->
+              <div class="form-group" style="margin-top:8px">
+                <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12px;line-height:1.5;color:var(--text-light);font-weight:400">
+                  <input type="checkbox" id="wfDsgvo" required style="margin-top:3px;flex-shrink:0;accent-color:var(--gold)">
+                  <span>Ich willige ein, dass meine Fotos/Sprachnachricht zur KI-Analyse an Mistral AI (EU, Paris) uebermittelt werden. Widerruf jederzeit moeglich.</span>
+                </label>
+              </div>
+
+              <!-- Progress -->
+              <div id="wfProgressWrap" style="display:none;margin-top:10px">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px"><span id="wfProgressLabel">Lade hoch...</span></div>
+                <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+                  <div id="wfProgressBar" style="height:100%;width:0%;background:var(--gold);transition:width 200ms"></div>
                 </div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
@@ -1964,9 +2014,17 @@
                 {name: 'Herrenschnitt', icon: '\u2702\uFE0F'},
                 {name: 'Herrenschnitt + Bartpflege', icon: '\uD83E\uDDD4'},
                 {name: 'Kinderhaarschnitt', icon: '\uD83D\uDC76'},
+                {name: 'Waschen & Foehnen', icon: '\uD83D\uDCA7'},
                 {name: 'Farbbehandlung', icon: '\uD83C\uDFA8'},
-                {name: 'Balayage / Highlights', icon: '\u2728'},
-                {name: 'Haarpflege / Treatment', icon: '\uD83E\uDDF4'},
+                {name: 'Straehnchen / Highlights', icon: '\u2728'},
+                {name: 'Balayage', icon: '\uD83C\uDF1F'},
+                {name: 'Tonung / Glanz', icon: '\uD83D\uDC8E'},
+                {name: 'Dauerwelle', icon: '\uD83C\uDF00'},
+                {name: 'Glaettung / Keratin', icon: '\uD83D\uDD25'},
+                {name: 'Olaplex Treatment', icon: '\uD83E\uDDEA'},
+                {name: 'Haarpflege / Kur', icon: '\uD83E\uDDF4'},
+                {name: 'Kopfmassage', icon: '\uD83D\uDC86'},
+                {name: 'Hochsteckfrisur', icon: '\uD83D\uDC51'},
                 {name: 'Brautstyling', icon: '\uD83D\uDC70'},
                 {name: 'Haaranalyse (Profi mit PDF)', icon: '\uD83D\uDD2C'},
                 {name: 'Beratung', icon: '\uD83D\uDCAC'},
@@ -1974,30 +2032,51 @@
               ];
               var container = document.getElementById('bkLeistungCheckboxes');
               var hidden = document.getElementById('bkLeistung');
+              // Modernes Karten-Grid statt Pills (FB-21)
+              container.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:8px';
               services.forEach(function(svc) {
                 var chip = document.createElement('label');
-                chip.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-full);font-size:12px;font-weight:500;cursor:pointer;transition:all 200ms;user-select:none;color:var(--text-light);background:var(--white)';
+                chip.style.cssText = 'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px;border:1.5px solid var(--border);border-radius:12px;font-size:12px;font-weight:600;cursor:pointer;transition:all 200ms;user-select:none;color:var(--text);background:var(--white);text-align:center;min-height:80px;box-shadow:0 1px 3px rgba(0,0,0,0.04)';
                 var cb = document.createElement('input');
                 cb.type = 'checkbox';
                 cb.value = svc.name;
                 cb.style.display = 'none';
                 cb.addEventListener('change', function() {
-                  chip.style.background = cb.checked ? 'var(--gold-dim)' : 'var(--white)';
-                  chip.style.borderColor = cb.checked ? 'var(--gold)' : 'var(--border)';
-                  chip.style.color = cb.checked ? 'var(--gold)' : 'var(--text-light)';
-                  chip.style.fontWeight = cb.checked ? '600' : '500';
+                  if (cb.checked) {
+                    chip.style.background = 'linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04))';
+                    chip.style.borderColor = 'var(--gold)';
+                    chip.style.color = 'var(--gold)';
+                    chip.style.boxShadow = '0 4px 12px rgba(201,168,76,0.18)';
+                    chip.style.transform = 'translateY(-1px)';
+                  } else {
+                    chip.style.background = 'var(--white)';
+                    chip.style.borderColor = 'var(--border)';
+                    chip.style.color = 'var(--text)';
+                    chip.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)';
+                    chip.style.transform = '';
+                  }
                   var selected = Array.from(container.querySelectorAll('input:checked')).map(function(c) { return c.value; });
                   hidden.value = selected.join(', ');
                 });
                 var iconSpan = document.createElement('span');
+                iconSpan.style.cssText = 'font-size:22px;line-height:1';
                 iconSpan.textContent = svc.icon;
+                var nameSpan = document.createElement('span');
+                nameSpan.style.cssText = 'font-size:11px;line-height:1.25';
+                nameSpan.textContent = svc.name;
                 chip.appendChild(cb);
                 chip.appendChild(iconSpan);
-                chip.appendChild(document.createTextNode(svc.name));
+                chip.appendChild(nameSpan);
                 container.appendChild(chip);
               });
             })();
             </script>
+            <div class="form-group">
+              <label>Wunsch-Stylist (optional)</label>
+              <select id="bkStylist" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:'Inter',sans-serif">
+                <option value="">Egal, wer frei ist</option>
+              </select>
+            </div>
             <div class="form-group"><label>Anmerkungen (optional)</label><textarea id="bkNotiz" placeholder="Besondere Wünsche oder Hinweise..." rows="2"></textarea></div>
             <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:8px">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -2394,6 +2473,47 @@
   <script>
     var webhookBase = 'https://api.casa2035.de/webhook';
 
+    // =============================================================
+    // CASA_Auth Header Token (Webhook Header-Auth fuer WF-01/02a/02b)
+    // Stand: 11.04.2026 | @api
+    // Solange leer: wird KEIN Header gesendet (n8n-Webhooks ohne Header-Auth).
+    // Sobald Andreas den Token in n8n Header Auth Credential setzt, hier
+    // den identischen Token eintragen + deployen. Dann verlangt der Webhook
+    // den Header und alle Calls laufen gesichert.
+    // =============================================================
+    var CASA_AUTH_TOKEN = '4800df27365d67597b68e663342921e8771a2b559dc6817a4a6e13caa4c9775d';
+    function casaAuthHeaders() {
+      return CASA_AUTH_TOKEN ? { 'CASA_Auth': CASA_AUTH_TOKEN } : {};
+    }
+    function withCasaAuth(extraHeaders) {
+      var h = Object.assign({}, extraHeaders || {});
+      if (CASA_AUTH_TOKEN) h['CASA_Auth'] = CASA_AUTH_TOKEN;
+      return h;
+    }
+
+    // =============================================================
+    // Supabase Direct-Read (Services, Stylisten, Storage)
+    // Stand: 10.04.2026 | @hp-entwickler
+    // ACHTUNG Andy: ANON_KEY unten manuell eintragen vor Deploy!
+    // =============================================================
+    var SUPABASE_URL = 'https://api.casa2035.de';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc1NTA0NzY1LCJleHAiOjE5MzMxODQ3NjV9.5YsRP4FLKHp7hTae7-RAyi13ofRfSGmjm8P2Ved2Wu4';
+    var SALON_ID = '26230de8-a46e-4610-937c-c302547b5a73'; // Rena Rados
+
+    function sbReady() {
+      return SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== 'ANON_KEY_HIER';
+    }
+    function sbHeaders() {
+      return { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY };
+    }
+
+    // Session-ID fuer Uploads (UUID-Pfade, keine PII)
+    var sessionId = sessionStorage.getItem('rr_session_id');
+    if (!sessionId) {
+      sessionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('s' + Date.now() + Math.random().toString(36).slice(2,10));
+      sessionStorage.setItem('rr_session_id', sessionId);
+    }
+
     // Style Toggle: Feminin (hell) / Maskulin (dunkel)
     // Shop Integration — oeffnet externen Shop im Hintergrund
     function openShop(category) {
@@ -2468,6 +2588,125 @@
         c.appendChild(p);
       }
     })();
+
+    // =============================================================
+    // Supabase: Services dynamisch laden (fuellt bkLeistung Chips)
+    // Fallback: bestehende hardcoded Chips bleiben, wenn Fetch failed
+    // =============================================================
+    var dbServicesById = {}; // service_id -> {name, dauer_min, preis_brutto, kategorie}
+    function loadServicesFromDB() {
+      if (!sbReady()) { console.info('[Supabase] ANON_KEY fehlt — Services Fallback (hardcoded).'); return; }
+      var url = SUPABASE_URL + '/rest/v1/services_preisliste?salon_id=eq.' + SALON_ID + '&aktiv=eq.true&order=kategorie,reihenfolge&select=service_id,name,kategorie,dauer_min,preis_brutto';
+      fetch(url, { headers: sbHeaders() })
+        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(rows) {
+          if (!Array.isArray(rows) || !rows.length) { console.info('[Supabase] services_preisliste leer — Fallback aktiv.'); return; }
+          rebuildServiceChips(rows);
+        })
+        .catch(function(err) { console.warn('[Supabase] Services laden fehlgeschlagen:', err); });
+    }
+    function rebuildServiceChips(rows) {
+      var container = document.getElementById('bkLeistungCheckboxes');
+      var hidden = document.getElementById('bkLeistung');
+      if (!container || !hidden) return;
+      container.textContent = '';
+      dbServicesById = {};
+      // Nach Kategorie gruppieren
+      var groups = {};
+      rows.forEach(function(s) {
+        dbServicesById[s.service_id] = s;
+        var kat = s.kategorie || 'Sonstiges';
+        if (!groups[kat]) groups[kat] = [];
+        groups[kat].push(s);
+      });
+      Object.keys(groups).forEach(function(kat) {
+        var katLabel = document.createElement('div');
+        katLabel.style.cssText = 'flex-basis:100%;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-top:6px;margin-bottom:2px';
+        katLabel.textContent = kat;
+        container.appendChild(katLabel);
+        groups[kat].forEach(function(s) {
+          var chip = document.createElement('label');
+          chip.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-full);font-size:12px;font-weight:500;cursor:pointer;transition:all 200ms;user-select:none;color:var(--text-light);background:var(--white)';
+          var cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.value = s.service_id;
+          cb.setAttribute('data-name', s.name);
+          cb.setAttribute('data-dauer', String(s.dauer_min || 0));
+          cb.setAttribute('data-preis', String(s.preis_brutto || 0));
+          cb.style.display = 'none';
+          cb.addEventListener('change', function() {
+            chip.style.background = cb.checked ? 'var(--gold-dim)' : 'var(--white)';
+            chip.style.borderColor = cb.checked ? 'var(--gold)' : 'var(--border)';
+            chip.style.color = cb.checked ? 'var(--gold)' : 'var(--text-light)';
+            chip.style.fontWeight = cb.checked ? '600' : '500';
+            var selected = Array.from(container.querySelectorAll('input[type=checkbox]:checked')).map(function(c) { return c.getAttribute('data-name') || c.value; });
+            hidden.value = selected.join(', ');
+          });
+          chip.appendChild(cb);
+          chip.appendChild(document.createTextNode(s.name + ' — ' + (s.dauer_min || 0) + ' Min — ' + (s.preis_brutto || 0) + ' €'));
+          container.appendChild(chip);
+        });
+      });
+    }
+
+    // =============================================================
+    // Supabase: Stylisten dynamisch laden (fuellt bkStylist Dropdown)
+    // =============================================================
+    function loadStylistenFromDB() {
+      var sel = document.getElementById('bkStylist');
+      if (!sel) return;
+      // Hardcoded Fallback-Liste (FB-20)
+      function applyFallback() {
+        if (sel.options.length > 1) return;
+        var fallback = ['Rena Rados', 'Petra', 'Sabine'];
+        fallback.forEach(function(n) {
+          var opt = document.createElement('option');
+          opt.value = n; opt.textContent = n;
+          sel.appendChild(opt);
+        });
+      }
+      if (!sbReady()) { console.info('[Supabase] ANON_KEY fehlt — Stylisten Fallback.'); applyFallback(); return; }
+      var url = SUPABASE_URL + '/rest/v1/public_stylists?salon_id=eq.' + SALON_ID + '&select=id,name,rolle,spezialisierung';
+      fetch(url, { headers: sbHeaders() })
+        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(rows) {
+          if (!Array.isArray(rows) || !rows.length) { applyFallback(); return; }
+          rows.forEach(function(st) {
+            var opt = document.createElement('option');
+            opt.value = st.id;
+            opt.setAttribute('data-name', st.name || '');
+            var txt = st.name || 'Stylist';
+            if (st.spezialisierung) txt += ' — ' + st.spezialisierung;
+            opt.textContent = txt;
+            sel.appendChild(opt);
+          });
+        })
+        .catch(function(err) { console.warn('[Supabase] Stylisten laden fehlgeschlagen:', err); applyFallback(); });
+    }
+
+    // =============================================================
+    // Supabase Storage Upload (wunschfrisur_uploads Bucket)
+    // Pfad: {prefix}/{sessionId}/{ts}_{uuid8}.{ext}  (keine PII)
+    // =============================================================
+    function uploadToStorage(file, prefix) {
+      return new Promise(function(resolve, reject) {
+        if (!sbReady()) { reject(new Error('ANON_KEY fehlt')); return; }
+        var ext = 'bin';
+        if (file.name && file.name.indexOf('.') > -1) ext = file.name.split('.').pop().toLowerCase();
+        else if (file.type === 'audio/webm') ext = 'webm';
+        else if (file.type === 'image/jpeg') ext = 'jpg';
+        else if (file.type === 'image/png') ext = 'png';
+        var rand8 = (window.crypto && crypto.randomUUID) ? crypto.randomUUID().slice(0,8) : Math.random().toString(36).slice(2,10);
+        var path = prefix + '/' + sessionId + '/' + Date.now() + '_' + rand8 + '.' + ext;
+        var headers = Object.assign({}, sbHeaders(), { 'Content-Type': file.type || 'application/octet-stream', 'x-upsert': 'false' });
+        fetch(SUPABASE_URL + '/storage/v1/object/wunschfrisur_uploads/' + path, {
+          method: 'POST', headers: headers, body: file
+        })
+        .then(function(r) { if (!r.ok) return r.text().then(function(t) { throw new Error('Storage ' + r.status + ': ' + t); }); return r.json().catch(function(){return{};}); })
+        .then(function() { resolve(SUPABASE_URL + '/storage/v1/object/public/wunschfrisur_uploads/' + path); })
+        .catch(reject);
+      });
+    }
 
     // File upload preview
     function handleFiles(files) {
@@ -2590,7 +2829,7 @@
           email: email, stil: currentStyle
         };
         fetch(webhookBase + '/wf03d-farbcode', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
           body: JSON.stringify(payload)
         }).then(function(res) { return res.json(); })
         .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
@@ -2649,7 +2888,7 @@
           email: email, stil: currentStyle
         };
         fetch(webhookBase + '/schnellcheck', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
           body: JSON.stringify(payload)
         }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function(data) {
@@ -2664,13 +2903,156 @@
       reader.readAsDataURL(fileInput.files[0]);
     }
 
-    // Submit Wunschfrisur — geht an WF-03a /wunschfrisur
+    // =============================================================
+    // Wunschfrisur V2: 2 Upload-Zonen + Voice + DSGVO
+    // Uploads gehen DIREKT in Supabase Storage (Bucket wunschfrisur_uploads)
+    // Danach Payload mit URLs an n8n /wunschfrisur
+    // Stand: 10.04.2026 | @hp-entwickler
+    // =============================================================
+    var wfFilesState = { vorher: [], referenz: [] };
+    var WF_MAX_FILES = 5;
+    var WF_MAX_SIZE = 10 * 1024 * 1024; // 10 MB
+    var WF_ALLOWED = ['image/jpeg','image/png','image/webp','image/heic'];
+
+    function wfDragOver(e) { e.preventDefault(); e.currentTarget.style.background = 'rgba(184,150,46,0.08)'; }
+    function wfDragLeave(e) { e.currentTarget.style.background = ''; }
+    function wfDrop(e, kind) { e.preventDefault(); e.currentTarget.style.background = ''; wfAddFiles(e.dataTransfer.files, kind); }
+
+    function wfAddFiles(fileList, kind) {
+      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um Fotos hochzuladen.', 'error'); return; }
+      var arr = wfFilesState[kind] || [];
+      Array.from(fileList).forEach(function(f) {
+        if (arr.length >= WF_MAX_FILES) { showToast('Maximal ' + WF_MAX_FILES + ' Bilder pro Bereich.', 'error'); return; }
+        if (WF_ALLOWED.indexOf(f.type) === -1 && !/\.(jpe?g|png|webp|heic)$/i.test(f.name || '')) {
+          showToast('Dateityp nicht erlaubt: ' + (f.name || f.type), 'error'); return;
+        }
+        if (f.size > WF_MAX_SIZE) { showToast('Datei zu gross (max 10 MB): ' + (f.name || ''), 'error'); return; }
+        arr.push(f);
+      });
+      wfFilesState[kind] = arr;
+      wfRenderPreview(kind);
+    }
+    function wfRenderPreview(kind) {
+      var preview = document.getElementById(kind === 'vorher' ? 'wfPreviewVorher' : 'wfPreviewReferenz');
+      if (!preview) return;
+      preview.textContent = '';
+      wfFilesState[kind].forEach(function(file, idx) {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'position:relative;display:inline-block;margin:4px';
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          var img = document.createElement('img');
+          img.src = ev.target.result;
+          img.className = 'upload-thumb';
+          img.style.cssText = 'width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid var(--border)';
+          wrap.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.textContent = '\u00D7';
+        del.setAttribute('aria-label', 'Loeschen');
+        del.style.cssText = 'position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:none;background:#1a1a1a;color:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0;display:flex;align-items:center;justify-content:center';
+        del.onclick = function(ev) { ev.stopPropagation(); wfFilesState[kind].splice(idx,1); wfRenderPreview(kind); };
+        wrap.appendChild(del);
+        preview.appendChild(wrap);
+      });
+    }
+
+    // Voice-Recorder (MediaRecorder webm/opus)
+    var wfMediaRecorder = null;
+    var wfVoiceChunks = [];
+    var wfVoiceBlob = null;
+    var wfVoiceTimerHandle = null;
+    var wfVoiceStartTs = 0;
+    var wfVoiceDauerSek = 0;
+
+    (function initVoiceSupport() {
+      // Fallback: Voice-Gruppe ausblenden wenn MediaRecorder nicht unterstuetzt
+      try {
+        if (typeof MediaRecorder === 'undefined' || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          document.addEventListener('DOMContentLoaded', function() {
+            var g = document.getElementById('wfVoiceGroup'); if (g) g.style.display = 'none';
+          });
+        }
+      } catch(e) {}
+    })();
+
+    function wfToggleVoice() {
+      if (!activeCustomer) { showToast('Bitte melden Sie sich an.', 'error'); return; }
+      if (wfMediaRecorder && wfMediaRecorder.state === 'recording') { wfStopVoice(); return; }
+      wfStartVoice();
+    }
+    function wfStartVoice() {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+        try {
+          wfVoiceChunks = [];
+          var mime = 'audio/webm;codecs=opus';
+          if (!MediaRecorder.isTypeSupported(mime)) mime = 'audio/webm';
+          wfMediaRecorder = new MediaRecorder(stream, { mimeType: mime });
+          wfMediaRecorder.ondataavailable = function(ev) { if (ev.data && ev.data.size > 0) wfVoiceChunks.push(ev.data); };
+          wfMediaRecorder.onstop = function() {
+            wfVoiceBlob = new Blob(wfVoiceChunks, { type: 'audio/webm' });
+            var url = URL.createObjectURL(wfVoiceBlob);
+            var au = document.getElementById('wfVoicePreview');
+            au.src = url; au.style.display = '';
+            document.getElementById('wfVoiceClear').style.display = '';
+            document.getElementById('wfVoiceLabel').textContent = 'Aufnahme starten';
+            document.getElementById('wfVoiceDot').style.background = 'var(--gold)';
+            document.getElementById('wfVoiceDot').style.animation = '';
+            stream.getTracks().forEach(function(t) { t.stop(); });
+          };
+          wfMediaRecorder.start();
+          wfVoiceStartTs = Date.now();
+          wfVoiceDauerSek = 0;
+          document.getElementById('wfVoiceLabel').textContent = 'Aufnahme stoppen';
+          var dot = document.getElementById('wfVoiceDot');
+          dot.style.background = '#e53935';
+          dot.style.animation = 'breathe 1s ease-in-out infinite';
+          wfVoiceTimerHandle = setInterval(function() {
+            var s = Math.floor((Date.now() - wfVoiceStartTs)/1000);
+            wfVoiceDauerSek = s;
+            var m = Math.floor(s/60), r = s%60;
+            document.getElementById('wfVoiceTimer').textContent = (m<10?'0':'')+m+':'+(r<10?'0':'')+r;
+            if (s >= 120) wfStopVoice();
+          }, 250);
+        } catch(err) { console.warn('MediaRecorder Fehler:', err); showToast('Aufnahme nicht moeglich.', 'error'); }
+      }).catch(function(err) {
+        console.warn('Mikrofon-Zugriff abgelehnt:', err);
+        showToast('Mikrofon-Zugriff abgelehnt.', 'error');
+      });
+    }
+    function wfStopVoice() {
+      if (wfMediaRecorder && wfMediaRecorder.state === 'recording') wfMediaRecorder.stop();
+      if (wfVoiceTimerHandle) { clearInterval(wfVoiceTimerHandle); wfVoiceTimerHandle = null; }
+    }
+    function wfClearVoice() {
+      wfVoiceBlob = null;
+      wfVoiceDauerSek = 0;
+      var au = document.getElementById('wfVoicePreview');
+      au.src = ''; au.style.display = 'none';
+      document.getElementById('wfVoiceClear').style.display = 'none';
+      document.getElementById('wfVoiceTimer').textContent = '00:00';
+    }
+
+    function wfSetProgress(pct, label) {
+      var wrap = document.getElementById('wfProgressWrap');
+      if (pct < 0) { wrap.style.display = 'none'; return; }
+      wrap.style.display = '';
+      document.getElementById('wfProgressBar').style.width = Math.min(100, Math.max(0, pct)) + '%';
+      if (label) document.getElementById('wfProgressLabel').textContent = label;
+    }
+
+    // Submit Wunschfrisur — V2: Storage-Upload + Payload mit URLs
     function submitWunschfrisur(e) {
       e.preventDefault();
       if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
       if (typeof checkRateLimit === 'function' && !checkRateLimit('wunschfrisur', 5)) {
         showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error'); return;
       }
+      var dsgvo = document.getElementById('wfDsgvo');
+      if (!dsgvo || !dsgvo.checked) { showToast('Bitte DSGVO-Einwilligung bestaetigen.', 'error'); return; }
+
       var vorname = document.getElementById('wfVorname').value.trim();
       var nachname = document.getElementById('wfNachname').value.trim();
       var email = document.getElementById('wfEmail').value.trim();
@@ -2685,49 +3067,83 @@
         }
       }
       var wfBtn = document.getElementById('wunschBtnText');
-      var wfBtnOrig = wfBtn ? wfBtn.textContent : '';
-      if (wfBtn) { wfBtn.textContent = 'Analyse laeuft...'; }
+      if (wfBtn) { wfBtn.textContent = 'Uploads laufen...'; }
       var wfSubmitBtn = wfBtn ? wfBtn.closest('button') : null;
       if (wfSubmitBtn) { wfSubmitBtn.disabled = true; wfSubmitBtn.style.opacity = '0.7'; }
-      showToast('Wunschfrisur wird analysiert...', 'info');
-      var payload = {
-        from: email, name: vorname + ' ' + nachname,
-        message: 'Wunschfrisur-Anfrage: ' + nachricht,
-        timestamp: new Date().toISOString(),
-        message_id: 'web_wf_' + Date.now(),
-        media_url: null, referrer: window.location.href,
-        kanal: 'homepage', typ: 'wunschfrisur',
-        vorname: vorname, nachname: nachname,
-        email: email, telefon: telefon, nachricht: nachricht,
-        stil: currentStyle
-      };
-      // Fotos hinzufuegen falls vorhanden
-      var fileInput = document.getElementById('wfFiles');
-      if (fileInput && fileInput.files && fileInput.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(ev) {
-          payload.media_url = ev.target.result;
-          doWunschfrisurSubmit(payload, email, e);
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        doWunschfrisurSubmit(payload, email, e);
+
+      // WICHTIG: Ohne ANON_KEY kein Storage-Upload moeglich
+      if (!sbReady() && (wfFilesState.vorher.length || wfFilesState.referenz.length || wfVoiceBlob)) {
+        showToast('Uploads derzeit nicht verfuegbar (Konfig fehlt). Bitte Text-Nachricht senden.', 'error');
+        resetWfBtn(); return;
       }
-    }
-    function doWunschfrisurSubmit(payload, email, e) {
-      var resetWfBtn = function() {
+
+      function resetWfBtn() {
         var b = document.getElementById('wunschBtnText');
         if (b) { b.textContent = 'Wunschfrisur senden'; var p = b.closest('button'); if (p) { p.disabled = false; p.style.opacity = '1'; } }
-      };
-      fetch(webhookBase + '/wunschfrisur', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
-      .then(function(data) {
-        e.target.reset(); document.getElementById('uploadPreview').textContent = '';
+        wfSetProgress(-1);
+      }
+
+      var totalFiles = wfFilesState.vorher.length + wfFilesState.referenz.length + (wfVoiceBlob ? 1 : 0);
+      var doneFiles = 0;
+      wfSetProgress(totalFiles ? 1 : 100, totalFiles ? ('0 / ' + totalFiles + ' hochgeladen') : 'Sende Anfrage...');
+
+      function tickProgress() {
+        doneFiles++;
+        var pct = totalFiles ? Math.round((doneFiles/totalFiles)*100) : 100;
+        wfSetProgress(pct, doneFiles + ' / ' + totalFiles + ' hochgeladen');
+      }
+
+      var uploadsVorher = wfFilesState.vorher.map(function(f) { return uploadToStorage(f, 'vorher').then(function(url) { tickProgress(); return url; }); });
+      var uploadsReferenz = wfFilesState.referenz.map(function(f) { return uploadToStorage(f, 'referenz').then(function(url) { tickProgress(); return url; }); });
+      var voicePromise = wfVoiceBlob ? uploadToStorage(wfVoiceBlob, 'voice').then(function(url) { tickProgress(); return url; }) : Promise.resolve(null);
+
+      Promise.all([Promise.all(uploadsVorher), Promise.all(uploadsReferenz), voicePromise]).then(function(results) {
+        var bilderVorher = results[0];
+        var bilderReferenz = results[1];
+        var voiceUrl = results[2];
+
+        var payload = {
+          salon_id: SALON_ID,
+          kanal: 'homepage',
+          typ: 'wunschfrisur',
+          vorname: vorname, nachname: nachname,
+          email: email, telefon: telefon,
+          nachricht: nachricht,
+          bilder_urls: { vorher: bilderVorher, referenz: bilderReferenz },
+          voice_url: voiceUrl,
+          voice_dauer_sek: wfVoiceDauerSek || 0,
+          session_id: sessionId,
+          message_id: 'web_wf_' + Date.now(),
+          timestamp: new Date().toISOString(),
+          dsgvo_consent: true,
+          // Kompatibilitaet mit bestehendem WF-01 (Intent-LLM bleibt Safety-Net):
+          from: email,
+          name: vorname + ' ' + nachname,
+          message: 'Wunschfrisur-Anfrage: ' + nachricht,
+          referrer: window.location.href,
+          stil: currentStyle
+        };
+
+        if (wfBtn) wfBtn.textContent = 'Analyse laeuft...';
+        wfSetProgress(100, 'Sende Anfrage...');
+        return fetch(webhookBase + '/wunschfrisur', {
+          method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify(payload)
+        }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json().catch(function(){return{};}); })
+        .then(function(data) {
+          // Formular zuruecksetzen
+          try { e.target.reset(); } catch(_) {}
+          wfFilesState = { vorher: [], referenz: [] };
+          wfRenderPreview('vorher'); wfRenderPreview('referenz');
+          wfClearVoice();
+          resetWfBtn();
+          showKiResultPopup('Wunschfrisur', data, email, false);
+        });
+      }).catch(function(err) {
+        console.warn('Wunschfrisur Submit Fehler:', err);
         resetWfBtn();
-        showKiResultPopup('Wunschfrisur', data, email, false);
-      }).catch(function() { resetWfBtn(); showKiResultPopup('Wunschfrisur', HOMEPAGE_DEMO.wunschfrisur, email, true); });
+        showKiResultPopup('Wunschfrisur', HOMEPAGE_DEMO.wunschfrisur, email, true);
+      });
     }
 
     // === KI-Ergebnis-Popup (geteilt von allen 3 Funktionen) ===
@@ -2804,7 +3220,7 @@
         emailBtn.textContent = 'Wird gesendet...';
         emailBtn.disabled = true;
         fetch(webhookBase + '/homepage', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
           body: JSON.stringify({ typ: 'ergebnis_email', email: email, titel: titel, ergebnis: ergebnis, timestamp: new Date().toISOString(), message_id: 'web_email_' + Date.now(), kanal: 'homepage' })
         }).then(function() {
           emailBtn.textContent = 'Gesendet!';
@@ -2991,8 +3407,35 @@
       var notiz = (document.getElementById('bkNotiz').value || '').trim();
       if (!datum) { showToast('Bitte wählen Sie einen Tag im Kalender aus.', 'error'); return; }
       if (!uhrzeit) { showToast('Bitte wählen Sie eine Uhrzeit aus.', 'error'); return; }
+
+      // Strukturierte Leistungen aus aktiven Checkbox-Chips (inkl. DB-Details)
+      var leistungenStrukturiert = [];
+      var dauerGesamt = 0;
+      var preisGesamt = 0;
+      var checkedBoxes = document.querySelectorAll('#bkLeistungCheckboxes input[type=checkbox]:checked');
+      checkedBoxes.forEach(function(cb) {
+        var nm = cb.getAttribute('data-name') || cb.value;
+        var d = parseInt(cb.getAttribute('data-dauer') || '0', 10) || 0;
+        var p = parseFloat(cb.getAttribute('data-preis') || '0') || 0;
+        var svcId = (cb.getAttribute('data-name') ? cb.value : null); // nur wenn aus DB (dann value=uuid)
+        dauerGesamt += d;
+        preisGesamt += p;
+        leistungenStrukturiert.push({ service_id: svcId, name: nm, dauer_min: d, preis_brutto: p });
+      });
+
+      // Stylist-Wunsch
+      var stylistSel = document.getElementById('bkStylist');
+      var stylistWunschId = null;
+      var stylistWunschName = null;
+      if (stylistSel && stylistSel.value) {
+        stylistWunschId = stylistSel.value;
+        var stOpt = stylistSel.options[stylistSel.selectedIndex];
+        stylistWunschName = (stOpt && stOpt.getAttribute('data-name')) || (stOpt ? stOpt.textContent : null);
+      }
+
       // WF-01 erwartet: from, name, message, timestamp, message_id
       // message muss den Intent erkennen lassen (termin_buchen)
+      // Zusaetzlich: strukturierte Felder fuer WF-02a (Intent-LLM bleibt Safety-Net)
       var payload = {
         from: email,
         name: vorname + ' ' + nachname,
@@ -3001,6 +3444,7 @@
         message_id: 'web_bk_' + Date.now(),
         media_url: null,
         referrer: window.location.href,
+        salon_id: SALON_ID,
         kanal: 'homepage',
         typ: 'terminanfrage',
         vorname: vorname,
@@ -3010,12 +3454,17 @@
         datum: datum,
         uhrzeit: uhrzeit,
         leistung: leistung,
+        leistungen: leistungenStrukturiert,
+        dauer_gesamt_min: dauerGesamt,
+        preis_gesamt_brutto: preisGesamt,
+        stylist_wunsch_id: stylistWunschId,
+        stylist_wunsch_name: stylistWunschName,
         notiz: notiz,
         stil: currentStyle
       };
       if (webhookBase) {
         fetch(webhookBase + '/homepage', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
           body: JSON.stringify(payload)
         }).then(function(res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -3541,6 +3990,14 @@
           chip.appendChild(document.createTextNode(svcName));
           chipContainer.appendChild(chip);
         });
+        // Wenn DB-Services schon geladen: ueberschreiben mit echten Daten
+        try {
+          var dbIds = Object.keys(dbServicesById || {});
+          if (dbIds.length) {
+            var rowsForRebuild = dbIds.map(function(k) { return dbServicesById[k]; });
+            rebuildServiceChips(rowsForRebuild);
+          }
+        } catch(_) {}
       }
 
       // Karriere cards
@@ -4095,11 +4552,40 @@
     }
 
     // --- Load config on DOMContentLoaded ---
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadConfig);
-    } else {
+    function bootSalonData() {
       loadConfig();
+      try { loadServicesFromDB(); } catch(e) { console.warn(e); }
+      try { loadStylistenFromDB(); } catch(e) { console.warn(e); }
     }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootSalonData);
+    } else {
+      bootSalonData();
+    }
+
+    // =============================================================
+    // FB-19: Globaler Keyboard-Dismiss (iOS/Android)
+    // Touch auf leere Flaeche schliesst aktive Tastatur
+    // =============================================================
+    (function() {
+      function isFormField(el) {
+        if (!el) return false;
+        var tag = (el.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select' || tag === 'button') return true;
+        if (el.isContentEditable) return true;
+        return false;
+      }
+      function dismissKb(e) {
+        var ae = document.activeElement;
+        if (!isFormField(ae)) return;
+        var target = e.target;
+        // Wenn Touch innerhalb eines Form-Controls oder dessen Label → nichts tun
+        if (target && (isFormField(target) || target.closest('input,textarea,select,button,label,[contenteditable]'))) return;
+        try { ae.blur(); } catch(_) {}
+      }
+      document.addEventListener('touchend', dismissKb, { passive: true });
+      document.addEventListener('mousedown', dismissKb);
+    })();
 
     // =============================================================
     // Kunden-Login System
@@ -4554,17 +5040,14 @@
       document.body.appendChild(overlay);
     }
 
-    // Upload-Gate: Bilder hochladen nur mit Login
+    // Upload-Gate: Foto-Upload IMMER erlaubt (FB-22) — Login nur Hinweis
     function updateUploadGates() {
-      var loggedIn = !!activeCustomer;
       var gates = document.querySelectorAll('.upload-gate');
-      gates.forEach(function(gate) {
-        gate.style.display = loggedIn ? 'none' : 'flex';
-      });
+      gates.forEach(function(gate) { gate.style.display = 'none'; });
       var uploads = document.querySelectorAll('.upload-zone-gated');
       uploads.forEach(function(uz) {
-        uz.style.pointerEvents = loggedIn ? 'auto' : 'none';
-        uz.style.opacity = loggedIn ? '1' : '0.4';
+        uz.style.pointerEvents = 'auto';
+        uz.style.opacity = '1';
       });
     }
 
@@ -4579,6 +5062,33 @@
         if (ov && ov.classList.contains('show')) closeCustomerLogin();
       }
     });
+
+    // === FB-19: Keyboard-Dismiss bei Tap ausserhalb (mobile) ===
+    document.addEventListener('click', function(ev) {
+      var ae = document.activeElement;
+      if (!ae) return;
+      var isInput = (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT');
+      if (!isInput) return;
+      if (ae === ev.target) return;
+      var t = ev.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || (t.closest && t.closest('input,textarea,select,label,button')))) return;
+      try { ae.blur(); } catch(e) {}
+    }, true);
+
+    // === FB-19: Autofill-Hints fuer Booking + Wunschfrisur Inputs ===
+    (function() {
+      var map = [
+        ['bkName','name'], ['bkEmail','email'], ['bkTel','tel'],
+        ['wfVorname','given-name'], ['wfNachname','family-name'],
+        ['wfEmail','email'], ['wfTelefon','tel'],
+        ['haarName','given-name'], ['haarEmail','email'],
+        ['fcName','given-name'], ['fcEmail','email']
+      ];
+      map.forEach(function(p) {
+        var el = document.getElementById(p[0]);
+        if (el && !el.getAttribute('autocomplete')) el.setAttribute('autocomplete', p[1]);
+      });
+    })();
 
 
   </script>
@@ -5023,32 +5533,56 @@
       });
     }
 
+    var salonMicGranted = false;
+    function applySalonVoicePunctuation(text) {
+      if (!text) return text;
+      return text
+        .replace(/\s+(neuer absatz|absatz)/gi, '\n\n')
+        .replace(/\s+(fragezeichen|frage zeichen)/gi, '?')
+        .replace(/\s+(ausrufezeichen|ausrufe zeichen)/gi, '!')
+        .replace(/\s+(komma)/gi, ',')
+        .replace(/\s+(semikolon)/gi, ';')
+        .replace(/\s+(doppelpunkt)/gi, ':')
+        .replace(/\s+(punkt)\b/gi, '.')
+        .replace(/\s+([,.!?;:])/g, '$1')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+    }
     function toggleSalonFbVoice() {
       if (salonFbVoiceRec) { stopSalonFbVoice(); return; }
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) { showToast('Spracherkennung nicht unterstuetzt', 'error'); return; }
       var btn = document.getElementById('salonFbVoiceBtn');
       var status = document.getElementById('salonFbVoiceStatus');
-      navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
-        stream.getTracks().forEach(function(t) { t.stop(); });
+      function startRec() {
         salonFbVoiceRec = true;
         salonFbTextBefore = document.getElementById('feedbackText').value;
         btn.style.borderColor = '#c44040'; btn.style.color = '#c44040';
-        status.style.display = 'block'; status.textContent = 'Sprich jetzt...';
+        status.style.display = 'block'; status.textContent = 'Sprich jetzt... (Klick auf Mic stoppt)';
         var rec = new SR();
         rec.lang = 'de-DE'; rec.continuous = true; rec.interimResults = true;
         salonFbRecorder = rec;
         rec.onresult = function(e) {
           var t = '';
-          for (var i = 0; i < e.results.length; i++) t += e.results[i][0].transcript;
+          for (var i = 0; i < e.results.length; i++) t += e.results[i][0].transcript + ' ';
+          var clean = applySalonVoicePunctuation(t);
           var ta = document.getElementById('feedbackText');
-          ta.value = salonFbTextBefore ? salonFbTextBefore + ' ' + t : t;
+          ta.value = salonFbTextBefore ? salonFbTextBefore + ' ' + clean : clean;
           updateFbCount();
         };
-        rec.onerror = function() { stopSalonFbVoice(); };
-        rec.onend = function() { if (salonFbVoiceRec) stopSalonFbVoice(); };
-        rec.start();
-        setTimeout(function() { if (salonFbVoiceRec) stopSalonFbVoice(); }, 30000);
+        rec.onerror = function(e) {
+          if (e && e.error === 'not-allowed') salonMicGranted = false;
+          if (e && e.error === 'no-speech') return;
+          stopSalonFbVoice();
+        };
+        rec.onend = function() { if (salonFbVoiceRec) { try { rec.start(); } catch(err) { stopSalonFbVoice(); } } };
+        try { rec.start(); } catch(err) { stopSalonFbVoice(); }
+      }
+      if (salonMicGranted) { startRec(); return; }
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+        stream.getTracks().forEach(function(t) { t.stop(); });
+        salonMicGranted = true;
+        startRec();
       }).catch(function() { showToast('Mikrofon-Zugriff verweigert', 'error'); });
     }
 
