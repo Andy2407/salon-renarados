@@ -2473,14 +2473,8 @@
   <script>
     var webhookBase = 'https://api.casa2035.de/webhook';
 
-    // =============================================================
-    // CASA_Auth Header Token (Webhook Header-Auth fuer WF-01/02a/02b)
-    // Stand: 11.04.2026 | @api
-    // Solange leer: wird KEIN Header gesendet (n8n-Webhooks ohne Header-Auth).
-    // Sobald Andreas den Token in n8n Header Auth Credential setzt, hier
-    // den identischen Token eintragen + deployen. Dann verlangt der Webhook
-    // den Header und alle Calls laufen gesichert.
-    // =============================================================
+    // Auth Token
+
     var CASA_AUTH_TOKEN = '4800df27365d67597b68e663342921e8771a2b559dc6817a4a6e13caa4c9775d';
     function casaAuthHeaders() {
       return CASA_AUTH_TOKEN ? { 'CASA_Auth': CASA_AUTH_TOKEN } : {};
@@ -2491,11 +2485,8 @@
       return h;
     }
 
-    // =============================================================
-    // Supabase Direct-Read (Services, Stylisten, Storage)
-    // Stand: 10.04.2026 | @hp-entwickler
-    // ACHTUNG Andy: ANON_KEY unten manuell eintragen vor Deploy!
-    // =============================================================
+    // Backend API
+
     var SUPABASE_URL = 'https://api.casa2035.de';
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc1NTA0NzY1LCJleHAiOjE5MzMxODQ3NjV9.5YsRP4FLKHp7hTae7-RAyi13ofRfSGmjm8P2Ved2Wu4';
     var SALON_ID = '26230de8-a46e-4610-937c-c302547b5a73'; // Rena Rados
@@ -2567,12 +2558,23 @@
 
     // Scroll reveal
     var reveals = document.querySelectorAll('.reveal');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    reveals.forEach(function(el) { observer.observe(el); });
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+      reveals.forEach(function(el) { observer.observe(el); });
+      // Fallback: nach 1.5s alle noch unsichtbaren Elemente einblenden
+      setTimeout(function() {
+        reveals.forEach(function(el) {
+          if (!el.classList.contains('visible')) el.classList.add('visible');
+        });
+      }, 1500);
+    } else {
+      // Kein IntersectionObserver: sofort alles sichtbar
+      reveals.forEach(function(el) { el.classList.add('visible'); });
+    }
 
     // Particles
     (function() {
@@ -2589,21 +2591,18 @@
       }
     })();
 
-    // =============================================================
-    // Supabase: Services dynamisch laden (fuellt bkLeistung Chips)
-    // Fallback: bestehende hardcoded Chips bleiben, wenn Fetch failed
-    // =============================================================
+    // Services dynamisch laden
     var dbServicesById = {}; // service_id -> {name, dauer_min, preis_brutto, kategorie}
     function loadServicesFromDB() {
-      if (!sbReady()) { console.info('[Supabase] ANON_KEY fehlt — Services Fallback (hardcoded).'); return; }
+      if (!sbReady()) { console.info('[API] ANON_KEY fehlt — Services Fallback (hardcoded).'); return; }
       var url = SUPABASE_URL + '/rest/v1/services_preisliste?salon_id=eq.' + SALON_ID + '&aktiv=eq.true&order=kategorie,reihenfolge&select=service_id,name,kategorie,dauer_min,preis_brutto';
       fetch(url, { headers: sbHeaders() })
         .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function(rows) {
-          if (!Array.isArray(rows) || !rows.length) { console.info('[Supabase] services_preisliste leer — Fallback aktiv.'); return; }
+          if (!Array.isArray(rows) || !rows.length) { console.info('[API] services_preisliste leer — Fallback aktiv.'); return; }
           rebuildServiceChips(rows);
         })
-        .catch(function(err) { console.warn('[Supabase] Services laden fehlgeschlagen:', err); });
+        .catch(function(err) { console.warn('[API] Services laden fehlgeschlagen:', err); });
     }
     function rebuildServiceChips(rows) {
       var container = document.getElementById('bkLeistungCheckboxes');
@@ -2650,7 +2649,7 @@
     }
 
     // =============================================================
-    // Supabase: Stylisten dynamisch laden (fuellt bkStylist Dropdown)
+    // Stylisten dynamisch laden
     // =============================================================
     function loadStylistenFromDB() {
       var sel = document.getElementById('bkStylist');
@@ -2665,7 +2664,7 @@
           sel.appendChild(opt);
         });
       }
-      if (!sbReady()) { console.info('[Supabase] ANON_KEY fehlt — Stylisten Fallback.'); applyFallback(); return; }
+      if (!sbReady()) { console.info('[API] ANON_KEY fehlt — Stylisten Fallback.'); applyFallback(); return; }
       var url = SUPABASE_URL + '/rest/v1/public_stylists?salon_id=eq.' + SALON_ID + '&select=id,name,rolle,spezialisierung';
       fetch(url, { headers: sbHeaders() })
         .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
@@ -2681,11 +2680,11 @@
             sel.appendChild(opt);
           });
         })
-        .catch(function(err) { console.warn('[Supabase] Stylisten laden fehlgeschlagen:', err); applyFallback(); });
+        .catch(function(err) { console.warn('[API] Stylisten laden fehlgeschlagen:', err); applyFallback(); });
     }
 
     // =============================================================
-    // Supabase Storage Upload (wunschfrisur_uploads Bucket)
+    // Foto-Upload
     // Pfad: {prefix}/{sessionId}/{ts}_{uuid8}.{ext}  (keine PII)
     // =============================================================
     function uploadToStorage(file, prefix) {
@@ -2903,12 +2902,7 @@
       reader.readAsDataURL(fileInput.files[0]);
     }
 
-    // =============================================================
-    // Wunschfrisur V2: 2 Upload-Zonen + Voice + DSGVO
-    // Uploads gehen DIREKT in Supabase Storage (Bucket wunschfrisur_uploads)
-    // Danach Payload mit URLs an n8n /wunschfrisur
-    // Stand: 10.04.2026 | @hp-entwickler
-    // =============================================================
+    // Wunschfrisur: Upload + Analyse
     var wfFilesState = { vorher: [], referenz: [] };
     var WF_MAX_FILES = 5;
     var WF_MAX_SIZE = 10 * 1024 * 1024; // 10 MB
@@ -4164,12 +4158,7 @@
       if (uhrzeit) document.getElementById('bkUhrzeit').value = uhrzeit;
     }
 
-    // =============================================================
-    // CONFIG.JSON LOADER — Casa 2035 Template System
-    // Loads all salon-specific data from config.json at page load.
-    // Falls back to hardcoded defaults if config.json fails to load.
-    // Stand: 23.03.2026 | Agent: @hp-entwickler
-    // =============================================================
+    // Config Loader
 
     function loadConfig() {
       fetch('config.json?v=' + Date.now())
@@ -4595,11 +4584,7 @@
       document.addEventListener('mousedown', dismissKb);
     })();
 
-    // =============================================================
     // Kunden-Login System
-    // Registrierung + Login + Auto-Fill + KI-Textvorschlag
-    // Stand: 02.04.2026 | @leitung
-    // =============================================================
 
     var salonCustomers = JSON.parse(localStorage.getItem('salon_customers') || '{}');
     var activeCustomer = JSON.parse(sessionStorage.getItem('salon_customer') || 'null');
