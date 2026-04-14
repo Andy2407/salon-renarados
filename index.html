@@ -5227,7 +5227,7 @@
           <input type="file" id="salonFbScreenshot" accept="image/*" multiple style="display:none" onchange="handleSalonFbScreenshots(this)">
         </label>
       </div>
-      <div id="salonFbScreenPreview" style="display:none;display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">
+      <div id="salonFbScreenPreview" style="display:none;gap:4px;flex-wrap:wrap;margin-top:6px">
       </div>
       <div id="salonFbVoiceStatus" style="display:none;font-size:11px;color:#c44040;margin-bottom:4px"></div>
       <div class="fb-footer">
@@ -5469,6 +5469,9 @@
       for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
       if (chips[0]) chips[0].classList.add('active');
       fbSelectedType = 'bug';
+      salonFbScreenshots = [];
+      var scPrev = document.getElementById('salonFbScreenPreview');
+      if (scPrev) { scPrev.style.display = 'none'; while (scPrev.firstChild) scPrev.removeChild(scPrev.firstChild); }
     }
 
     var salonFbScreenshots = [];
