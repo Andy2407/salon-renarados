@@ -4843,7 +4843,19 @@
       }
     });
 
-    function customerRegister() {
+    // Kunden-Auth (Stand 15.04.2026): SHA-256 + pro-User-Salt im localStorage.
+    // ROADMAP: Migration auf Supabase Auth (auth.users + RLS) ist geplant —
+    // bis dahin ist dieser Hash-basierte Check deutlich besser als Klartext.
+    async function sha256Hex(str) {
+      var buf = new TextEncoder().encode(str);
+      var hash = await crypto.subtle.digest('SHA-256', buf);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+    function makeSalt() {
+      var arr = new Uint8Array(16); crypto.getRandomValues(arr);
+      return Array.from(arr).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+    async function customerRegister() {
       var vorname = document.getElementById('clRegVorname').value.trim();
       var nachname = document.getElementById('clRegNachname').value.trim();
       var email = document.getElementById('clRegEmail').value.trim().toLowerCase();
@@ -4860,8 +4872,8 @@
         errEl.textContent = 'Bitte eine gültige E-Mail eingeben.';
         errEl.style.display = 'block'; return;
       }
-      if (pw.length < 4) {
-        errEl.textContent = 'Passwort muss mindestens 4 Zeichen haben.';
+      if (pw.length < 10) {
+        errEl.textContent = 'Passwort muss mindestens 10 Zeichen haben.';
         errEl.style.display = 'block'; return;
       }
       if (pw !== pw2) {
@@ -4872,9 +4884,12 @@
         errEl.textContent = 'E-Mail bereits registriert. Bitte anmelden.';
         errEl.style.display = 'block'; return;
       }
+      var salt = makeSalt();
+      var hash = await sha256Hex(salt + ':' + pw);
       salonCustomers[email] = {
         vorname: vorname, nachname: nachname, email: email,
-        telefon: telefon, pw: pw, services: [], createdAt: new Date().toISOString()
+        telefon: telefon, salt: salt, pwHash: hash,
+        services: [], createdAt: new Date().toISOString()
       };
       localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
       activeCustomer = salonCustomers[email];
@@ -4883,12 +4898,22 @@
       applyCustomerLogin();
     }
 
-    function customerLogin() {
+    async function customerLogin() {
       var email = document.getElementById('clLoginEmail').value.trim().toLowerCase();
       var pw = document.getElementById('clLoginPw').value;
       var errEl = document.getElementById('clLoginError');
       var customer = salonCustomers[email];
-      if (!customer || customer.pw !== pw) {
+      if (!customer) {
+        errEl.textContent = 'E-Mail oder Passwort falsch.';
+        errEl.style.display = 'block'; return;
+      }
+      // Migration: altes Klartext-pw Feld wird nicht mehr unterstuetzt
+      if (!customer.pwHash || !customer.salt) {
+        errEl.textContent = 'Bitte Passwort zuruecksetzen (Konto wurde migriert).';
+        errEl.style.display = 'block'; return;
+      }
+      var hash = await sha256Hex(customer.salt + ':' + pw);
+      if (hash !== customer.pwHash) {
         errEl.textContent = 'E-Mail oder Passwort falsch.';
         errEl.style.display = 'block'; return;
       }
@@ -5147,9 +5172,18 @@
     <div style="font-size:10px;color:#555">Rena Rados Friseure &middot; Powered by <a href="https://casa2035.de" target="_blank" rel="noopener" style="color:#b8962e;text-decoration:none">Casa 2035</a></div>
   </div>
   <script>
-    function checkLogin() {
+    // Login (SHA-256 Hash-Vergleich statt Klartext; Passwort im Vault 15.04.2026)
+    async function sha256Hex(str) {
+      var buf = new TextEncoder().encode(str);
+      var hash = await crypto.subtle.digest('SHA-256', buf);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+    }
+    var CASA_GATE_HASH = 'c38cfe357f4dcf31bb6db44de70644a5f0ff5a4bb8724eff8d8d681d1bda0b55';
+    async function checkLogin() {
       var pw = document.getElementById('loginPw').value;
-      if (pw === 'Peter&Ruediger13') {
+      if (!pw) return;
+      var h = await sha256Hex(pw);
+      if (h === CASA_GATE_HASH) {
         document.getElementById('loginOverlay').style.display = 'none';
         sessionStorage.setItem('casa_auth', '1');
         showSalonLogout(true);
