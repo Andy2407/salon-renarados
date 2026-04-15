@@ -4580,18 +4580,28 @@
     }
 
     // --- Load config on DOMContentLoaded ---
-    // FB-31: Services-Load mit Retry, damit Filter sicher greift auch bei Race-Condition
+    // FB-31: Services-Load mit Retry-Interval. Der Initial-Boot-Call kann durch Script-Errors
+    // anderer Funktionen gebrochen werden; ein unabhängiger Poll garantiert dass Services geladen werden.
     function bootSalonData() {
-      loadConfig();
+      try { loadConfig(); } catch(e) { console.warn('loadConfig failed', e); }
       try { loadServicesFromDB(); } catch(e) { console.warn(e); }
       try { loadStylistenFromDB(); } catch(e) { console.warn(e); }
-      // Retry nach 1.5s falls beim ersten Versuch allDbServices noch leer
-      setTimeout(function() {
-        if (!allDbServices.length && typeof sbReady === 'function' && sbReady()) {
+    }
+
+    // Unabhängiger Poll: läuft parallel zu bootSalonData, prüft alle 600ms bis Services geladen (max 10x)
+    (function() {
+      var tries = 0;
+      var poll = setInterval(function() {
+        tries++;
+        if ((typeof allDbServices !== 'undefined' && allDbServices.length > 0) || tries >= 10) {
+          clearInterval(poll);
+          return;
+        }
+        if (typeof sbReady === 'function' && sbReady() && typeof loadServicesFromDB === 'function') {
           try { loadServicesFromDB(); } catch(e) {}
         }
-      }, 1500);
-    }
+      }, 600);
+    })();
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', bootSalonData);
     } else {
