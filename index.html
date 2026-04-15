@@ -929,9 +929,10 @@
     .fb-star-icon:hover { transform: scale(1.15); }
     .feedback-panel textarea {
       width: 100%; min-height: 72px; border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 12px 14px; font-size: 13px;
+      border-radius: 12px; padding: 12px 14px; font-size: 16px;
       font-family: 'Inter', sans-serif; resize: vertical; outline: none;
       background: var(--cream); color: var(--text); transition: border-color 200ms;
+      -webkit-text-size-adjust: 100%;
     }
     .feedback-panel textarea:focus { border-color: var(--gold); }
     .feedback-panel textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
@@ -2839,7 +2840,7 @@
     }
 
     function submitFarbcodeHomepage() {
-      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
+      /* FB-22/FB-54: KI-Funktionen ohne Login-Gate */
       var name = (document.getElementById('fcName') || {}).value || '';
       var email = (document.getElementById('fcEmail') || {}).value || '';
       var nachricht = (document.getElementById('fcNachricht') || {}).value || '';
@@ -2872,8 +2873,7 @@
         fetch(webhookBase + '/wf03d-farbcode', {
           method: 'POST', headers: withCasaAuth({ 'Content-Type': 'application/json' }),
           body: JSON.stringify(payload)
-        }).then(function(res) { return res.json(); })
-        .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+        }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
         .then(function(data) { resetFcBtn(); showKiResultPopup('Wunsch-Haarfarbe', data, email, false); })
         .catch(function() { resetFcBtn(); showKiResultPopup('Wunsch-Haarfarbe', HOMEPAGE_DEMO.farbcode, email, true); });
       };
@@ -2897,7 +2897,7 @@
     }
 
     function submitHaaranalyse() {
-      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
+      /* FB-22/FB-54: KI-Funktionen ohne Login-Gate */
       if (typeof checkRateLimit === 'function' && !checkRateLimit('haaranalyse', 3)) {
         showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error'); return;
       }
@@ -2955,7 +2955,7 @@
     function wfDrop(e, kind) { e.preventDefault(); e.currentTarget.style.background = ''; wfAddFiles(e.dataTransfer.files, kind); }
 
     function wfAddFiles(fileList, kind) {
-      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um Fotos hochzuladen.', 'error'); return; }
+      /* FB-22/FB-54: Foto-Upload IMMER erlaubt, kein Login-Gate */
       var arr = wfFilesState[kind] || [];
       Array.from(fileList).forEach(function(f) {
         if (arr.length >= WF_MAX_FILES) { showToast('Maximal ' + WF_MAX_FILES + ' Bilder pro Bereich.', 'error'); return; }
@@ -3015,7 +3015,7 @@
     })();
 
     function wfToggleVoice() {
-      if (!activeCustomer) { showToast('Bitte melden Sie sich an.', 'error'); return; }
+      /* FB-22/FB-54: Voice ohne Login-Gate */
       if (wfMediaRecorder && wfMediaRecorder.state === 'recording') { wfStopVoice(); return; }
       wfStartVoice();
     }
@@ -3082,7 +3082,7 @@
     // Submit Wunschfrisur — V2: Storage-Upload + Payload mit URLs
     function submitWunschfrisur(e) {
       e.preventDefault();
-      if (!activeCustomer) { showToast('Bitte melden Sie sich an, um diese Funktion zu nutzen.', 'error'); return; }
+      /* FB-22/FB-54: Wunschfrisur ohne Login-Gate */
       if (typeof checkRateLimit === 'function' && !checkRateLimit('wunschfrisur', 5)) {
         showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error'); return;
       }
