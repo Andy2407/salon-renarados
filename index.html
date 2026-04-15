@@ -2607,9 +2607,15 @@
         })
         .catch(function(err) { console.warn('[API] Services laden fehlgeschlagen:', err); });
     }
-    // FB-34: Services nach aktuellem Style (maskulin/feminin) filtern
+    // FB-34 + FB-31: Services nach aktuellem Style (maskulin/feminin) filtern
+    // Self-Repair: wenn allDbServices leer (Initial-Load scheitert beim Boot durch Race-Condition),
+    // beim Style-Toggle nachladen. Sonst blieben Damen-Services im maskulin-Modus sichtbar.
     function applyServiceGenderFilter() {
-      if (!allDbServices.length) return;
+      if (!allDbServices.length) {
+        // Lazy reload - DB war beim Boot noch nicht bereit oder Filter wurde getriggered bevor Load fertig
+        if (typeof sbReady === 'function' && sbReady()) { loadServicesFromDB(); }
+        return;
+      }
       // currentStyle 'maskulin' -> herren+unisex | 'feminin' -> damen+unisex
       var wantedGender = (typeof currentStyle !== 'undefined' && currentStyle === 'maskulin') ? 'herren' : 'damen';
       var filtered = allDbServices.filter(function(s) {
@@ -4574,10 +4580,17 @@
     }
 
     // --- Load config on DOMContentLoaded ---
+    // FB-31: Services-Load mit Retry, damit Filter sicher greift auch bei Race-Condition
     function bootSalonData() {
       loadConfig();
       try { loadServicesFromDB(); } catch(e) { console.warn(e); }
       try { loadStylistenFromDB(); } catch(e) { console.warn(e); }
+      // Retry nach 1.5s falls beim ersten Versuch allDbServices noch leer
+      setTimeout(function() {
+        if (!allDbServices.length && typeof sbReady === 'function' && sbReady()) {
+          try { loadServicesFromDB(); } catch(e) {}
+        }
+      }, 1500);
     }
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', bootSalonData);
