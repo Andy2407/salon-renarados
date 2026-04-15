@@ -2488,6 +2488,9 @@
     var SUPABASE_URL = 'https://api.casa2035.de';
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc1NTA0NzY1LCJleHAiOjE5MzMxODQ3NjV9.5YsRP4FLKHp7hTae7-RAyi13ofRfSGmjm8P2Ved2Wu4';
     var SALON_ID = '26230de8-a46e-4610-937c-c302547b5a73'; // Rena Rados
+    // FB-31: Force-Init FRÜH, damit eine evtl. Script-Crashes danach nicht diese Vars kill'n
+    window.allDbServices = window.allDbServices || [];
+    window.dbServicesById = window.dbServicesById || {};
 
     function sbReady() {
       return SUPABASE_ANON_KEY && SUPABASE_ANON_KEY !== 'ANON_KEY_HIER';
