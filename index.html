@@ -2526,6 +2526,8 @@
       localStorage.setItem('renarados_style', style);
       // Update dynamic content per mode
       updateContentForStyle(style);
+      // FB-34: Service-Chips nach Style filtern (maskulin = Herren+Unisex, feminin = Damen+Unisex)
+      if (typeof applyServiceGenderFilter === 'function') applyServiceGenderFilter();
     }
     // Restore saved style
     (function() {
@@ -2591,16 +2593,30 @@
 
     // Services dynamisch laden
     var dbServicesById = {}; // service_id -> {name, dauer_min, preis_brutto, kategorie}
+    var allDbServices = []; // Alle geladenen Services fuer dynamisches Gender-Filtering
     function loadServicesFromDB() {
       if (!sbReady()) { console.info('[API] ANON_KEY fehlt — Services Fallback (hardcoded).'); return; }
-      var url = SUPABASE_URL + '/rest/v1/services_preisliste?salon_id=eq.' + SALON_ID + '&aktiv=eq.true&order=kategorie,reihenfolge&select=service_id,name,kategorie,dauer_min,preis_brutto';
+      // FB-34: service_typ (damen/herren/unisex) mitladen fuer Gender-Filter
+      var url = SUPABASE_URL + '/rest/v1/services_preisliste?salon_id=eq.' + SALON_ID + '&aktiv=eq.true&order=kategorie,reihenfolge&select=service_id,name,kategorie,dauer_min,preis_brutto,service_typ';
       fetch(url, { headers: sbHeaders() })
         .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function(rows) {
           if (!Array.isArray(rows) || !rows.length) { console.info('[API] services_preisliste leer — Fallback aktiv.'); return; }
-          rebuildServiceChips(rows);
+          allDbServices = rows;
+          applyServiceGenderFilter(); // filtert anhand currentStyle
         })
         .catch(function(err) { console.warn('[API] Services laden fehlgeschlagen:', err); });
+    }
+    // FB-34: Services nach aktuellem Style (maskulin/feminin) filtern
+    function applyServiceGenderFilter() {
+      if (!allDbServices.length) return;
+      // currentStyle 'maskulin' -> herren+unisex | 'feminin' -> damen+unisex
+      var wantedGender = (typeof currentStyle !== 'undefined' && currentStyle === 'maskulin') ? 'herren' : 'damen';
+      var filtered = allDbServices.filter(function(s) {
+        var t = (s.service_typ || 'unisex').toLowerCase();
+        return t === 'unisex' || t === wantedGender;
+      });
+      rebuildServiceChips(filtered);
     }
     function rebuildServiceChips(rows) {
       var container = document.getElementById('bkLeistungCheckboxes');
