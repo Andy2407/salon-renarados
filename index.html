@@ -1101,6 +1101,25 @@
       .style-toggle-btn { padding: 6px 12px; font-size: 10px; }
     }
 
+    /* FB-33: Salon Wunschlook Mobile Fix (<= 479px) — inline 2-col Grids stacken, Form sauber, Voice-Recorder umbricht */
+    @media (max-width: 479px) {
+      #kiTabWunschfrisur .wf-row-2 { grid-template-columns: 1fr !important; }
+      #kiTabWunschfrisur .form-row { grid-template-columns: 1fr !important; gap: 0 !important; }
+      #kiTabWunschfrisur .ki-form-card { padding: 20px 16px; }
+      #kiTabWunschfrisur .ki-form-card h3 { font-size: 17px; margin-bottom: 14px; }
+      #kiTabWunschfrisur .upload-zone { padding: 22px 12px; min-height: 72px; }
+      #kiTabWunschfrisur .upload-zone p { font-size: 11px; line-height: 1.4; }
+      #kiTabWunschfrisur .upload-zone svg { width: 26px; height: 26px; margin-bottom: 6px; }
+      #kiTabWunschfrisur .upload-gate { font-size: 11px !important; padding: 8px 12px !important; }
+      #kiTabWunschfrisur #wfVoiceGroup > div { gap: 8px !important; }
+      #kiTabWunschfrisur #wfVoicePreview { width: 100%; min-width: 0 !important; flex-basis: 100% !important; }
+      #kiTabWunschfrisur .btn { padding: 12px 16px; font-size: 12px; min-height: 44px; width: 100%; }
+      #kiTabWunschfrisur label { font-size: 12px; }
+      #kiTabWunschfrisur .form-group { margin-bottom: 14px; }
+      /* Hero-Steps (Icon + Text) bei sehr engem Screen: Text umbrechen, Icon bleibt */
+      #kiTabWunschfrisur .ki-content > div > div { align-items: flex-start !important; }
+    }
+
     @media (min-width: 480px) and (max-width: 767px) {
       section { padding: 56px 20px; }
       .about-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -1906,7 +1925,7 @@
                   <div id="wfProgressBar" style="height:100%;width:0%;background:var(--gold);transition:width 200ms"></div>
                 </div>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+              <div class="wf-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
                 <div class="form-group" style="margin-bottom:0"><label>Wunschtermin (optional)</label><input type="date" id="wfDatum"></div>
                 <div class="form-group" style="margin-bottom:0"><label>Uhrzeit (optional)</label>
                   <select id="wfUhrzeit" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:'Inter',sans-serif">
@@ -1920,7 +1939,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+              <div class="wf-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
                 <button type="submit" class="btn btn-gold" style="justify-content:center">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/></svg>
                   <span id="wunschBtnText">Wunschfrisur senden</span>
@@ -5615,6 +5634,14 @@
     }
 
     var salonMicGranted = false;
+    // FB-19: Wenn Browser-Permission bereits granted, nicht erneut fragen
+    if (navigator.permissions && navigator.permissions.query) {
+      try {
+        navigator.permissions.query({ name: 'microphone' }).then(function(p) {
+          if (p.state === 'granted') salonMicGranted = true;
+        }).catch(function() {});
+      } catch(e) {}
+    }
     function applySalonVoicePunctuation(text) {
       if (!text) return text;
       return text
