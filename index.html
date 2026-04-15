@@ -3468,6 +3468,17 @@
           body: JSON.stringify(payloadWf02a)
         }).then(function(res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json().catch(function(){ return {}; });
+        }).then(function(j) {
+          // Erfolg nur wenn Server kein success:false meldet
+          if (j && j.success === false) {
+            var msg = (j.error && j.error.message) || 'Termin konnte nicht eingeplant werden.';
+            if (j.action === 'service_unbekannt' || (j.error && j.error.code === 'SERVICE_NOT_FOUND')) {
+              msg = 'Die gewählte Leistung ist aktuell nicht buchbar. Bitte rufen Sie uns an oder waehlen Sie eine andere Leistung.';
+            }
+            showToast(msg, 'error');
+            return;
+          }
           showToast('Terminanfrage gesendet! Sie erhalten in Kürze eine Bestätigung.', 'success');
           e.target.reset();
         }).catch(function() { showToast('Fehler beim Senden. Bitte rufen Sie uns an.', 'error'); });
