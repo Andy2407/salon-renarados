@@ -5748,6 +5748,35 @@
         });
       }
     }
-  </script>
+  
+    /* FB-15.04. Upload-Zone-Fix marker */
+
+    // FB-15.04.: iOS-Fix fuer alle Upload-Zonen — ersetzt synthetische .click() durch Overlay-Input
+    (function upgradeUploadZones() {
+      try {
+        var zones = document.querySelectorAll('.upload-zone, [data-upload-zone]');
+        zones.forEach(function(zone) {
+          var input = zone.querySelector('input[type="file"]');
+          if (!input) return;
+          if (window.getComputedStyle(zone).position === 'static') zone.style.position = 'relative';
+          zone.style.overflow = 'hidden';
+          zone.style.webkitTapHighlightColor = 'transparent';
+          zone.style.touchAction = 'manipulation';
+          input.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:10;font-size:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation';
+          zone.removeAttribute('onclick');
+          // Sofort-Feedback beim File-Wahl
+          input.addEventListener('change', function() {
+            if (input.files && input.files.length) {
+              var prev = zone.style.borderColor;
+              zone.style.transition = 'border-color 150ms';
+              zone.style.borderColor = 'var(--gold, #b8962e)';
+              setTimeout(function() { zone.style.borderColor = prev; }, 600);
+            }
+          });
+        });
+      } catch (e) { /* silent */ }
+    })();
+
+    </script>
 </body>
 </html>
