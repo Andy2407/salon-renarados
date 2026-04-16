@@ -5248,7 +5248,7 @@
       var hash = await crypto.subtle.digest('SHA-256', buf);
       return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
     }
-    var CASA_GATE_HASH = 'c38cfe357f4dcf31bb6db44de70644a5f0ff5a4bb8724eff8d8d681d1bda0b55';
+    var CASA_GATE_HASH = '368800a7c839d92f53735953f1b840ad47eb48153745ae757a853bf3a03d2250';
     async function checkLogin() {
       var pw = document.getElementById('loginPw').value;
       if (!pw) return;
