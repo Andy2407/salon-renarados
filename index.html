@@ -409,7 +409,7 @@
     .form-group input, .form-group select, .form-group textarea {
       width: 100%; padding: 13px 16px; background: var(--cream);
       border: 1px solid var(--border); border-radius: var(--radius-sm);
-      color: var(--text); font-size: 14px; font-family: 'Inter', sans-serif; transition: border-color 200ms;
+      color: var(--text); font-size: 16px; font-family: 'Inter', sans-serif; transition: border-color 200ms;
     }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(184,150,46,0.1); }
     .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
@@ -1225,7 +1225,7 @@
     .customer-login-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 4px; }
     .customer-login-card p { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
     .cl-field { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-      font-size: 14px; font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text);
+      font-size: 16px; font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text);
       margin-bottom: 10px; box-sizing: border-box; transition: border-color 200ms; }
     .cl-field:focus { outline: none; border-color: var(--gold); }
     .cl-row { display: flex; gap: 10px; }
@@ -1929,7 +1929,7 @@
               <div class="wf-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
                 <div class="form-group" style="margin-bottom:0"><label>Wunschtermin (optional)</label><input type="date" id="wfDatum"></div>
                 <div class="form-group" style="margin-bottom:0"><label>Uhrzeit (optional)</label>
-                  <select id="wfUhrzeit" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:'Inter',sans-serif">
+                  <select id="wfUhrzeit" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:16px;font-family:'Inter',sans-serif">
                     <option value="">Flexibel</option>
                     <option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option>
                     <option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
@@ -2091,7 +2091,7 @@
             </script>
             <div class="form-group">
               <label>Wunsch-Stylist (optional)</label>
-              <select id="bkStylist" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;font-family:'Inter',sans-serif">
+              <select id="bkStylist" style="width:100%;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:16px;font-family:'Inter',sans-serif">
                 <option value="">Egal, wer frei ist</option>
               </select>
             </div>
@@ -5234,7 +5234,7 @@
       </div>
       <form autocomplete="on" onsubmit="event.preventDefault();checkLogin()">
         <input type="hidden" name="username" value="salon" autocomplete="username">
-        <input type="password" id="loginPw" name="password" autocomplete="current-password" placeholder="Passwort eingeben" onkeypress="if(event.key==='Enter')checkLogin()" style="width:100%;padding:14px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;text-align:center;background:#1a1a1a;color:#fff;margin-bottom:12px;letter-spacing:2px">
+        <input type="password" id="loginPw" name="password" autocomplete="current-password" placeholder="Passwort eingeben" onkeypress="if(event.key==='Enter')checkLogin()" style="width:100%;padding:14px 18px;border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-size:16px;font-family:'Inter',sans-serif;text-align:center;background:#1a1a1a;color:#fff;margin-bottom:12px;letter-spacing:2px">
         <div id="loginError" style="font-size:12px;color:#e53e3e;margin-bottom:8px;display:none">Falsches Passwort</div>
         <button type="submit" style="width:100%;padding:14px;background:linear-gradient(135deg,#b8962e,#c9a93d);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:0.5px">Anmelden</button>
       </form>
@@ -5302,7 +5302,7 @@
   <div class="feedback-panel" id="feedbackPanel">
     <div class="feedback-panel-header">
       <h4>Feedback geben</h4>
-      <button class="fb-close-btn" onclick="toggleFeedback()">&times;</button>
+      <button type="button" class="fb-close-btn" onclick="toggleFeedback()">&times;</button>
     </div>
     <div class="feedback-panel-body" id="fbFormView">
       <p>Was funktioniert gut? Was fehlt? Jede Meldung hilft uns, die Seite besser zu machen.</p>
@@ -5323,7 +5323,7 @@
       </div>
       <textarea id="feedbackText" placeholder="Beschreibe, was dir aufgefallen ist..." maxlength="1000" oninput="updateFbCount()"></textarea>
       <div style="display:flex;gap:6px;margin:8px 0 4px">
-        <button id="salonFbVoiceBtn" onclick="toggleSalonFbVoice()" title="Spracheingabe" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg-light,#f5f2ef);cursor:pointer;color:var(--text-muted);transition:all 200ms">
+        <button type="button" id="salonFbVoiceBtn" onclick="toggleSalonFbVoice()" title="Spracheingabe" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg-light,#f5f2ef);cursor:pointer;color:var(--text-muted);transition:all 200ms">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
         </button>
         <label title="Screenshot beifuegen" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg-light,#f5f2ef);cursor:pointer;color:var(--text-muted);transition:all 200ms">
@@ -5336,7 +5336,7 @@
       <div id="salonFbVoiceStatus" style="display:none;font-size:11px;color:#c44040;margin-bottom:4px"></div>
       <div class="fb-footer">
         <span class="fb-counter" id="fbCounter">0 / 1000</span>
-        <button class="fb-submit-btn" id="fbSubmitBtn" onclick="submitFeedback()">Absenden</button>
+        <button type="button" class="fb-submit-btn" id="fbSubmitBtn" onclick="submitFeedback()">Absenden</button>
       </div>
     </div>
     <div class="fb-success-view" id="fbSuccessView">
@@ -5366,7 +5366,7 @@
       <button class="cb-qr" onclick="chatQuickReply('services')" style="padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif">Services &amp; Preise</button>
     </div>
     <form id="chatForm" onsubmit="chatSend(event)" style="padding:8px 16px 16px;display:flex;gap:8px">
-      <input id="chatInput" type="text" placeholder="Ihre Frage..." maxlength="300" style="flex:1;padding:10px 14px;border-radius:var(--radius-full);border:1px solid var(--border);font-size:13px;font-family:'Inter',sans-serif;outline:none" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="Ihre Frage..." maxlength="300" style="flex:1;padding:10px 14px;border-radius:var(--radius-full);border:1px solid var(--border);font-size:16px;font-family:'Inter',sans-serif;outline:none" autocomplete="off">
       <button type="submit" style="width:38px;height:38px;border-radius:50%;background:var(--gold);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
