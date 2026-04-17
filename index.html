@@ -1400,7 +1400,7 @@
         <a href="https://www.instagram.com/rena_rados_friseure/" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 200ms;box-shadow:0 2px 8px rgba(0,0,0,0.04)" title="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="1.5" style="width:18px;height:18px"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#e1306c" stroke="none"/></svg>
         </a>
-        <a href="mailto:renarados.friseure@hotmail.com" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 200ms;box-shadow:0 2px 8px rgba(0,0,0,0.04)" title="E-Mail">
+        <a href="mailto:renarados.friseure@hotmail.com" data-cfg="email_kontakt" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 200ms;box-shadow:0 2px 8px rgba(0,0,0,0.04)" title="E-Mail">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
         <a href="https://www.facebook.com/Rena.Rados" target="_blank" rel="noopener" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 200ms;box-shadow:0 2px 8px rgba(0,0,0,0.04)" title="Facebook">
@@ -1420,7 +1420,7 @@
         <div style="width:1px;height:16px;background:var(--border)"></div>
         <div style="font-size:13px;color:var(--text-light);font-weight:500">Seit 25+ Jahren in München</div>
         <div style="width:1px;height:16px;background:var(--border)"></div>
-        <div style="font-size:13px;color:var(--text-light);font-weight:500">La Biosthetique Partner-Salon</div>
+        <div data-cfg="marken_partner" style="font-size:13px;color:var(--text-light);font-weight:500">La Biosthétique Partner-Salon</div>
       </div>
     </div>
     <a href="#about" class="hero-scroll" style="text-decoration:none;cursor:pointer">
@@ -1543,7 +1543,7 @@
           <div style="display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap" class="reveal">
             <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:var(--radius-full);border:1px solid var(--border);background:var(--cream);font-size:11px;font-weight:600;color:var(--text-light)">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:16px;height:16px"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/><path d="M9 6.5C7.33 7.83 5 10.6 5 14c0 3 2.5 6 7 8"/><path d="M15 6.5c1.67 1.33 4 4.1 4 7.5 0 3-2.5 6-7 8"/></svg>
-              La Biosthetique Partner
+              <span data-cfg="marken_partner">La Biosthétique Partner</span>
             </div>
             <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:var(--radius-full);border:1px solid var(--border);background:var(--cream);font-size:11px;font-weight:600;color:var(--text-light)">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:16px;height:16px"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -2213,7 +2213,7 @@
     <div class="container">
       <div class="karriere-intro reveal">
         <div class="section-label" id="karriereLabel">Werde Teil unseres Teams</div>
-        <h2 class="section-title" id="karriereIntroTitle">Deine <em>Karriere</em><br>bei Rena Rados</h2>
+        <h2 class="section-title" id="karriereIntroTitle">Deine <em>Karriere</em><br>bei <span data-cfg="salon_kurzname">Rena Rados</span></h2>
         <p class="section-desc" id="karriereIntroDesc">Wir suchen Menschen, die für ihren Beruf brennen. Ob erfahrener Stylist, Barber oder Azubi am Anfang — bei uns zählt Leidenschaft, nicht nur Erfahrung. Werde Teil eines Teams, das jeden Tag das Beste aus sich herausholt.</p>
       </div>
 
@@ -2221,12 +2221,12 @@
       <div style="background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(26,26,26,0.03));border:2px solid var(--gold);border-radius:var(--radius);padding:32px;margin-bottom:40px;text-align:center;position:relative;overflow:hidden" class="reveal">
         <div style="position:absolute;inset:0;background:url('https://api.casa2035.de/images/e2a621bb5f.jpg') center/cover no-repeat;opacity:0.06"></div>
         <div style="position:relative;z-index:1">
-        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Talente willkommen — Deine Karriere bei Rena Rados</h3>
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:8px">Talente willkommen — Deine Karriere bei <span data-cfg="salon_kurzname">Rena Rados</span></h3>
         <p style="font-size:14px;color:var(--text-light);line-height:1.6;max-width:560px;margin:0 auto 16px">Unsere Kunden lieben uns — und warten gerne 2-3 Wochen. Wir wachsen und suchen leidenschaftliche Friseure, die mit modernster Technik und Premium-Produkten arbeiten möchten. Du verdienst einen Salon, der dich wertschätzt.</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
           <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">Überdurchschnittliches Gehalt</div>
           <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">Modernste KI-Technik</div>
-          <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">La Biosthetique Produkte</div>
+          <div data-cfg="marken_partner" style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">La Biosthétique Produkte</div>
           <div style="padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold);font-size:12px;font-weight:600;color:var(--gold)">Null Verwaltung — KI macht den Rest</div>
         </div>
       </div>
@@ -2509,7 +2509,9 @@
 
     var SUPABASE_URL = 'https://api.casa2035.de';
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc1NTA0NzY1LCJleHAiOjE5MzMxODQ3NjV9.5YsRP4FLKHp7hTae7-RAyi13ofRfSGmjm8P2Ved2Wu4';
-    var SALON_ID = '26230de8-a46e-4610-937c-c302547b5a73'; // Rena Rados
+    // Multi-Tenant: salon_id + style key come from config.json (set in applyConfig)
+    var SALON_ID = '26230de8-a46e-4610-937c-c302547b5a73'; // Fallback — wird durch config.json überschrieben
+    var STYLE_STORAGE_KEY = 'casa_style_renarados'; // Fallback — wird durch config.json überschrieben
     // FB-31: Force-Init FRÜH, damit eine evtl. Script-Crashes danach nicht diese Vars kill'n
     window.allDbServices = window.allDbServices || [];
     window.dbServicesById = window.dbServicesById || {};
@@ -2548,7 +2550,7 @@
       document.querySelectorAll('.style-toggle-btn').forEach(function(btn) {
         btn.classList.toggle('active', btn.getAttribute('data-style') === style);
       });
-      localStorage.setItem('renarados_style', style);
+      localStorage.setItem(STYLE_STORAGE_KEY, style);
       // Update dynamic content per mode
       updateContentForStyle(style);
       // FB-34: Service-Chips nach Style filtern (maskulin = Herren+Unisex, feminin = Damen+Unisex)
@@ -2556,7 +2558,7 @@
     }
     // Restore saved style
     (function() {
-      var saved = localStorage.getItem('renarados_style');
+      var saved = localStorage.getItem(STYLE_STORAGE_KEY);
       if (saved === 'maskulin') setStyle('maskulin');
     })();
 
@@ -2702,7 +2704,7 @@
       // Hardcoded Fallback-Liste (FB-20)
       function applyFallback() {
         if (sel.options.length > 1) return;
-        var fallback = ['Rena Rados', 'Petra', 'Sabine'];
+        var fallback = [window._salonInhaberName || 'Inhaber/in', 'Petra', 'Sabine'];
         fallback.forEach(function(n) {
           var opt = document.createElement('option');
           opt.value = n; opt.textContent = n;
@@ -3538,7 +3540,7 @@
       if (webhookBase) {
         // Direkt an WF-02a (Terminvorschlag) — bis WF-01 Intent-Router live ist
         var payloadWf02a = Object.assign({}, payload, {
-          salon_id: '26230de8-a46e-4610-937c-c302547b5a73',
+          salon_id: SALON_ID,
           kundenname: ((payload.vorname || '') + ' ' + (payload.nachname || '')).trim(),
           kontakt: payload.email || payload.telefon || '',
           nachricht: (payload.leistung || '') + (payload.notiz ? ' — ' + payload.notiz : ''),
@@ -4099,13 +4101,13 @@
         if (h3a) h3a.textContent = m.karriereTitle1;
         var pa = karriereCards[0].querySelector('p');
         if (pa) pa.textContent = m.karriereDesc1;
-        karriereCards[0].onclick = function() { location.href = 'mailto:renarados.friseure@hotmail.com?subject=' + m.karriereEmail1; };
+        karriereCards[0].onclick = function() { location.href = 'mailto:' + (window._salonKarriereEmail || 'renarados.friseure@hotmail.com') + '?subject=' + m.karriereEmail1; };
 
         var h3b = karriereCards[1].querySelector('h3');
         if (h3b) h3b.textContent = m.karriereTitle2;
         var pb = karriereCards[1].querySelector('p');
         if (pb) pb.textContent = m.karriereDesc2;
-        karriereCards[1].onclick = function() { location.href = 'mailto:renarados.friseure@hotmail.com?subject=' + m.karriereEmail2; };
+        karriereCards[1].onclick = function() { location.href = 'mailto:' + (window._salonKarriereEmail || 'renarados.friseure@hotmail.com') + '?subject=' + m.karriereEmail2; };
       }
 
       // Haar & Style Section — update labels, descriptions, tab names
@@ -4282,6 +4284,11 @@
       // --- 2. Salon Info: Nav Logo, Footer, Meta ---
       if (cfg.salon) {
         var s = cfg.salon;
+        // Multi-Tenant: SALON_ID + STYLE_STORAGE_KEY aus config.json
+        if (s.salon_id) SALON_ID = s.salon_id;
+        if (s.style_localStorage_key) STYLE_STORAGE_KEY = s.style_localStorage_key;
+        if (s.inhaber_name) window._salonInhaberName = s.inhaber_name;
+        if (s.email_karriere || s.email) window._salonKarriereEmail = s.email_karriere || s.email;
         if (s.name) {
           document.title = s.name + ' | ' + (s.city || '') + ' \u2014 ' + (s.slogan || 'Premium Haarstyling');
         }
@@ -4308,6 +4315,45 @@
         applyContactCards(s);
         applyBookingInfoCards(s);
         if (s.oeffnungszeiten) applyOpeningHours(s.oeffnungszeiten);
+        // Google Maps iframe aus config
+        if (s.google_maps_embed_url) {
+          var mapsIframe = document.querySelector('.contact-map iframe');
+          if (mapsIframe) mapsIframe.src = s.google_maps_embed_url;
+        }
+        // Marken-Partner Label (z.B. "La Biosthétique Partner-Salon")
+        if (s.marken_partner && s.marken_partner.length) {
+          var markenText = s.marken_partner.join(' + ') + ' Partner-Salon';
+          document.querySelectorAll('[data-cfg="marken_partner"]').forEach(function(el) {
+            el.textContent = markenText;
+          });
+        }
+        // Login-Splash Salon-Name
+        if (s.name) {
+          var loginNameEl = document.getElementById('loginSalonName');
+          if (loginNameEl) { applyBrandName('#loginSalonName', s.name); }
+        }
+        // Kurzname inline (z.B. "bei Rena Rados" in Karriere-Sektion)
+        var kurzname = s.kurzname || s.name;
+        if (kurzname) {
+          document.querySelectorAll('[data-cfg="salon_kurzname"]').forEach(function(el) {
+            el.textContent = kurzname;
+          });
+        }
+        // E-Mail-Links (Kontakt + Nav-Mailto)
+        var kontaktEmail = s.email_kontakt || s.email;
+        var karriereEmail = s.email_karriere || s.email;
+        if (kontaktEmail) {
+          document.querySelectorAll('[data-cfg="email_kontakt"]').forEach(function(el) {
+            el.textContent = kontaktEmail;
+            el.href = 'mailto:' + kontaktEmail;
+          });
+        }
+        if (karriereEmail) {
+          document.querySelectorAll('[data-cfg="email_karriere"]').forEach(function(el) {
+            el.href = 'mailto:' + karriereEmail;
+            if (el.tagName !== 'A') el.textContent = karriereEmail;
+          });
+        }
       }
 
       // --- 3. Social Media Links ---
@@ -4338,16 +4384,59 @@
         if (cfg.content.maskulin) applyModeContent('maskulin', cfg.content.maskulin);
         // Hero badge wird aus JS-defaults geladen (cache-sicher, kein config.json-Override)
       }
+      // Karriere-Intro Titel aus Salon-Name (ersetzt "bei Rena Rados")
+      if (cfg.salon && cfg.salon.name && typeof modeContent !== 'undefined') {
+        var karriereName = cfg.salon.kurzname || cfg.salon.name;
+        modeContent.feminin.karriereIntroTitle = 'Deine <em>Karriere</em><br>bei ' + karriereName;
+        modeContent.maskulin.karriereIntroTitle = 'Deine <em>Karriere</em><br>bei ' + karriereName;
+      }
 
       // --- 7. Karriere Positions ---
       if (cfg.karriere && cfg.karriere.positions) {
-        applyKarrierePositions(cfg.karriere.positions, cfg.salon ? cfg.salon.email : null);
+        var karriereEmail = (cfg.salon && (cfg.salon.email_karriere || cfg.salon.email)) || null;
+        applyKarrierePositions(cfg.karriere.positions, karriereEmail);
+        // Alle weiteren Karriere-Karten (card 3+4) die nicht von applyKarrierePositions abgedeckt sind
+        if (karriereEmail) {
+          document.querySelectorAll('.karriere-card[onclick*="mailto:"]').forEach(function(card) {
+            var match = card.getAttribute('onclick').match(/subject=([^'"]+)/);
+            var subj = match ? match[1] : 'Bewerbung';
+            card.setAttribute('onclick', "location.href='mailto:" + karriereEmail + "?subject=" + subj + "'");
+          });
+          var salonName = (cfg.salon && cfg.salon.name) || '';
+          var cta = document.querySelector('.karriere-cta [href^="mailto:"]');
+          if (cta) cta.href = 'mailto:' + karriereEmail + '?subject=Bewerbung%20bei%20' + encodeURIComponent(salonName);
+          // Inline-Email-Links in Footer + Kontakt
+          document.querySelectorAll('a[href^="mailto:renarados.friseure@hotmail.com"]').forEach(function(a) {
+            a.href = 'mailto:' + karriereEmail;
+            if (a.textContent.indexOf('@') !== -1) a.textContent = karriereEmail;
+          });
+        }
       }
 
       // --- 8. Legal / Impressum ---
       if (cfg.legal && cfg.legal.impressum) applyImpressum(cfg.legal.impressum);
 
-      // --- 9. Re-apply current style to refresh all dynamic content ---
+      // --- 9. Chatbot strings dynamisch befüllen ---
+      if (cfg.salon) {
+        var sn = cfg.salon;
+        var salonDisplayName = sn.name || '';
+        var salonPhone = sn.phone || '';
+        var salonAddress = sn.address || '';
+        var salonAddressNote = sn.addressNote || '';
+        var marken = (sn.marken_partner && sn.marken_partner.length) ? sn.marken_partner.join(' + ') : '';
+        if (salonDisplayName && typeof chatResponses !== 'undefined') {
+          chatResponses.adresse = salonDisplayName + '\n' + salonAddress.replace(', ', ' (') + (salonAddressNote ? ', ' + salonAddressNote + ')' : '') + '\n' + (sn.adresse_plz || '') + ' ' + (sn.adresse_ort || '') + (salonPhone ? '\nTelefon: ' + salonPhone : '') + '\n\nAm besten mit der U-Bahn (Stiglmaierplatz) oder Tram.';
+          if (marken) {
+            chatResponses.produkte = 'Wir arbeiten mit ' + marken + ' — Premium-Produkte, die wir auch im Salon für Sie zum Mitnehmen haben.';
+            chatResponses.team = 'Unser Team unter der Leitung von ' + (sn.inhaber_name || salonDisplayName) + ' — erfahrene Stylisten, die mit ' + marken + ' arbeiten.';
+            chatResponses.services = chatResponses.services.replace(/La Biosthetique Produkte im Salon/, marken + ' Produkte im Salon');
+          }
+          // Chatbot Begrüßung
+          window._chatBotSalonName = salonDisplayName;
+        }
+      }
+
+      // --- 10. Re-apply current style to refresh all dynamic content ---
       updateContentForStyle(currentStyle);
     }
 
@@ -4532,7 +4621,7 @@
 
     function applyKarrierePositions(positions, salonEmail) {
       if (!positions || !positions.length) return;
-      var email = salonEmail || 'renarados.friseure@hotmail.com';
+      var email = salonEmail || window._salonKarriereEmail || 'renarados.friseure@hotmail.com';
       if (positions[0]) {
         var p0 = positions[0];
         if (p0.title) {
@@ -5409,7 +5498,7 @@
   <!-- Login Overlay -->
   <div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px">
     <div style="text-align:center">
-      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:4px;color:#ffffff"><em style="color:#b8962e;font-style:italic">Rena Rados</em> Friseure</div>
+      <div id="loginSalonName" style="font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:4px;color:#ffffff"><em style="color:#b8962e;font-style:italic">Rena Rados</em> Friseure</div>
       <div style="font-size:11px;color:#999;letter-spacing:1px;text-transform:uppercase">Salon Website — Vorschau</div>
     </div>
     <div style="background:#222;border:1px solid rgba(184,150,46,0.2);border-radius:16px;padding:32px;width:90%;max-width:340px;text-align:center">
@@ -5609,7 +5698,7 @@
       var win = document.getElementById('chatBotWindow');
       win.style.display = chatBotOpen ? 'flex' : 'none';
       if (chatBotOpen && document.getElementById('chatMessages').children.length === 0) {
-        addBotMessage('Hallo! Ich bin der Salon-Assistent von Rena Rados. Wie kann ich Ihnen helfen?');
+        addBotMessage('Hallo! Ich bin der Salon-Assistent von ' + (window._chatBotSalonName || 'Rena Rados') + '. Wie kann ich Ihnen helfen?');
       }
     }
     function addBotMessage(text) {
@@ -5653,7 +5742,7 @@
       var labels = {oeffnungszeiten:'Öffnungszeiten',termin:'Termin buchen',services:'Services & Preise'};
       addUserMessage(labels[key] || key);
       setTimeout(function() {
-        addBotMessage(chatResponses[key] || 'Ich helfe gerne bei Fragen rund um Ihren Besuch bei Rena Rados.');
+        addBotMessage(chatResponses[key] || 'Ich helfe gerne bei Fragen rund um Ihren Besuch bei ' + (window._chatBotSalonName || 'uns') + '.');
       }, 400);
     }
     function chatSend(e) {

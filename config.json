@@ -1,13 +1,25 @@
 {
   "salon": {
+    "salon_id": "26230de8-a46e-4610-937c-c302547b5a73",
+    "slug": "renarados",
     "name": "Rena Rados Friseure",
+    "kurzname": "Rena Rados",
+    "inhaber_name": "Rena Rados",
     "slogan": "Premium Haarstyling",
     "city": "München",
     "address": "Erzgiessereistr. 51, 80335 München",
     "addressNote": "Eingang Dachauer Str. 143",
+    "adresse_strasse": "Erzgiessereistr. 51",
+    "adresse_plz": "80335",
+    "adresse_ort": "München",
     "phone": "089 - 1296294",
     "email": "renarados.friseure@hotmail.com",
+    "email_kontakt": "renarados.friseure@hotmail.com",
+    "email_karriere": "renarados.friseure@hotmail.com",
     "mapsUrl": "https://maps.google.com/?q=Erzgiessereistr.+51,+80335+München",
+    "google_maps_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2661.8!2d11.5555!3d48.1525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e75f77f29c64d%3A0x123456!2sErzgie%C3%9Fereistra%C3%9Fe%2051%2C%2080335%20M%C3%BCnchen!5e0!3m2!1sde!2sde!4v1",
+    "style_localStorage_key": "casa_style_renarados",
+    "marken_partner": ["La Biosthétique"],
     "oeffnungszeiten": {
       "Mo": "Geschlossen",
       "Di": "09:00 - 18:00",
@@ -99,9 +111,9 @@
     }
   },
   "_meta": {
-    "version": "1.0",
+    "version": "2.0",
     "template": "casa2035-salon",
-    "generatedAt": "2026-03-23",
+    "generatedAt": "2026-04-17",
     "poweredBy": "Casa 2035"
   }
 }
