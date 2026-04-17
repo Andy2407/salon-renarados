@@ -11,6 +11,46 @@
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>Rena Rados Friseure | München — Premium Haarstyling</title>
+  <!-- Schema.org LocalBusiness (HairSalon) — SEO + Google Maps Rich Snippets (17.04.2026, @seo) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Rena Rados Friseure",
+    "url": "https://renarados.casa2035.de",
+    "telephone": "+49 89 1296294",
+    "image": "https://renarados.casa2035.de/icons/icon-512.png",
+    "priceRange": "€€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Erzgiessereistr. 51",
+      "addressLocality": "München",
+      "postalCode": "80335",
+      "addressCountry": "DE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 48.1479,
+      "longitude": 11.5473
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "18:00" }
+    ],
+    "sameAs": ["https://www.instagram.com/rena_rados_friseure"],
+    "paymentAccepted": "Bargeld, EC-Karte, Kreditkarte",
+    "currenciesAccepted": "EUR",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Salon-Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Damenhaarschnitt + Föhn" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Balayage + Schnitt" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Herrenschnitt" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "KI-Haaranalyse (Premium)" } }
+      ]
+    }
+  }
+  </script>
   <style>
     /* =============================================================
        Rena Rados Friseure — Salon Website
@@ -5488,12 +5528,26 @@
 
   <!-- Cookie-Banner (DSGVO) -->
   <div class="cookie-banner" id="cookieBanner">
-    <span>Diese Website verwendet nur technisch notwendige Cookies. Wir laden Google Fonts extern. <a href="#" onclick="event.preventDefault();openLegal('datenschutz')">Datenschutz</a></span>
+    <span>Diese Website nutzt nur technisch notwendige Cookies (fuer Login und Warenkorb). Keine Tracking-Cookies, keine externen Drittanbieter. Server in Nuernberg (Deutschland). <a href="#" onclick="event.preventDefault();openLegal('datenschutz')">Datenschutz</a></span>
     <div style="display:flex;gap:8px;flex-shrink:0">
       <button class="cookie-btn cookie-btn-reject" onclick="handleCookies('reject')">Nur notwendige</button>
       <button class="cookie-btn cookie-btn-accept" onclick="handleCookies('accept')">Verstanden</button>
     </div>
   </div>
+  <script>
+    // Cookie-Consent Logic (Capo 17.04.: DSGVO-konform, keine Tracker)
+    (function(){
+      var banner = document.getElementById('cookieBanner');
+      if (!banner) return;
+      if (!localStorage.getItem('casa_cookie_consent')) {
+        setTimeout(function(){ banner.classList.add('show'); }, 800);
+      }
+      window.handleCookies = function(choice) {
+        try { localStorage.setItem('casa_cookie_consent', choice + '|' + Date.now()); } catch(e) {}
+        banner.classList.remove('show');
+      };
+    })();
+  </script>
 
   <!-- Login Overlay -->
   <div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px">
