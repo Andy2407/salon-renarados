@@ -15,7 +15,7 @@
     /* =============================================================
        Rena Rados Friseure — Salon Website
        Powered by Casa 2035 | KI-First Innovation
-       Stand: 07.04.2026
+       Stand: 17.04.2026
        ============================================================= */
 
     :root {
@@ -2445,20 +2445,21 @@
     <div class="legal-modal">
       <button class="legal-close" onclick="closeLegal('datenschutz')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       <h2>Datenschutzerklärung</h2>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Stand: April 2026</p>
       <h3>1. Datenschutz auf einen Blick</h3>
       <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und gemäß der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
       <h3>2. Verantwortliche Stelle</h3>
       <p>Rena Rados Friseure<br>Erzgiessereistr. 51, 80335 München<br>E-Mail: <a href="mailto:renarados.friseure@hotmail.com">renarados.friseure@hotmail.com</a></p>
       <h3>3. Datenerfassung auf dieser Website</h3>
       <p>Diese Website verwendet keine Cookies und kein Tracking. Wenn Sie über unsere Formulare eine Anfrage senden, werden Ihre Angaben (Name, E-Mail, Telefon, Nachricht) ausschließlich zur Bearbeitung Ihrer Anfrage gespeichert und nicht an Dritte weitergegeben.</p>
-      <h3>4. Hosting</h3>
-      <p>Diese Website wird bei GitHub Pages gehostet. Der Anbieter ist GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Beim Besuch der Website werden automatisch Informationen in Server-Log-Files gespeichert (Browser, Betriebssystem, Uhrzeit, IP-Adresse).</p>
+      <h3>4. Hosting &amp; Datenspeicherung</h3>
+      <p>Diese Website und alle Kundendaten werden ausschließlich auf Servern der <strong>Hetzner Online GmbH</strong> (Industriestr. 25, 91710 Gunzenhausen, Deutschland) gespeichert und verarbeitet. Es findet kein Transfer in Drittländer außerhalb der EU statt. Als Datenbanksystem wird Supabase (selbst gehostet auf Hetzner, Deutschland) eingesetzt. Beim Besuch der Website werden automatisch technisch notwendige Informationen in Server-Protokolldateien gespeichert (Browser, Betriebssystem, Uhrzeit, IP-Adresse).</p>
       <h3>5. Ihre Rechte</h3>
       <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Kontaktieren Sie uns dazu unter den oben genannten Kontaktdaten.</p>
-      <h3>6. KI-gestützte Haaranalyse</h3>
-      <p>Wenn Sie unsere KI-Haaranalyse nutzen, wird das hochgeladene Foto ausschließlich zur Analyse Ihrer Haarstruktur verwendet. Die Verarbeitung erfolgt ausschliesslich auf EU-Servern. Fotos werden nach 30 Tagen automatisch gelöscht. Die finale Beurteilung erfolgt stets durch unser Fachpersonal (Human-in-the-Loop). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). EU AI Act: Begrenztes Risiko, Transparenzpflicht erfüllt.</p>
-      <h3>7. Externe Dienste</h3>
-      <p>Wir binden Google Fonts und Google Maps ein. Beim Laden dieser Ressourcen werden Daten an Google-Server übertragen. Nähere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Datenschutzerklärung</a>.</p>
+      <h3>6. KI-gestützte Analysen (Haaranalyse, Farbcode, Wunschfrisur)</h3>
+      <p>Wenn Sie unsere KI-Analyse nutzen, wird das hochgeladene Foto zur Analyse verarbeitet. Die KI-Verarbeitung erfolgt durch <strong>Mistral AI SAS</strong> (15 rue des Halles, 75001 Paris, Frankreich — EU-Server). Es findet kein Transfer in Drittländer statt. Fotos werden nach 30 Tagen automatisch gelöscht. Die finale Beurteilung erfolgt stets durch unser Fachpersonal (Human-in-the-Loop gemäß EU AI Act). Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). EU AI Act: Begrenztes Risiko, Transparenzpflicht erfüllt.</p>
+      <h3>7. E-Mail-Versand</h3>
+      <p>Terminbestätigungen und Benachrichtigungen werden über den Dienst <strong>Brevo SAS</strong> (55 rue d'Amsterdam, 75008 Paris, Frankreich — EU-Server) versandt. Brevo verarbeitet dabei ausschließlich Ihre E-Mail-Adresse und den Nachrichteninhalt zum Zweck der Zustellung. Ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO ist abgeschlossen.</p>
       <h3>8. Social-Media-Kanäle</h3>
       <p>Wir sind auf WhatsApp, Instagram, Facebook und YouTube präsent. Bei Nutzung dieser Dienste gelten die jeweiligen Datenschutzbestimmungen der Anbieter.</p>
     </div>
@@ -2725,6 +2726,41 @@
           });
         })
         .catch(function(err) { console.warn('[API] Stylisten laden fehlgeschlagen:', err); applyFallback(); });
+    }
+
+    // =============================================================
+    // Karriere-Stellen aus DB laden (karriere_stellen Tabelle)
+    // Ersetzt Karten-Titel + Beschreibung dynamisch; Fallback = hardcoded HTML.
+    // Stand: 17.04.2026
+    // =============================================================
+    function loadKarriereFromDB() {
+      if (!sbReady()) return;
+      var url = SUPABASE_URL + '/rest/v1/karriere_stellen?salon_id=eq.' + SALON_ID + '&aktiv=eq.true&order=erstellt_am&select=id,titel,anstellung,beschreibung,kontakt';
+      fetch(url, { headers: sbHeaders() })
+        .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(rows) {
+          if (!Array.isArray(rows) || !rows.length) return; // Fallback: hardcoded HTML bleibt
+          var grid = document.querySelector('.karriere-grid');
+          if (!grid) return;
+          // Nur überschreiben wenn DB Daten liefert — bestehende Karten-Anzahl beibehalten
+          var cards = grid.querySelectorAll('.karriere-card');
+          rows.forEach(function(stelle, i) {
+            var card = cards[i];
+            if (!card) return;
+            var h3 = card.querySelector('h3');
+            var p = card.querySelector('p');
+            var tag = card.querySelector('.karriere-tag');
+            if (h3) h3.textContent = stelle.titel || h3.textContent;
+            if (p && stelle.beschreibung) p.textContent = stelle.beschreibung;
+            if (tag && stelle.anstellung) tag.textContent = stelle.anstellung;
+            // E-Mail-Link im onclick aktualisieren
+            if (stelle.kontakt) {
+              var subject = encodeURIComponent('Bewerbung als ' + (stelle.titel || ''));
+              card.setAttribute('onclick', "location.href='mailto:" + stelle.kontakt + "?subject=" + subject + "'");
+            }
+          });
+        })
+        .catch(function(err) { console.info('[Karriere] DB-Laden fehlgeschlagen, Fallback aktiv:', err); });
     }
 
     // =============================================================
@@ -4609,6 +4645,7 @@
       try { loadConfig(); } catch(e) { console.warn('loadConfig failed', e); }
       try { loadServicesFromDB(); } catch(e) { console.warn(e); }
       try { loadStylistenFromDB(); } catch(e) { console.warn(e); }
+      try { loadKarriereFromDB(); } catch(e) { console.warn(e); }
     }
 
     // Unabhängiger Poll: läuft parallel zu bootSalonData, prüft alle 600ms bis Services geladen (max 10x)
