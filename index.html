@@ -4679,6 +4679,8 @@
     function showCustomerLogin() {
       document.getElementById('clLoginMode').style.display = '';
       document.getElementById('clRegisterMode').style.display = 'none';
+      var fm = document.getElementById('clForgotMode'); if (fm) fm.style.display = 'none';
+      var np = document.getElementById('clNewPwMode'); if (np) np.style.display = 'none';
     }
 
     // Dropdown-Menü für Kunden-Button
@@ -5021,6 +5023,127 @@
       updateUploadGates();
     }
 
+    // === Passwort-vergessen-Flow ===
+    // Temporärer Reset-Email-Speicher (nur im Arbeitsspeicher der Sitzung)
+    var _pwResetEmail = '';
+
+    function showPasswordForgot() {
+      document.getElementById('clLoginMode').style.display = 'none';
+      document.getElementById('clRegisterMode').style.display = 'none';
+      document.getElementById('clForgotMode').style.display = '';
+      document.getElementById('clNewPwMode').style.display = 'none';
+      document.getElementById('clForgotError').style.display = 'none';
+      document.getElementById('clForgotSuccess').style.display = 'none';
+      document.getElementById('clForgotBtn').disabled = false;
+      document.getElementById('clForgotBtn').textContent = 'Passwort zurücksetzen';
+      var emailInput = document.getElementById('clForgotEmail');
+      // E-Mail aus Login-Feld vorausfüllen wenn vorhanden
+      var loginEmail = document.getElementById('clLoginEmail');
+      if (loginEmail && loginEmail.value) emailInput.value = loginEmail.value;
+      setTimeout(function() { emailInput.focus(); }, 50);
+    }
+
+    async function doPasswordForgot() {
+      var emailEl = document.getElementById('clForgotEmail');
+      var errEl = document.getElementById('clForgotError');
+      var successEl = document.getElementById('clForgotSuccess');
+      var btn = document.getElementById('clForgotBtn');
+      var email = (emailEl.value || '').trim().toLowerCase();
+
+      errEl.style.display = 'none';
+      successEl.style.display = 'none';
+
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        errEl.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+        errEl.style.display = 'block';
+        return;
+      }
+      // Sanitierung: Länge begrenzen
+      if (email.length > 120) {
+        errEl.textContent = 'E-Mail-Adresse ungültig.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      // Prüfen ob Konto mit dieser E-Mail existiert
+      var customer = salonCustomers[email];
+      if (!customer) {
+        // Sicherheits-Hinweis: Gleiche Meldung egal ob Konto existiert (verhindert Account-Enumeration)
+        successEl.textContent = 'Falls ein Konto mit dieser E-Mail existiert, können Sie jetzt ein neues Passwort setzen.';
+        successEl.style.display = 'block';
+        // Trotzdem weiterleiten zum Passwort-Setzen (wird dort abgefangen)
+        _pwResetEmail = email;
+        btn.disabled = true;
+        btn.textContent = '✓ Weiter';
+        setTimeout(function() { showNewPasswordForm(); }, 1200);
+        return;
+      }
+
+      // Konto gefunden — direkt zum Passwort-Setzen-Formular
+      _pwResetEmail = email;
+      btn.disabled = true;
+      btn.textContent = 'Weiter …';
+      successEl.textContent = 'Konto gefunden. Bitte wählen Sie jetzt Ihr neues Passwort.';
+      successEl.style.display = 'block';
+      setTimeout(function() { showNewPasswordForm(); }, 1000);
+    }
+
+    function showNewPasswordForm() {
+      document.getElementById('clForgotMode').style.display = 'none';
+      document.getElementById('clNewPwMode').style.display = '';
+      document.getElementById('clNewPwError').style.display = 'none';
+      document.getElementById('clNewPw1').value = '';
+      document.getElementById('clNewPw2').value = '';
+      setTimeout(function() { document.getElementById('clNewPw1').focus(); }, 50);
+    }
+
+    async function doSetNewPassword() {
+      var pw1 = document.getElementById('clNewPw1').value;
+      var pw2 = document.getElementById('clNewPw2').value;
+      var errEl = document.getElementById('clNewPwError');
+      errEl.style.display = 'none';
+
+      if (!_pwResetEmail) {
+        showCustomerLogin();
+        return;
+      }
+      if (!pw1 || pw1.length < 10) {
+        errEl.textContent = 'Passwort muss mindestens 10 Zeichen haben.';
+        errEl.style.display = 'block';
+        return;
+      }
+      if (pw1 !== pw2) {
+        errEl.textContent = 'Passwörter stimmen nicht überein.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      var customer = salonCustomers[_pwResetEmail];
+      if (!customer) {
+        // Neues Konto anlegen ist hier nicht sinnvoll — zurück zum Login
+        errEl.textContent = 'Kein Konto mit dieser E-Mail gefunden. Bitte registrieren.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      // Neues Passwort-Hash speichern
+      var salt = makeSalt();
+      var hash = await sha256Hex(salt + ':' + pw1);
+      customer.salt = salt;
+      customer.pwHash = hash;
+      salonCustomers[_pwResetEmail] = customer;
+      localStorage.setItem('salon_customers', JSON.stringify(salonCustomers));
+      _pwResetEmail = '';
+
+      // Direkt einloggen nach Passwort-Reset
+      activeCustomer = customer;
+      sessionStorage.setItem('salon_customer', JSON.stringify(activeCustomer));
+      closeCustomerLogin();
+      applyCustomerLogin();
+      showToast('Ihr Passwort wurde geändert. Sie sind jetzt eingeloggt.', 'success');
+    }
+    // === Ende Passwort-vergessen-Flow ===
+
     function applyCustomerLogin() {
       if (!activeCustomer) return;
       var c = activeCustomer;
@@ -5193,6 +5316,29 @@
         <div class="cl-error" id="clLoginError">E-Mail oder Passwort falsch</div>
         <button class="cl-btn" onclick="customerLogin()">Anmelden</button>
         <div class="cl-toggle">Noch kein Konto? <a onclick="showCustomerRegister()">Jetzt registrieren</a></div>
+        <div style="text-align:center;margin-top:10px">
+          <a onclick="showPasswordForgot()" style="font-size:12px;color:var(--text-muted);cursor:pointer;text-decoration:none;border-bottom:1px dashed var(--border)">Passwort vergessen?</a>
+        </div>
+      </div>
+      <!-- Passwort vergessen -->
+      <div id="clForgotMode" style="display:none">
+        <h3>Passwort zurücksetzen</h3>
+        <p>Geben Sie Ihre E-Mail-Adresse ein. Wir setzen Ihr Passwort direkt zurück.</p>
+        <input type="email" class="cl-field" id="clForgotEmail" name="email" autocomplete="email" placeholder="Ihre E-Mail-Adresse" maxlength="120" onkeypress="if(event.key==='Enter')doPasswordForgot()">
+        <div class="cl-error" id="clForgotError"></div>
+        <div id="clForgotSuccess" style="display:none;padding:12px 14px;background:rgba(45,138,78,0.08);border:1px solid rgba(45,138,78,0.2);border-radius:var(--radius-sm);font-size:13px;color:#2d8a4e;margin-bottom:10px;line-height:1.5"></div>
+        <button class="cl-btn" id="clForgotBtn" onclick="doPasswordForgot()">Passwort zurücksetzen</button>
+        <div class="cl-toggle"><a onclick="showCustomerLogin()">Zurück zur Anmeldung</a></div>
+      </div>
+      <!-- Neues Passwort setzen (nach Reset) -->
+      <div id="clNewPwMode" style="display:none">
+        <h3>Neues Passwort</h3>
+        <p>Bitte wählen Sie ein neues Passwort für Ihr Konto.</p>
+        <input type="password" class="cl-field" id="clNewPw1" name="new-password" autocomplete="new-password" placeholder="Neues Passwort (min. 10 Zeichen)" minlength="10" onkeypress="if(event.key==='Enter')document.getElementById('clNewPw2').focus()">
+        <input type="password" class="cl-field" id="clNewPw2" name="new-password-confirm" autocomplete="new-password" placeholder="Passwort wiederholen" onkeypress="if(event.key==='Enter')doSetNewPassword()">
+        <div class="cl-error" id="clNewPwError"></div>
+        <button class="cl-btn" onclick="doSetNewPassword()">Passwort speichern</button>
+        <div class="cl-toggle"><a onclick="showCustomerLogin()">Abbrechen</a></div>
       </div>
       <!-- Registrierung -->
       <div id="clRegisterMode" style="display:none">
