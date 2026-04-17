@@ -877,7 +877,7 @@
     .human-guarantee span { font-size: 13px; font-weight: 700; color: var(--gold); }
 
     /* === Feedback Widget === */
-    /* Capo-Fix 16.04.2026: gleiche Hoehe + Groesse wie Chatbot-FAB rechts (bottom:24, 56x56) */
+    /* Capo-Fix 16.04.2026: gleiche Hoehe + Größe wie Chatbot-FAB rechts (bottom:24, 56x56) */
     .feedback-fab {
       position: fixed; bottom: 24px; left: 24px; z-index: 100;
       width: 56px; height: 56px; border-radius: 50%;
@@ -1377,7 +1377,7 @@
           <span id="heroBtnWunschText">Wunschfrisur senden</span>
         </a>
       </div>
-      <!-- Omnichannel-Konzept: 24/7 ueber alle Kanaele -->
+      <!-- Omnichannel-Konzept: 24/7 über alle Kanaele -->
       <div style="margin-top:32px;display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim)">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:15px;height:15px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -1731,7 +1731,7 @@
           </div>
           <div class="form-row">
             <div class="form-group"><input type="text" id="haarName" placeholder="Ihr Vorname"></div>
-            <div class="form-group"><input type="email" id="haarEmail" placeholder="E-Mail fuer Ergebnis"></div>
+            <div class="form-group"><input type="email" id="haarEmail" placeholder="E-Mail für Ergebnis"></div>
           </div>
           <div style="background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(184,150,46,0.02));border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:12px;margin-top:12px;text-align:center">
             <div style="font-size:18px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif">Kostenloser Schnell-Check</div>
@@ -1739,7 +1739,7 @@
           </div>
           <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
+            Ergebnis erscheint sofort — Sie können es sich per E-Mail zusenden.
           </div>
           <button class="btn-gold" id="haarBtn" onclick="submitHaaranalyse()" style="width:100%;margin-top:8px">
             Haaranalyse starten
@@ -1753,7 +1753,7 @@
       <div id="kiTabFarbcode" class="ki-grid" style="display:none">
         <div class="ki-content reveal">
           <div class="section-label">Farbwunsch</div>
-          <h2 class="section-title">Ihre <em>Wunsch-Haarfarbe</em><br>vorab pruefen</h2>
+          <h2 class="section-title">Ihre <em>Wunsch-Haarfarbe</em><br>vorab prüfen</h2>
           <p class="section-desc">Traeumen Sie von einer neuen Haarfarbe? Laden Sie ein Foto hoch und beschreiben Sie Ihren Wunsch &mdash; wir sagen Ihnen ehrlich, ob und wie es machbar ist.</p>
           <div style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:8px 16px;border-radius:var(--radius-full);background:var(--gold-dim);border:1px solid var(--border-gold)">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:16px;height:16px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -1781,8 +1781,8 @@
           </div>
         </div>
         <div class="ki-form-card reveal">
-          <h3>Wunsch-Haarfarbe pruefen</h3>
-          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht und beschreiben Sie Ihre Wunschfarbe. Wir sagen Ihnen ehrlich, was moeglich ist.</p>
+          <h3>Wunsch-Haarfarbe prüfen</h3>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Fotografieren Sie Ihr Haar bei Tageslicht und beschreiben Sie Ihre Wunschfarbe. Wir sagen Ihnen ehrlich, was möglich ist.</p>
           <div style="position:relative">
           <div class="upload-zone upload-zone-gated" onclick="document.getElementById('farbcodeHomepageUpload').click()" style="cursor:pointer">
             <input type="file" id="farbcodeHomepageUpload" accept="image/*" style="display:none" onchange="previewFarbcodeHomepage(this.files)">
@@ -1803,7 +1803,7 @@
           </div>
           <div class="form-row">
             <div class="form-group"><input type="text" id="fcName" placeholder="Ihr Vorname"></div>
-            <div class="form-group"><input type="email" id="fcEmail" placeholder="E-Mail fuer Ergebnis"></div>
+            <div class="form-group"><input type="email" id="fcEmail" placeholder="E-Mail für Ergebnis"></div>
           </div>
           <div class="form-group"><label>Wunschfarbe beschreiben</label><textarea id="fcNachricht" placeholder="z.B. Warmes Karamellblond, 2 Stufen heller, Balayage-Effekt..." rows="2"></textarea></div>
           <div style="background:linear-gradient(135deg,rgba(184,150,46,0.08),rgba(184,150,46,0.02));border:1px solid var(--border-gold);border-radius:var(--radius-sm);padding:12px;margin-top:12px;text-align:center">
@@ -1812,11 +1812,11 @@
           </div>
           <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
+            Ergebnis erscheint sofort — Sie können es sich per E-Mail zusenden.
           </div>
-          <button class="btn-gold" onclick="submitFarbcodeHomepage()" style="width:100%;margin-top:8px">Wunsch-Haarfarbe pruefen</button>
+          <button class="btn-gold" onclick="submitFarbcodeHomepage()" style="width:100%;margin-top:8px">Wunsch-Haarfarbe prüfen</button>
           <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:center">Detaillierte Farbberatung mit Mischungsformel erhalten Sie im Salon. Powered by <a href="https://casa2035.de" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">Casa 2035</a>.</p>
-          <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestuetzte Analyse (EU AI Act konform). Ihr Foto wird ausschliesslich fuer die Farbberatung verwendet und nach 30 Tagen geloescht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
+          <p style="font-size:9px;color:var(--text-muted);margin-top:6px;text-align:center;line-height:1.4">KI-gestuetzte Analyse (EU AI Act konform). Ihr Foto wird ausschliesslich für die Farbberatung verwendet und nach 30 Tagen geloescht. <a href="#" onclick="openLegal('datenschutz');return false" style="color:var(--gold);text-decoration:underline">Datenschutz</a></p>
         </div>
       </div>
 
@@ -1907,7 +1907,7 @@
                   </button>
                   <span id="wfVoiceTimer" style="font-size:12px;color:var(--text-muted);font-variant-numeric:tabular-nums">00:00</span>
                   <audio id="wfVoicePreview" controls style="display:none;flex:1;min-width:200px;max-width:100%"></audio>
-                  <button type="button" id="wfVoiceClear" onclick="wfClearVoice()" style="display:none;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:transparent;cursor:pointer;font-size:11px;color:var(--text-muted)">Loeschen</button>
+                  <button type="button" id="wfVoiceClear" onclick="wfClearVoice()" style="display:none;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:transparent;cursor:pointer;font-size:11px;color:var(--text-muted)">Löschen</button>
                 </div>
                 <div id="wfVoiceHint" style="font-size:11px;color:var(--text-muted);margin-top:6px">Sprechen Sie frei — beschreiben Sie Ihren Wunsch, Ihre Haargeschichte, Ihre Fragen.</div>
               </div>
@@ -1916,7 +1916,7 @@
               <div class="form-group" style="margin-top:8px">
                 <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:12px;line-height:1.5;color:var(--text-light);font-weight:400">
                   <input type="checkbox" id="wfDsgvo" required style="margin-top:3px;flex-shrink:0;accent-color:var(--gold)">
-                  <span>Ich willige ein, dass meine Fotos/Sprachnachricht zur KI-Analyse an Mistral AI (EU, Paris) uebermittelt werden. Widerruf jederzeit moeglich.</span>
+                  <span>Ich willige ein, dass meine Fotos/Sprachnachricht zur KI-Analyse an Mistral AI (EU, Paris) übermittelt werden. Widerruf jederzeit möglich.</span>
                 </label>
               </div>
 
@@ -1939,7 +1939,7 @@
               </div>
               <div style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px">
                 <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" style="width:13px;height:13px;flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                Ergebnis erscheint sofort — Sie koennen es sich per E-Mail zusenden.
+                Ergebnis erscheint sofort — Sie können es sich per E-Mail zusenden.
               </div>
               <div class="wf-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
                 <button type="submit" class="btn btn-gold" style="justify-content:center">
@@ -2033,7 +2033,7 @@
                 {name: 'Herrenschnitt', icon: '\u2702\uFE0F'},
                 {name: 'Herrenschnitt + Bartpflege', icon: '\uD83E\uDDD4'},
                 {name: 'Kinderhaarschnitt', icon: '\uD83D\uDC76'},
-                {name: 'Waschen & Foehnen', icon: '\uD83D\uDCA7'},
+                {name: 'Waschen & Föhnen', icon: '\uD83D\uDCA7'},
                 {name: 'Farbbehandlung', icon: '\uD83C\uDFA8'},
                 {name: 'Straehnchen / Highlights', icon: '\u2728'},
                 {name: 'Balayage', icon: '\uD83C\uDF1F'},
@@ -2523,7 +2523,7 @@
       return { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY };
     }
 
-    // Session-ID fuer Uploads (UUID-Pfade, keine PII)
+    // Session-ID für Uploads (UUID-Pfade, keine PII)
     var sessionId = sessionStorage.getItem('rr_session_id');
     if (!sessionId) {
       sessionId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('s' + Date.now() + Math.random().toString(36).slice(2,10));
@@ -2620,10 +2620,10 @@
 
     // Services dynamisch laden
     var dbServicesById = {}; // service_id -> {name, dauer_min, preis_brutto, kategorie}
-    var allDbServices = []; // Alle geladenen Services fuer dynamisches Gender-Filtering
+    var allDbServices = []; // Alle geladenen Services für dynamisches Gender-Filtering
     function loadServicesFromDB() {
       if (!sbReady()) { console.info('[API] ANON_KEY fehlt — Services Fallback (hardcoded).'); return; }
-      // FB-34: service_typ (damen/herren/unisex) mitladen fuer Gender-Filter
+      // FB-34: service_typ (damen/herren/unisex) mitladen für Gender-Filter
       var url = SUPABASE_URL + '/rest/v1/services_preisliste?salon_id=eq.' + SALON_ID + '&aktiv=eq.true&order=kategorie,reihenfolge&select=service_id,name,kategorie,dauer_min,preis_brutto,service_typ';
       fetch(url, { headers: sbHeaders() })
         .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
@@ -3026,7 +3026,7 @@
         var del = document.createElement('button');
         del.type = 'button';
         del.textContent = '\u00D7';
-        del.setAttribute('aria-label', 'Loeschen');
+        del.setAttribute('aria-label', 'Löschen');
         del.style.cssText = 'position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;border:none;background:#1a1a1a;color:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0;display:flex;align-items:center;justify-content:center';
         del.onclick = function(ev) { ev.stopPropagation(); wfFilesState[kind].splice(idx,1); wfRenderPreview(kind); };
         wrap.appendChild(del);
@@ -3091,7 +3091,7 @@
             document.getElementById('wfVoiceTimer').textContent = (m<10?'0':'')+m+':'+(r<10?'0':'')+r;
             if (s >= 120) wfStopVoice();
           }, 250);
-        } catch(err) { console.warn('MediaRecorder Fehler:', err); showToast('Aufnahme nicht moeglich.', 'error'); }
+        } catch(err) { console.warn('MediaRecorder Fehler:', err); showToast('Aufnahme nicht möglich.', 'error'); }
       }).catch(function(err) {
         console.warn('Mikrofon-Zugriff abgelehnt:', err);
         showToast('Mikrofon-Zugriff abgelehnt.', 'error');
@@ -3126,7 +3126,7 @@
         showToast('Bitte warten Sie etwas — Sie haben zu viele Anfragen gesendet.', 'error'); return;
       }
       var dsgvo = document.getElementById('wfDsgvo');
-      if (!dsgvo || !dsgvo.checked) { showToast('Bitte DSGVO-Einwilligung bestaetigen.', 'error'); return; }
+      if (!dsgvo || !dsgvo.checked) { showToast('Bitte DSGVO-Einwilligung bestätigen.', 'error'); return; }
 
       var vorname = document.getElementById('wfVorname').value.trim();
       var nachname = document.getElementById('wfNachname').value.trim();
@@ -3146,9 +3146,9 @@
       var wfSubmitBtn = wfBtn ? wfBtn.closest('button') : null;
       if (wfSubmitBtn) { wfSubmitBtn.disabled = true; wfSubmitBtn.style.opacity = '0.7'; }
 
-      // WICHTIG: Ohne ANON_KEY kein Storage-Upload moeglich
+      // WICHTIG: Ohne ANON_KEY kein Storage-Upload möglich
       if (!sbReady() && (wfFilesState.vorher.length || wfFilesState.referenz.length || wfVoiceBlob)) {
-        showToast('Uploads derzeit nicht verfuegbar (Konfig fehlt). Bitte Text-Nachricht senden.', 'error');
+        showToast('Uploads derzeit nicht verfügbar (Konfig fehlt). Bitte Text-Nachricht senden.', 'error');
         resetWfBtn(); return;
       }
 
@@ -3206,7 +3206,7 @@
           body: JSON.stringify(payload)
         }).then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json().catch(function(){return{};}); })
         .then(function(data) {
-          // Formular zuruecksetzen
+          // Formular zurücksetzen
           try { e.target.reset(); } catch(_) {}
           wfFilesState = { vorher: [], referenz: [] };
           wfRenderPreview('vorher'); wfRenderPreview('referenz');
@@ -3222,16 +3222,16 @@
     }
 
     // === KI-Ergebnis-Popup (geteilt von allen 3 Funktionen) ===
-    // === DEMO-Daten fuer Homepage (Fallback wenn Webhooks nicht erreichbar) ===
+    // === DEMO-Daten für Homepage (Fallback wenn Webhooks nicht erreichbar) ===
     var HOMEPAGE_DEMO = {
       haaranalyse: {
-        antwort: 'Haartyp: Wellig (2B)\nSchaedigung: Leicht an den Spitzen\nKopfhaut: Normal, leicht trocken\nPorositaet: Mittel\n\nEmpfehlung: Feuchtigkeitskur 1x pro Woche, Hitzeschutz beim Foehnen. Olaplex Nr. 3 als Home-Treatment. Naechste Balayage-Auffrischung in 4-6 Wochen.\n\nHaar-Gesundheit: 68%'
+        antwort: 'Haartyp: Wellig (2B)\nSchaedigung: Leicht an den Spitzen\nKopfhaut: Normal, leicht trocken\nPorositaet: Mittel\n\nEmpfehlung: Feuchtigkeitskur 1x pro Woche, Hitzeschutz beim Föhnen. Olaplex Nr. 3 als Home-Treatment. Naechste Balayage-Auffrischung in 4-6 Wochen.\n\nHaar-Gesundheit: 68%'
       },
       farbcode: {
-        antwort: 'Machbarkeit: Gut realisierbar\nGeschaetzte Sitzungen: 2 (bei deutlicher Aufhellung)\n\nIhr aktueller Haarton laesst sich mit der gewuenschten Farbe gut vereinbaren. Bei starker Aufhellung empfehlen wir eine schrittweise Veraenderung mit Schutzbehandlung.\n\nEmpfehlung: Vereinbaren Sie einen Beratungstermin fuer eine individuelle Farbformel.'
+        antwort: 'Machbarkeit: Gut realisierbar\nGeschaetzte Sitzungen: 2 (bei deutlicher Aufhellung)\n\nIhr aktueller Haarton laesst sich mit der gewuenschten Farbe gut vereinbaren. Bei starker Aufhellung empfehlen wir eine schrittweise Veraenderung mit Schutzbehandlung.\n\nEmpfehlung: Vereinbaren Sie einen Beratungstermin für eine individuelle Farbformel.'
       },
       wunschfrisur: {
-        antwort: 'Machbarkeit: 87%\n\nDie gewuenschte Frisur passt gut zu Ihrer Gesichtsform und Haarstruktur.\n\nSchnittform und Styling-Technik: Gut machbar\nFarbton: Bedingt — erfordert ggf. 2 Sitzungen\nEmpfohlene Technik: Balayage + Glossing\nGeschaetzte Dauer: 150 Min\n\nVereinbaren Sie einen Beratungstermin fuer eine detaillierte Planung.'
+        antwort: 'Machbarkeit: 87%\n\nDie gewuenschte Frisur passt gut zu Ihrer Gesichtsform und Haarstruktur.\n\nSchnittform und Styling-Technik: Gut machbar\nFarbton: Bedingt — erfordert ggf. 2 Sitzungen\nEmpfohlene Technik: Balayage + Glossing\nGeschaetzte Dauer: 150 Min\n\nVereinbaren Sie einen Beratungstermin für eine detaillierte Planung.'
       }
     };
 
@@ -3319,7 +3319,7 @@
       document.body.appendChild(overlay);
     }
 
-    // === Visueller Kalender fuer Terminbuchung ===
+    // === Visueller Kalender für Terminbuchung ===
     var calMonth = new Date().getMonth();
     var calYear = new Date().getFullYear();
     var calSelectedDate = null;
@@ -3410,7 +3410,7 @@
 
     function selectCalDate(date) {
       calSelectedDate = date;
-      // ISO-Format fuer hidden input
+      // ISO-Format für hidden input
       var y = date.getFullYear();
       var m = String(date.getMonth() + 1).padStart(2, '0');
       var d = String(date.getDate()).padStart(2, '0');
@@ -3510,7 +3510,7 @@
 
       // WF-01 erwartet: from, name, message, timestamp, message_id
       // message muss den Intent erkennen lassen (termin_buchen)
-      // Zusaetzlich: strukturierte Felder fuer WF-02a (Intent-LLM bleibt Safety-Net)
+      // Zusaetzlich: strukturierte Felder für WF-02a (Intent-LLM bleibt Safety-Net)
       var payload = {
         from: email,
         name: vorname + ' ' + nachname,
@@ -3557,7 +3557,7 @@
           if (j && j.success === false) {
             var msg = (j.error && j.error.message) || 'Termin konnte nicht eingeplant werden.';
             if (j.action === 'service_unbekannt' || (j.error && j.error.code === 'SERVICE_NOT_FOUND')) {
-              msg = 'Die gewählte Leistung ist aktuell nicht buchbar. Bitte rufen Sie uns an oder waehlen Sie eine andere Leistung.';
+              msg = 'Die gewählte Leistung ist aktuell nicht buchbar. Bitte rufen Sie uns an oder wählen Sie eine andere Leistung.';
             }
             showToast(msg, 'error');
             return;
@@ -4225,7 +4225,7 @@
       }
     }
 
-    // Gespeicherten Stil erneut anwenden (modeContent ist jetzt verfuegbar)
+    // Gespeicherten Stil erneut anwenden (modeContent ist jetzt verfügbar)
     if (currentStyle === 'maskulin') updateContentForStyle('maskulin');
 
     // Min date = today
@@ -4314,7 +4314,7 @@
         }
         applyContactCards(s);
         applyBookingInfoCards(s);
-        if (s.oeffnungszeiten) applyOpeningHours(s.oeffnungszeiten);
+        if (s.öffnungszeiten) applyOpeningHours(s.öffnungszeiten);
         // Google Maps iframe aus config
         if (s.google_maps_embed_url) {
           var mapsIframe = document.querySelector('.contact-map iframe');
@@ -4759,7 +4759,7 @@
 
     // =============================================================
     // FB-19: Globaler Keyboard-Dismiss (iOS/Android)
-    // Touch auf leere Flaeche schliesst aktive Tastatur
+    // Touch auf leere Flaeche schließt aktive Tastatur
     // =============================================================
     (function() {
       function isFormField(el) {
@@ -5108,7 +5108,7 @@
       }
       // Migration: altes Klartext-pw Feld wird nicht mehr unterstuetzt
       if (!customer.pwHash || !customer.salt) {
-        errEl.textContent = 'Bitte Passwort zuruecksetzen (Konto wurde migriert).';
+        errEl.textContent = 'Bitte Passwort zurücksetzen (Konto wurde migriert).';
         errEl.style.display = 'block'; return;
       }
       var hash = await sha256Hex(customer.salt + ':' + pw);
@@ -5413,7 +5413,7 @@
       try { ae.blur(); } catch(e) {}
     }, true);
 
-    // === FB-19: Autofill-Hints fuer Booking + Wunschfrisur Inputs ===
+    // === FB-19: Autofill-Hints für Booking + Wunschfrisur Inputs ===
     (function() {
       var map = [
         ['bkName','name'], ['bkEmail','email'], ['bkTel','tel'],
@@ -5639,7 +5639,7 @@
     <div style="padding:6px 12px;background:rgba(184,150,46,0.08);font-size:10px;color:var(--text-muted);text-align:center">KI-gestützter Assistent &mdash; Angaben ohne Gewähr</div>
     <div id="chatMessages" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:320px"></div>
     <div id="chatQuickReplies" style="padding:0 16px 8px;display:flex;flex-wrap:wrap;gap:6px">
-      <button class="cb-qr" onclick="chatQuickReply('oeffnungszeiten')" style="padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif">Öffnungszeiten</button>
+      <button class="cb-qr" onclick="chatQuickReply('öffnungszeiten')" style="padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif">Öffnungszeiten</button>
       <button class="cb-qr" onclick="chatQuickReply('termin')" style="padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif">Termin buchen</button>
       <button class="cb-qr" onclick="chatQuickReply('services')" style="padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--border-gold);background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif">Services &amp; Preise</button>
     </div>
@@ -5718,7 +5718,7 @@
       wrap.scrollTop = wrap.scrollHeight;
     }
     var chatResponses = {
-      oeffnungszeiten: 'Unsere Öffnungszeiten:\nDi-Mi + Fr: 9:00-18:00 Uhr\nDo: 9:00-20:00 Uhr\nSa: 9:00-15:00 Uhr\nMo + So: Geschlossen',
+      öffnungszeiten: 'Unsere Öffnungszeiten:\nDi-Mi + Fr: 9:00-18:00 Uhr\nDo: 9:00-20:00 Uhr\nSa: 9:00-15:00 Uhr\nMo + So: Geschlossen',
       termin: 'Sie können direkt auf unserer Website einen Termin buchen — scrollen Sie zum Bereich "Termin buchen" oder rufen Sie uns an unter 089-1296294.',
       services: 'Unsere Services:\n- Haarschnitte (ab 35 EUR, ca. 45 Min.)\n- Farbbehandlung (ab 65 EUR, ca. 90 Min.)\n- Haarpflege/Treatment (ab 25 EUR, ca. 30 Min.)\n- Styling/Brautstyling (ab 45 EUR, ca. 60 Min.)\n- Wunschfrisur-Service (kostenlos)\n- KI-Haaranalyse (kostenloser Schnell-Check + Profi im Salon)\n- La Biosthetique Produkte im Salon',
       adresse: 'Rena Rados Friseure\nErzgiessereistr. 51 (Eingang Dachauer Str. 143)\n80335 München\nTelefon: 089-1296294\n\nAm besten mit der U-Bahn (Stiglmaierplatz) oder Tram.',
@@ -5739,7 +5739,7 @@
       fallback: 'Das ist eine interessante Frage! Dazu kann ich Ihnen leider keine genaue Antwort geben. Am besten rufen Sie uns an (089-1296294) oder kommen Sie einfach vorbei — wir beraten Sie gerne persönlich.\n\nIch kann Ihnen helfen bei:\n- Terminen & Buchung\n- Services & Preise\n- Öffnungszeiten & Anfahrt\n- Haaranalyse & Wunschfrisur\n- Produkte & Pflege'
     };
     function chatQuickReply(key) {
-      var labels = {oeffnungszeiten:'Öffnungszeiten',termin:'Termin buchen',services:'Services & Preise'};
+      var labels = {öffnungszeiten:'Öffnungszeiten',termin:'Termin buchen',services:'Services & Preise'};
       addUserMessage(labels[key] || key);
       setTimeout(function() {
         addBotMessage(chatResponses[key] || 'Ich helfe gerne bei Fragen rund um Ihren Besuch bei ' + (window._chatBotSalonName || 'uns') + '.');
@@ -5762,7 +5762,7 @@
       var answer = '';
       // Keyword-Matching (Reihenfolge = Prioritaet)
       if (lower.indexOf('oeffnungszeit') !== -1 || lower.indexOf('geoeffnet') !== -1 || lower.indexOf('offen') !== -1 || (lower.indexOf('wann') !== -1 && (lower.indexOf('auf') !== -1 || lower.indexOf('zu') !== -1))) {
-        answer = chatResponses.oeffnungszeiten;
+        answer = chatResponses.öffnungszeiten;
       } else if (lower.indexOf('termin') !== -1 || lower.indexOf('buchen') !== -1 || lower.indexOf('buchung') !== -1 || lower.indexOf('vereinbar') !== -1) {
         answer = chatResponses.termin;
       } else if (lower.indexOf('crazy') !== -1 || lower.indexOf('verrueckt') !== -1 || lower.indexOf('neon') !== -1 || lower.indexOf('regenbogen') !== -1 || lower.indexOf('rainbow') !== -1 || lower.indexOf('extrem') !== -1 || lower.indexOf('punk') !== -1 || lower.indexOf('mohawk') !== -1 || lower.indexOf('irokese') !== -1) {
@@ -6084,7 +6084,7 @@
     }
   </script>
   <script>
-    // Service Worker: Alte Caches loeschen + NICHT neu registrieren (Testphase)
+    // Service Worker: Alte Caches löschen + NICHT neu registrieren (Testphase)
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(function(regs) {
         regs.forEach(function(r) { r.unregister(); });
@@ -6098,7 +6098,7 @@
   
     /* FB-15.04. Upload-Zone-Fix marker */
 
-    // FB-15.04.: iOS-Fix fuer alle Upload-Zonen — ersetzt synthetische .click() durch Overlay-Input
+    // FB-15.04.: iOS-Fix für alle Upload-Zonen — ersetzt synthetische .click() durch Overlay-Input
     (function upgradeUploadZones() {
       try {
         var zones = document.querySelectorAll('.upload-zone, [data-upload-zone]');
