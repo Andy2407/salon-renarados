@@ -2084,26 +2084,37 @@
             <script>
             (function() {
               var services = [
-                {name: 'Damenhaarschnitt', icon: '\u2702\uFE0F'},
-                {name: 'Herrenschnitt', icon: '\u2702\uFE0F'},
-                {name: 'Herrenschnitt + Bartpflege', icon: '\uD83E\uDDD4'},
-                {name: 'Kinderhaarschnitt', icon: '\uD83D\uDC76'},
-                {name: 'Waschen & Föhnen', icon: '\uD83D\uDCA7'},
-                {name: 'Farbbehandlung', icon: '\uD83C\uDFA8'},
-                {name: 'Straehnchen / Highlights', icon: '\u2728'},
-                {name: 'Balayage', icon: '\uD83C\uDF1F'},
-                {name: 'Tonung / Glanz', icon: '\uD83D\uDC8E'},
-                {name: 'Dauerwelle', icon: '\uD83C\uDF00'},
-                {name: 'Glaettung / Keratin', icon: '\uD83D\uDD25'},
-                {name: 'Olaplex Treatment', icon: '\uD83E\uDDEA'},
-                {name: 'Haarpflege / Kur', icon: '\uD83E\uDDF4'},
-                {name: 'Kopfmassage', icon: '\uD83D\uDC86'},
-                {name: 'Hochsteckfrisur', icon: '\uD83D\uDC51'},
-                {name: 'Brautstyling', icon: '\uD83D\uDC70'},
-                {name: 'Haaranalyse (Profi mit PDF)', icon: '\uD83D\uDD2C'},
-                {name: 'Beratung', icon: '\uD83D\uDCAC'},
-                {name: 'Sonstiges', icon: '\u2795'}
+                {name: 'Damenhaarschnitt', icon: '\u2702\uFE0F', typ: 'damen'},
+                {name: 'Herrenschnitt', icon: '\u2702\uFE0F', typ: 'herren'},
+                {name: 'Herrenschnitt + Bartpflege', icon: '\uD83E\uDDD4', typ: 'herren'},
+                {name: 'Kinderhaarschnitt', icon: '\uD83D\uDC76', typ: 'unisex'},
+                {name: 'Waschen & Föhnen', icon: '\uD83D\uDCA7', typ: 'unisex'},
+                {name: 'Farbbehandlung', icon: '\uD83C\uDFA8', typ: 'damen'},
+                {name: 'Straehnchen / Highlights', icon: '\u2728', typ: 'damen'},
+                {name: 'Balayage', icon: '\uD83C\uDF1F', typ: 'damen'},
+                {name: 'Tonung / Glanz', icon: '\uD83D\uDC8E', typ: 'damen'},
+                {name: 'Dauerwelle', icon: '\uD83C\uDF00', typ: 'damen'},
+                {name: 'Glaettung / Keratin', icon: '\uD83D\uDD25', typ: 'damen'},
+                {name: 'Olaplex Treatment', icon: '\uD83E\uDDEA', typ: 'unisex'},
+                {name: 'Haarpflege / Kur', icon: '\uD83E\uDDF4', typ: 'unisex'},
+                {name: 'Kopfmassage', icon: '\uD83D\uDC86', typ: 'unisex'},
+                {name: 'Hochsteckfrisur', icon: '\uD83D\uDC51', typ: 'damen'},
+                {name: 'Brautstyling', icon: '\uD83D\uDC70', typ: 'damen'},
+                {name: 'Bart-Styling', icon: '\uD83E\uDDD4', typ: 'herren'},
+                {name: 'Glatze / Rasur', icon: '\u2702\uFE0F', typ: 'herren'},
+                {name: 'Haaranalyse (Profi mit PDF)', icon: '\uD83D\uDD2C', typ: 'unisex'},
+                {name: 'Beratung', icon: '\uD83D\uDCAC', typ: 'unisex'},
+                {name: 'Sonstiges', icon: '\u2795', typ: 'unisex'}
               ];
+              // Sortierung nach Style-Toggle (Capo 18.04.2026): Feminin=Damen+Unisex zuerst, Maskulin=Herren+Unisex zuerst
+              function sortByStyle(arr) {
+                var isMask = document.body.classList.contains('maskulin-style');
+                var prefer = isMask ? ['herren','unisex','damen'] : ['damen','unisex','herren'];
+                return arr.slice().sort(function(a,b){
+                  return prefer.indexOf(a.typ||'unisex') - prefer.indexOf(b.typ||'unisex');
+                });
+              }
+              services = sortByStyle(services);
               var container = document.getElementById('bkLeistungCheckboxes');
               var hidden = document.getElementById('bkLeistung');
               // Modernes Karten-Grid statt Pills (FB-21)
